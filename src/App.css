@@ -1,0 +1,66 @@
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+}
+
+.flex-center {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.Header {
+  height: 100px;
+  /* background-color: #fff; */
+  top: 0;
+  width: 100%;
+  z-index: 1500;
+  padding: 0 20px;
+  display: grid;
+  position: fixed;
+  grid-template-columns: repeat(12,1fr);
+  background: rgb(204, 204, 204); /* Fallback for older browsers without RGBA-support */
+  background: rgba(204, 204, 204, 0);
+  transition: .7s;
+}
+
+.Header:hover {
+  background-color: #fff;
+}
+
+.menu {
+  list-style-type: none;
+  grid-column: 1/5;
+  justify-content: flex-start;
+}
+
+.menu li a {
+  text-decoration: none;
+  font-weight: 600;
+  text-transform: uppercase;
+  transition: .5s;
+  color: #23232c;
+  cursor: pointer;
+  font-family: "Poppins",sans-serif;
+  font-size: 12px;
+  margin: 0 20px;
+}
+
+.logo {
+  grid-column: 5/9;
+}
+
+.cart {
+  grid-column: 9/13;
+  justify-content: flex-end;
+}
+
+.Banner {
+  overflow: hidden;
+  background-image: url(./assets/S1.jpg);
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center;
+  height: 100vh;
+}
