@@ -5,17 +5,63 @@ import {
   } from "react-router-dom"; 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 // import {  faUser } from "@fortawesome/free-regular-svg-icons";
+import classNames from 'classnames';
 import {  faSearch, faUser, faCartPlus } from "@fortawesome/free-solid-svg-icons";
-
 
 class Header extends Component {
     constructor(props) {
         super(props);
+
+        this.state = {
+            scrolled: false,
+            isWhite: false
+        }
+    }
+
+    componentDidMount() {
+        window.addEventListener('scroll', e => this.handleNavigation(e));
+    }
+    
+    handleNavigation = (e) => {
+        const window = e.currentTarget;
+    
+        const isTop = window.scrollY < 100;
+        if (window.scrollY  === 0) {
+            this.setState({
+                isWhite: false
+            })
+        }
+
+        if (isTop !== true) {
+            this.setState({
+                scrolled: true,
+                isWhite: true
+            })
+        } else {
+            this.setState({
+                scrolled: false
+            })
+        }
+
+        if (this.prev > window.scrollY) {
+            this.setState({
+                scrolled: false
+            })
+        }
+        this.prev = window.scrollY;
+
+    };
+
+    componentWillUnmount() {
+        window.removeEventListener('scroll');
     }
 
     render() {
         return(
-            <div className="Header">
+            <div className={classNames('Header', {
+                scrolled: this.state.scrolled === true,
+                white: this.state.isWhite === true
+                })}>
                 <ul className="menu flex-center">
                     <li>
                         <Link to="/" className="active">home</Link>
@@ -37,7 +83,6 @@ class Header extends Component {
                     <Link to="/">
                         <img src="https://demo.uix.store/sober/wp-content/themes/sober/images/logo.svg" alt="logo"></img>
                     </Link>
-                
                 </div>
                 <div className="cart flex-center"> 
                     <FontAwesomeIcon icon={faSearch} className="icon"/>
