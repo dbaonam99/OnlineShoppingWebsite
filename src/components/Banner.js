@@ -34,15 +34,45 @@ class Banner extends Component {
         return(
             <div className="Banner flex-center">
                 <div className="banner-container">
-                    <div className={classNames('banner-first', {
+                    <div className={classNames('banner-first flex-center', {
                         hide: currentBanner !== 1
-                    })}></div>
-                    <div className={classNames('banner-second', {
+                    })}>
+                        <div className="banner-title">
+                            New Arrivals
+                        </div>
+                        <div className="flex-center">
+                            <div className="banner-link">
+                                Woman collection
+                            </div>
+                            <div className="banner-link">
+                                Man collection
+                            </div>
+                        </div>
+                    </div>
+                    <div className={classNames('banner-second flex-center', {
                         hide: currentBanner !== 2
-                    })}></div>
-                    <div className={classNames('banner-third', {
+                    })}>
+                        <div className="banner-title">
+                            White Collection
+                        </div>
+                        <div className="">
+                            <div className="banner-link banner-link-second">
+                                Shop now
+                            </div>
+                        </div>
+                    </div>
+                    <div className={classNames('banner-third flex-center', {
                         hide: currentBanner !== 3
-                    })}></div>
+                    })}>
+                        <div className="banner-title">
+                            Linen Collection
+                        </div>
+                        <div className="flex-center">
+                            <div className="banner-link">
+                                Shop now
+                            </div>
+                        </div>
+                    </div>
                 </div>
                 <div className="choose-slide flex-center">
                     <div 

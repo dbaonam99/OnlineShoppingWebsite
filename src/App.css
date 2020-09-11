@@ -129,6 +129,7 @@
   width: 100%;
   background-image: url(./assets/S1.jpg);
   transition: 1s;
+  flex-direction: column;
 }
 
 .banner-second {
@@ -141,6 +142,10 @@
   width: 100%;
   background-image: url(./assets/S2.jpg);
   transition: 1s;
+  flex-direction: column;
+  align-items: flex-start;
+  padding-left: 130px;
+  padding-bottom: 10px;
 }
 
 .banner-third {
@@ -153,6 +158,7 @@
   width: 100%;
   background-image: url(./assets/S3.jpg);
   transition: 1s;
+  flex-direction: column;
 }
 
 .hide {
@@ -182,4 +188,29 @@
 
 .white {
   background: rgba(255, 255, 255, 1);
+}
+
+.banner-title {
+  font-weight: 100;
+  font-size: 60px;
+  font-family: sans-serif;
+  margin-top: 35px;
+  margin-bottom: 25px;
+}
+
+.banner-link {
+  font-size: 11px;
+  margin: 0 20px;
+}
+
+.banner-link-second {
+  margin-left: 180px;
+}
+
+.banner-link::after {
+  content: '';
+  display: block;
+  height: 2px;
+  background: #000;
+  bottom: -3px;
 }
