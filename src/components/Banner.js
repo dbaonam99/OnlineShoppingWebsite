@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import '../App.css';
 import classNames from 'classnames';
+import ScrollAnimation from 'react-animate-on-scroll';
 
 class Banner extends Component {
     constructor(props) {
@@ -20,7 +21,7 @@ class Banner extends Component {
                 return 1; 
         }
     }
-
+    
     componentDidMount() {
         setInterval(() => {
             this.setState({
@@ -37,40 +38,54 @@ class Banner extends Component {
                     <div className={classNames('banner-first flex-center', {
                         hide: currentBanner !== 1
                     })}>
-                        <div className="banner-title">
-                            New Arrivals
-                        </div>
+                        <ScrollAnimation animateIn='fadeInDown' animateOut='fadeOutUp'>
+                            <div className="banner-title">
+                                New Arrivals
+                            </div>
+                        </ScrollAnimation>
                         <div className="flex-center">
-                            <div className="banner-link">
-                                Woman collection
-                            </div>
-                            <div className="banner-link">
-                                Man collection
-                            </div>
+                            <ScrollAnimation animateIn='fadeInLeft' animateOut='fadeOutRight'>
+                                <div className="banner-link">
+                                    Woman collection
+                                </div>
+                            </ScrollAnimation>
+                            <ScrollAnimation animateIn='fadeInRight' animateOut='fadeOutLeft'>
+                                <div className="banner-link">
+                                    Man collection
+                                </div>
+                            </ScrollAnimation>
                         </div>
                     </div>
                     <div className={classNames('banner-second flex-center', {
                         hide: currentBanner !== 2
                     })}>
-                        <div className="banner-title">
-                            White Collection
-                        </div>
-                        <div className="">
-                            <div className="banner-link banner-link-second">
-                                Shop now
+                        <ScrollAnimation animateIn='fadeInDown' animateOut='fadeOutUp'>
+                            <div className="banner-title">
+                                White Collection
                             </div>
+                        </ScrollAnimation>
+                        <div className="">
+                            <ScrollAnimation animateIn='fadeInLeft' animateOut='fadeOutRight'>
+                                <div className="banner-link banner-link-second">
+                                    Shop now
+                                </div>
+                            </ScrollAnimation>
                         </div>
                     </div>
                     <div className={classNames('banner-third flex-center', {
                         hide: currentBanner !== 3
                     })}>
-                        <div className="banner-title">
-                            Linen Collection
-                        </div>
-                        <div className="flex-center">
-                            <div className="banner-link">
-                                Shop now
+                        <ScrollAnimation animateIn='fadeInDown' animateOut='fadeOutUp'>
+                            <div className="banner-title">
+                                Linen Collection
                             </div>
+                        </ScrollAnimation>
+                        <div className="flex-center">
+                            <ScrollAnimation animateIn='fadeInLeft' animateOut='fadeOutRight'>
+                                <div className="banner-link">
+                                    Shop now
+                                </div>
+                            </ScrollAnimation>
                         </div>
                     </div>
                 </div>
