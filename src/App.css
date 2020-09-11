@@ -2,6 +2,12 @@
   padding: 0;
   margin: 0;
   box-sizing: border-box;
+  font-family: Poppins ,sans-serif;
+}
+
+@font-face {
+  font-family: Poppins;
+  src: url(./assets/Poppins.ttf);
 }
 
 .flex-center {
@@ -12,7 +18,6 @@
 
 .Header {
   height: 100px;
-  /* background-color: #fff; */
   top: 0;
   width: 100%;
   z-index: 1500;
@@ -29,6 +34,10 @@
   background-color: #fff;
 }
 
+.active {
+  border-bottom: 2px black solid;
+}
+
 .menu {
   list-style-type: none;
   grid-column: 1/5;
@@ -37,14 +46,43 @@
 
 .menu li a {
   text-decoration: none;
-  font-weight: 600;
+  font-weight: bold;
   text-transform: uppercase;
   transition: .5s;
   color: #23232c;
   cursor: pointer;
-  font-family: "Poppins",sans-serif;
+  font-family: Poppins ,sans-serif;
   font-size: 12px;
   margin: 0 20px;
+  padding: 5px 0px;
+  letter-spacing: -1px;
+  position: relative;
+}
+
+.menu li a::after {
+  content: '';
+  display: block;
+  height: 2px;
+  background: #000;
+  margin-top: 3px;
+  position: absolute;
+  right: 0;
+  bottom: -3px;
+  transition: all .5s;
+  width: 0;
+}
+
+.menu li a:hover::after {
+  /* width: 100%; */
+  animation-name: active_line;
+  animation-duration: 0.4s;
+  width: 100%;
+  left: 0;
+}
+
+@keyframes active_line {
+  from {width: 0px;}
+  to {width: 100%;}
 }
 
 .logo {
@@ -54,6 +92,23 @@
 .cart {
   grid-column: 9/13;
   justify-content: flex-end;
+}
+.cart .icon {
+  margin: 0 15px;
+}
+
+.cart-count {
+  background-color: black;
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  color: white;
+  margin-left: 5px;
+  font-size: 12px;
+  font-weight: bold;
+  display: flex;
+  justify-content: center;
+  line-height: 20px;
 }
 
 .Banner {

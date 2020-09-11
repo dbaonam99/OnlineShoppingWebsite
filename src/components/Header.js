@@ -3,26 +3,34 @@ import '../App.css';
 import {
     Link
   } from "react-router-dom"; 
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+// import {  faUser } from "@fortawesome/free-regular-svg-icons";
+import {  faSearch, faUser, faCartPlus } from "@fortawesome/free-solid-svg-icons";
+
 
 class Header extends Component {
+    constructor(props) {
+        super(props);
+    }
+
     render() {
         return(
             <div className="Header">
                 <ul className="menu flex-center">
                     <li>
-                        <Link to="/">Home</Link>
+                        <Link to="/" className="active">home</Link>
                     </li>
                     <li>
                         <Link to="/">New</Link>
                     </li>
                     <li>
-                        <Link to="/">Men</Link>
+                        <Link to="/">men</Link>
                     </li>
                     <li>
-                        <Link to="/">Women</Link>
+                        <Link to="/">women</Link>
                     </li>
                     <li>
-                        <Link to="/">Children</Link>
+                        <Link to="/">children</Link>
                     </li>
                 </ul>
                 <div className="logo flex-center">
@@ -31,7 +39,16 @@ class Header extends Component {
                     </Link>
                 
                 </div>
-                <div className="cart flex-center"> cart </div>
+                <div className="cart flex-center"> 
+                    <FontAwesomeIcon icon={faSearch} className="icon"/>
+                    <FontAwesomeIcon icon={faUser} className="icon"/>
+                    <div className="icon flex-center">
+                        <FontAwesomeIcon icon={faCartPlus} className="cart-icon"/>
+                        <div className="cart-count">
+                            <p>0</p>
+                        </div>
+                    </div>
+                </div>
             </div>
         )
     }
