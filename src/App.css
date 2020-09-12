@@ -4,10 +4,23 @@
   box-sizing: border-box;
   font-family: Poppins ,sans-serif;
 }
+*:before, *:after {
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+}
+
+.no-p {
+  padding: 0 !important;
+}
 
 @font-face {
   font-family: Poppins;
-  src: url(./assets/Poppins.ttf);
+  src: url(./assets/font/Poppins.ttf);
+}
+@font-face {
+  font-family: Poppins-Medium;
+  src: url(./assets/font/Poppins-Medium.ttf);
 }
 
 .flex-center {
@@ -24,9 +37,7 @@
   z-index: 1500;
   padding: 0 20px;
   display: grid;
-  /* position: fixed; */
   grid-template-columns: repeat(12,1fr);
-  background: rgb(204, 204, 204); /* Fallback for older browsers without RGBA-support */
   background: rgba(204, 204, 204, 0);
   transition: .3s;
 }
@@ -35,8 +46,9 @@
   background-color: #fff;
 }
 
-.active {
-  border-bottom: 2px black solid;
+.active::after {
+  width: 100% !important; 
+  animation-name: none!important;
 }
 
 .menu {
@@ -74,7 +86,6 @@
 }
 
 .menu li a:hover::after {
-  /* width: 100%; */
   animation-name: active_line;
   animation-duration: 0.4s;
   width: 100%;
@@ -219,7 +230,7 @@
 }
 
 .RecommendBanner {
-  padding: 40px;
+  padding: 40px 40px 0px 40px;
 }
 
 .RecommendBanner-container {
@@ -334,4 +345,97 @@
 
 .blackbox-link-small {
   font-size: 14px;
+}
+
+/* Home page */
+
+.HomeTab {
+  padding: 0 25px;
+  margin-top: 30px;
+}
+
+.home-tab {
+  height: 50px;
+  margin-bottom: 10px;
+}
+
+.home-tab p {
+  font-size: 15px;
+  margin: 0 25px;
+  color: #667;
+  cursor: pointer;
+  position: relative;
+  padding: 10px 0;
+  font-weight: bold;
+}
+
+.home-tab-active {
+  color: #111 !important;
+}
+.home-tab-active::after {
+  width: 100% !important; 
+  animation-name: none!important;
+}
+
+.home-tab p:hover {
+  color: #111;
+}
+
+.home-tab p::after {
+  content: '';
+  display: block;
+  height: 2px;
+  background: #000;
+  margin-top: 3px;
+  right: 0;
+  bottom: -3px;
+  transition: all .5s;
+  width: 0;
+  position: absolute;
+}
+
+.home-tab p:hover::after {
+  animation-name: active_line;
+  animation-duration: 0.4s;
+  width: 100%;
+  left: 0;
+}
+
+/* BestSeller */
+
+.BestSeller {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+/* Product */
+
+.Product {
+  width: 216px;
+  margin: 15px 15px 20px 15px;
+  text-align: center;
+}
+
+.product-img {
+  height: 257px;
+}
+.product-img .img {
+  height: 100%;
+  width: 100%;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  transition: all .7s;
+}
+
+.product-title {
+  margin-top: 20px;
+  font-size: 14px;
+  font-family: Poppins-Medium;
+}
+
+.product-price {
+  margin-top: 10px;
+  font-size: 12px;
+  font-weight: bold;
 }

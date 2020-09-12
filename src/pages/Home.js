@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import "../App.css";
 import RecommendBanner from "../components/RecommendBanner.js"
+import HomeTab from "../components/HomeTab.js"
 
 class Home extends Component {
     constructor() {
@@ -14,6 +15,7 @@ class Home extends Component {
         return (
             <div className="Home">
                 <RecommendBanner/>
+                <HomeTab/>
             </div>
         );
     }
