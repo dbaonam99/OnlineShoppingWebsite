@@ -4,7 +4,6 @@ import {
     Link
   } from "react-router-dom"; 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-// import {  faUser } from "@fortawesome/free-regular-svg-icons";
 import classNames from 'classnames';
 import {  faSearch, faUser, faCartPlus } from "@fortawesome/free-solid-svg-icons";
 
