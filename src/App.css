@@ -491,3 +491,60 @@
   transform: translateY(-48px);
   opacity: 1;
 }
+
+/* Collection */
+
+.collection-container {
+  width: 100%;
+  display: flex;
+}
+
+.collection-box {
+  overflow: hidden;
+  height: 100%;
+  position: relative;
+}
+
+.collection-box img {
+  width: 100%;
+  height: 100%;
+  transition: .7s;
+  display: block;
+}
+
+.collection-box:hover img {
+  transform: scale(1.1);
+}
+
+.collection-overlay {
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  top: 0;
+  flex-direction: column;
+  color: #fff;
+  font-family: Poppins-Medium;
+}
+
+.collection-title {
+  font-size: 32px;
+  font-weight: 100;
+  font-weight: 300;
+  margin-bottom: 20px;
+}
+
+.collection-link {
+  font-size: 16px;
+  position: relative;
+}
+
+.collection-link::after {
+  content: '';
+  height: 2px;
+  background: #fff;
+  margin-top: 3px;
+  position: absolute;
+  right: 0;
+  bottom: -3px;
+  width: 100%;
+}
