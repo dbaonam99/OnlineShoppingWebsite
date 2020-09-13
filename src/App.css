@@ -548,3 +548,114 @@
   bottom: -3px;
   width: 100%;
 }
+
+/* Fashion News */
+
+.FashionNews {
+  padding: 0 40px;
+  margin-top: 65px;
+}
+
+.news-container {
+  width: 100%;
+  height: 100%;
+}
+
+.news-title {
+  text-align: center;
+  font-size: 40px;
+  font-weight: 300;
+  font-family: sans-serif;
+}
+
+.news-box {
+  margin-top: 50px;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: flex-start;
+}
+
+.News {
+  width: 33.3%;
+  padding: 0 15px;
+}
+
+.News img {
+  width: 100%;
+  height: 240px;
+}
+
+.news-container .news-line {
+  margin-top: 20px;
+  background-color: #eee;
+  height: 1px;
+}
+
+.new-info {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.news-time {
+  font-size: 12px;
+  margin: 10px 10px;
+  font-weight: 500;
+  color: #bbb;
+}
+
+.news-cate {
+  font-size: 12px;
+  margin: 10px 10px;
+  font-weight: 500;
+  color: #111;
+}
+
+.news-title-box {
+  text-align: center;
+  word-wrap: break-word;
+  padding: 0 30px;
+  margin-bottom: 15px;
+  font-size: 20px;
+  font-weight: 300;
+  font-family: Poppins-medium;
+}
+
+.news-content {
+  color: #777;
+  font-size: 12px;
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.news-link {
+  text-align: center;
+  margin-bottom: 40px;
+}
+
+.news-link a {
+  font-size: 12px;
+  position: relative;
+  width: 200px;
+  color: #000;
+  text-decoration: none;
+}
+
+.news-link a::after{
+  content: '';
+  display: block;
+  height: 2px;
+  background: #000;
+  margin-top: 3px;
+  right: 0;
+  bottom: -3px;
+  width: 100%;
+  position: absolute;
+}
+
+/* Newsletter */
+
+.Newsletter {
+  height: 500px;
+  background-color: red;
+}

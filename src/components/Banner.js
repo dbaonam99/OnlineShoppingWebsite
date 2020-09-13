@@ -19,6 +19,8 @@ class Banner extends Component {
                 return 3;
             case 3:
                 return 1; 
+            default:
+                return;
         }
     }
     
