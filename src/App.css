@@ -656,6 +656,127 @@
 /* Newsletter */
 
 .Newsletter {
-  height: 500px;
-  background-color: red;
+  height: 232px;
+  padding: 0 40px;
+}
+
+.newsletter-container {
+  flex-direction: column;
+  height: 100%;
+  position: relative;
+}
+
+.newsletter-title {
+  font-size: 23px;
+  margin-bottom: 20px;
+  color: #333;
+  font-weight: 600;
+  font-family: Poppins-medium;
+}
+
+.newsletter-small {
+  margin-bottom: 35px;
+  color: #777;
+  font-size: 14px;
+}
+
+.newsletter-container .newsletter-line {
+  margin-top: 20px;
+  background-color: #eee;
+  height: 1px;
+  width: 100%;
+  position: absolute;
+  bottom: 0;
+}
+
+.newsletter-input {
+  width: 720px;
+  height: 50px;
+  border: none;
+  transition: .7s;
+  border-bottom: 2px #ddd solid;
+  padding: 0 20px;
+  margin-right: 10px;
+  font-size: 14px;
+}
+
+.newsletter-input:hover {
+  border-bottom: 2px #111 solid;
+}
+
+.newsletter-input:focus {
+  outline: none !important;
+}
+
+.newsletter-btn {
+  width: 100px;
+  height: 50px;
+  margin-left: 10px;
+  background-color: #fff;
+  border: none;
+  font-size: 16px;
+  position: relative;
+  transition: .7s;
+}
+
+.newsletter-btn:hover::after {
+  background: #000;
+}
+
+.newsletter-btn::after{
+  content: '';
+  display: block;
+  height: 2px;
+  background: #ddd;
+  margin-top: 1px;
+  right: 0;
+  bottom: -3px;
+  width: 100%;
+  position: absolute;
+}
+
+/* Footer */
+
+.Footer {
+  padding: 0 40px;
+  height: 90px;
+}
+
+.footer-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  height: 100%;
+  font-size: 12px;
+}
+
+.footer-container a {
+
+  text-decoration: none;
+  color: #778;
+  margin: 0 15px;
+}
+
+.footer-left {
+  height: 100%;
+  display: flex;
+  align-items: center;
+}
+.footer-right {
+  height: 100%;
+  display: flex;
+  align-items: center;
+}
+
+.cr {
+  color: #000 !important;
+}
+
+.cart-icon {
+  color: #778;
+  margin: 0 15px;
+}
+
+.cart-icon:last-child {
+  margin-right: 0;
 }

@@ -28,20 +28,6 @@ export default class FashionNews extends Component {
                     newCate: "SHOPPING",
                     newTitle: "Friday Finest The Best of The Week",
                     newContent: "xcepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deseru mollit anim id"
-                },
-                {
-                    newImg: "https://demo.uix.store/sober/wp-content/uploads/sites/2/2016/07/1-44-360x240.jpg",
-                    newTime: "20.10 2016",
-                    newCate: "SHOPPING",
-                    newTitle: "Friday Finest The Best of The Week",
-                    newContent: "xcepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deseru mollit anim id"
-                },
-                {
-                    newImg: "https://demo.uix.store/sober/wp-content/uploads/sites/2/2016/07/1-44-360x240.jpg",
-                    newTime: "20.10 2016",
-                    newCate: "SHOPPING",
-                    newTitle: "Friday Finest The Best of The Week",
-                    newContent: "xcepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deseru mollit anim id"
                 }
             ]
         }
