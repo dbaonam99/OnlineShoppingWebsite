@@ -551,7 +551,7 @@
 
 /* Fashion News */
 
-.FashionNews {
+.FashionNews, .Service {
   padding: 0 40px;
   margin-top: 65px;
 }
@@ -578,11 +578,22 @@
 .News {
   width: 33.3%;
   padding: 0 15px;
+  overflow: hidden;
 }
 
-.News img {
+.News .news-img {
   width: 100%;
   height: 240px;
+  overflow: hidden;
+}
+
+.News .news-img img {
+  transition: .5s;
+  width: 100%;
+}
+
+.News .news-img:hover img {
+  transform: scale(1.1);
 }
 
 .news-container .news-line {
@@ -766,17 +777,61 @@
   height: 100%;
   display: flex;
   align-items: center;
-}
+} 
 
 .cr {
   color: #000 !important;
 }
 
-.cart-icon {
+.cart-icon-footer {
   color: #778;
   margin: 0 15px;
 }
 
-.cart-icon:last-child {
+.cart-icon-footer:last-child {
   margin-right: 0;
+}
+
+.footer-left a:first-child {
+  margin-left: 0;
+}
+
+/* Service  */
+
+.Service {
+  position: relative;
+}
+
+.service-container {
+  position: relative;
+  width: 100%;
+}
+
+.service-box {
+  flex-direction: column;
+  margin-bottom: 40px;
+}
+
+.service-title {
+  text-align: center;
+  margin: 35px 0;
+  font-size: 18px;
+  font-weight: 600;
+  font-family: sans-serif;
+  color: #111;
+}
+
+.service-content {
+  text-align: center;
+  font-size: 14px;
+  color: #777;
+  padding: 0 20px;
+}
+
+.service-line {
+  margin-top: 20px;
+  background-color: #eee;
+  height: 1px;
+  width: 100%;
+  bottom: 0;
 }

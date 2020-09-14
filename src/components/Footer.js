@@ -17,11 +17,11 @@ export default class Footer extends Component {
                         <a href="pe.heromc.net">Contact us</a>
                     </div>
                     <div className="footer-right">
-                        <FontAwesomeIcon icon={faTwitter} className="cart-icon"/>
-                        <FontAwesomeIcon icon={faFacebookF} className="cart-icon"/>
-                        <FontAwesomeIcon icon={faInstagram} className="cart-icon"/>
-                        <FontAwesomeIcon icon={faPinterest} className="cart-icon"/>
-                        <FontAwesomeIcon icon={faGoogle} className="cart-icon"/>
+                        <FontAwesomeIcon icon={faTwitter} className="cart-icon-footer"/>
+                        <FontAwesomeIcon icon={faFacebookF} className="cart-icon-footer"/>
+                        <FontAwesomeIcon icon={faInstagram} className="cart-icon-footer"/>
+                        <FontAwesomeIcon icon={faPinterest} className="cart-icon-footer"/>
+                        <FontAwesomeIcon icon={faGoogle} className="cart-icon-footer"/>
                     </div>
                 </div>
             </div>

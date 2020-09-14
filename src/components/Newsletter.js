@@ -10,7 +10,7 @@ export default class Newsletter extends Component {
                     <div className="newsletter-title">Newsletter</div>
                     <div className="newsletter-small">Get timely updates from your favorite products</div>
                     <form className="newsletter-form">
-                        <input className="newsletter-input" placeholder="Enter your email address"></input>
+                        <input className="newsletter-input" placeholder="Enter your email address" type="email"></input>
                         <button className="newsletter-btn">Subcribe</button>
                     </form>
                     <div className="newsletter-line"></div>

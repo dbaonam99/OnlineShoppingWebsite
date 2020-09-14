@@ -6,7 +6,9 @@ export default class News extends Component {
         console.log(this.props);
         return(
             <div className="News">
-                <img src={this.props.newImg} alt="z"></img>
+                <div className="news-img">
+                    <img src={this.props.newImg} alt="z"></img>
+                </div>
                 <div className="news-info flex-center">
                     <div className="news-time">{this.props.newTime}</div>
                     <div className="news-cate">{this.props.newCate}</div>
