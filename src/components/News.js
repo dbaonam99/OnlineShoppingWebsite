@@ -3,7 +3,6 @@ import '../App.css';
 
 export default class News extends Component {
     render() {
-        console.log(this.props);
         return(
             <div className="News">
                 <div className="news-img">
@@ -16,7 +15,7 @@ export default class News extends Component {
                 <div className="news-title-box">
                     {this.props.newTitle}
                 </div>
-                <p className="news-content">
+                <p className="news-content tripledot">
                     {this.props.newContent}
                 </p>
                 <div className="news-link">

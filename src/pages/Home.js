@@ -6,12 +6,14 @@ import Collection from '../components/Collection.js'
 import FashionNews from '../components/FashionNews.js'
 import Newsletter from "../components/Newsletter.js"
 import Footer from "../components/Footer.js"
+import Banner from '../components/Banner.js'
 // import Service from "../components/Service.js"
 
 class Home extends Component {
     render() {
         return (
             <div className="Home">
+                <Banner></Banner>
                 <RecommendBanner/>
                 <HomeTab/>
                 <Collection/>

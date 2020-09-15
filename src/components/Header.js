@@ -66,7 +66,7 @@ class Header extends Component {
                         <Link to="/" className="active">home</Link>
                     </li>
                     <li>
-                        <Link to="/">New</Link>
+                        <Link to="/news">News</Link>
                     </li>
                     <li>
                         <Link to="/">men</Link>

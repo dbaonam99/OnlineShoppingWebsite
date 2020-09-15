@@ -7,9 +7,9 @@ import {
 
 
 import Header from './components/Header.js'
-import Banner from './components/Banner.js'
 
 import Home from './pages/Home.js'
+import News from './pages/News.js'
 
 
 
@@ -18,8 +18,8 @@ function App() {
     <Router>
       <div className="App">
         <Header></Header>
-        <Banner></Banner>
         <Route path="/" exact component={Home}></Route>
+        <Route path="/news" exact component={News}></Route>
       </div>
     </Router>
   );

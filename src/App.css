@@ -637,11 +637,20 @@
   font-size: 12px;
   text-align: center;
   margin-bottom: 20px;
+  height: 38px;
+  text-overflow: ellipsis;
+  position: relative;
+  /* Add ... if text is full */
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  max-width: 100%;
+  overflow: hidden;
 }
 
 .news-link {
   text-align: center;
-  margin-bottom: 40px;
+  margin-bottom: 20px;
 }
 
 .news-link a {
@@ -662,6 +671,35 @@
   bottom: -3px;
   width: 100%;
   position: absolute;
+}
+
+.pagnigation {
+  width: 90px;
+}
+
+.pagnigation div {
+  cursor: pointer;
+  width: 30px;
+  text-align: center;
+  font-size: 14px;
+  color: #aaa;
+  text-decoration: underline;
+  -webkit-user-select: none;
+  -khtml-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  -o-user-select: none;
+  user-select: none;
+}
+
+.pagnigation div:hover {
+  color: #111 !important;
+  text-decoration: none !important;
+}
+
+.pagnigation-active {
+  color: #111 !important;
+  text-decoration: none !important;
 }
 
 /* Newsletter */

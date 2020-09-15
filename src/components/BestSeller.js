@@ -72,9 +72,10 @@ export default class BestSeller extends Component {
         const { product } = this.state;
         return(
             <div className="BestSeller">
-                {product.map(function(item) {
+                {product.map(function(item, index) {
                     return (
                         <Product 
+                            key={index}
                             imgUrl={item.imgUrl} 
                             imgUrlHover={item.imgUrlHover} 
                             productTitle={item.productTitle}
