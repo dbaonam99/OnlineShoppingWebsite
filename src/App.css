@@ -39,12 +39,30 @@
   display: grid;
   grid-template-columns: repeat(12,1fr);
   background: rgba(204, 204, 204, 0);
-  transition: .3s;
+  transition: .7s;
 }
 
 .Header:hover {
   background-color: #fff;
 }
+
+.Header:hover .whitelink_header {
+  color: #23232c !important;
+}
+
+.Header:hover .whitelink_header::after {
+  background: #23232c !important;
+}
+
+.white_header:hover {
+  color: #23232c !important;
+}
+
+.Header:hover .cart_count_news_hover {
+  background-color: black;
+  color: white;
+}
+
 
 .active::after {
   width: 100% !important; 
@@ -72,6 +90,14 @@
   position: relative;
 }
 
+.white_header {
+  color: white;
+}
+
+.whitelink_header {
+  color: white !important;
+}
+
 .menu li a::after {
   content: '';
   display: block;
@@ -83,6 +109,10 @@
   bottom: -3px;
   transition: all .5s;
   width: 0;
+}
+
+.whitelink_header::after {
+  background: white !important;
 }
 
 .menu li a:hover::after {
@@ -121,6 +151,11 @@
   display: flex;
   justify-content: center;
   line-height: 20px;
+}
+
+.cart_count_news {
+  background-color: white;
+  color: black;
 }
 
 .Banner {
@@ -682,7 +717,7 @@
   width: 30px;
   text-align: center;
   font-size: 14px;
-  color: #aaa;
+  color: #777;
   text-decoration: underline;
   -webkit-user-select: none;
   -khtml-user-select: none;
@@ -702,6 +737,12 @@
   text-decoration: none !important;
 }
 
+.pagnigation_disable {
+  cursor: default;
+  pointer-events: none;
+  color: #eee !important;
+  /* display: none; */
+}
 /* Newsletter */
 
 .Newsletter {
@@ -872,4 +913,63 @@
   height: 1px;
   width: 100%;
   bottom: 0;
+}
+
+/* NewsBanner */
+
+.NewsPages {
+  height: 500px;
+}
+
+.NewsBanner {
+  height: 100%;
+}
+
+.newsbanner-container {
+  height: 100%;
+  background-image: url(./assets/newsbanner.jpg);
+  padding: 175px 0;
+  margin: 0;
+  border: 0;
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-color: #f1f2f4;
+  position: relative;
+}
+
+.newsbanner-container img {
+  width: 100%;
+  height: 100%;
+}
+
+.newsbanner-overlay {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  flex-direction: column;
+  color: #fff;
+}
+
+.newsbanner-title {
+  font-size: 5rem;
+  font-weight: 300;
+  font-family: sans-serif;
+  /* margin-top: -40px; */
+  margin-bottom: 30px;
+}
+
+.newsbanner-nav {
+  position: absolute;
+  bottom: 0;
+  display: flex;
+}
+
+.newsbanner-breadcrumb {
+  font-size: 12px;
+}
+
+.newsbanner-breadcrumb div {
+  margin: 0 10px;
 }

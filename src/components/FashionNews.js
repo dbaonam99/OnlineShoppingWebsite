@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import '../App.css';
 import News from './News.js'
+import classNames from 'classnames'
 
 export default class FashionNews extends Component {
     constructor(props) {
@@ -211,6 +212,10 @@ export default class FashionNews extends Component {
 
     choosePage(event) {
         if (Number(event.target.id) === 0) {
+            this.setState({
+                currentPage: this.state.currentPage
+            })
+        } else if (Number(event.target.id) === -1) {
             if (this.state.currentPage > 1) {
                 this.setState({
                     currentPage: this.state.currentPage - 1
@@ -219,18 +224,11 @@ export default class FashionNews extends Component {
                 this.setState({
                     currentPage: 1
                 })
-
             }
         } else if (Number(event.target.id) === 999) {
-            if (this.state.isEnd === true) {
-                this.setState({
-                    currentPage: this.state.currentPage
-                })
-            } else {
-                this.setState({
-                    currentPage: this.state.currentPage + 1
-                })
-            }
+            this.setState({
+                currentPage: this.state.currentPage + 1
+            })
         } else {
             this.setState({
                 currentPage: Number(event.target.id),
@@ -258,7 +256,6 @@ export default class FashionNews extends Component {
         } else {
             if (currentPage === 1) {
                 pages.push(currentPage, currentPage + 1, currentPage + 2 );
-                this.state.isStart = true;
             } else if (currentPage === 2) {
                 pages.push(currentPage - 1, currentPage, currentPage + 1);
             } else if (currentPage > 2 && currentPage < pageNumbers.length - 1) {
@@ -267,7 +264,6 @@ export default class FashionNews extends Component {
                 pages.push(currentPage - 1, currentPage, currentPage + 1);
             } else {
                 pages.push(currentPage - 2, currentPage - 1, currentPage);
-                this.state.isEnd = true;
             }
         }
 
@@ -292,7 +288,9 @@ export default class FashionNews extends Component {
                     </div>
                     <div className="pagination-container flex-center">
                         <div className="pagnigation flex-center" onClick={this.choosePage}>
-                            <div id="0">←</div>
+                            <div id="-1" className={classNames({
+                                pagnigation_disable: currentPage === 1
+                            })}>←</div>
                             { pages.map(function(number, index) { 
                                 if (currentPage === number) {
                                     return (
@@ -311,7 +309,9 @@ export default class FashionNews extends Component {
                                     )
                                 } 
                             })}
-                            <div id="999">→</div>
+                            <div id="999" className={classNames({
+                                pagnigation_disable: currentPage === pageNumbers.length
+                            })}>→</div>
                         </div>
                     </div>
                     <div className="news-line"></div>
