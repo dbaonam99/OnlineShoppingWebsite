@@ -962,8 +962,41 @@
 
 .newsbanner-nav {
   position: absolute;
-  bottom: 0;
+  bottom: 10px;
   display: flex;
+  padding: 0 0 25px;
+  font-size: 15px;
+  font-weight: bold;
+}
+
+.newsbanner-nav div {
+  margin: 0 20px;
+  position: relative;
+}
+
+.newsbanner-nav div::after {
+  content: '';
+  display: block;
+  height: 2px;
+  background: #fff;
+  margin-top: 3px;
+  position: absolute;
+  right: 0;
+  bottom: -10px;
+  transition: all .5s;
+  width: 0%;
+}
+
+.newsbanner-nav div:hover::after {
+  animation-name: active_line;
+  animation-duration: 0.4s;
+  width: 100%;
+  left: 0;
+}
+
+.newsbanner-nav-active::after {
+  width: 100% !important; 
+  animation-name: none!important;
 }
 
 .newsbanner-breadcrumb {
@@ -972,4 +1005,5 @@
 
 .newsbanner-breadcrumb div {
   margin: 0 10px;
+  text-transform: capitalize;
 }
