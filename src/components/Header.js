@@ -9,70 +9,96 @@ import classNames from 'classnames';
 import {  faSearch, faUser, faCartPlus } from "@fortawesome/free-solid-svg-icons";
 
 class Header extends Component {
+
     constructor(props) {
         super(props);
-
         this.state = {
             scrolled: false,
-            isWhite: false,
+            isWhiteBox: false,
             activeId: 1,
             location: this.props.history.location.pathname,
-            isLogoWhite: false
+            isWhiteText: false
         }
     }
 
     componentDidMount() {
-        window.addEventListener('scroll', e => this.handleNavigation(e));
-    }
 
-    handleNavigation = (e) => {
-        const window = e.currentTarget;
-        const isTop = window.scrollY < 100;
-
-        if (window.scrollY  === 0) {
+        if (this.state.location === "/news") {
             this.setState({
-                isWhite: false,
-                isLogoWhite: true
-            })
-        }
-
-        if (isTop !== true) {
-            this.setState({
-                scrolled: true,
-                isWhite: true,
-                isLogoWhite: true
+                isWhiteText: false
             })
         } else {
             this.setState({
-                scrolled: false,
-                isLogoWhite: true
+                isWhiteText: false
             })
         }
+        
+        window.onscroll = function() {
+            if(window.pageYOffset === 0) {
+                if (this.state.location === "/news") {
+                    this.setState({
+                        isWhiteBox: false,
+                        isWhiteText: true
+                    })
+                } else {
+                    this.setState({
+                        isWhiteBox: false
+                    })
+                }
+            } else if(window.pageYOffset < 100) {
+                this.setState({
+                    scrolled: false
+                })
+            } else if (this.prev > window.pageYOffset) {
+                if (this.state.location === "/news") {
+                    this.setState({
+                        scrolled: false,
+                        isWhiteBox: true,
+                        isWhiteText: false
+                    })
+                } else {
+                    this.setState({
+                        scrolled: false,
+                        isWhiteBox: true
+                    })
+                }
+            }else {
+                this.setState({
+                    scrolled: true
+                })
+            }
+            this.prev = window.pageYOffset;
+        }.bind(this);
 
-        if (this.prev > window.scrollY) {
-            this.setState({
-                scrolled: false,
-                isLogoWhite: false
-            })
-        }
-        this.prev = window.scrollY;
-    };
-
-    // componentWillUnmount() {
-    //     window.removeEventListener('scroll');
-    // }
+        console.log(this.state.isWhiteText);
+    }
+    
+    componentWillUnmount() {
+        window.onscroll = null;
+    }
 
     render() {
-        const {location , scrolled , isWhite, isLogoWhite} = this.state;
+        const {location , scrolled, isWhiteBox, isWhiteText } = this.state;
         return(
             <div 
                 className={classNames('Header', {
                     scrolled: scrolled === true,
-                    white: isWhite === true,
-                    white_header: location === "/news"
+                    white: isWhiteBox === true
                 })}
-                onMouseEnter={() => { this.setState({ isLogoWhite: false})}}
-                onMouseLeave={() => { this.setState({ isLogoWhite: true})}}
+                onMouseEnter={() => { 
+                    if (location === "/news") {
+                        this.setState({ 
+                            isWhiteText: false 
+                        }) 
+                    }
+                }}
+                onMouseLeave={() => { 
+                    if (location === "/news") {
+                        this.setState({ 
+                            isWhiteText: true 
+                        }) 
+                    }
+                }}
                 >
                 <ul className="menu flex-center">
                     <li>
@@ -80,7 +106,7 @@ class Header extends Component {
                             to="/" 
                             className={classNames({
                                 active: location === "/",
-                                whitelink_header: location === "/news"
+                                whitelink_header: isWhiteText === true
                             })}
                             id="1"
                             >home</Link>
@@ -89,7 +115,7 @@ class Header extends Component {
                         <Link to="/news"
                             className={classNames({
                                 active: location === "/news",
-                                whitelink_header: location === "/news"
+                                whitelink_header: isWhiteText === true
                             })}
                             id="2" 
                             >News</Link>
@@ -98,7 +124,7 @@ class Header extends Component {
                         <Link to="/men" 
                             className={classNames({
                                 active: location === "/men",
-                                whitelink_header: location === "/news"
+                                whitelink_header: isWhiteText === true
                             })}
                             id="3"
                             >men</Link>
@@ -107,16 +133,16 @@ class Header extends Component {
                         <Link to="/women" 
                             className={classNames({
                                 active: location === "/women",
-                                whitelink_header: location === "/news"
+                                whitelink_header: isWhiteText === true
                             })}
                             id="4"
                             >women</Link>
                     </li>
                     <li>
-                        <Link to="/children" 
+                        <Link to="/contact" 
                             className={classNames({
                                 active: location === "/contact",
-                                whitelink_header: location === "/news"
+                                whitelink_header: isWhiteText === true
                             })}
                             id="5"
                             >contact</Link>
@@ -124,17 +150,16 @@ class Header extends Component {
                 </ul>
                 <div className="logo flex-center">
                     <Link to="/">
-                        {location !== "/news"
-                            ?<img src="https://demo.uix.store/sober/wp-content/themes/sober/images/logo.svg" alt="logo"></img>
-                            :(
-                                isLogoWhite === true 
-                                    ? <img src="https://demo.uix.store/sober/wp-content/themes/sober/images/logo-light.svg" alt="logo"></img> 
-                                    : <img src="https://demo.uix.store/sober/wp-content/themes/sober/images/logo.svg" alt="logo"></img>
-                            )
+                        {
+                            isWhiteText === true 
+                                ? <img src="https://demo.uix.store/sober/wp-content/themes/sober/images/logo-light.svg" alt="logo"></img>
+                                : <img src="https://demo.uix.store/sober/wp-content/themes/sober/images/logo.svg" alt="logo"></img>
                         }
                     </Link>
                 </div>
-                <div className="cart flex-center"> 
+                <div className={classNames('cart flex-center', {
+                        whitelink_header: isWhiteText === true
+                    })}> 
                     <FontAwesomeIcon icon={faSearch} className="icon"/>
                     <FontAwesomeIcon icon={faUser} className="icon"/>
                     <div className="icon flex-center">

@@ -39,15 +39,23 @@
   display: grid;
   grid-template-columns: repeat(12,1fr);
   background: rgba(204, 204, 204, 0);
-  transition: .7s ease-in-out;
+  transition: .4s ease-in-out;
 }
 
 .Header:hover {
   background-color: #fff;
 }
 
-.Header:hover .whitelink_header {
+.blacklink_header {
   color: #23232c !important;
+}
+
+.blacklink_header::after {
+  background: #fff !important;
+}
+
+.Header:hover .blacklink_header {
+  color: #fff !important;
 }
 
 .Header:hover .whitelink_header::after {
@@ -1047,7 +1055,8 @@
 }
 
 .newsbody-small-img {
-  width: 100%;
+  width: 50%;
+  height: 100%;
 }
 
 .newsbody-info {
