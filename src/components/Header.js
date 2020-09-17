@@ -52,7 +52,7 @@ class Header extends Component {
         if (this.prev > window.scrollY) {
             this.setState({
                 scrolled: false,
-                isLogoWhite: true
+                isLogoWhite: false
             })
         }
         this.prev = window.scrollY;
