@@ -39,7 +39,7 @@
   display: grid;
   grid-template-columns: repeat(12,1fr);
   background: rgba(204, 204, 204, 0);
-  transition: .7s;
+  transition: .7s ease-in-out;
 }
 
 .Header:hover {
@@ -997,6 +997,11 @@
 .newsbanner-nav-active::after {
   width: 100% !important; 
   animation-name: none!important;
+}
+
+.newsbanner-nav-active2::after {
+  width: 100% !important; 
+  background-color: red !important;
 }
 
 .newsbanner-breadcrumb {

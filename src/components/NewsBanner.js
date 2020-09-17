@@ -12,14 +12,216 @@ class NewsBanner extends Component {
 
         this.state = {
             location: this.props.history.location.pathname,
-            currentTab: 1
+            currentTab: -1,
+            cate: [
+                "shopping",
+                "Fashion",
+                "Inspiration",
+                "Lifestyle",
+                "Photography",
+                "minimalism"
+            ],
+            news: [
+                {
+                    id: 1,
+                    newImg: "https://demo.uix.store/sober/wp-content/uploads/sites/2/2016/07/1-44-360x240.jpg",
+                    newTime: "20.10 2016",
+                    newCate: "SHOPPING",
+                    newTitle: "Friday Finest The Best of The Week",
+                    newContent: "xcepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deseru mollit anim idxcepteur sint occaeczxczxat cupidatat non proident, sunt in culpa qui officia deseru mollit anim idxcepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deseru mollit anim idxcepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deseru mollit anim idxcepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deseru mollit anim idxcepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deseru mollit anim idxcepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deseru mollit anim idxcepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deseru mollit anim idxcepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deseru mollit anim id"
+                },
+                {
+                    id: 2,
+                    newImg: "https://demo.uix.store/sober/wp-content/uploads/sites/2/2016/07/1-44-360x240.jpg",
+                    newTime: "20.10 2016",
+                    newCate: "SHOPPING",
+                    newTitle: "Friday Finest The Best of The Week",
+                    newContent: "xcepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deseru mollit anim idxcepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deseru mollit anim idxcepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deseru mollit anim idxcepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deseru mollit anim idxcepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deseru mollit anim idxcepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deseru mollit anim idxcepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deseru mollit anim idxcepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deseru mollit anim idxcepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deseru mollit anim id"
+                },
+                {
+                    id: 3,
+                    newImg: "https://demo.uix.store/sober/wp-content/uploads/sites/2/2016/07/1-44-360x240.jpg",
+                    newTime: "20.10 2016",
+                    newCate: "SHOPPING",
+                    newTitle: "Friday Finest The Best of The Week",
+                    newContent: "xcepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deseru mollit anim idxcepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deseru mollit anim idxcepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deseru mollit anim idxcepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deseru mollit anim idxcepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deseru mollit anim idxcepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deseru mollit anim idxcepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deseru mollit anim idxcepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deseru mollit anim idxcepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deseru mollit anim id"
+                },
+                {
+                    id: 4,
+                    newImg: "https://demo.uix.store/sober/wp-content/uploads/sites/2/2016/07/1-44-360x240.jpg",
+                    newTime: "20.10 2016",
+                    newCate: "SHOPPING",
+                    newTitle: "Friday Finest The Best of The Week",
+                    newContent: "xcepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deseru mollit anim idxcepteur sint occaeczxczxat cupidatat non proident, sunt in culpa qui officia deseru mollit anim idxcepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deseru mollit anim idxcepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deseru mollit anim idxcepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deseru mollit anim idxcepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deseru mollit anim idxcepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deseru mollit anim idxcepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deseru mollit anim idxcepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deseru mollit anim id"
+                },
+                {
+                    id: 5,
+                    newImg: "https://demo.uix.store/sober/wp-content/uploads/sites/2/2016/07/1-44-360x240.jpg",
+                    newTime: "20.10 2016",
+                    newCate: "SHOPPING",
+                    newTitle: "Friday Finest The Best of The Week",
+                    newContent: "xcepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deseru mollit anim idxcepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deseru mollit anim idxcepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deseru mollit anim idxcepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deseru mollit anim idxcepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deseru mollit anim idxcepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deseru mollit anim idxcepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deseru mollit anim idxcepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deseru mollit anim idxcepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deseru mollit anim id"
+                },
+                {
+                    id: 6,
+                    newImg: "https://demo.uix.store/sober/wp-content/uploads/sites/2/2016/07/1-44-360x240.jpg",
+                    newTime: "20.10 2016",
+                    newCate: "SHOPPING",
+                    newTitle: "Friday Finest The Best of The Week",
+                    newContent: "xcepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deseru mollit anim idxcepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deseru mollit anim idxcepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deseru mollit anim idxcepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deseru mollit anim idxcepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deseru mollit anim idxcepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deseru mollit anim idxcepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deseru mollit anim idxcepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deseru mollit anim idxcepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deseru mollit anim id"
+                },
+                {
+                    id: 7,
+                    newImg: "https://demo.uix.store/sober/wp-content/uploads/sites/2/2016/07/1-44-360x240.jpg",
+                    newTime: "20.10 2016",
+                    newCate: "SHOPPING",
+                    newTitle: "Friday Finest The Best of The Week",
+                    newContent: "xcepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deseru mollit anim idxcepteur sint occaeczxczxat cupidatat non proident, sunt in culpa qui officia deseru mollit anim idxcepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deseru mollit anim idxcepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deseru mollit anim idxcepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deseru mollit anim idxcepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deseru mollit anim idxcepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deseru mollit anim idxcepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deseru mollit anim idxcepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deseru mollit anim id"
+                },
+                {
+                    id: 8,
+                    newImg: "https://demo.uix.store/sober/wp-content/uploads/sites/2/2016/07/1-44-360x240.jpg",
+                    newTime: "20.10 2016",
+                    newCate: "SHOPPING",
+                    newTitle: "Friday Finest The Best of The Week",
+                    newContent: "xcepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deseru mollit anim idxcepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deseru mollit anim idxcepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deseru mollit anim idxcepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deseru mollit anim idxcepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deseru mollit anim idxcepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deseru mollit anim idxcepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deseru mollit anim idxcepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deseru mollit anim idxcepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deseru mollit anim id"
+                },
+                {
+                    id: 9,
+                    newImg: "https://demo.uix.store/sober/wp-content/uploads/sites/2/2016/07/1-44-360x240.jpg",
+                    newTime: "20.10 2016",
+                    newCate: "SHOPPING",
+                    newTitle: "Friday Finest The Best of The Week",
+                    newContent: "xcepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deseru mollit anim idxcepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deseru mollit anim idxcepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deseru mollit anim idxcepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deseru mollit anim idxcepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deseru mollit anim idxcepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deseru mollit anim idxcepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deseru mollit anim idxcepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deseru mollit anim idxcepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deseru mollit anim id"
+                },
+                {
+                    id: 10,
+                    newImg: "https://demo.uix.store/sober/wp-content/uploads/sites/2/2016/07/1-44-360x240.jpg",
+                    newTime: "20.10 2016",
+                    newCate: "SHOPPING",
+                    newTitle: "Friday Finest The Best of The Week",
+                    newContent: "xcepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deseru mollit anim idxcepteur sint occaeczxczxat cupidatat non proident, sunt in culpa qui officia deseru mollit anim idxcepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deseru mollit anim idxcepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deseru mollit anim idxcepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deseru mollit anim idxcepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deseru mollit anim idxcepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deseru mollit anim idxcepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deseru mollit anim idxcepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deseru mollit anim id"
+                },
+                {
+                    id: 11,
+                    newImg: "https://demo.uix.store/sober/wp-content/uploads/sites/2/2016/07/1-44-360x240.jpg",
+                    newTime: "20.10 2016",
+                    newCate: "SHOPPING",
+                    newTitle: "Friday Finest The Best of The Week",
+                    newContent: "xcepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deseru mollit anim idxcepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deseru mollit anim idxcepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deseru mollit anim idxcepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deseru mollit anim idxcepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deseru mollit anim idxcepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deseru mollit anim idxcepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deseru mollit anim idxcepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deseru mollit anim idxcepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deseru mollit anim id"
+                },
+                {
+                    id: 12,
+                    newImg: "https://demo.uix.store/sober/wp-content/uploads/sites/2/2016/07/1-44-360x240.jpg",
+                    newTime: "20.10 2016",
+                    newCate: "SHOPPING",
+                    newTitle: "Friday Finest The Best of The Week",
+                    newContent: "xcepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deseru mollit anim idxcepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deseru mollit anim idxcepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deseru mollit anim idxcepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deseru mollit anim idxcepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deseru mollit anim idxcepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deseru mollit anim idxcepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deseru mollit anim idxcepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deseru mollit anim idxcepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deseru mollit anim id"
+                },
+                {
+                    id: 13,
+                    newImg: "https://demo.uix.store/sober/wp-content/uploads/sites/2/2016/07/1-44-360x240.jpg",
+                    newTime: "20.10 2016",
+                    newCate: "SHOPPING",
+                    newTitle: "Friday Finest The Best of The Week",
+                    newContent: "xcepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deseru mollit anim idxcepteur sint occaeczxczxat cupidatat non proident, sunt in culpa qui officia deseru mollit anim idxcepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deseru mollit anim idxcepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deseru mollit anim idxcepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deseru mollit anim idxcepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deseru mollit anim idxcepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deseru mollit anim idxcepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deseru mollit anim idxcepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deseru mollit anim id"
+                },
+                {
+                    id: 14,
+                    newImg: "https://demo.uix.store/sober/wp-content/uploads/sites/2/2016/07/1-44-360x240.jpg",
+                    newTime: "20.10 2016",
+                    newCate: "SHOPPING",
+                    newTitle: "Friday Finest The Best of The Week",
+                    newContent: "xcepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deseru mollit anim idxcepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deseru mollit anim idxcepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deseru mollit anim idxcepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deseru mollit anim idxcepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deseru mollit anim idxcepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deseru mollit anim idxcepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deseru mollit anim idxcepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deseru mollit anim idxcepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deseru mollit anim id"
+                },
+                {
+                    id: 15,
+                    newImg: "https://demo.uix.store/sober/wp-content/uploads/sites/2/2016/07/1-44-360x240.jpg",
+                    newTime: "20.10 2016",
+                    newCate: "SHOPPING",
+                    newTitle: "Friday Finest The Best of The Week",
+                    newContent: "xcepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deseru mollit anim idxcepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deseru mollit anim idxcepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deseru mollit anim idxcepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deseru mollit anim idxcepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deseru mollit anim idxcepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deseru mollit anim idxcepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deseru mollit anim idxcepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deseru mollit anim idxcepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deseru mollit anim id"
+                },
+                {
+                    id: 16,
+                    newImg: "https://demo.uix.store/sober/wp-content/uploads/sites/2/2016/07/1-44-360x240.jpg",
+                    newTime: "20.10 2016",
+                    newCate: "SHOPPING",
+                    newTitle: "Friday Finest The Best of The Week",
+                    newContent: "xcepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deseru mollit anim idxcepteur sint occaeczxczxat cupidatat non proident, sunt in culpa qui officia deseru mollit anim idxcepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deseru mollit anim idxcepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deseru mollit anim idxcepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deseru mollit anim idxcepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deseru mollit anim idxcepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deseru mollit anim idxcepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deseru mollit anim idxcepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deseru mollit anim id"
+                },
+                {
+                    id: 17,
+                    newImg: "https://demo.uix.store/sober/wp-content/uploads/sites/2/2016/07/1-44-360x240.jpg",
+                    newTime: "20.10 2016",
+                    newCate: "SHOPPING",
+                    newTitle: "Friday Finest The Best of The Week",
+                    newContent: "xcepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deseru mollit anim idxcepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deseru mollit anim idxcepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deseru mollit anim idxcepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deseru mollit anim idxcepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deseru mollit anim idxcepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deseru mollit anim idxcepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deseru mollit anim idxcepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deseru mollit anim idxcepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deseru mollit anim id"
+                },
+                {
+                    id: 18,
+                    newImg: "https://demo.uix.store/sober/wp-content/uploads/sites/2/2016/07/1-44-360x240.jpg",
+                    newTime: "20.10 2016",
+                    newCate: "SHOPPING",
+                    newTitle: "Friday Finest The Best of The Week",
+                    newContent: "xcepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deseru mollit anim idxcepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deseru mollit anim idxcepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deseru mollit anim idxcepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deseru mollit anim idxcepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deseru mollit anim idxcepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deseru mollit anim idxcepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deseru mollit anim idxcepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deseru mollit anim idxcepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deseru mollit anim id"
+                },
+                {
+                    id: 19,
+                    newImg: "https://demo.uix.store/sober/wp-content/uploads/sites/2/2016/07/1-44-360x240.jpg",
+                    newTime: "20.10 2016",
+                    newCate: "SHOPPING",
+                    newTitle: "Friday Finest The Best of The Week",
+                    newContent: "xcepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deseru mollit anim idxcepteur sint occaeczxczxat cupidatat non proident, sunt in culpa qui officia deseru mollit anim idxcepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deseru mollit anim idxcepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deseru mollit anim idxcepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deseru mollit anim idxcepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deseru mollit anim idxcepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deseru mollit anim idxcepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deseru mollit anim idxcepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deseru mollit anim id"
+                },
+                {
+                    id: 20,
+                    newImg: "https://demo.uix.store/sober/wp-content/uploads/sites/2/2016/07/1-44-360x240.jpg",
+                    newTime: "20.10 2016",
+                    newCate: "SHOPPING",
+                    newTitle: "Friday Finest The Best of The Week",
+                    newContent: "xcepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deseru mollit anim idxcepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deseru mollit anim idxcepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deseru mollit anim idxcepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deseru mollit anim idxcepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deseru mollit anim idxcepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deseru mollit anim idxcepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deseru mollit anim idxcepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deseru mollit anim idxcepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deseru mollit anim id"
+                },
+                {
+                    id: 21,
+                    newImg: "https://demo.uix.store/sober/wp-content/uploads/sites/2/2016/07/1-44-360x240.jpg",
+                    newTime: "20.10 2016",
+                    newCate: "SHOPPING",
+                    newTitle: "Friday Finest The Best of The Week",
+                    newContent: "xcepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deseru mollit anim idxcepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deseru mollit anim idxcepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deseru mollit anim idxcepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deseru mollit anim idxcepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deseru mollit anim idxcepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deseru mollit anim idxcepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deseru mollit anim idxcepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deseru mollit anim idxcepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deseru mollit anim id"
+                },
+                {
+                    id: 22,
+                    newImg: "https://demo.uix.store/sober/wp-content/uploads/sites/2/2016/07/1-44-360x240.jpg",
+                    newTime: "20.10 2016",
+                    newCate: "SHOPPING",
+                    newTitle: "Friday Finest The Best of The Week",
+                    newContent: "xcepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deseru mollit anim idxcepteur sint occaeczxczxat cupidatat non proident, sunt in culpa qui officia deseru mollit anim idxcepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deseru mollit anim idxcepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deseru mollit anim idxcepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deseru mollit anim idxcepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deseru mollit anim idxcepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deseru mollit anim idxcepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deseru mollit anim idxcepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deseru mollit anim id"
+                },
+                {
+                    id: 21,
+                    newImg: "https://demo.uix.store/sober/wp-content/uploads/sites/2/2016/07/1-44-360x240.jpg",
+                    newTime: "20.10 2016",
+                    newCate: "SHOPPING",
+                    newTitle: "Friday Finest The Best of The Week",
+                    newContent: "xcepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deseru mollit anim idxcepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deseru mollit anim idxcepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deseru mollit anim idxcepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deseru mollit anim idxcepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deseru mollit anim idxcepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deseru mollit anim idxcepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deseru mollit anim idxcepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deseru mollit anim idxcepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deseru mollit anim id"
+                },
+                {
+                    id: 23,
+                    newImg: "https://demo.uix.store/sober/wp-content/uploads/sites/2/2016/07/1-44-360x240.jpg",
+                    newTime: "20.10 2016",
+                    newCate: "SHOPPING",
+                    newTitle: "Friday Finest The Best of The Week",
+                    newContent: "xcepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deseru mollit anim idxcepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deseru mollit anim idxcepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deseru mollit anim idxcepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deseru mollit anim idxcepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deseru mollit anim idxcepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deseru mollit anim idxcepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deseru mollit anim idxcepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deseru mollit anim idxcepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deseru mollit anim id"
+                }
+            ]
         }
     }
 
     render() {
-        const { location, currentTab } = this.state;
+        const { location, currentTab, cate } = this.state;
         const locationText = location.slice(1);
-        console.log(locationText)
+        console.log(this.state.currentTab);
         return(
             <div className="NewsBanner">
                 <div className="newsbanner-container">
@@ -34,30 +236,26 @@ class NewsBanner extends Component {
                             <div>{locationText}</div>
                         </div>
                         <div className="newsbanner-nav">
-                            <div 
-                                className={currentTab === 1 ? "newsbanner-nav-active" : ""}
-                                onClick={() => {this.setState({currentTab: 1})}}
+                            <div
+                                className={currentTab === -1 ? "newsbanner-nav-active" : ""}
+                                onClick={() => {this.setState({currentTab: -1})}}
                                 >All Blog Posts</div>
-                            <div
-                                className={currentTab === 2 ? "newsbanner-nav-active" : ""}
-                                onClick={() => {this.setState({currentTab: 2})}}
-                                >Inspiration</div>
-                            <div
-                                className={currentTab === 3 ? "newsbanner-nav-active" : ""}
-                                onClick={() => {this.setState({currentTab: 3})}}
-                                >Fashion</div>
-                            <div
-                                className={currentTab === 4 ? "newsbanner-nav-active" : ""}
-                                onClick={() => {this.setState({currentTab: 4})}}
-                                >Shopping</div>
-                            <div
-                                className={currentTab === 5 ? "newsbanner-nav-active" : ""}
-                                onClick={() => {this.setState({currentTab: 5})}}
-                                >Lifestyle</div>
-                            <div
-                                className={currentTab === 6 ? "newsbanner-nav-active" : ""}
-                                onClick={() => {this.setState({currentTab: 6})}}
-                                >Photography</div>
+                            {
+                                cate.map((item, index) => {
+                                    return (
+                                        <div
+                                            key={index}
+                                            id={index}
+                                            className={currentTab === Number(index) ? "newsbanner-nav-active" : ""}
+                                            onClick={(event) => {
+                                                console.log("event id : ", Number(event.target.id));
+                                                this.setState({currentTab: index})
+                                            }}
+                                            >{item} {index}
+                                        </div>
+                                    )
+                                })
+                            }
                         </div>
                     </div>
                 </div>
