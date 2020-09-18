@@ -3,6 +3,13 @@ import '../App.css';
 
 export default class NewsBody extends Component {
 
+    constructor(props) {
+        super(props);
+        this.state = {
+            isSearchFocus: false
+        }
+    }
+
     render() {
         const { news, currentTabText, currentTab } = this.props;
         
@@ -17,13 +24,7 @@ export default class NewsBody extends Component {
         } else {
             filterNews = news;
         }
-
-        console.log(filterNews);
-
-
         const firstPost = filterNews;
-
-
         const nextPosts = filterNews.slice(1);
 
         return(
@@ -61,11 +62,21 @@ export default class NewsBody extends Component {
                             )
                         })}
                     </div>
-                    <div className="newsbody-nav">
-                        <div className="newsbody-search">search</div>
-                        <div className="newsbody-pop">popular</div>
-                        <div className="newsbody-cate">category</div>
-                        <div className="newsbody-tag">TAg</div>
+                    <div className="newsbody-widget">
+                        <div className="widget-search">
+                            <div className="widget-title">Search</div>
+                            <form className={ this.state.isSearchFocus === true ? "widget-form widget_search_click" : "widget-form"} 
+                                onMouseEnter={() => { this.setState({ isSearchFocus: true})}}
+                                onMouseLeave={() => { this.setState({ isSearchFocus: false})}}>
+                                <input placeholder="Search the site"></input>
+                                <button>Search</button>
+                            </form>
+                        </div>
+                        <div className="widget-pop">
+                            <div className="widget-title">Popular Posts</div>
+                        </div>
+                        <div className="widget-cate">category</div>
+                        <div className="widget-tag">TAg</div>
                     </div>
                 </div>
             </div>

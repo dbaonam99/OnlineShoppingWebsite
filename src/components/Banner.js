@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import '../App.css';
 import classNames from 'classnames';
-import ScrollAnimation from 'react-animate-on-scroll';
+import ScrollAnimation from 'react-animate-on-scroll'; 
 
 class Banner extends Component {
     constructor(props) {

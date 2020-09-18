@@ -19,7 +19,7 @@ class NewsBanner extends Component {
             news: [ 
                 {
                     id: 1,
-                    newImg: "https://demo.uix.store/sober/wp-content/uploads/sites/2/2016/07/1-44-360x240.jpg",
+                    newImg: "https://demo.uix.store/sober/wp-content/uploads/sites/2/2016/07/1-44.jpg",
                     newTime: "20.10 2016",
                     newCate: "Inspiration",
                     newTitle: "Friday Finest The Best of The Week",
@@ -27,7 +27,7 @@ class NewsBanner extends Component {
                 },
                 {
                     id: 2,
-                    newImg: "https://demo.uix.store/sober/wp-content/uploads/sites/2/2016/07/1-44-360x240.jpg",
+                    newImg: "https://demo.uix.store/sober/wp-content/uploads/sites/2/2016/07/1-44.jpg",
                     newTime: "20.10 2016",
                     newCate: "Shopping",
                     newTitle: "Friday Finest The Best of The Week",
@@ -35,7 +35,7 @@ class NewsBanner extends Component {
                 },
                 {
                     id: 3,
-                    newImg: "https://demo.uix.store/sober/wp-content/uploads/sites/2/2016/07/1-44-360x240.jpg",
+                    newImg: "https://demo.uix.store/sober/wp-content/uploads/sites/2/2016/07/1-44.jpg",
                     newTime: "20.10 2016",
                     newCate: "Inspiration",
                     newTitle: "Friday Finest The Best of The Week",
@@ -51,7 +51,7 @@ class NewsBanner extends Component {
                 },
                 {
                     id: 5,
-                    newImg: "https://demo.uix.store/sober/wp-content/uploads/sites/2/2016/07/1-44-360x240.jpg",
+                    newImg: "https://demo.uix.store/sober/wp-content/uploads/sites/2/2016/07/1-44.jpg",
                     newTime: "20.10 2016",
                     newCate: "Inspiration",
                     newTitle: "Friday Finest The Best of The Week",
@@ -115,7 +115,7 @@ class NewsBanner extends Component {
                 },
                 {
                     id: 13,
-                    newImg: "https://demo.uix.store/sober/wp-content/uploads/sites/2/2016/07/1-44-360x240.jpg",
+                    newImg: "https://demo.uix.store/sober/wp-content/uploads/sites/2/2016/07/1-44.jpg",
                     newTime: "20.10 2016",
                     newCate: "Photography",
                     newTitle: "Friday Finest The Best of The Week",
@@ -131,7 +131,7 @@ class NewsBanner extends Component {
                 },
                 {
                     id: 15,
-                    newImg: "https://demo.uix.store/sober/wp-content/uploads/sites/2/2016/07/1-44-360x240.jpg",
+                    newImg: "https://demo.uix.store/sober/wp-content/uploads/sites/2/2016/07/1-44.jpg",
                     newTime: "20.10 2016",
                     newCate: "Photography",
                     newTitle: "Friday Finest The Best of The Week",
@@ -147,7 +147,7 @@ class NewsBanner extends Component {
                 },
                 {
                     id: 17,
-                    newImg: "https://demo.uix.store/sober/wp-content/uploads/sites/2/2016/07/1-44-360x240.jpg",
+                    newImg: "https://demo.uix.store/sober/wp-content/uploads/sites/2/2016/07/1-44.jpg",
                     newTime: "20.10 2016",
                     newCate: "Photography",
                     newTitle: "Friday Finest The Best of The Week",
@@ -155,7 +155,7 @@ class NewsBanner extends Component {
                 },
                 {
                     id: 18,
-                    newImg: "https://demo.uix.store/sober/wp-content/uploads/sites/2/2016/07/1-44-360x240.jpg",
+                    newImg: "https://demo.uix.store/sober/wp-content/uploads/sites/2/2016/07/1-44.jpg",
                     newTime: "20.10 2016",
                     newCate: "Photography",
                     newTitle: "Friday Finest The Best of The Week",
@@ -171,7 +171,7 @@ class NewsBanner extends Component {
                 },
                 {
                     id: 20,
-                    newImg: "https://demo.uix.store/sober/wp-content/uploads/sites/2/2016/07/1-44-360x240.jpg",
+                    newImg: "https://demo.uix.store/sober/wp-content/uploads/sites/2/2016/07/1-44.jpg",
                     newTime: "20.10 2016",
                     newCate: "fuck",
                     newTitle: "Friday Finest The Best of The Week",
@@ -179,7 +179,7 @@ class NewsBanner extends Component {
                 },
                 {
                     id: 21,
-                    newImg: "https://demo.uix.store/sober/wp-content/uploads/sites/2/2016/07/1-44-360x240.jpg",
+                    newImg: "https://demo.uix.store/sober/wp-content/uploads/sites/2/2016/07/1-44.jpg",
                     newTime: "20.10 2016",
                     newCate: "zxc",
                     newTitle: "Friday Finest The Best of The Week",
@@ -187,7 +187,7 @@ class NewsBanner extends Component {
                 },
                 {
                     id: 22,
-                    newImg: "https://demo.uix.store/sober/wp-content/uploads/sites/2/2016/07/1-44-360x240.jpg",
+                    newImg: "https://demo.uix.store/sober/wp-content/uploads/sites/2/2016/07/1-44.jpg",
                     newTime: "20.10 2016",
                     newCate: "SHOPPccING",
                     newTitle: "Friday Finest The Best of The Week",
@@ -195,7 +195,7 @@ class NewsBanner extends Component {
                 },
                 {
                     id: 21,
-                    newImg: "https://demo.uix.store/sober/wp-content/uploads/sites/2/2016/07/1-44-360x240.jpg",
+                    newImg: "https://demo.uix.store/sober/wp-content/uploads/sites/2/2016/07/1-44.jpg",
                     newTime: "20.10 2016",
                     newCate: "Shopping",
                     newTitle: "Friday Finest The Best of The Week",
@@ -203,7 +203,7 @@ class NewsBanner extends Component {
                 },
                 {
                     id: 23,
-                    newImg: "https://demo.uix.store/sober/wp-content/uploads/sites/2/2016/07/1-44-360x240.jpg",
+                    newImg: "https://demo.uix.store/sober/wp-content/uploads/sites/2/2016/07/1-44.jpg",
                     newTime: "20.10 2016",
                     newCate: "Shopping",
                     newTitle: "Friday Finest The Best of The Week",
@@ -266,7 +266,6 @@ class NewsBanner extends Component {
                                             id={index}
                                             className={currentTab === Number(index) ? "newsbanner-nav-active" : ""}
                                             onClick={(event) => {
-                                                console.log();
                                                 this.setState({
                                                     currentTab: index, 
                                                     currentTabText:event.currentTarget.textContent
