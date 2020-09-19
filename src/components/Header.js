@@ -4,8 +4,8 @@ import {
     Link,
     withRouter
   } from "react-router-dom"; 
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import classNames from 'classnames';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import {  faSearch, faUser, faCartPlus } from "@fortawesome/free-solid-svg-icons";
 
 class Header extends Component {
@@ -17,41 +17,37 @@ class Header extends Component {
             isWhiteBox: false,
             activeId: 1,
             location: this.props.history.location.pathname,
-            isWhiteText: false
+            isWhiteText: false,
+            isInvisBox: false
         }
-        this.ScrollToTop = this.ScrollToTop.bind(this);
     }
-
-    ScrollToTop() {
-        window.scrollTo(0,0);
-        console.log(this.state.isWhiteBox);
-        if (this.state.isWhiteBox === false) {
-            this.setState({
-                isWhiteText: false
-            })
-        } else {
-            this.setState({
-                isWhiteText: true
-            })
-        }
-        console.log(this.state.isWhiteText);
-    }
-
 
     componentDidMount() {
+        window.scrollTo(0,0);
 
-        if (this.state.location === "/news") {
-            this.setState({
-                isWhiteText: false
-            })
-        } else {
-            this.setState({
-                isWhiteText: false
-            })
-        }
-        
+        // if (this.state.location === "/news") {
+        //     this.setState({
+        //         isWhiteText: false,
+        //     })
+        // } else {
+        //     this.setState({
+        //         isWhiteText: false,
+        //     })
+        // }
+
         window.onscroll = function() {
             if(window.pageYOffset < 100) {
+                if (this.state.location === "/news") {
+                    this.setState({
+                        isWhiteBox: false,
+                        isWhiteText: true
+                    })
+                } else {
+                    this.setState({
+                        isWhiteBox: false
+                    })
+                }
+            } else if(window.pageYOffset < 100) {
                 this.setState({
                     scrolled: false
                 })
@@ -59,8 +55,8 @@ class Header extends Component {
                 if (this.state.location === "/news") {
                     this.setState({
                         scrolled: false,
-                        isWhiteBox: true,
-                        isWhiteText: false
+                        isWhiteText: false,
+                        isWhiteBox: true
                     })
                 } else {
                     this.setState({
@@ -68,7 +64,7 @@ class Header extends Component {
                         isWhiteBox: true
                     })
                 }
-            }else {
+            } else {
                 this.setState({
                     scrolled: true
                 })
@@ -76,7 +72,7 @@ class Header extends Component {
             this.prev = window.pageYOffset;
         }.bind(this);
     }
-    
+
     componentWillUnmount() {
         window.onscroll = null;
     }
@@ -92,7 +88,7 @@ class Header extends Component {
                 onMouseEnter={() => { 
                     if (location === "/news") {
                         this.setState({ 
-                            isWhiteText: false 
+                            isWhiteText: false
                         }) 
                     }
                 }}
@@ -100,11 +96,6 @@ class Header extends Component {
                     if (location === "/news") {
                         this.setState({ 
                             isWhiteText: true 
-                        }) 
-                    }
-                    if (this.prev > 0) {
-                        this.setState({ 
-                            isWhiteText: false 
                         }) 
                     }
                 }}
@@ -118,7 +109,6 @@ class Header extends Component {
                                 whitelink_header: isWhiteText === true
                             })}
                             id="1"
-                            onClick={this.ScrollToTop}
                             >home</Link>
                     </li>
                     <li>
@@ -127,8 +117,8 @@ class Header extends Component {
                                 active: location === "/news",
                                 whitelink_header: isWhiteText === true
                             })}
-                            id="2" 
-                            onClick={this.ScrollToTop}
+                            onClick={() => { this.setState({ isWhiteBox: false})}}
+                            id="2"
                             >News</Link>
                     </li>
                     <li>
@@ -176,10 +166,6 @@ class Header extends Component {
                     <div className="icon flex-center">
                         <FontAwesomeIcon icon={faCartPlus} className="cart-icon"/>
                         <div
-                            // className={classNames("cart-count",  {
-                                // cart_count_news_hover: isWhiteText === true,
-                                // cart_count_news: location === "/news" && this.prev < 100
-                            // })}>
                             className={classNames('cart-count', {
                                 cart_count_news_hover: isWhiteText === true
                             })}> 
