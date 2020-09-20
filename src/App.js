@@ -8,6 +8,7 @@ import {
 
 import Home from './pages/Home.js'
 import NewsPages from './pages/NewsPages.js'
+import Men from './pages/Men.js'
 
 
 
@@ -17,6 +18,7 @@ function App() {
       <div className="App">
         <Route path="/" exact component={Home}></Route>
         <Route path="/news" exact component={NewsPages}></Route>
+        <Route path="/men" exact component={Men}></Route>
       </div>
     </Router>
   );

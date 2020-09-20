@@ -928,11 +928,10 @@
 /* NewsBanner */
 
 .NewsPages {
-  height: 500px;
 }
 
 .NewsBanner {
-  height: 100%;
+  height: 500px;
 }
 
 .newsbanner-container {
@@ -946,6 +945,12 @@
   background-repeat: no-repeat;
   background-color: #f1f2f4;
   position: relative;
+}
+
+.another-banner {
+  background-image: url(./assets/S3.jpg) !important;
+  height: 90vh !important; 
+  background-position: 120px;
 }
 
 .newsbanner-container img {
@@ -962,8 +967,14 @@
   color: #fff;
 }
 
+.another-overlay {
+  color: #000 !important;
+  text-transform: capitalize;
+  top: 50px;
+}
+
 .newsbanner-title {
-  font-size: 5rem;
+  font-size: 6rem;
   font-weight: 300;
   font-family: sans-serif;
   /* margin-top: -40px; */
