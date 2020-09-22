@@ -12,6 +12,7 @@ export default class Product extends Component {
     }
     render() {
         const {url} = this.state;
+
         return(
             <div className="Product"
                 onMouseOver={()=> {this.setState({ url: this.props.imgUrlHover })}}

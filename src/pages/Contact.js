@@ -4,20 +4,22 @@ import Newsletter from "../components/Newsletter.js"
 import Footer from "../components/Footer.js"
 import BannerV2 from '../components/BannerV2.js'
 import Header from '../components/Header.js'
-import ShopBody from "../components/ShopBody";
-import bg from '../assets/S3.jpg'
+import bg from '../assets/contact.jpg'
+import ContactBody from '../components/ContactBody.js'
+import GetInTouch from "../components/GetInTouch";
 
-class Men extends Component {
+class Contact extends Component {
     render() {
         return (
-            <div className="Men">
+            <div className="Contact">
                 <Header/>
-                <BannerV2 bannerImage={bg} position={'120px'}/>
-                <ShopBody/>
+                <BannerV2 bannerImage={bg} position={'-70px'}/>
+                <ContactBody/>
+                <GetInTouch/>
                 <Newsletter/>
                 <Footer/>
             </div>
         );
     }
 }
-export default Men;
+export default Contact;

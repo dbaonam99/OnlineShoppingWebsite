@@ -23,6 +23,10 @@
   src: url(./assets/font/Poppins-Medium.ttf);
 }
 
+.flex {
+  display: flex;
+}
+
 .flex-center {
   display: flex;
   justify-content: center;
@@ -948,9 +952,9 @@
 }
 
 .another-banner {
-  background-image: url(./assets/S3.jpg) !important;
+  /* background-image: url(./assets/b2.jpg) !important; */
   height: 90vh !important; 
-  background-position: 120px;
+  /* background-position: 120px; */
 }
 
 .newsbanner-container img {
@@ -1337,7 +1341,6 @@
 .NewsPages .ccc {
   width: 100px;
   height: 100px;
-  background-color: red;
 }
 
 .newsbody-line {
@@ -1386,4 +1389,270 @@
   pointer-events: none;
   color: #eee !important;
   display: none;
+}
+
+/* ShopBody */
+
+.ShopBody {
+  padding: 40px 40px;
+}
+
+.shopbody-container {
+  display: flex;
+}
+
+.shopbody-filter {
+  width: 20%;
+  margin-right: 25px;
+}
+
+.shopbody-filter-title {
+  font-size: 16px;
+  font-weight: bold;
+}
+
+.shopbody-filter-catelist {
+  margin: 30px 0;
+  font-size: 14px;
+  color: #777;
+}
+
+.shopbody-filter-catelist div {
+  margin: 10px 0;
+}
+
+.filter-line {
+  height: 1px;
+  width: 100%;
+  background-color: #eee;
+  margin-bottom: 40px;
+}
+
+.shopbody-main {
+  width: 80%;
+  margin-left: 25px;
+}
+
+.filter-price::before {
+  content: 'Price: ';
+}
+
+.filter-price::after {
+  content: ' vnđ';
+}
+
+.filter-price {
+  color: #777;
+  text-align: center;
+  font-size: 14px !important;
+}
+
+.shopbody-filter-submit {
+  display: flex;
+  justify-content: center;
+}
+
+.shopbody-filter-submit p {
+  text-align: center;
+  line-height: 50px;
+  width: 80%;
+  height: 50px;
+  color: #fff;
+  background-color: #111;
+  font-size: 14px;
+}
+
+.shopbody-first {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 30px;
+}
+
+.shopbody-tab {
+  font-size: 15px;
+}
+
+.shopbody-option {
+}
+
+.shopbody-tab-item {
+  position: relative;
+  margin-right: 30px;
+}
+
+.shopbody-tab-item:hover::after {
+  animation-name: active_line;
+  animation-duration: 0.7s;
+  width: 100%;
+  left: 0;
+}
+
+.shopbody-tab-item::after {
+  content: '';
+  height: 2px;
+  background: #000;
+  position: absolute;
+  left: 0;
+  bottom: -5px;
+  width: 0%;
+}
+
+.shopbody-option {
+  align-items: center;
+  color: #777;
+}
+.shopbody-option-grid {
+  border-right: 1px #777 solid;
+  align-items: center;
+}
+
+.shopbody-option-grid .grid-icon {
+  margin-right: 30px;
+}
+
+.shopbody-option-filter .filter-icon {
+  margin-left: 30px;
+}
+
+.shopbody-option-filter {
+  align-items: center;
+}
+
+.shopbody-products {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.shopbody-products-six {
+  width: 20% !important;
+  background-color: red !important;
+}
+
+.shopbody-line {
+  margin-top: 20px;
+  background-color: #eee;
+  height: 1px;
+  width: 100%;
+  bottom: 0;
+}
+
+/* Contact */
+
+.ContactBody {
+  padding: 40px;
+}
+
+.contact-container {
+  background-image: url(./assets/newsbanner.jpg) !important;
+}
+
+.contact-info {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.contact-info-title {
+  margin-top: 50px;
+  color: #888;
+  font-size: 18px;
+  width: 60%;
+}
+
+.contact-info-detail {
+  margin-top: 40px;
+  width: 60%;
+}
+
+.contact-icon {
+  font-size: 20px;
+  color: #888;
+  margin-right: 40px;
+  line-height: 100%;
+}
+
+.contact-info-item {
+  margin-top: 20px;
+  display: flex;
+  justify-content: start;
+}
+
+.contact-info-title2 {
+  font-size: 14px !important;
+  text-transform: uppercase;
+  margin-right: 30px;
+  color: #888 !important;
+  font-weight: bold !important;
+  width: 80px;
+}
+
+.contact-info-item p {
+  color: #111;
+  font-size: 14px;
+}
+
+.GetInTouch {
+  background-color: red;
+  width: 100%;
+  margin: 40px 0;
+  justify-content: space-between;
+}
+
+.getintouch-container {
+  background-color: #edeff1;
+  display: flex;
+  width: 100%;
+  height: 100%;
+}
+
+.GetInTouch .map {
+  width: 63%;
+}
+
+.google-map {
+  height: 100%;
+}
+
+.getintouch-form { 
+  width: 37%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.getintouch-form label {
+  font-size: 30px;
+  margin-top: 50px;
+  margin-bottom: 30px;
+  font-family: Poppins-Medium;
+}
+
+.getintouch-form input {
+  width: 70%;
+  margin: 20px 0;
+  border: none;
+  height: 30px;
+  background: rgba(204, 204, 204, 0);
+  font-size: 14px;
+  border-bottom: 2px #bbb  solid;
+  padding-bottom: 5px;
+}
+
+.getintouch-form input:focus {
+  outline: none !important;
+}
+
+.getintouch-form button {
+  border: none;
+  background: none;
+  font-size: 14px;
+  text-transform: uppercase;
+  font-weight: 600;
+  background-color: #232323;
+  color: #fff;
+  font-family: sans-serif;
+  padding: 20px;
+  width: 70%;
+  margin-top: 40px;
+  margin-bottom: 60px;
 }

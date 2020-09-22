@@ -6,6 +6,7 @@ import {
     withRouter
   } from "react-router-dom"; 
 
+  
 class BannerV2 extends Component {
 
     constructor(props) {
@@ -17,11 +18,18 @@ class BannerV2 extends Component {
 
     render() {
         const { location } = this.state;
+        let { bannerImage, position } = this.props;
         const locationText = location.slice(1);
 
         return(
             <div className="BannerV2">
-                <div className="newsbanner-container another-banner">
+                <div 
+                    className="newsbanner-container another-banner" 
+                    style={{ 
+                        backgroundImage: `url(${bannerImage})`,
+                        backgroundPosition: position
+                    }}
+                    >
                     <div className="newsbanner-overlay flex-center another-overlay">
                         <div className="newsbanner-title">
                             {locationText}

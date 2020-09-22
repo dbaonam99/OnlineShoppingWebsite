@@ -24,50 +24,36 @@ class Header extends Component {
 
     componentDidMount() {
         window.scrollTo(0,0);
+        const { location } = this.state;
 
-        // if (this.state.location === "/news") {
-        //     this.setState({
-        //         isWhiteText: false,
-        //     })
-        // } else {
-        //     this.setState({
-        //         isWhiteText: false,
-        //     })
-        // }
+        if (location === '/news') {
+            this.setState({
+                isWhiteText: false
+            })
+        }
 
         window.onscroll = function() {
-            if(window.pageYOffset < 100) {
-                if (this.state.location === "/news") {
-                    this.setState({
-                        isWhiteBox: false,
-                        isWhiteText: true
-                    })
-                } else {
-                    this.setState({
-                        isWhiteBox: false
-                    })
-                }
-            } else if(window.pageYOffset < 100) {
+            if(window.pageYOffset < 100) { // top
                 this.setState({
-                    scrolled: false
+                    isWhiteBox: false
                 })
-            } else if (this.prev > window.pageYOffset) {
-                if (this.state.location === "/news") {
-                    this.setState({
-                        scrolled: false,
-                        isWhiteText: false,
-                        isWhiteBox: true
-                    })
-                } else {
-                    this.setState({
-                        scrolled: false,
-                        isWhiteBox: true
-                    })
-                }
-            } else {
+            } else if (this.prev < window.pageYOffset) { //down
                 this.setState({
                     scrolled: true
                 })
+            } else if (this.prev > window.pageYOffset) { //up
+                if (location === "/news") {
+                    this.setState({
+                        scrolled: false,
+                        isWhiteBox: true,
+                        isWhiteText: false
+                    })
+                } else {
+                    this.setState({
+                        scrolled: false,
+                        isWhiteBox: true
+                    })
+                }
             }
             this.prev = window.pageYOffset;
         }.bind(this);

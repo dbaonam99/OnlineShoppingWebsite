@@ -7,10 +7,10 @@ import Header from '../components/Header.js'
 import ShopBody from "../components/ShopBody";
 import bg from '../assets/S3.jpg'
 
-class Men extends Component {
+class Women extends Component {
     render() {
         return (
-            <div className="Men">
+            <div className="Women">
                 <Header/>
                 <BannerV2 bannerImage={bg} position={'120px'}/>
                 <ShopBody/>
@@ -20,4 +20,4 @@ class Men extends Component {
         );
     }
 }
-export default Men;
+export default Women;
