@@ -7,6 +7,7 @@ import {
 import classNames from 'classnames';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import {  faSearch, faUser, faCartPlus } from "@fortawesome/free-solid-svg-icons";
+import Search from './Search';
 
 class Header extends Component {
 
@@ -18,9 +19,22 @@ class Header extends Component {
             activeId: 1,
             location: this.props.history.location.pathname,
             isWhiteText: false,
-            isInvisBox: false
+            isInvisBox: false,
+            isSearchOpen: false
         }
+        this.clickToClose = this.clickToClose.bind(this);
+        this.clickToShow = this.clickToShow.bind(this);
     }
+
+    clickToShow() {
+        this.setState({
+            isSearchOpen: true
+    })}
+
+    clickToClose() {
+        this.setState({
+            isSearchOpen: false
+    })}
 
     componentDidMount() {
         window.scrollTo(0,0);
@@ -64,7 +78,7 @@ class Header extends Component {
     }
 
     render() {
-        const {location , scrolled, isWhiteBox, isWhiteText } = this.state;
+        const {location , scrolled, isWhiteBox, isWhiteText, isSearchOpen } = this.state;
         return(
             <div 
                 className={classNames('Header', {
@@ -147,7 +161,15 @@ class Header extends Component {
                 <div className={classNames('cart flex-center', {
                         whitelink_header: isWhiteText === true
                     })}> 
-                    <FontAwesomeIcon icon={faSearch} className="icon"/>
+                    <FontAwesomeIcon 
+                        icon={faSearch} 
+                        className="icon"
+                        onClick={()=> {
+                            this.setState({ 
+                                isSearchOpen: true 
+                            })
+                        }}
+                        />
                     <FontAwesomeIcon icon={faUser} className="icon"/>
                     <div className="icon flex-center">
                         <FontAwesomeIcon icon={faCartPlus} className="cart-icon"/>
@@ -160,6 +182,7 @@ class Header extends Component {
                         </div>
                     </div>
                 </div>
+                <Search isSearchOpen={isSearchOpen} clickToClose={this.clickToClose}/>
             </div>
         )
     }
