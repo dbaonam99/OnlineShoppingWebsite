@@ -7,13 +7,16 @@ export default class Search extends Component {
 
     render() {
         return(
-            <div className={this.props.isSearchOpen === false ? 'Search displayNone' : 'Search'}>
+            <div className={this.props.searchOpen === false ? 'Search displayNone' : 'Search'}>
                 <div className="search-header flex">
                     <div className="search-title">Search</div>
-                    <div className="search-close">
+                    <div
+                        className="search-close"
+                        onClick={this.props.clickToClose}
+                        >
                         <FontAwesomeIcon 
                             icon={faTimes}
-                            onClick={this.props.clickToClose}
+                            className="icon"
                             />
                     </div>
                 </div>
