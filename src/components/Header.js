@@ -216,50 +216,62 @@ function Header(props) {
     }
 
     useEffect(() => {
-        window.scrollTo(0, 0);
+        console.log("mount")
+        setTimeout(function () {
+            window.scrollTo(0, 0);
+        }, 100);
 
+        console.log(location)
 
-        if (props.history.location.pathname === "/news") {
+        if (location === "/news") {
             setWhiteText(true);
-            setDisableBox(true)
+            setDisableBox(true);
+        } else {
+            setWhiteText(false);
+            setDisableBox(false);
         }
 
         function onScroll() {
-            if(window.pageYOffset < 100) { // top
-                if (props.history.location.pathname === "/news") {
+            if (location === "/news") {
+                if(window.pageYOffset < 100) { // top
                     setWhiteBox(false)
                     setWhiteText(true)
-                } else {
-                    setWhiteBox(false)
-                }
-            } else if (this.prev < window.pageYOffset) { //down
-                if (props.history.location.pathname === "/news") {
-                    setScrolled(true)
+                    setDisableBox(true)
+                } else if (this.prev < window.pageYOffset) { //down
                     setWhiteBox(true)
                     setDisableBox(false)
-                } else {
-                    setScrolled(true)
-                    setWhiteBox(true)
-                }
-            } else if (this.prev > window.pageYOffset) { //up
-                if (props.history.location.pathname === "/news") {
-                    setScrolled(false)
-                    setWhiteBox(true)
                     setWhiteText(false)
-                } else {
+                    setScrolled(true)
+                } else if (this.prev > window.pageYOffset) { //up
                     setScrolled(false)
+                }
+            } else {
+                if(window.pageYOffset < 100) { // top
+                    setWhiteBox(false)
+                    setWhiteText(false)
+                } else if (this.prev < window.pageYOffset) { //down
                     setWhiteBox(true)
+                    setScrolled(true)
+                } else if (this.prev > window.pageYOffset) { //up
+                    setScrolled(false)
                 }
             }
             this.prev = window.pageYOffset;
         }
 
         window.addEventListener("scroll", onScroll);
-    }, [props.history.location]);
+        return() => {
+            window.removeEventListener("scroll", onScroll);
+        }
+    }, [location]);
 
     if(searchOpen){
         document.body.style.overflow = 'hidden';
     }
+
+    // console.log("whiteBox", whiteBox)
+    // console.log("whiteText ", whiteText)
+    // console.log("disable ", disableBox)
 
     return(
         <div 
@@ -275,7 +287,7 @@ function Header(props) {
                 }
             }}
             onMouseLeave={() => { 
-                if (location === "/news") {
+                if (location === "/news" && window.pageYOffset < 100) {
                     setWhiteText(true);
                 }
             }}
