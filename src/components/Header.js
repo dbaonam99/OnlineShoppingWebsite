@@ -216,12 +216,7 @@ function Header(props) {
     }
 
     useEffect(() => {
-        console.log("mount")
-        setTimeout(function () {
-            window.scrollTo(0, 0);
-        }, 100);
-
-        console.log(location)
+        window.scrollTo(0, 0);
 
         if (location === "/news") {
             setWhiteText(true);
@@ -268,10 +263,6 @@ function Header(props) {
     if(searchOpen){
         document.body.style.overflow = 'hidden';
     }
-
-    // console.log("whiteBox", whiteBox)
-    // console.log("whiteText ", whiteText)
-    // console.log("disable ", disableBox)
 
     return(
         <div 

@@ -1,9 +1,18 @@
 import React, { Component } from 'react';
 import '../App.css';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faTimes } from '@fortawesome/free-solid-svg-icons';
+import { faSearch, faTimes } from '@fortawesome/free-solid-svg-icons';
 
 export default class Search extends Component {
+
+    constructor(props) {
+        super(props);
+        this.inputElement = React.createRef();
+    }
+
+    componentDidUpdate() {
+        this.inputElement.current.focus();
+    }
 
     render() {
         return(
@@ -22,15 +31,19 @@ export default class Search extends Component {
                 </div>
 
                 <div className="search-tab flex">
-                    <div className="search-tab-cate">All Categories</div>
+                    <div className="search-tab-cate search-tab-active">All Categories</div>
                     <div className="search-tab-cate">Woman</div>
+                    <div className="search-tab-cate">Bags</div>
+                    <div className="search-tab-cate">Search</div>
                     <div className="search-tab-cate">Bags</div>
                     <div className="search-tab-cate">Search</div>
                 </div>
 
-                <div className="search-form">
+                <div className="search-form" >
                     <form>
-                        <input placeholder="Search"/>
+                        <FontAwesomeIcon icon={faSearch} className="icon"/>
+                        <input placeholder="Search" ref={this.inputElement}/>
+                        <FontAwesomeIcon icon={faTimes} className="icon"/>
                     </form>
                 </div>
             </div>
