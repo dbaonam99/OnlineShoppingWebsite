@@ -13,6 +13,15 @@
 .no-p {
   padding: 0 !important;
 }
+.noselect {
+  -webkit-touch-callout: none; /* iOS Safari */
+    -webkit-user-select: none; /* Safari */
+     -khtml-user-select: none; /* Konqueror HTML */
+       -moz-user-select: none; /* Old versions of Firefox */
+        -ms-user-select: none; /* Internet Explorer/Edge */
+            user-select: none; /* Non-prefixed version, currently
+                                  supported by Chrome, Edge, Opera and Firefox */
+}
 
 @font-face {
   font-family: Poppins;
@@ -27,12 +36,55 @@
 .flex {
   display: flex;
 }
-
 .flex-center {
   display: flex;
   justify-content: center;
   align-items: center;
 }
+.flex-col {
+  display: flex;
+  flex-direction: column;
+}
+
+/* Animation  */
+
+@keyframes active_line {
+  from {width: 0px;}
+  to {width: 100%;}
+}
+
+@keyframes fadeIn {
+  from {transform: translateY(100px);}
+  to {transform: translateY(0px)}
+}
+
+.fadeIn {
+  animation-name: fadeIn;
+  animation-duration: .5s;
+}
+.fadeIn-duration {
+  animation-duration: .6s !important;
+}
+
+.fadeToRight {
+  animation-name: fadeToRight;
+  animation-duration: .5s;
+}
+@keyframes fadeToRight {
+  from {transform: translateX(200px);}
+  to {transform: translateX(0px)}
+}
+
+.fadeToLeft {
+  animation-name: fadeToLeft;
+  animation-duration: .5s;
+}
+@keyframes fadeToLeft {
+  from {transform: translateX(-200px);}
+  to {transform: translateX(0px)}
+}
+
+/* Header */
 
 .Header {
   position: fixed;
@@ -46,42 +98,32 @@
   background: rgba(204, 204, 204, 0);
   transition: .4s ease-in-out;
 }
-
 .Header:hover {
   background-color: #fff;
 }
-
 .blacklink_header {
   color: #23232c !important;
 }
-
 .blacklink_header::after {
   background: #fff !important;
 }
-
 .Header:hover .blacklink_header {
   color: #fff !important;
 }
-
 .Header:hover .whitelink_header::after {
   background: #23232c;
 }
-
 .white_header:hover {
   color: #23232c !important;
 }
-
 .cart_count_news_hover {
   background-color: white !important;
   color: black !important;
 }
-
-
 .active::after {
   width: 100% !important; 
   animation-name: none!important;
 }
-
 .white_active::after {
   width: 100% !important; 
   animation-name: none!important;
@@ -89,12 +131,13 @@
   color: white !important;
 }
 
+/* Menu */
+
 .menu {
   list-style-type: none;
   grid-column: 1/5;
   justify-content: flex-start;
 }
-
 .menu li a {
   text-decoration: none;
   font-weight: bold;
@@ -109,15 +152,12 @@
   letter-spacing: -1px;
   position: relative;
 }
-
 .white_header {
   color: white;
 }
-
 .whitelink_header {
   color: white !important;
 }
-
 .menu li a::after {
   content: '';
   display: block;
@@ -130,27 +170,18 @@
   transition: all .5s;
   width: 0;
 }
-
 .whitelink_header::after {
   background: white !important;
 }
-
 .menu li a:hover::after {
   animation-name: active_line;
   animation-duration: 0.4s;
   width: 100%;
   left: 0;
 }
-
-@keyframes active_line {
-  from {width: 0px;}
-  to {width: 100%;}
-}
-
 .logo {
   grid-column: 5/9;
 }
-
 .cart {
   grid-column: 9/13;
   justify-content: flex-end;
@@ -159,7 +190,6 @@
   margin: 0 15px;
   cursor: pointer;
 }
-
 .cart-count {
   background-color: black;
   width: 20px;
@@ -173,11 +203,12 @@
   justify-content: center;
   line-height: 20px;
 }
-
 .cart_count_news {
   background-color: white;
   color: black;
 }
+
+/* Banner */
 
 .Banner {
   position: relative;
@@ -198,7 +229,6 @@
   transition: 1s;
   flex-direction: column;
 }
-
 .banner-second {
   overflow: hidden;
   position: absolute;
@@ -214,7 +244,6 @@
   padding-left: 130px;
   padding-bottom: 10px;
 }
-
 .banner-third {
   overflow: hidden;
   position: absolute;
@@ -227,49 +256,39 @@
   transition: 1s;
   flex-direction: column;
 }
-
 .hide {
   opacity: 0;
 }
-
 .displayNone {
   opacity: 0;
   z-index: -2;
   pointer-events: none;
 }
-
 .choose-slide {
   position: absolute;
   bottom: 40px;
 }
-
 .choose-line {
   background-color: #999;
   height: 3px;
   width: 20px;
   margin: 0px 5px;
 }
-
 .choose_line_active {
   background-color: #000;
 }
-
 .choose-line:hover {
   background-color: #ddd;
 }
-
 .scrolled {
   transform: translateY(-100px);
 }
-
 .white {
   background: rgba(255, 255, 255, 1);
 }
-
 .white_disable {
   background: rgba(255, 255, 255, 0) !important;
 } 
-
 .banner-title {
   font-weight: 100;
   font-size: 60px;
@@ -277,16 +296,13 @@
   margin-top: 35px;
   margin-bottom: 25px;
 }
-
 .banner-link {
   font-size: 11px;
   margin: 0 20px;
 }
-
 .banner-link-second {
   margin-left: 180px;
 }
-
 .banner-link::after {
   content: '';
   display: block;
@@ -295,26 +311,24 @@
   bottom: -3px;
 }
 
+/* RecommendBanner */
+
 .RecommendBanner {
   padding: 40px 40px 0px 40px;
 }
-
 .RecommendBanner-container {
   width: 100%;
   height: 100%;
 }
-
 .banner-box {
   width: 50%;
   height: 535px;
   margin: 0;
 }
-
 .banner-top {
   width: 100%;
   height: 50%;
 }
-
 .banner-top2 {
   width: 100%;
   height: 100%;
@@ -1676,52 +1690,50 @@
   margin-bottom: 60px;
 }
 
-/* Search Box */
+/* Search, Login Box */
 
-.Search {
+.Search, .Account, .Cart {
   background-color: #fff;
   width: 100%;
   height: 100vh;
   position: absolute;
   padding: 40px;
-  transition: .5s;
+  transition: all .3s ease-in;
   overscroll-behavior: contain;
 }
-
 .search-header {
   display: flex;
   justify-content: space-between;
   margin-top: -5px;
-  margin-bottom: 120px;
+  margin-bottom: 100px;
 }
-
 .search-close {
   cursor: pointer;
 }
-
 .search-close .icon {
   font-size: 22px;
   font-weight: 300;
 }
-
 .search-title {
   font-size: 32px;
   font-family: sans-serif;
   font-weight: 400;
 }
-
 .search-tab {
   font-size: 20px;
   justify-content: center;
   margin-bottom: 120px;
 }
-
+.login-tab {
+  margin-bottom: 60px !important;
+}
 .search-tab-cate {
-  margin: 0 25px;
+  margin: 0 30px;
   position: relative;
   color: #888;
+  font-weight: bold;
+  font-family: sans-serif;
 }
-
 .search-tab-cate::after {
   content: '';
   display: block;
@@ -1734,33 +1746,29 @@
   transition: all .5s;
   width: 0;
 }
-
 .search-tab-cate:hover::after {
   animation-name: active_line;
   animation-duration: 0.4s;
   width: 100%;
   left: 0;
 }
-
+.search-tab-cate:hover {
+  color: #000;
+}
 .search-tab-active::after {
   width: 100% !important; 
   animation-name: none!important;
 }
-
 .search-tab-active {
   color: #000;
 }
-
-.search-form {
+.search-form, .login-form {
   padding: 0 30px;
 }
-
 .search-form form {
-  display: flex;
   align-items: center;
   border-bottom: 2px #ddd solid;
 }
-
 .search-form form input {
   height: 50px;
   border: none;
@@ -1769,17 +1777,82 @@
   flex-grow: 1;
   color: #888;
 }
-
 .search-form form:hover {
   border-bottom: 2px #111 solid;
 }
-
 .search-form form input:focus {
   outline: none !important;
 }
-
 .search-form form .icon {
   font-size: 20px;
   margin: 0 20px;
   color: #888;
+}
+.login-form {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+}
+.login-form form {
+  width: 35%;
+  border: none;
+}
+.login-form form:hover {
+  border-bottom: none !important;
+}
+.login-form input {
+  width: 100%;
+  font-size: 14px !important;
+  border-bottom: 2px #ddd solid !important;
+  margin-bottom: 30px;
+}
+.login-form input:hover, .login-form input:focus {
+  border-bottom: 2px #111 solid !important;
+}
+.login-form button {
+  border: none;
+  background: none;
+  font-size: 14px;
+  text-transform: uppercase;
+  font-weight: 600;
+  background-color: #232323;
+  color: #fff;
+  font-family: sans-serif;
+  padding: 20px;
+  width: 100%;
+  margin-top: 40px;
+  margin-bottom: 60px;
+}
+.check-box {
+  width: 20px;
+  height: 20px;
+  background-color: #ddd;
+  margin-right: 10px;
+  position: relative;
+}
+.check-box-active {
+  position: absolute;
+  width: 20px;
+  height: 20px;
+  color: #fff;
+  background-color: #888;
+}
+.remember-login {
+  width: 100%;
+  font-size: 14px;
+  color: #888;
+  cursor: pointer;
+}
+.remember-login:hover .check-box{
+  background-color: #888;
+}
+.login-form label {
+  font-size: 14px;
+  border-bottom: 1px #888 solid;
+  color: #888;
+}
+.login-form label:hover {
+  border-bottom: 1px #000 solid;
+  color: #000;
 }

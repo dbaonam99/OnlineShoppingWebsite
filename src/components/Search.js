@@ -29,22 +29,24 @@ export default class Search extends Component {
                             />
                     </div>
                 </div>
+                <div className={this.props.searchOpen === false ? '' : 'fadeIn'}>
+                    <div 
+                        className='search-tab flex'>
+                        <div className="search-tab-cate search-tab-active">All Categories</div>
+                        <div className="search-tab-cate">Woman</div>
+                        <div className="search-tab-cate">Bags</div>
+                        <div className="search-tab-cate">Search</div>
+                        <div className="search-tab-cate">Bags</div>
+                        <div className="search-tab-cate">Search</div>
+                    </div>
 
-                <div className="search-tab flex">
-                    <div className="search-tab-cate search-tab-active">All Categories</div>
-                    <div className="search-tab-cate">Woman</div>
-                    <div className="search-tab-cate">Bags</div>
-                    <div className="search-tab-cate">Search</div>
-                    <div className="search-tab-cate">Bags</div>
-                    <div className="search-tab-cate">Search</div>
-                </div>
-
-                <div className="search-form" >
-                    <form>
-                        <FontAwesomeIcon icon={faSearch} className="icon"/>
-                        <input placeholder="Search" ref={this.inputElement}/>
-                        <FontAwesomeIcon icon={faTimes} className="icon"/>
-                    </form>
+                    <div className="search-form">
+                        <form className="flex">
+                            <FontAwesomeIcon icon={faSearch} className="icon"/>
+                            <input placeholder="Search" ref={this.inputElement}/>
+                            <FontAwesomeIcon icon={faTimes} className="icon"/>
+                        </form>
+                    </div>
                 </div>
             </div>
         )

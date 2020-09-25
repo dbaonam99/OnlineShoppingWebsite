@@ -6,6 +6,8 @@ import {
     withRouter
   } from "react-router-dom"; 
 
+import ScrollAnimation from 'react-animate-on-scroll'; 
+
 class NewsBanner extends Component {
 
     constructor(props) {
@@ -23,9 +25,9 @@ class NewsBanner extends Component {
             <div className="NewsBanner">
                 <div className="newsbanner-container">
                     <div className="newsbanner-overlay flex-center">
-                        <div className="newsbanner-title">
+                        <ScrollAnimation animateIn='fadeInDown' animateOut='fadeOutUp'  className="newsbanner-title">
                             News
-                        </div>
+                        </ScrollAnimation>
                         <div className="newsbanner-breadcrumb flex-center">
                             <div>Home</div>
 
