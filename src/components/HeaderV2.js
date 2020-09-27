@@ -12,7 +12,7 @@ import Account from './Account.js';
 import Cart from './Cart.js';
 
 
-function Header(props) {
+function HeaderV2(props) {
 
     const [scrolled, setScrolled] = useState(false);
     const [whiteBox, setWhiteBox] = useState(false);
@@ -44,7 +44,7 @@ function Header(props) {
 
         function onScroll() {
             if (location === "/news") {
-                if(window.pageYOffset < 50) { // top
+                if(window.pageYOffset < 100) { // top
                     setWhiteBox(false)
                     setWhiteText(true)
                     setDisableBox(true)
@@ -57,7 +57,7 @@ function Header(props) {
                     setScrolled(false)
                 }
             } else {
-                if(window.pageYOffset < 50) { // top
+                if(window.pageYOffset < 10) { // top
                     setWhiteBox(false)
                     setWhiteText(false)
                 } else if (this.prev < window.pageYOffset) { //down
@@ -82,7 +82,7 @@ function Header(props) {
 
     return(
         <div
-            className={classNames('Header', {
+            className={classNames('Header HeaderV2', {
                 scrolled: scrolled === true,
                 white: whiteBox === true,
                 white_disable: disableBox === true
@@ -148,7 +148,7 @@ function Header(props) {
                 </li>
             </ul>
             <div className="logo flex-center">
-                <Link to="/ProductDetail">
+                <Link to="/">
                     {
                         whiteText === true 
                             ? <img src="https://demo.uix.store/sober/wp-content/themes/sober/images/logo-light.svg" alt="logo"></img>
@@ -201,4 +201,4 @@ function Header(props) {
         </div>
     )
 }
-export default withRouter(Header);
+export default withRouter(HeaderV2);
