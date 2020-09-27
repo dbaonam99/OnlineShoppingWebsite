@@ -1986,3 +1986,131 @@
   background-color: #111;
   color: #fff;
 }
+/* Product info */
+.product-info-detail {
+  width: 50%;
+  height: 600px;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+  padding-left: 40px;
+}
+.product-info-title {
+  font-size: 36px;
+  font-family: sans-serif;
+  font-weight: 300;
+  margin: 40px 0;
+}
+.product-info-des {
+  font-size: 12px;
+  margin-bottom: 10px;
+  color: #777;
+  text-align: center;
+}
+.product-info-vote {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+.product-info-vote p {
+  margin-bottom: 20px;
+  font-size: 11px;
+}
+.product-info-price {
+  margin-top: 10px;
+  font-size: 26px;
+  margin-bottom: 60px;
+}
+.product-info-cart {
+  height: 60px;
+  align-items: center;
+}
+.count-cart {
+  display: flex;
+  align-items: center;
+  height: 100%;
+  border: 1px solid #ddd;
+  color: #777;
+  transition: .5s;
+}
+.count-cart:hover {
+  border: 1px solid #111;
+}
+.count-cart-item {
+  height: 100%;
+  width: 30px;
+}
+.count-cart .item {
+  font-size: 16px;
+}
+.count-cart .left {
+  margin-left: 5px;
+}
+.count-cart .right {
+  margin-right: 5px;
+}
+.count-cart .text form input {
+  width: 30px;
+  font-size: 16px;
+  border: none;
+  text-align: center;
+}
+.count-cart .text input:focus {
+  outline: none !important;
+}
+
+.count-cart .left:hover {
+  color: #111;
+}
+.count-cart .right:hover {
+  color: #111;
+}
+.product-info-addtocart {
+  margin: 0 15px;
+  color: #fff;
+  height: 100%;
+  background-color: #232323;
+  padding: 0 20px;
+  cursor: pointer;
+}
+.product-info-addtocart p {
+  margin-left: 15px;
+  font-size: 14px;
+}
+.product-info-addtocart:hover {
+  background-color: #343434;
+}
+.product-info-wishlist {
+  width: 60px;
+  height: 60px;
+  border: 1px solid #ddd;
+  color: #777;
+  transition: .5s;
+}
+.product-info-wishlist:hover {
+  border: 1px solid #111;
+}
+.product-info-line {
+  margin-top: 20px;
+  background-color: #eee;
+  height: 1px;
+  width: 100%;
+  bottom: 0;
+  margin: 40px 0;
+}
+.product-info-cate p {
+  font-size: 10px;
+  margin: 0 3px;
+  color: #111;
+  font-weight: bold;
+  font-family: sans-serif;
+  text-transform: uppercase;
+}
+.product-info-cate p:first-child {
+  color: #777;
+  font-weight: 300;
+}
+.product-info-cate p::second-line {
+}

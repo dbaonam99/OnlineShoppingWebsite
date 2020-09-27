@@ -1,7 +1,7 @@
 import React, { useEffect, useRef, useState } from 'react';
 import '../App.css';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import {  faAngleRight, faChevronLeft, faChevronRight } from "@fortawesome/free-solid-svg-icons";
+import {  faAngleRight, faCar, faCartPlus, faChevronLeft, faChevronRight, faDivide, faHeart, faMinus, faPlus } from "@fortawesome/free-solid-svg-icons";
 import { Link } from 'react-router-dom';
 
 // Import Swiper React components
@@ -10,16 +10,26 @@ import { Link } from 'react-router-dom';
 // Import Swiper styles
 // import 'swiper/swiper.scss';
 
+import ReactStars from "react-rating-stars-component";
 
 export default function ProductBody(props) {
 
-    function slugify(text){
-        return text.toString().toLowerCase()
-            .replace(/\s+/g, '-')           // Replace spaces with -
-            .replace(/[^\u0100-\uFFFF\w\-]/g,'-') // Remove all non-word chars ( fix for UTF-8 chars )
-            .replace(/\-\-+/g, '-')         // Replace multiple - with single -
-            .replace(/^-+/, '')             // Trim - from start of text
-            .replace(/-+$/, '');            // Trim - from end of text
+    function slugify(str){
+        str = str.replace(/^\s+|\s+$/g, ''); // trim
+        str = str.toLowerCase();
+
+        // remove accents, swap ñ for n, etc
+        var from = "ãàáäâẽèéëêìíïîõòóöôùúüûñç·/_,:;";
+        var to   = "aaaaaeeeeeiiiiooooouuuunc------";
+        for (var i=0, l=from.length ; i<l ; i++) {
+            str = str.replace(new RegExp(from.charAt(i), 'g'), to.charAt(i));
+        }
+
+        str = str.replace(/[^a-z0-9 -]/g, '') // remove invalid chars
+            .replace(/\s+/g, '-') // collapse whitespace and replace by -
+            .replace(/-+/g, '-'); // collapse dashes
+
+        return str;    // Trim - from end of text
     }
     const slugSex = "/" + slugify(props.productSex);
 
@@ -63,11 +73,6 @@ export default function ProductBody(props) {
         }
     }
 
-    const updateIndex = (event) => {
-        console.log("cc")
-        setImgIndex(imgIndex + 1);
-    }
-
     useEffect(() => {
         if (hover === false) {
             var interval = setInterval(() => {
@@ -79,7 +84,20 @@ export default function ProductBody(props) {
         }
     },[hover])
 
-    console.log(imgIndex)
+    //Counting star vote
+    let ratingList = props.productVote.map(a => a.ratingStar); // get all rating
+    const totalRating = ratingList.reduce((a, b) => a + b, 0)
+    const averageRating = totalRating/ratingList.length;
+
+    const ratingStar = {
+        size: 12,
+        value: averageRating,
+        edit: false,
+        activeColor: "#fda32a",
+        color: "#ddd",
+        isHalf: true
+    };
+      
 
     return(
         <div className="ProductBody">
@@ -91,7 +109,7 @@ export default function ProductBody(props) {
                 <div className="breadcrumb-item breadcrumb-product">{props.productName}</div>
             </div>
 
-            <div className="product-detail">
+            <div className="product-detail flex">
                 <div className="product-gallery flex"
                     onMouseEnter={()=> {setHover(true)}}
                     onMouseLeave={()=> {setHover(false)}}>
@@ -160,7 +178,53 @@ export default function ProductBody(props) {
                         </div>
                     </div>
                 </div>
+                <div className="product-info-detail">
+                    <div className="product-info-title">
+                        {props.productName}
+                    </div>
+                    <div className="product-info-des">
+                        {props.productDes}
+                    </div>
+                    <div className="product-info-vote">
+                        <ReactStars {...ratingStar} />
+                        <p>
+                            ({ratingList.length} customer reviews)
+                        </p>
+                    </div>
+                    <div className="product-info-price">
+                        {props.productPrice}
+                    </div>
+                    <div className="product-info-cart flex">
+                        <div className="count-cart">
+                            <div className="count-cart-item left flex-center">
+                                <FontAwesomeIcon icon={faMinus}/>
+                            </div> 
+                            <div className="count-cart-item text flex-center">
+                                <form>
+                                    <input type="text" defaultValue="1"/>
+                                </form>
+                            </div>
+                            <div className="count-cart-item right flex-center">
+                                <FontAwesomeIcon icon={faPlus}/>
+                            </div>
+                        </div>
+                        <div className="product-info-addtocart flex-center">
+                            <FontAwesomeIcon icon={faCartPlus}/>
+                            <p>Add to cart</p>
+                        </div>
+                        <div className="product-info-wishlist flex-center">
+                            <FontAwesomeIcon icon={faHeart}></FontAwesomeIcon>
+                        </div>
+                    </div>
+                    <div className="product-info-line"></div>
+                    <div className="product-info-cate flex">
+                        <p>Category:</p>
+                        <p>{props.productCate}</p>
+                    </div>
+                    <div className="product-info-line"></div>
+                </div>
             </div>
+                <div className="product-info-line"></div>
         </div>
     )
 }

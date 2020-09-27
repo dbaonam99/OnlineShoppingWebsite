@@ -34,6 +34,33 @@ export default function ProductDetail() {
                 "https://demo.uix.store/sober/wp-content/uploads/sites/2/2016/07/2_1-4.jpg",
                 "https://demo.uix.store/sober/wp-content/uploads/sites/2/2016/07/3-10.jpg",
                 "https://demo.uix.store/sober/wp-content/uploads/sites/2/2016/07/4-3.jpg",
+            ],
+            productDes: "Lorem Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.",
+            productVote: [
+                {
+                    ratingText :"",
+                    ratingStar: 5
+                },
+                {
+                    ratingText :"",
+                    ratingStar: 2
+                },
+                {
+                    ratingText :"",
+                    ratingStar: 3
+                },
+                {
+                    ratingText :"",
+                    ratingStar: 4
+                },
+                {
+                    ratingText :"",
+                    ratingStar: 4
+                },
+                {
+                    ratingText :"",
+                    ratingStar: 5
+                },
             ]
         }
     )
@@ -45,7 +72,11 @@ export default function ProductDetail() {
                 productCate={products.productCate} 
                 productName={products.productName}
                 productSex={products.productSex}
-                productImg={products.productImg}/>
+                productImg={products.productImg}
+                productDes={products.productDes}
+                productVote={products.productVote}
+                productPrice={products.productPrice}
+            />
             <Newsletter/>
             <Footer/>
         </div>

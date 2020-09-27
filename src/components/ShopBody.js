@@ -20,7 +20,7 @@ export default class ShopBody extends Component {
                     productImgHover: "https://demo.uix.store/sober/wp-content/uploads/sites/2/2016/07/2_1-4-433x516.jpg",
                     productCate: "Woman",
                     productColor: "Grey",
-                    productSize: "Large",
+                    productSize: "Large"
                 },
                 {
                     id: 2,
