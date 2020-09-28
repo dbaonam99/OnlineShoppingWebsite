@@ -1,7 +1,7 @@
 import React, { useEffect, useRef, useState } from 'react';
-import '../App.css';
+import '../../App.css';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import {  faAngleRight, faCar, faCartPlus, faChevronLeft, faChevronRight, faDivide, faHeart, faMinus, faPlus } from "@fortawesome/free-solid-svg-icons";
+import {  faAngleRight, faCartPlus, faChevronLeft, faChevronRight, faHeart, faMinus, faPlus } from "@fortawesome/free-solid-svg-icons";
 import { Link } from 'react-router-dom';
 
 // Import Swiper React components
@@ -38,6 +38,7 @@ export default function ProductBody(props) {
     // const productImgBig = [].concat(props.productImg);
     
     const [imgIndex, setImgIndex] = useState(0);
+    const [countCart, setCountCart] = useState(1);
     const [hover, setHover] = useState(false);
     const [zoom, setZoom] = useState(`0% 0%`);
     const width = 500;
@@ -97,14 +98,13 @@ export default function ProductBody(props) {
         color: "#ddd",
         isHalf: true
     };
-      
 
     return(
         <div className="ProductBody">
             <div className="product-breadcrumb flex">
                 <Link to="/" className="breadcrumb-item breadcrumb-link">Home</Link>
                 <FontAwesomeIcon icon={ faAngleRight } className="breadcrumb-arrow"/>
-                <Link to={slugSex} className="breadcrumb-item breadcrumb-link">{props.productCate}</Link>
+                <Link to={slugSex} className="breadcrumb-item breadcrumb-link">{props.productSex}</Link>
                 <FontAwesomeIcon icon={ faAngleRight } className="breadcrumb-arrow"/>
                 <div className="breadcrumb-item breadcrumb-product">{props.productName}</div>
             </div>
@@ -195,16 +195,27 @@ export default function ProductBody(props) {
                         {props.productPrice}
                     </div>
                     <div className="product-info-cart flex">
-                        <div className="count-cart">
-                            <div className="count-cart-item left flex-center">
+                        <div className="count-cart noselect">
+                            <div className="count-cart-item left flex-center"
+                                onClick={() => { 
+                                    if (countCart > 1) setCountCart(countCart-1) 
+                                }}
+                                >
                                 <FontAwesomeIcon icon={faMinus}/>
                             </div> 
                             <div className="count-cart-item text flex-center">
                                 <form>
-                                    <input type="text" defaultValue="1"/>
+                                    <input 
+                                        type="text" 
+                                        value={countCart}
+                                        onChange={e => setCountCart(Number(e.target.value))}
+                                    />
                                 </form>
                             </div>
-                            <div className="count-cart-item right flex-center">
+                            <div 
+                                className="count-cart-item right flex-center"
+                                onClick={() => { setCountCart(countCart+1) }}
+                                >
                                 <FontAwesomeIcon icon={faPlus}/>
                             </div>
                         </div>
@@ -212,7 +223,8 @@ export default function ProductBody(props) {
                             <FontAwesomeIcon icon={faCartPlus}/>
                             <p>Add to cart</p>
                         </div>
-                        <div className="product-info-wishlist flex-center">
+                        <div 
+                            className="product-info-wishlist flex-center">
                             <FontAwesomeIcon icon={faHeart}></FontAwesomeIcon>
                         </div>
                     </div>
@@ -224,7 +236,7 @@ export default function ProductBody(props) {
                     <div className="product-info-line"></div>
                 </div>
             </div>
-                <div className="product-info-line"></div>
+            <div className="product-info-line"></div>
         </div>
     )
 }

@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import '../App.css';
+import '../../App.css';
 import {
     Link,
     withRouter
@@ -7,12 +7,12 @@ import {
 import classNames from 'classnames';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import {  faSearch, faUser, faCartPlus } from "@fortawesome/free-solid-svg-icons";
-import Search from './Search.js';
-import Account from './Account.js';
-import Cart from './Cart.js';
+import Search from '../Search.js';
+import Account from '../Account.js';
+import Cart from '../Cart.js';
 
 
-function HeaderV2(props) {
+function Header(props) {
 
     const [scrolled, setScrolled] = useState(false);
     const [whiteBox, setWhiteBox] = useState(false);
@@ -44,7 +44,7 @@ function HeaderV2(props) {
 
         function onScroll() {
             if (location === "/news") {
-                if(window.pageYOffset < 100) { // top
+                if(window.pageYOffset < 50) { // top
                     setWhiteBox(false)
                     setWhiteText(true)
                     setDisableBox(true)
@@ -57,7 +57,7 @@ function HeaderV2(props) {
                     setScrolled(false)
                 }
             } else {
-                if(window.pageYOffset < 10) { // top
+                if(window.pageYOffset < 50) { // top
                     setWhiteBox(false)
                     setWhiteText(false)
                 } else if (this.prev < window.pageYOffset) { //down
@@ -82,7 +82,7 @@ function HeaderV2(props) {
 
     return(
         <div
-            className={classNames('Header HeaderV2', {
+            className={classNames('Header', {
                 scrolled: scrolled === true,
                 white: whiteBox === true,
                 white_disable: disableBox === true
@@ -148,7 +148,7 @@ function HeaderV2(props) {
                 </li>
             </ul>
             <div className="logo flex-center">
-                <Link to="/">
+                <Link to="/Product">
                     {
                         whiteText === true 
                             ? <img src="https://demo.uix.store/sober/wp-content/themes/sober/images/logo-light.svg" alt="logo"></img>
@@ -201,4 +201,4 @@ function HeaderV2(props) {
         </div>
     )
 }
-export default withRouter(HeaderV2);
+export default withRouter(Header);

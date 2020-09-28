@@ -1778,7 +1778,7 @@
   animation-name: none!important;
 }
 .search-tab-active {
-  color: #000;
+  color: #000 !important;
 }
 .search-form, .login-form {
   padding: 0 30px;
@@ -2041,6 +2041,7 @@
 .count-cart-item {
   height: 100%;
   width: 30px;
+  cursor: pointer;
 }
 .count-cart .item {
   font-size: 16px;
@@ -2091,6 +2092,7 @@
 }
 .product-info-wishlist:hover {
   border: 1px solid #111;
+  color: #111;
 }
 .product-info-line {
   margin-top: 20px;
@@ -2112,5 +2114,126 @@
   color: #777;
   font-weight: 300;
 }
-.product-info-cate p::second-line {
+/* ProductReview */
+.ProductReview {
+  padding: 0 40px;
+}
+.productreview-container {
+  width: 100%;
+}
+.productreview-tab {
+  height: 50px;
+  width: 100%;
+  margin-bottom: 30px;
+}
+.productreview-title {
+  margin: 0 20px;
+  color: #777;
+  position: relative;
+}
+.productreview-title span {
+  padding: 0px 5px;
+  font-size: 12px;
+  background-color: #777;
+  color: #fff;
+  border-radius: 50%;
+  width: 16px;
+  height: 16px;
+  margin-left: 4px;
+}
+.productreview-title::after {
+  content: '';
+  display: block;
+  height: 2px;
+  background: #000;
+  margin-top: 5px;
+  right: 0;
+  bottom: -3px;
+  transition: all .5s;
+  width: 0%;
+}
+.productreview-title:hover span {
+  color: #fff;
+  background-color: #111;
+}
+.span-active {
+  color: #fff !important;
+  background-color: #111 !important;
+}
+.productreview-title:hover {
+  color: #111;
+}
+.productreview-title:hover::after {
+  animation-name: active_line;
+  animation-duration: 0.4s;
+  width: 100%;
+  left: 0;
+}
+.productreview-text {
+  font-size: 14px;
+  color: #777;
+  text-align: center;
+}
+.productreview-list {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.productreview-item:first-child {
+  /* margin: 0; */
+}
+.productreview-item {
+  width: 65%;
+  padding: 10px;
+  position: relative;
+  margin-bottom: 80px;
+}
+.reviewer {
+  width: 70px;
+  height: 70px;
+  border-radius: 50%;
+  overflow: hidden;
+  margin-right: 20px;
+}
+.review-info {
+  width: 100%;
+}
+.review-first {
+  justify-content: space-between;
+  width: 100%;
+}
+.productreview-line {
+  margin-top: 20px;
+  background-color: #eee;
+  height: 1px;
+  width: 100%;
+  bottom: -40px;
+  position: absolute;
+}
+.review-second {
+  margin-top: 5px;
+  margin-bottom: 10px;
+  font-size: 10px;
+  color: #777;
+}
+.review-third {
+  font-size: 14px;
+  color: #777;
+}
+.review-img {
+  margin-top: 20px;
+}
+.review-img img {
+  margin-right: 10px;
+}
+.productreview-review {
+  margin-top: 30px;
+  width: 65%;
+}
+.productreview-review div:first-child {
+  color: #000;
+  font-family: sans-serif;
+  font-size: 20px;
+  font-weight: 400;
+  margin-bottom: 10px;
 }

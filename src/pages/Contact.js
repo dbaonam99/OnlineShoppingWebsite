@@ -3,7 +3,7 @@ import "../App.css";
 import Newsletter from "../components/Newsletter.js"
 import Footer from "../components/Footer.js"
 import BannerV2 from '../components/BannerV2.js'
-import Header from '../components/Header.js'
+import Header from '../components/Header/Header.js'
 import bg from '../assets/contact.jpg'
 import ContactBody from '../components/ContactBody.js'
 import GetInTouch from "../components/GetInTouch";

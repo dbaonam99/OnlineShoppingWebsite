@@ -7,7 +7,7 @@ import FashionNews from '../components/FashionNews.js'
 import Newsletter from "../components/Newsletter.js"
 import Footer from "../components/Footer.js"
 import Banner from '../components/Banner.js'
-import Header from '../components/Header.js'
+import Header from '../components/Header/Header.js'
 // import Service from "../components/Service.js"
 
 class Home extends Component {

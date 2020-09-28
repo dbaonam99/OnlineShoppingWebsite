@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import "../App.css";
 import NewsBanner from '../components/NewsBanner.js'
 import NewsBody from '../components/NewsBody.js'
-import Header from '../components/Header.js'
+import Header from '../components/Header/Header.js'
 import Newsletter from "../components/Newsletter";
 import Footer from "../components/Footer";
 

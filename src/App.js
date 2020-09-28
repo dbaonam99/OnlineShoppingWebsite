@@ -11,7 +11,7 @@ import NewsPages from './pages/NewsPages.js'
 import Men from './pages/Men.js'
 import Women from './pages/Women.js'
 import Contact from './pages/Contact.js'
-import ProductDetail from './pages/ProductDetail.js'
+import Product from './pages/Product.js'
 
 
 
@@ -19,7 +19,7 @@ function App() {
   return (
     <Router>
       <div className="App">
-        <Route path="/ProductDetail" exact component={ProductDetail}></Route>
+        <Route path="/Product" exact component={Product}></Route>
         <Route path="/" exact component={Home}></Route>
         <Route path="/news" exact component={NewsPages}></Route>
         <Route path="/men" exact component={Men}></Route>
