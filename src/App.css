@@ -9,7 +9,6 @@
   -moz-box-sizing: border-box;
   box-sizing: border-box;
 }
-
 .no-p {
   padding: 0 !important;
 }
@@ -24,6 +23,12 @@
 }
 .mr-2 {
   margin-right: 20px !important;
+}
+.ml-5 {
+  margin-left: 50px !important;
+}
+.mr-5 {
+  margin-right: 50px !important;
 }
 .no-outline:focus {
   outline: none !important;
@@ -187,7 +192,7 @@
   font-size: 12px;
   margin: 0 20px;
   padding: 5px 0px;
-  letter-spacing: -1px;
+  letter-spacing: 0px;
   position: relative;
 }
 .white_header {
@@ -2033,6 +2038,7 @@
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  cursor: pointer;
 }
 .product-info-vote p {
   margin-bottom: 20px;
@@ -2199,9 +2205,6 @@
   flex-direction: column;
   align-items: center;
 }
-.productreview-item:first-child {
-  /* margin: 0; */
-}
 .productreview-item {
   width: 65%;
   padding: 10px;
@@ -2213,10 +2216,10 @@
   height: 70px;
   border-radius: 50%;
   overflow: hidden;
-  margin-right: 20px;
 }
 .review-info {
-  width: 100%;
+  margin-left: 30px;
+  flex-grow: 1;
 }
 .review-first {
   justify-content: space-between;
@@ -2239,6 +2242,15 @@
 .review-third {
   font-size: 14px;
   color: #777;
+  width: 600px;
+}
+.review-third-full {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  max-height: 40px;
 }
 .review-img {
   margin-top: 20px;
@@ -2287,17 +2299,19 @@
 .ProductRecommend {
   padding: 0 25px;
 }
-
 .newsletter-container {
   flex-direction: column;
   height: 100%;
   position: relative;
 }
-
 .newsletter-title {
   font-size: 23px;
   margin-bottom: 20px;
   color: #333;
   font-weight: 600;
   font-family: Poppins-medium;
+}
+.review-like {
+  margin-top: 30px;
+  color: #777;
 }

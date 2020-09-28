@@ -1,4 +1,4 @@
-import React, {  } from "react";
+import React, { useRef, useState } from "react";
 import "../App.css";
 import Newsletter from "../components/Newsletter.js"
 import Footer from "../components/Footer.js"
@@ -55,7 +55,7 @@ export default function ProductDetail() {
                 {
                     name: "Tien",
                     ratingTitle : "love it",
-                    ratingText : "Lorem Duis aute irure dolor in reprehenderit in voluptate velit esse cillum d",
+                    ratingText : "Lorem Duis aute irure dolor in reprehenderit zxc zczin voluptate velit esse cillum Lorem Duis aute irure dolor in reprehenderit in voluptate velit esse cillum Lorem Duis Lorem",
                     ratingDate : "01.01 2020",
                     ratingStar: 4,
                     ratingImg: [
@@ -114,6 +114,94 @@ export default function ProductDetail() {
             ]
         }
     )
+    
+    const [tabId, setTabId] = useState(0);
+
+    const bRef = useRef(null);
+
+    const handleClick = () => {
+        smoothScroll.scrollTo('review');
+        setTabId(1)
+    }
+
+    var smoothScroll = {
+        
+        timer: null,
+    
+        stop: function () {
+            clearTimeout(this.timer);
+        },
+    
+        scrollTo: function (id, callback) {
+            var settings = {
+                duration: 1000,
+                easing: {
+                    outQuint: function (x, t, b, c, d) {
+                        return c*((t=t/d-1)*t*t*t*t + 1) + b;
+                    }
+                }
+            };
+            var percentage;
+            var startTime;
+            var node = document.getElementById(id);
+            var nodeTop = node.offsetTop;
+            var nodeHeight = node.offsetHeight;
+            var body = document.body;
+            var html = document.documentElement;
+            var height = Math.max(
+                body.scrollHeight,
+                body.offsetHeight,
+                html.clientHeight,
+                html.scrollHeight,
+                html.offsetHeight
+            );
+            var windowHeight = window.innerHeight
+            var offset = window.pageYOffset;
+            var delta = nodeTop - offset;
+            var bottomScrollableY = height - windowHeight;
+            var targetY = (bottomScrollableY < delta) ?
+                (bottomScrollableY - (height - nodeTop - nodeHeight + offset)):
+                delta - 30;
+    
+            startTime = Date.now();
+            percentage = 0;
+    
+            if (this.timer) {
+                clearInterval(this.timer);
+            }
+    
+            function step () {
+                var yScroll;
+                var elapsed = Date.now() - startTime;
+    
+                if (elapsed > settings.duration) {
+                    clearTimeout(this.timer);
+                }
+    
+                percentage = elapsed / settings.duration;
+    
+                if (percentage > 1) {
+                    clearTimeout(this.timer);
+    
+                    if (callback) {
+                        callback();
+                    }
+                } else {
+                    yScroll = settings.easing.outQuint(0, elapsed, offset, targetY, settings.duration);
+                    window.scrollTo(0, yScroll);
+                    this.timer = setTimeout(step, 10);     
+                }
+            }
+    
+            this.timer = setTimeout(step, 10);
+        }
+    };
+    
+    
+
+    const setTab = (tab) => {
+        setTabId(tab)
+    }
 
     return (
         <div className="ProductDetail">
@@ -126,11 +214,16 @@ export default function ProductDetail() {
                 productDes={products.productDes}
                 productVote={products.productVote}
                 productPrice={products.productPrice}
+                scrollOnLick={handleClick}
             />
             <ProductReview
                 productDes={products.productDes}
                 productVote={products.productVote}
                 ratingImg={products.ratingImg}
+                bRef={bRef}
+                tabId={tabId}
+                setTab={setTab}
+                id={"review"}
             />
             <ProductRecommend/>
             <Newsletter/>

@@ -2,9 +2,10 @@ import React, { useState } from 'react';
 import '../../App.css';
 
 import ReactStars from "react-rating-stars-component";
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faComment, faThumbsUp } from '@fortawesome/free-solid-svg-icons';
 
 export default function ProductReview(props) {
-    const [tabId, setTabId] = useState(0);
 
     const defaultStar = {
         size: 24,
@@ -14,34 +15,35 @@ export default function ProductReview(props) {
         isHalf: true,
         edit: true
     }
-
+    const [full, setFull] = useState(false);
+    
     return(
-        <div className="ProductReview">
+        <div className="ProductReview" ref={props.bRef} id={props.id}>
             <div className="productreview-container">
                 <div className="productreview-tab flex-center">
                     <div 
-                        className={tabId === 0 ? "productreview-title search-tab-active" : "productreview-title"}
-                        onClick={()=>{setTabId(0)}}>
+                        className={props.tabId === 0 ? "productreview-title search-tab-active" : "productreview-title"}
+                        onClick={()=>{props.setTab(0)}}>
                         Description
                     </div>
                     <div 
-                        className={tabId === 1 ? "productreview-title search-tab-active" : "productreview-title"}
-                        onClick={()=>{setTabId(1)}}>
+                        className={props.tabId === 1 ? "productreview-title search-tab-active" : "productreview-title"}
+                        onClick={()=>{props.setTab(1)}}>
                         Reviews
-                        <span className={tabId === 1 ? "span-active" : ""}>
+                        <span className={props.tabId === 1 ? "span-active" : ""}>
                             {props.productVote.length}
                         </span>
                     </div>
                 </div>
                 <div className="productreview-content">
                     {
-                        tabId === 0 && 
+                        props.tabId === 0 && 
                         <div className="productreview-text"> 
                             {props.productDes}
                         </div>
                     }
                     {
-                        tabId === 1 && 
+                        props.tabId === 1 && 
                         <div className="productreview-list"> 
                             {props.productVote.map((item, index) => {
                                 const ratingStar = {
@@ -70,7 +72,15 @@ export default function ProductReview(props) {
                                             <div className="review-second">
                                                 {item.ratingDate}
                                             </div>
-                                            <div className="review-third">
+                                            <div 
+                                                id={index}
+                                                className={full === false ? "review-third review-third-full" : "review-third"}
+                                                onClick={()=> {
+                                                    if (item.ratingText.length >= 175) {
+                                                        if (full===false) setFull(true)
+                                                        else setFull(false)
+                                                    }
+                                                }}>
                                                 {item.ratingText}
                                             </div>
                                             <div className="review-img flex">
@@ -85,6 +95,10 @@ export default function ProductReview(props) {
                                                         ></img>
                                                     )
                                                 })}
+                                            </div>
+                                            <div className="review-like">
+                                                <FontAwesomeIcon icon={faThumbsUp} className="mr-5"></FontAwesomeIcon>
+                                                <FontAwesomeIcon icon={faComment}></FontAwesomeIcon>
                                             </div>
                                         </div>
                                         <div className="productreview-line"></div>

@@ -40,13 +40,14 @@ export default function ProductRecommend() {
             <div className="newsletter-container flex-center">
                 <div className="newsletter-title">Related products</div>
                 <div className="RecommendProduct">
-                    {product.map(function(item) {
+                    {product.map(function(item, index) {
                         return (
                             <Product 
                                 imgUrl={item.imgUrl} 
                                 imgUrlHover={item.imgUrlHover} 
                                 productTitle={item.productTitle}
                                 productPrice={item.productPrice}
+                                key={index}
                             />
                         )
                     })}

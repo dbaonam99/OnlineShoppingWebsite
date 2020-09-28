@@ -33,15 +33,14 @@ export default function ProductBody(props) {
     }
     const slugSex = "/" + slugify(props.productSex);
 
-    const productImgSmall = props.productImg;
-    // const [productImgBig, setProductImgBig] = useState([].concat(props.productImg));
-    // const productImgBig = [].concat(props.productImg);
+    const productImg = props.productImg;
     
     const [imgIndex, setImgIndex] = useState(0);
     const [countCart, setCountCart] = useState(1);
     const [hover, setHover] = useState(false);
     const [zoom, setZoom] = useState(`0% 0%`);
     const width = 500;
+
     const productSmall = useRef(null);
 
     const handleMouseMove = (e) => {
@@ -51,19 +50,19 @@ export default function ProductBody(props) {
         setZoom(`${x}% ${y}%`);
     };
     
-    if (imgIndex >= productImgSmall.length) { //infinity slider loop
+    if (imgIndex >= productImg.length) { //infinity slider loop
         // setProductImgBig(productImgBig.concat(props.productImg))
         setImgIndex(0);
     }
 
-    if (productImgSmall.length > 4) {
+    if (productImg.length > 4) {
         if (imgIndex === 1 || imgIndex === 2) {
             productSmall.current.style.transform= `translateY(0px)`
-        } else if (imgIndex === productImgSmall.length - 1) {
+        } else if (imgIndex === productImg.length - 1) {
             productSmall.current.style.transform= `translateY(-${(imgIndex-5) * 110 + 50}px)`
-        } else if (imgIndex === productImgSmall.length - 2) {
+        } else if (imgIndex === productImg.length - 2) {
             productSmall.current.style.transform= `translateY(-${(imgIndex-4) * 110 + 50}px)`
-        } else if (imgIndex === productImgSmall.length - 3) {
+        } else if (imgIndex === productImg.length - 3) {
             productSmall.current.style.transform= `translateY(-${(imgIndex-3) * 110 + 50}px)`
         } else if (imgIndex > 2) {
             productSmall.current.style.transform= `translateY(-${(imgIndex-2) * 110}px)`
@@ -116,7 +115,7 @@ export default function ProductBody(props) {
                     <div 
                         className="product-small" ref={productSmall}
                         >
-                        {productImgSmall.map((item, index) => {
+                        {productImg.map((item, index) => {
                             return (
                                 <div 
                                     key={index}
@@ -139,7 +138,7 @@ export default function ProductBody(props) {
                         // onSlideChange={updateIndex}
                         onMouseMove={handleMouseMove}
                         >
-                        {productImgSmall.map((item, index) => {
+                        {productImg.map((item, index) => {
                             return (
                                 <div
                                     key={index}
@@ -171,7 +170,7 @@ export default function ProductBody(props) {
                         </div>
                         <div className="change-product right"
                             onClick={()=> {
-                                if (imgIndex < productImgSmall.length) setImgIndex(imgIndex + 1)
+                                if (imgIndex < productImg.length) setImgIndex(imgIndex + 1)
                             }}
                             >
                             <FontAwesomeIcon icon={faChevronRight}></FontAwesomeIcon>
@@ -185,7 +184,10 @@ export default function ProductBody(props) {
                     <div className="product-info-des">
                         {props.productDes}
                     </div>
-                    <div className="product-info-vote">
+                    <div 
+                        className="product-info-vote"
+                        onClick={props.scrollOnLick}
+                        >
                         <ReactStars {...ratingStar} />
                         <p>
                             ({ratingList.length} customer reviews)
