@@ -521,7 +521,7 @@
 
 /* BestSeller */
 
-.BestSeller, .SalesProducts, .NewProducts {
+.BestSeller, .SalesProducts, .NewProducts, .RecommendProduct {
   display: flex;
   flex-wrap: wrap;
 }
@@ -2282,4 +2282,22 @@
 }
 .submit-btn:hover {
   background-color: #343434;
+}
+/* ProductRecommend */
+.ProductRecommend {
+  padding: 0 25px;
+}
+
+.newsletter-container {
+  flex-direction: column;
+  height: 100%;
+  position: relative;
+}
+
+.newsletter-title {
+  font-size: 23px;
+  margin-bottom: 20px;
+  color: #333;
+  font-weight: 600;
+  font-family: Poppins-medium;
 }

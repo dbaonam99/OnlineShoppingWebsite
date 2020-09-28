@@ -9,7 +9,6 @@ export default function ProductReview(props) {
     const defaultStar = {
         size: 24,
         value: 0,
-        edit: false,
         activeColor: "#fda32a",
         color: "#ddd",
         isHalf: true,
