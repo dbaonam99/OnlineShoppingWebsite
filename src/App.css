@@ -13,6 +13,26 @@
 .no-p {
   padding: 0 !important;
 }
+.w-100 {
+  width: 100% !important;
+}
+.w-50 {
+  width: 50% !important;
+}
+.ml-2 {
+  margin-left: 20px !important;
+}
+.mr-2 {
+  margin-right: 20px !important;
+}
+.no-outline:focus {
+  outline: none !important;
+  border-bottom: 2px solid #111;
+}
+.no-outline:hover {
+  border-bottom: 2px solid #111;
+  transition: .5s;
+}
 .noselect {
   -webkit-touch-callout: none; /* iOS Safari */
     -webkit-user-select: none; /* Safari */
@@ -2236,4 +2256,30 @@
   font-size: 20px;
   font-weight: 400;
   margin-bottom: 10px;
+}
+.review-form-title {
+  color: #888;
+  font-size: 14px;
+  margin-top: 30px;
+}
+.review-form input {
+  height: 50px;
+  border: none;
+  border-bottom: 2px solid #ddd;
+  font-size: 14px;
+  color: #333;
+}
+.submit-btn {
+  line-height: 60px;
+  text-align: center;
+  width: 100%;
+  background-color: #232323;
+  height: 60px;
+  color: #fff;
+  margin: 40px 0;
+  display: flex;
+  justify-content: center;
+}
+.submit-btn:hover {
+  background-color: #343434;
 }

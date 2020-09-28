@@ -98,15 +98,22 @@ export default function ProductReview(props) {
                                 <div style={{ color: "#888", fontSize: '14px', marginBottom: '10px'}}>Your rating *</div>
                                 <ReactStars {...defaultStar} />
                                 <form className="review-form">
-                                    <p>Your review *</p>
-                                    <input type="text"></input>
-                                    <div className="flex">
-                                        <p>Name *</p>
-                                        <input type="text"></input>
-                                        <p>Email *</p>
-                                        <input type="email"></input>
+                                    <p className="review-form-title">Your review *</p>
+                                    <input type="text" className="w-100 no-outline"></input>
+                                    <div className="flex w-100">
+                                        <div className="w-100 mr-2">
+                                            <p className="review-form-title">Name *</p>
+                                            <input type="text" className="w-100 no-outline"></input>
+                                        </div>
+                                        <div className="w-100 ml-2">
+                                            <p className="review-form-title">Email *</p>
+                                            <input type="email" className="w-100 no-outline"></input>
+                                        </div>
                                     </div>
                                 </form>
+                                <div className="submit-btn">
+                                    <p>Submit</p>
+                                </div>
                             </div>
                         </div>
                     }
