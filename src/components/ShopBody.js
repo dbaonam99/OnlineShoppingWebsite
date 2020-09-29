@@ -247,8 +247,6 @@ export default class ShopBody extends Component {
             sortedSize.push(size[i].productSize);
         }
 
-        console.log(grid)
-
         return(
             <div className="ShopBody">
                 <div className="shopbody-container">

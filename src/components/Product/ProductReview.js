@@ -1,9 +1,10 @@
-import React, { useState } from 'react';
+import React from 'react';
 import '../../App.css';
 
 import ReactStars from "react-rating-stars-component";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faComment, faThumbsUp } from '@fortawesome/free-solid-svg-icons';
+import ProductReviewContent from './ProductReviewContent';
 
 export default function ProductReview(props) {
 
@@ -15,7 +16,6 @@ export default function ProductReview(props) {
         isHalf: true,
         edit: true
     }
-    const [full, setFull] = useState(false);
     
     return(
         <div className="ProductReview" ref={props.bRef} id={props.id}>
@@ -72,17 +72,7 @@ export default function ProductReview(props) {
                                             <div className="review-second">
                                                 {item.ratingDate}
                                             </div>
-                                            <div 
-                                                id={index}
-                                                className={full === false ? "review-third review-third-full" : "review-third"}
-                                                onClick={()=> {
-                                                    if (item.ratingText.length >= 175) {
-                                                        if (full===false) setFull(true)
-                                                        else setFull(false)
-                                                    }
-                                                }}>
-                                                {item.ratingText}
-                                            </div>
+                                            <ProductReviewContent content={item.ratingText}/>
                                             <div className="review-img flex">
                                                 {item.ratingImg.map((item, index) => {
                                                     return (

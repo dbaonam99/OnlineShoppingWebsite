@@ -10,6 +10,7 @@ import {  faSearch, faUser, faCartPlus } from "@fortawesome/free-solid-svg-icons
 import Search from '../Search.js';
 import Account from '../Account.js';
 import Cart from '../Cart.js';
+import MenuItemDropdown from './MenuItemDropdown';
 
 
 function Header(props) {
@@ -30,6 +31,85 @@ function Header(props) {
         setAccountOpen(false);
         setCartOpen(false);
     }
+
+    const navBar = [
+        {
+            id: "1",
+            label: "Home",
+            url: "/",
+            dropdownContent: []
+        },
+        {
+            id: "2",
+            label: "News",
+            url: "/news",
+            dropdownContent: [
+            ]
+        },
+        {
+            id: "3",
+            label: "Women",
+            url: "/women",
+            dropdownContent: [
+                {
+                    dropdownTitle: "Ready-to-wear",
+                    dropdownList: [
+                        "Shop by look", 
+                        "Shirts & T-shirts", 
+                        "Denim", "Pants", 
+                        "Blazers & jackets"
+                    ]
+                },
+                {
+                    dropdownTitle: "Shoes",
+                    dropdownList: [
+                        "Sneakers",
+                        "Sandals",
+                        "Loafers"
+                    ]
+                },
+                {
+                    dropdownTitle: "Bags",
+                    dropdownList: [
+                        "Business bags",
+                        "Travels bags"                        
+                    ]
+                }
+            ]
+        },
+        {
+            id: "4",
+            label: "Men",
+            url: "/men",
+            dropdownContent: [
+                {
+                    dropdownTitle: "Ready-to-wear",
+                    dropdownList: [
+                        "Shop by look", 
+                        "Shirts & T-shirts", 
+                        "Denim", "Pants", 
+                        "Blazers & jackets"
+                    ]
+                }
+            ]
+        },
+        {
+            id: "5",
+            label: "Contact",
+            url: "/contact",
+            dropdownContent: [
+                {
+                    dropdownTitle: "Ready-to-wear",
+                    dropdownList: [
+                        "Shop by look", 
+                        "Shirts & T-shirts", 
+                        "Denim", "Pants", 
+                        "Blazers & jackets"
+                    ]
+                }
+            ]
+        },
+    ]
 
     useEffect(() => {
         window.scrollTo(0, 0);
@@ -93,6 +173,12 @@ function Header(props) {
                     setDisableBox(false);
                 }
             }}
+            onMouseOver={() => { 
+                if (location === "/news") {
+                    setWhiteText(false); 
+                    setDisableBox(false);
+                }
+            }}
             onMouseLeave={() => { 
                 if (location === "/news" && window.pageYOffset < 50) {
                     setWhiteText(true);
@@ -100,52 +186,22 @@ function Header(props) {
             }}
             >
             <ul className="menu flex-center">
-                <li>
-                    <Link 
-                        to="/" 
-                        className={classNames({
-                            active: location === "/",
-                            whitelink_header: whiteText === true
-                        })}
-                        id="1"
-                        >home</Link>
-                </li>
-                <li>
-                    <Link to="/news"
-                        className={classNames({
-                            active: location === "/news",
-                            whitelink_header: whiteText === true,
-                        })}
-                        id="2"
-                        >News</Link>
-                </li>
-                <li>
-                    <Link to="/men" 
-                        className={classNames({
-                            active: location === "/men",
-                            whitelink_header: whiteText === true
-                        })}
-                        id="3"
-                        >men</Link>
-                </li>
-                <li>
-                    <Link to="/women" 
-                        className={classNames({
-                            active: location === "/women",
-                            whitelink_header: whiteText === true
-                        })}
-                        id="4"
-                        >women</Link>
-                </li>
-                <li>
-                    <Link to="/contact" 
-                        className={classNames({
-                            active: location === "/contact",
-                            whitelink_header: whiteText === true
-                        })}
-                        id="5"
-                        >contact</Link>
-                </li>
+                {
+                    navBar.map((item, index)=> { 
+                        return (
+                            <MenuItemDropdown 
+                                location={location}
+                                key={index}
+                                whiteText={whiteText}
+                                label={item.label}
+                                id={item.id}
+                                url={item.url}
+                                dropdownContent={item.dropdownContent} // dropdown text
+                                className="menu-item">
+                            </MenuItemDropdown>
+                        )
+                    })
+                }
             </ul>
             <div className="logo flex-center">
                 <Link to="/Product">

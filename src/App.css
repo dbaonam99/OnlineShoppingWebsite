@@ -251,6 +251,30 @@
   color: black;
 }
 
+/* Drop down */
+.menu-item {
+  height: 100px;
+  display: flex;
+  align-items: center;
+}
+
+.menu-item:hover .Dropdown {
+  visibility: visible;
+}
+
+.Dropdown {
+  visibility: hidden;
+  position: absolute;
+  padding: 40px;
+  background-color: #fff;
+  top: 100px;
+  border-top: 1px #ddd solid;
+}
+
+.dropdown-display {
+  visibility: visible;
+}
+
 /* Banner */
 
 .Banner {
