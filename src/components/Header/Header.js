@@ -22,6 +22,7 @@ function Header(props) {
     const [accountOpen, setAccountOpen] = useState(false);
     const [cartOpen, setCartOpen] = useState(false);
     const [disableBox, setDisableBox] = useState(false);
+    const [dropdownHover, setDropdownHover] = useState(false)
 
     const location = props.history.location.pathname;
 
@@ -30,6 +31,13 @@ function Header(props) {
         setSearchOpen(false);
         setAccountOpen(false);
         setCartOpen(false);
+    }
+
+    const handleHover = () => {
+        setDropdownHover(true)
+    }
+    const handleLeaveHover = () => {
+        setDropdownHover(false)
     }
 
     const navBar = [
@@ -50,6 +58,49 @@ function Header(props) {
             id: "3",
             label: "Women",
             url: "/women",
+            dropdownContent: [
+                {
+                    dropdownTitle: "Accessories",
+                    dropdownList: [
+                        "Sunglasses",
+                        "Jewelry",
+                        "watches",
+                    ]
+                },
+                {
+                    dropdownTitle: "Ready-to-wear",
+                    dropdownList: [
+                        'Shop by look',
+                        'Dresses',
+                        'Denim & pants',
+                        'Tops & shirts ',
+                        'Blazers',
+                        'Skirts',
+                        'Activewear',
+                    ]
+                },
+                {
+                    dropdownTitle: "Shoes",
+                    dropdownList: [
+                        'Sneakers',
+                        'Boots',
+                        'Pumps',
+                    ]
+                },
+                {
+                    dropdownTitle: "Bags",
+                    dropdownList: [
+                        'Shoulder bags',
+                        'Travels bags',
+                        'Tote bags',
+                    ]
+                }
+            ]
+        },
+        {
+            id: "4",
+            label: "Men",
+            url: "/men",
             dropdownContent: [
                 {
                     dropdownTitle: "Ready-to-wear",
@@ -73,22 +124,6 @@ function Header(props) {
                     dropdownList: [
                         "Business bags",
                         "Travels bags"                        
-                    ]
-                }
-            ]
-        },
-        {
-            id: "4",
-            label: "Men",
-            url: "/men",
-            dropdownContent: [
-                {
-                    dropdownTitle: "Ready-to-wear",
-                    dropdownList: [
-                        "Shop by look", 
-                        "Shirts & T-shirts", 
-                        "Denim", "Pants", 
-                        "Blazers & jackets"
                     ]
                 }
             ]
@@ -125,14 +160,24 @@ function Header(props) {
         function onScroll() {
             if (location === "/news") {
                 if(window.pageYOffset < 50) { // top
-                    setWhiteBox(false)
-                    setWhiteText(true)
-                    setDisableBox(true)
+                    if (dropdownHover === true) {
+                        setWhiteBox(true)
+                        setWhiteText(false)
+                        setDisableBox(false)
+                    } else {
+                        setWhiteBox(false)
+                        setWhiteText(true)
+                        setDisableBox(true)
+                    }
                 } else if (this.prev < window.pageYOffset) { //down
+                    if (dropdownHover === true) {
+                        setScrolled(false)
+                    } else {
+                        setScrolled(true)
+                    }
                     setWhiteBox(true)
                     setDisableBox(false)
                     setWhiteText(false)
-                    setScrolled(true)
                 } else if (this.prev > window.pageYOffset) { //up
                     setScrolled(false)
                 }
@@ -141,10 +186,15 @@ function Header(props) {
                     setWhiteBox(false)
                     setWhiteText(false)
                 } else if (this.prev < window.pageYOffset) { //down
+                    if (dropdownHover === true) {
+                        setScrolled(false)
+                    } else {
+                        setScrolled(true)
+                    }
                     setWhiteBox(true)
-                    setScrolled(true)
                 } else if (this.prev > window.pageYOffset) { //up
                     setScrolled(false)
+                    setWhiteText(false)
                 }
             }
             this.prev = window.pageYOffset;
@@ -154,7 +204,7 @@ function Header(props) {
         return() => {
             window.removeEventListener("scroll", onScroll);
         }
-    }, [location]);
+    }, [location, dropdownHover]);
 
     if(searchOpen || accountOpen || cartOpen){
         document.body.style.overflow = 'hidden';
@@ -190,11 +240,14 @@ function Header(props) {
                     navBar.map((item, index)=> { 
                         return (
                             <MenuItemDropdown 
+                                handleHover={handleHover}
+                                handleLeaveHover={handleLeaveHover}
+                                dropdownHover={dropdownHover}
+                                scrolled={scrolled}
                                 location={location}
                                 key={index}
                                 whiteText={whiteText}
                                 label={item.label}
-                                id={item.id}
                                 url={item.url}
                                 dropdownContent={item.dropdownContent} // dropdown text
                                 className="menu-item">

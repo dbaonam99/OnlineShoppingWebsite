@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { } from 'react'
 import classNames from 'classnames'
 import {
     Link, withRouter
@@ -7,18 +7,14 @@ import Dropdown from './Dropdown';
 
 function MenuItemDropdown(props) {
     
-    const [dropdownHover, setDropdownHover] = useState(false)
+    const dropdownHover = props.dropdownHover;
     const location = props.location.pathname;
 
     return (
         <li 
             className="menu-item"
-            onMouseEnter={()=>{
-                setDropdownHover(true)
-            }}
-            onMouseLeave={()=>{
-                setDropdownHover(false)
-            }}
+            onMouseEnter={props.handleHover}
+            onMouseLeave={props.handleLeaveHover}
             >
             <Link to={props.url}
                 className={classNames({
@@ -30,6 +26,8 @@ function MenuItemDropdown(props) {
                 <Dropdown 
                     className="dropdown-display"
                     dropdownContent={props.dropdownContent}
+                    label={props.label}
+                    scrolled={props.scrolled}
                 /> 
             }
         </li>
