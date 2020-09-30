@@ -13,7 +13,7 @@ import Cart from './Cart.js';
 import MenuItemDropdown from './MenuItemDropdown';
 
 
-function Header(props) {
+function BannerV3(props) {
 
     const [scrolled, setScrolled] = useState(false);
     const [whiteBox, setWhiteBox] = useState(false);
@@ -141,7 +141,7 @@ function Header(props) {
     ]
 
     useEffect(() => {
-        if (location === "/news") {
+        if (location === "/news" || location === "/collection") {
             setWhiteText(true);
             setDisableBox(true);
         } else {
@@ -150,7 +150,7 @@ function Header(props) {
         }
 
         function onScroll() {
-            if (location === "/news") {
+            if (location === "/news" || location === "/collection") {
                 if(window.pageYOffset < 50) { // top
                     if (dropdownHover === true) {
                         setWhiteBox(true)
@@ -204,30 +204,30 @@ function Header(props) {
 
     return(
         <div
-            className={classNames('Header', {
+            className={classNames('Header Header-v3', {
                 scrolled: scrolled === true,
                 white: whiteBox === true,
                 white_disable: disableBox === true
             })}
             onMouseEnter={() => { 
-                if (location === "/news") {
+                if (location === "/news" || location === "/collection") {
                     setWhiteText(false); 
                     setDisableBox(false);
                 }
             }}
             onMouseOver={() => { 
-                if (location === "/news") {
+                if (location === "/news" || location === "/collection") {
                     setWhiteText(false); 
                     setDisableBox(false);
                 }
             }}
             onMouseLeave={() => { 
-                if (location === "/news" && window.pageYOffset < 50) {
+                if ((location === "/news" && window.pageYOffset < 50) || (location === "/collection" && window.pageYOffset < 50)) {
                     setWhiteText(true);
                 }
             }}
             >
-            <ul className="menu flex-center">
+            <ul className="menu menu-v3 flex-center">
                 {
                     navBar.map((item, index)=> { 
                         return (
@@ -249,7 +249,7 @@ function Header(props) {
                     })
                 }
             </ul>
-            <div className="logo flex-center">
+            <div className="logo logo-v3 flex-center">
                 <Link to="/collection">
                     {
                         whiteText === true 
@@ -258,7 +258,7 @@ function Header(props) {
                     }
                 </Link>
             </div>
-            <div className={classNames('cart flex-center', {
+            <div className={classNames('cart cart-v3 flex-center', {
                     whitelink_header: whiteText === true
                 })}> 
                 <div className="icon-container">
@@ -303,4 +303,4 @@ function Header(props) {
         </div>
     )
 }
-export default withRouter(Header);
+export default withRouter(BannerV3);

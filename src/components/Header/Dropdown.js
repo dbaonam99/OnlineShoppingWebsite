@@ -21,11 +21,9 @@ export default function Dropdown(props) {
                         >
                             <div>
                                 <div 
-                                    animateIn='fadeInRight'
                                     className="dropdown-title">{item.dropdownTitle}
                                 </div>
                                 <div 
-                                    animateIn='fadeInLeft' 
                                     className="dropdown-item flex-col">
                                     {
                                         item.dropdownList.map((item, index) => {

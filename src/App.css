@@ -174,8 +174,23 @@
   color: white !important;
 }
 
-/* Menu */
+/* Menu V3 */
+.Header-v3 {
+  padding: 0 40px;
+  display: flex !important;
+  justify-content: space-between;
+}
+.menu-v3 {
+  order: 2;
+}
+.logo-v3 {
+  order: 1;
+}
+.cart-v3 {
+  order: 3;
+}
 
+/* Menu */
 .menu {
   list-style-type: none;
   grid-column: 1/5;
@@ -426,6 +441,10 @@
   bottom: -3px;
 }
 
+/* Banner V3 */
+.banner-v3-white {
+  color: #fff !important
+}
 /* RecommendBanner */
 
 .RecommendBanner {
@@ -2391,4 +2410,84 @@
 .review-like {
   margin-top: 30px;
   color: #777;
+}
+
+/* Collection */
+
+.Collection {
+  padding: 5px;
+}
+.CollectionList {
+  margin-top: 5px;
+  width: 100%;
+  justify-content: space-between;
+  flex-wrap: wrap;
+}
+.CollectionItem {
+  width: 49.8%;
+  height: 552px;
+  margin-bottom: 5px;
+  transition: transform .3s;
+  position: relative;
+}
+.CollectionItem img {
+  width: 100%;
+  height: 100%;
+}
+.CollectionItem:hover {
+  transform: scale(0.97);
+}
+.CollectionItem:hover .collectionitem-price div p,
+.CollectionItem:hover .collectionitem-price div div {
+  transform: translateY(-50px)
+}
+
+.collectionitem-overlay {
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  top: 0;
+  left: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-end;
+  background: rgba(204, 204, 204, 0);
+  color: #fff;
+}
+.collectionitem-title {
+  font-size: 38px;
+  font-weight: 200;
+  margin-top: 300px;
+  margin-bottom: 20px;
+  font-family: sans-serif;
+}
+.collectionitem-des {
+  font-size: 16px;
+  font-weight: 300;
+  text-align: center;
+  margin-bottom: 30px;
+  width: 80%;
+}
+.collectionitem-price {
+  font-size: 28px;
+  font-weight: 500;
+  margin-bottom: 50px;
+  line-height: 50px;
+  height: 50px;
+  text-align: center;
+  overflow: hidden;
+}
+.collectionitem-price div, .collectionitem-price p  {
+  transition: .5s;
+  height: 50px;
+}
+.addtocart-btn-collection {
+  font-size: 14px;
+  border: 2px #fff solid;
+  padding: 0 20px;
+  cursor: pointer;
+}
+.addtocart-btn-collection:hover {
+  border: 2px #777 solid;
 }
