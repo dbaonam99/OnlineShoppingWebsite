@@ -13,6 +13,7 @@ function MenuItemDropdown(props) {
     return (
         <li 
             className="menu-item"
+            onClick={props.handleClick}
             onMouseEnter={props.handleHover}
             onMouseLeave={props.handleLeaveHover}
             >

@@ -5,6 +5,9 @@ import DropdownSlider from './DropdownSlider.js'
 import womenImg from '../../assets/women-dropdown.jpg'
 import womenImg2 from '../../assets/women-dropdown2.jpg'
 import womenImg3 from '../../assets/women-dropdown3.jpg'
+import menImg from '../../assets/men-dropdown.jpg'
+import menImg2 from '../../assets/men-dropdown2.jpg'
+import menImg3 from '../../assets/men-dropdown3.jpg'
 
 export default function Dropdown(props) {
     return(
@@ -57,9 +60,9 @@ export default function Dropdown(props) {
                         width={"450"} 
                         height={"300"}
                         imgs={[
-                            womenImg,
-                            womenImg,
-                            womenImg,
+                            menImg,
+                            menImg2,
+                            menImg3,
                         ]}
                     ></DropdownSlider>
                 }

@@ -39,6 +39,10 @@ function Header(props) {
     const handleLeaveHover = () => {
         setDropdownHover(false)
     }
+    const handleClick = () => {
+        console.log("click")
+        window.scrollTo(0,0)
+    }
 
     const navBar = [
         {
@@ -132,23 +136,11 @@ function Header(props) {
             id: "5",
             label: "Contact",
             url: "/contact",
-            dropdownContent: [
-                {
-                    dropdownTitle: "Ready-to-wear",
-                    dropdownList: [
-                        "Shop by look", 
-                        "Shirts & T-shirts", 
-                        "Denim", "Pants", 
-                        "Blazers & jackets"
-                    ]
-                }
-            ]
+            dropdownContent: []
         },
     ]
 
     useEffect(() => {
-        window.scrollTo(0, 0);
-
         if (location === "/news") {
             setWhiteText(true);
             setDisableBox(true);
@@ -239,7 +231,8 @@ function Header(props) {
                 {
                     navBar.map((item, index)=> { 
                         return (
-                            <MenuItemDropdown 
+                            <MenuItemDropdown
+                                handleClick={handleClick}
                                 handleHover={handleHover}
                                 handleLeaveHover={handleLeaveHover}
                                 dropdownHover={dropdownHover}
