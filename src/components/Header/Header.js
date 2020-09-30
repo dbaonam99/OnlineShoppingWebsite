@@ -7,9 +7,9 @@ import {
 import classNames from 'classnames';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import {  faSearch, faUser, faCartPlus } from "@fortawesome/free-solid-svg-icons";
-import Search from '../Search.js';
-import Account from '../Account.js';
-import Cart from '../Cart.js';
+import Search from './Search.js';
+import Account from './Account.js';
+import Cart from './Cart.js';
 import MenuItemDropdown from './MenuItemDropdown';
 
 

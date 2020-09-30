@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
-import '../App.css';
-import BestSeller from "../components/BestSeller.js"
-import NewProducts from "../components/NewProducts.js"
-import SalesProducts from "../components/SalesProducts.js"
+import '../../App.css';
+import BestSeller from "./BestSeller.js"
+import NewProducts from "./NewProducts.js"
+import SalesProducts from "./SalesProducts.js"
 
 export default class HomeTab extends Component {
     constructor(props) {

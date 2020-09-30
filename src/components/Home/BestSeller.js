@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
-import '../App.css';
-import Product from './Product.js';
+import '../../App.css';
+import Product from '../Product.js';
 
 
 export default class BestSeller extends Component {

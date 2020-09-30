@@ -312,6 +312,17 @@
 .dropdownslider-container img {
   transition: transform 1s;
 }
+.dropdownslider-dot {
+  font-size: 8px;
+  color: #ddd;
+}
+.dropdownslider-dot div .icon {
+  margin: 0 5px;
+  margin-top: 10px;
+}
+.active-dot {
+  color: #666;
+}
 /* Banner */
 
 .Banner {
@@ -604,15 +615,20 @@
   height: 257px;
   position: relative;
 }
-.product-img .img {
+.product-img-bg {
   height: 100%;
   width: 100%;
-  background-position: center;
-  background-repeat: no-repeat;
-  background-size: cover;
-  transition: all 1s;
 }
-
+.product-img-bg img {
+  height: 100%;
+  transition: 1s;
+  width: 100%;
+}
+.product-img-bg .img-defalt {
+  position: absolute;
+  top: 0;
+  left: 0;
+}
 .product-title {
   margin-top: 20px;
   font-size: 14px;

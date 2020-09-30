@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
-import '../App.css';
-import b1 from '../assets/b1.jpg';
-import b2 from '../assets/b2.jpg';
-import b3 from '../assets/b3.jpg';
-import b4 from '../assets/b4.jpg';
+import '../../App.css';
+import b1 from '../../assets/b1.jpg';
+import b2 from '../../assets/b2.jpg';
+import b3 from '../../assets/b3.jpg';
+import b4 from '../../assets/b4.jpg';
 import ScrollAnimation from 'react-animate-on-scroll';
 
 export default class RecommendBanner extends Component {

@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
-import '../App.css';
-import Product from './Product.js'
+import '../../App.css';
+import Product from '../Product.js'
 import RangeSlider from './RangeSlider.js'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faCircle, faFilter, faTh, faThLarge } from "@fortawesome/free-solid-svg-icons";

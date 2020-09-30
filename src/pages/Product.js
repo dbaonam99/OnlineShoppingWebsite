@@ -1,7 +1,7 @@
 import React, { useRef, useState } from "react";
 import "../App.css";
-import Newsletter from "../components/Newsletter.js"
-import Footer from "../components/Footer.js"
+import Newsletter from "../components/Layouts/Newsletter.js"
+import Footer from "../components/Layouts/Footer.js"
 import ProductBody from "../components/Product/ProductBody.js";
 import HeaderV2 from "../components/Header/HeaderV2";
 import ProductReview from "../components/Product/ProductReview.js";

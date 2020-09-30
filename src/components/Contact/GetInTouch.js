@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import '../App.css';
+import '../../App.css';
 import GoogleMap from './GoogleMap';
 
 export default class GetInTouch extends Component {

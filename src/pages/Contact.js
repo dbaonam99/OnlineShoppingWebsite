@@ -1,12 +1,12 @@
 import React, { Component } from "react";
 import "../App.css";
-import Newsletter from "../components/Newsletter.js"
-import Footer from "../components/Footer.js"
+import Newsletter from "../components/Layouts/Newsletter.js"
+import Footer from "../components/Layouts/Footer.js"
 import BannerV2 from '../components/Banner/BannerV2.js'
 import Header from '../components/Header/Header.js'
 import bg from '../assets/contact.jpg'
-import ContactBody from '../components/ContactBody.js'
-import GetInTouch from "../components/GetInTouch";
+import ContactBody from '../components/Contact/ContactBody.js'
+import GetInTouch from "../components/Contact/GetInTouch";
 
 class Contact extends Component {
     render() {
