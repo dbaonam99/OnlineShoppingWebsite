@@ -1,111 +1,50 @@
-import React, { Component } from 'react';
+import React, { useEffect, useState } from 'react';
 import '../../App.css';
 import Product from '../Product.js';
+import axios from 'axios'
 
-export default class SalesProducts extends Component {
+export default function SalesProducts(props) {
 
-    constructor(props) {
-        super(props);
+    const [products, setProducts] = useState([]);
 
-        this.state = {
-            product: [
-                {
-                    imgUrl: "https://demo.uix.store/sober/wp-content/uploads/sites/2/2016/07/1-1-433x516.jpg",
-                    imgUrlHover: "https://demo.uix.store/sober/wp-content/uploads/sites/2/2016/07/2-1-433x516.jpg",
-                    productTitle: "Hooded Coat",
-                    productPrice: 200
-                },
-                {
-                    imgUrl: "https://demo.uix.store/sober/wp-content/uploads/sites/2/2016/07/1_1-4-433x516.jpg",
-                    imgUrlHover: "https://demo.uix.store/sober/wp-content/uploads/sites/2/2016/07/2_1-4-433x516.jpg",
-                    productTitle: "Hooded Coat",
-                    productPrice: 200
-                },
-                {
-                    imgUrl: "https://demo.uix.store/sober/wp-content/uploads/sites/2/2016/07/1_1-4-433x516.jpg",
-                    imgUrlHover: "https://demo.uix.store/sober/wp-content/uploads/sites/2/2016/07/2_1-4-433x516.jpg",
-                    productTitle: "Hooded Coat",
-                    productPrice: 200
-                },
-                {
-                    imgUrl: "https://demo.uix.store/sober/wp-content/uploads/sites/2/2016/07/1_1-4-433x516.jpg",
-                    imgUrlHover: "https://demo.uix.store/sober/wp-content/uploads/sites/2/2016/07/2_1-4-433x516.jpg",
-                    productTitle: "Hooded Coat",
-                    productPrice: 200
-                },
-                {
-                    imgUrl: "https://demo.uix.store/sober/wp-content/uploads/sites/2/2016/07/1_1-4-433x516.jpg",
-                    imgUrlHover: "https://demo.uix.store/sober/wp-content/uploads/sites/2/2016/07/2_1-4-433x516.jpg",
-                    productTitle: "Hooded Coat",
-                    productPrice: 200
-                },
-                {
-                    imgUrl: "https://demo.uix.store/sober/wp-content/uploads/sites/2/2016/07/1_1-4-433x516.jpg",
-                    imgUrlHover: "https://demo.uix.store/sober/wp-content/uploads/sites/2/2016/07/2_1-4-433x516.jpg",
-                    productTitle: "Hooded Coat",
-                    productPrice: 200
-                },
-                {
-                    imgUrl: "https://demo.uix.store/sober/wp-content/uploads/sites/2/2016/07/1_1-4-433x516.jpg",
-                    imgUrlHover: "https://demo.uix.store/sober/wp-content/uploads/sites/2/2016/07/2_1-4-433x516.jpg",
-                    productTitle: "Hooded Coat",
-                    productPrice: 200
-                },
-                {
-                    imgUrl: "https://demo.uix.store/sober/wp-content/uploads/sites/2/2016/07/1_1-4-433x516.jpg",
-                    imgUrlHover: "https://demo.uix.store/sober/wp-content/uploads/sites/2/2016/07/2_1-4-433x516.jpg",
-                    productTitle: "Hooded Coat",
-                    productPrice: 200
-                },
-                {
-                    imgUrl: "https://demo.uix.store/sober/wp-content/uploads/sites/2/2016/07/1_1-4-433x516.jpg",
-                    imgUrlHover: "https://demo.uix.store/sober/wp-content/uploads/sites/2/2016/07/2_1-4-433x516.jpg",
-                    productTitle: "Hooded Coat",
-                    productPrice: 200
-                },
-                {
-                    imgUrl: "https://demo.uix.store/sober/wp-content/uploads/sites/2/2016/07/1_1-4-433x516.jpg",
-                    imgUrlHover: "https://demo.uix.store/sober/wp-content/uploads/sites/2/2016/07/2_1-4-433x516.jpg",
-                    productTitle: "Hooded Coat",
-                    productPrice: 200
-                },
-                {
-                    imgUrl: "https://demo.uix.store/sober/wp-content/uploads/sites/2/2016/07/1_1-4-433x516.jpg",
-                    imgUrlHover: "https://demo.uix.store/sober/wp-content/uploads/sites/2/2016/07/2_1-4-433x516.jpg",
-                    productTitle: "Hooded Coat",
-                    productPrice: 200
-                },
-                {
-                    imgUrl: "https://demo.uix.store/sober/wp-content/uploads/sites/2/2016/07/1_1-4-433x516.jpg",
-                    imgUrlHover: "https://demo.uix.store/sober/wp-content/uploads/sites/2/2016/07/2_1-4-433x516.jpg",
-                    productTitle: "Hooded Coat",
-                    productPrice: 200
-                },
-                {
-                    imgUrl: "https://demo.uix.store/sober/wp-content/uploads/sites/2/2016/07/1_1-4-433x516.jpg",
-                    imgUrlHover: "https://demo.uix.store/sober/wp-content/uploads/sites/2/2016/07/2_1-4-433x516.jpg",
-                    productTitle: "Hooded Coat",
-                    productPrice: 200
-                },
-            ]
+    useEffect(() => {
+        axios.get(`http://localhost:4000/products`)
+            .then(res => {
+                setProducts(res.data)
+            }
+        )
+    },[])
+
+    //Get product selling
+    const sellingProduct = [];
+    for (let i = 0; i < products.length; i++) {
+        if (Number(products[i].productSale) > 0) {
+            sellingProduct.push(products[i]);
         }
     }
 
-    render() {
-        const { product } = this.state;
-        return(
-            <div className="SalesProducts">
-                {product.map(function(item) {
-                    return (
-                        <Product 
-                            imgUrl={item.imgUrl} 
-                            imgUrlHover={item.imgUrlHover} 
-                            productTitle={item.productTitle}
-                            productPrice={item.productPrice}
-                        />
-                    )
-                })}
-            </div>
-        )
+    let height = 750;
+    if (sellingProduct.length) {
+        if (sellingProduct.length <= 5) {
+            height = 360;
+        }
     }
+
+    return(
+        <div className="SalesProducts" style={{ minHeight: `${height}px`}}>
+            {sellingProduct.map(function(item, index) {
+                return (
+                    <Product 
+                        key={index}
+                        imgUrl={item.imgUrl} 
+                        imgUrlHover={item.imgUrlHover} 
+                        productTitle={item.productTitle}
+                        productPrice={item.productPrice}
+                        productSale={item.productSale}
+                        productSold={item.productSold}
+                    />
+                )
+            })}
+        </div>
+    )
 }

@@ -87,6 +87,15 @@
 }
 
 /* Animation  */
+@keyframes opa {
+  from {opacity: 0}
+  to {opacity: 1}
+}
+
+.opa {
+  animation-name: opa;
+  animation-duration: .5s;
+}
 
 @keyframes active_line {
   from {width: 0px;}
@@ -175,19 +184,16 @@
 }
 
 /* Menu V3 */
-.Header-v3 {
+.HeaderV3 {
+
   padding: 0 40px;
-  display: flex !important;
-  justify-content: space-between;
 }
 .menu-v3 {
-  order: 2;
+  grid-column: 5/9 !important;
 }
 .logo-v3 {
-  order: 1;
-}
-.cart-v3 {
-  order: 3;
+  grid-column: 1/5 !important;
+  justify-content: flex-start;
 }
 
 /* Menu */
@@ -614,6 +620,56 @@
   width: 100%;
   left: 0;
 }
+.tab-content {
+  width: 100%;
+  position: relative;
+}
+/* .tab-loading {
+  position: absolute;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 3;
+  background-color: #fff;
+  padding-top: 180px;
+  display: flex;
+  justify-content: center;
+  opacity: 0;
+  transition: .9s;
+  z-index: -2;
+}
+.tab-loading-display {
+  opacity: 1;
+  z-index: 3 !important;
+  transition: none !important;
+}
+.tab-loading div {
+  width: 200px;
+  height: 20px;
+}
+.loading-icon {
+  margin: 10px;
+  background-color: #111;
+  animation-name: loading;
+  animation-duration: .5s;
+  animation-iteration-count: infinite;
+} */
+@keyframes loading {
+  from {transform: scaleY(0);}
+  to {transform: scaleY(10px);}
+}
+.tab-loadmore {
+  margin-bottom: 45px;
+  margin-top: 20px;
+  color: #FFF;
+}
+.tab-loadmore-btn {
+  background-color: #1a1a21;
+  width: 200px;
+  height: 60px;
+  font-size: 14px;
+  font-weight: bold;
+}
 
 /* BestSeller */
 
@@ -633,6 +689,31 @@
 .product-img {
   height: 257px;
   position: relative;
+}
+.product-tag {
+  position: absolute;
+  z-index: 2;
+  font-size: 10px;
+  color: #fff;
+  font-family: sans-serif;
+  font-weight: bold;
+  top: 5px;
+  left: 0;
+}
+.product-tag-item {
+  line-height: 20px;
+  width: 40px;
+  height: 20px;
+  margin: 10px 0;
+}
+.product-img .sale {
+  background: #1cd481;
+}
+.product-img .hot {
+  background: #fc5050;
+}
+.product-img .new {
+  background: #fc9953;
 }
 .product-img-bg {
   height: 100%;

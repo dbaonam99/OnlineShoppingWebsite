@@ -40,7 +40,6 @@ function BannerV3(props) {
         setDropdownHover(false)
     }
     const handleClick = () => {
-        console.log("click")
         window.scrollTo(0,0)
     }
 
@@ -204,7 +203,7 @@ function BannerV3(props) {
 
     return(
         <div
-            className={classNames('Header Header-v3', {
+            className={classNames('Header HeaderV3', {
                 scrolled: scrolled === true,
                 white: whiteBox === true,
                 white_disable: disableBox === true
@@ -227,6 +226,15 @@ function BannerV3(props) {
                 }
             }}
             >
+            <div className="logo logo-v3 flex-center">
+                <Link to="/">
+                    {
+                        whiteText === true 
+                            ? <img src="https://demo.uix.store/sober/wp-content/themes/sober/images/logo-light.svg" alt="logo"></img>
+                            : <img src="https://demo.uix.store/sober/wp-content/themes/sober/images/logo.svg" alt="logo"></img>
+                    }
+                </Link>
+            </div>
             <ul className="menu menu-v3 flex-center">
                 {
                     navBar.map((item, index)=> { 
@@ -249,15 +257,6 @@ function BannerV3(props) {
                     })
                 }
             </ul>
-            <div className="logo logo-v3 flex-center">
-                <Link to="/collection">
-                    {
-                        whiteText === true 
-                            ? <img src="https://demo.uix.store/sober/wp-content/themes/sober/images/logo-light.svg" alt="logo"></img>
-                            : <img src="https://demo.uix.store/sober/wp-content/themes/sober/images/logo.svg" alt="logo"></img>
-                    }
-                </Link>
-            </div>
             <div className={classNames('cart cart-v3 flex-center', {
                     whitelink_header: whiteText === true
                 })}> 

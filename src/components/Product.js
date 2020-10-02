@@ -2,19 +2,36 @@ import React, { useState } from 'react';
 import '../App.css';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faCartPlus, faHeart } from "@fortawesome/free-solid-svg-icons";
+import ScrollAnimation from 'react-animate-on-scroll';
 
 export default function Product(props) {
 
     const [url] = useState(props.imgUrl);
     const [hover, setHover] = useState(false);
     const [imgUrlHover] = useState(props.imgUrlHover);
-    console.log(hover)
+
     return(
-        <div className="Product"
-            onMouseOver={()=> {setHover(true)}}
-            onMouseOut={()=> {setHover(false)}}
-        >
-            <div className="product-img">
+        <ScrollAnimation className="Product opa">
+            <div className="product-img"
+                onMouseOver={()=> {setHover(true)}}
+                onMouseOut={()=> {setHover(false)}}>
+                <div className="product-tag">
+                    {
+                        props.productSale > 0 && <div className="product-tag-item sale">
+                            {props.productSale}%
+                        </div>
+                    }
+                    {
+                        props.productSold >= 40 && <div className="product-tag-item hot">
+                            HOT
+                        </div>
+                    }
+                    {
+                        props.productSale > 0 && <div className="product-tag-item new">
+                            NEW
+                        </div>
+                    }
+                </div>
                 <div className="product-img-bg">
                     <img 
                         className=""
@@ -38,6 +55,6 @@ export default function Product(props) {
             <div className="product-price">
                 {props.productPrice} VNĐ
             </div>
-        </div>
+        </ScrollAnimation>
     )
 }

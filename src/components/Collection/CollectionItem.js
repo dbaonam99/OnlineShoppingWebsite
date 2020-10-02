@@ -3,8 +3,9 @@ import React from 'react'
 export default function CollectionItem(props) {
 
     return (
-        <div className="CollectionItem">
-            <img src={props.img}></img>
+        <div 
+            className="CollectionItem">
+            <img src={props.img} alt=""></img>
             <div className="collectionitem-overlay">
                 <div className="collectionitem-title">{props.name}</div>
                 <div className="collectionitem-des">{props.des}</div>

@@ -40,7 +40,6 @@ function Header(props) {
         setDropdownHover(false)
     }
     const handleClick = () => {
-        console.log("click")
         window.scrollTo(0,0)
     }
 
