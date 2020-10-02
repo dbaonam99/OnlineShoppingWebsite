@@ -1,58 +1,77 @@
-import React, { Component } from 'react';
+import React from 'react';
 import '../../App.css';
 import b1 from '../../assets/b1.jpg';
 import b2 from '../../assets/b2.jpg';
 import b3 from '../../assets/b3.jpg';
 import b4 from '../../assets/b4.jpg';
 import ScrollAnimation from 'react-animate-on-scroll';
+import {
+    Link
+  } from "react-router-dom"; 
 
-export default class RecommendBanner extends Component {
-    render() {
-        return(
-            <div className="RecommendBanner flex-center">
-                <div className="RecommendBanner-container flex-center">
-                    <ScrollAnimation animateIn='fadeInLeft' className="banner-box img-hover">
-                        <img src={b1} alt="banner" width="100%" height="100%"></img>
-                        <div className="blackbox-center-container">
-                            <div className="blackbox-title">New Arrivals</div>
-                            <div className="blackbox-center">
-                                <div className="blackbox-link">Shop now</div>
-                            </div>
+export default function RecommendBanner() {
+
+    const handleClick = () => {
+        window.scrollTo(0,0)
+    }
+
+    return(
+        <div className="RecommendBanner flex-center">
+            <div className="RecommendBanner-container flex-center">
+                <ScrollAnimation animateIn='fadeInLeft' className="banner-box img-hover">
+                    <img src={b1} alt="banner" width="100%" height="100%"></img>
+                    <div className="blackbox-center-container">
+                        <div className="blackbox-title">New Arrivals</div>
+                        <div className="blackbox-center">
+                            <Link 
+                                className="blackbox-link a"
+                                to="/collection" 
+                                onClick={handleClick}
+                                >Shop now</Link>
                         </div>
-                    </ScrollAnimation>
-                    <div className="banner-box">
-                        <div className="banner-top flex-center">
-                            <ScrollAnimation className="banner-top2 img-hover" animateIn='fadeInRight'>
-                                <img src={b2} alt="banner" width="100%" height="100%"></img>
-                                <div className="blackbox-center-container">
-                                    <div className="blackbox-title blackbox-title-small">Woman Collection</div>
-                                    <div className="blackbox-center">
-                                        <div className="blackbox-link blackbox-link-smaill">Shop now</div>
-                                    </div>
-                                </div>
-                            </ScrollAnimation>
-                            <ScrollAnimation className="banner-top2 img-hover" animateIn='fadeInRight'>
-                                <img src={b3} alt="banner" width="100%" height="100%"></img>
-                                <div className="blackbox-center-container">
-                                    <div className="blackbox-title blackbox-title-small">Man Collection</div>
-                                    <div className="blackbox-center">
-                                        <div className="blackbox-link blackbox-link-smaill">Shop now</div>
-                                    </div>
-                                </div>
-                            </ScrollAnimation>
-                        </div>
-                        <ScrollAnimation className="banner-bottom img-hover" animateIn='fadeInRight'>
-                            <img src={b4} alt="banner" width="100%" height="100%"></img>
-                                <div className="blackbox-center-container">
-                                <div className="blackbox-title blackbox-title-medium">Free Shipping On All Orders</div>
+                    </div>
+                </ScrollAnimation>
+                <div className="banner-box">
+                    <div className="banner-top flex-center">
+                        <ScrollAnimation className="banner-top2 img-hover" animateIn='fadeInRight'>
+                            <img src={b2} alt="banner" width="100%" height="100%"></img>
+                            <div className="blackbox-center-container">
+                                <div className="blackbox-title blackbox-title-small">Woman Collection</div>
                                 <div className="blackbox-center">
-                                    <div className="blackbox-link blackbox-link-medium">Shop now</div>
+                                    <Link 
+                                        className="blackbox-link blackbox-link-smaill a"
+                                        to="/women" 
+                                        onClick={handleClick}>Shop now</Link>
+                                </div>
+                            </div>
+                        </ScrollAnimation>
+                        <ScrollAnimation className="banner-top2 img-hover" animateIn='fadeInRight'>
+                            <img src={b3} alt="banner" width="100%" height="100%"></img>
+                            <div className="blackbox-center-container">
+                                <div className="blackbox-title blackbox-title-small">Man Collection</div>
+                                <div className="blackbox-center">
+                                    <Link 
+                                        className="blackbox-link blackbox-link-smaill a"
+                                        to="/men" 
+                                        onClick={handleClick}>Shop now</Link>
                                 </div>
                             </div>
                         </ScrollAnimation>
                     </div>
+                    <ScrollAnimation className="banner-bottom img-hover" animateIn='fadeInRight'>
+                        <img src={b4} alt="banner" width="100%" height="100%"></img>
+                            <div className="blackbox-center-container">
+                            <div className="blackbox-title blackbox-title-medium">Free Shipping On All Orders</div>
+                            <div className="blackbox-center">
+                                <Link 
+                                    className="blackbox-link blackbox-link-medium a"
+                                    to="/shop" 
+                                    onClick={handleClick}>Shop now</Link>
+                            </div>
+                        </div>
+                    </ScrollAnimation>
                 </div>
             </div>
-        )
-    }
+        </div>
+    )
 }

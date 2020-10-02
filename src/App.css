@@ -63,6 +63,11 @@
   user-drag: none;
 }
 
+.a {
+  text-decoration: none;
+  color: #fff;
+}
+
 @font-face {
   font-family: Poppins;
   src: url(./assets/font/Poppins.ttf);
@@ -85,7 +90,6 @@
   display: flex !important;
   flex-direction: column;
 }
-
 /* Animation  */
 @keyframes opa {
   from {opacity: 0}
@@ -94,7 +98,7 @@
 
 .opa {
   animation-name: opa;
-  animation-duration: .5s;
+  animation-duration: 2s;
 }
 
 @keyframes active_line {
@@ -576,7 +580,7 @@
 
 .home-tab {
   height: 50px;
-  margin-bottom: 10px;
+  margin-bottom: 20px;
 }
 
 .home-tab p {
@@ -662,6 +666,7 @@
   margin-bottom: 45px;
   margin-top: 20px;
   color: #FFF;
+  position: relative;
 }
 .tab-loadmore-btn {
   background-color: #1a1a21;
@@ -669,13 +674,33 @@
   height: 60px;
   font-size: 14px;
   font-weight: bold;
+  position: relative;
 }
-
+.tab-loadmore-loading {
+  position: absolute;
+  top: 0;
+  /* width: 100%;
+  height: 100%;
+  background-color: red; */
+}
+.loading-icon {
+  margin: 0 10px;
+  font-size: 8px;
+  animation-name: icon;
+  animation-duration: 1s;
+  animation-iteration-count: infinite;
+}
+@keyframes icon {
+  0%   {transform: scale(1.3);}
+  50%  {transform: scale(0.1);}
+  100% {transform: scale(1.3);}
+}
 /* BestSeller */
 
 .BestSeller, .SalesProducts, .NewProducts, .RecommendProduct {
   display: flex;
   flex-wrap: wrap;
+  margin-bottom: 20px;
 }
 
 /* Product */

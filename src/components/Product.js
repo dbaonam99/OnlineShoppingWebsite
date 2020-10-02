@@ -2,7 +2,6 @@ import React, { useState } from 'react';
 import '../App.css';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faCartPlus, faHeart } from "@fortawesome/free-solid-svg-icons";
-import ScrollAnimation from 'react-animate-on-scroll';
 
 export default function Product(props) {
 
@@ -11,7 +10,7 @@ export default function Product(props) {
     const [imgUrlHover] = useState(props.imgUrlHover);
 
     return(
-        <ScrollAnimation className="Product opa">
+        <div className="Product opa">
             <div className="product-img"
                 onMouseOver={()=> {setHover(true)}}
                 onMouseOut={()=> {setHover(false)}}>
@@ -55,6 +54,6 @@ export default function Product(props) {
             <div className="product-price">
                 {props.productPrice} VNĐ
             </div>
-        </ScrollAnimation>
+        </div>
     )
 }

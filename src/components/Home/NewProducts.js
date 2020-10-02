@@ -2,10 +2,14 @@ import React, { useEffect, useState } from 'react';
 import '../../App.css';
 import Product from '../Product.js';
 import axios from 'axios'
+import { faCircle } from '@fortawesome/free-solid-svg-icons';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 export default function NewProducts() {
 
     const [products, setProducts] = useState([]);
+    const [limit, setLimit] = useState(10);
+    const [loading, setLoading] = useState(false);
 
     useEffect(() => {
         axios.get(`http://localhost:4000/products`)
@@ -15,32 +19,59 @@ export default function NewProducts() {
         )
     },[])
 
+    const handleClick = () => {
+        setLoading(true)
+        setTimeout(() => {
+            setLoading(false)
+            setLimit(limit + 5);
+        }, 1500);
+    }
 
     let height = 750;
     //Sort by product sold
     if (products.length) {
-        products.reverse();
         if (products.length <= 5) {
             height = 360;
         }
     }
 
+    //Limit products
+    const limitProducts = products.slice(0, limit);
 
     return(
-        <div className="NewProducts" style={{ minHeight: `${height}px`}}>
-            {products.map(function(item, index) {
-                return (
-                    <Product 
-                        key={index}
-                        imgUrl={item.imgUrl} 
-                        imgUrlHover={item.imgUrlHover} 
-                        productTitle={item.productTitle}
-                        productPrice={item.productPrice}
-                        productSale={item.productSale}
-                        productSold={item.productSold}
-                    />
-                )
-            })}
+        <div>
+            <div className="NewProducts" style={{ minHeight: `${height}px`}}>
+                {limitProducts.map(function(item, index) {
+                    return (
+                        <Product 
+                            key={index}
+                            imgUrl={item.imgUrl} 
+                            imgUrlHover={item.imgUrlHover} 
+                            productTitle={item.productTitle}
+                            productPrice={item.productPrice}
+                            productSale={item.productSale}
+                            productSold={item.productSold}
+                        />
+                    )
+                })}
+            </div>
+            {(products.length > 10 && products.length >= limit) && 
+                <div className="tab-loadmore flex-center">
+                    <div 
+                        className="tab-loadmore-btn flex-center"
+                        onClick={handleClick}
+                        >
+                        Load More
+                    </div>
+                    {loading === true && 
+                        <div className="tab-loadmore-btn tab-loadmore-loading flex-center">
+                            <FontAwesomeIcon icon={faCircle} className="loading-icon" style={{animationDelay: `0s`}}></FontAwesomeIcon>
+                            <FontAwesomeIcon icon={faCircle} className="loading-icon" style={{animationDelay: `.2s`}}></FontAwesomeIcon>
+                            <FontAwesomeIcon icon={faCircle} className="loading-icon" style={{animationDelay: `.4s`}}></FontAwesomeIcon>
+                        </div>
+                    }
+                </div>
+            }    
         </div>
     )
 }

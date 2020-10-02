@@ -7,16 +7,6 @@ import SalesProducts from "./SalesProducts.js"
 export default function HomeTab() {
     const [currentTab, setCurrentTab] = useState(1)
     const [isActive, setIsActive] = useState(1)
-    // const [loading, setLoading] = useState(true)
-
-    // useEffect(()=> {
-    //     const a = setInterval(() => {
-    //         setLoading(false)
-    //     }, 1000);
-    //     return(()=>{
-    //         clearInterval(a)
-    //     })
-    // }, [currentTab])
 
     return(
         <div className="HomeTab">
@@ -26,21 +16,9 @@ export default function HomeTab() {
                 <p onClick={() => {setCurrentTab(3); setIsActive(3)}} className={isActive === 3 ? "home-tab-active" : ""}>Sales Products</p>
             </div>
             <div className="tab-content">
-                {/* <div className={loading === false ? "tab-loading" : "tab-loading tab-loading-display"}>
-                    <div className="flex-center">
-                        <div className="loading-icon"/>
-                        <div className="loading-icon"/>
-                        <div className="loading-icon"/>
-                    </div>
-                </div> */}
                 {currentTab === 1 && <BestSeller/>}
                 {currentTab === 2 && <NewProducts/>}
                 {currentTab === 3 && <SalesProducts/>}
-            </div>
-            <div className="tab-loadmore flex-center">
-                <div className="tab-loadmore-btn flex-center">
-                    Load More
-                </div>
             </div>
         </div>
     )
