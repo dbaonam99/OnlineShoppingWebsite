@@ -1,53 +1,40 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import '../../App.css';
 import Product from '../Product/Product.js'
+import axios from 'axios'
 
-export default function ProductRecommend() {
-    const product = [
-        {
-            imgUrl: "https://demo.uix.store/sober/wp-content/uploads/sites/2/2016/07/1_1-4-433x516.jpg",
-            imgUrlHover: "https://demo.uix.store/sober/wp-content/uploads/sites/2/2016/07/2_1-4-433x516.jpg",
-            productTitle: "Hooded Coat",
-            productPrice: 200
-        },
-        {
-            imgUrl: "https://demo.uix.store/sober/wp-content/uploads/sites/2/2016/07/1-1-433x516.jpg",
-            imgUrlHover: "https://demo.uix.store/sober/wp-content/uploads/sites/2/2016/07/2-1-433x516.jpg",
-            productTitle: "Hooded Coat",
-            productPrice: 200
-        },
-        {
-            imgUrl: "https://demo.uix.store/sober/wp-content/uploads/sites/2/2016/07/1_1-4-433x516.jpg",
-            imgUrlHover: "https://demo.uix.store/sober/wp-content/uploads/sites/2/2016/07/2_1-4-433x516.jpg",
-            productTitle: "Hooded Coat",
-            productPrice: 200
-        },
-        {
-            imgUrl: "https://demo.uix.store/sober/wp-content/uploads/sites/2/2016/07/1_1-4-433x516.jpg",
-            imgUrlHover: "https://demo.uix.store/sober/wp-content/uploads/sites/2/2016/07/2_1-4-433x516.jpg",
-            productTitle: "Hooded Coat",
-            productPrice: 200
-        },
-        {
-            imgUrl: "https://demo.uix.store/sober/wp-content/uploads/sites/2/2016/07/1_1-4-433x516.jpg",
-            imgUrlHover: "https://demo.uix.store/sober/wp-content/uploads/sites/2/2016/07/2_1-4-433x516.jpg",
-            productTitle: "Hooded Coat",
-            productPrice: 200
+export default function ProductRecommend(props) {
+
+    const [products, setProducts] = useState([]);
+
+    useEffect(() => {
+        axios.get(`http://localhost:4000/products`)
+            .then(res => {
+                setProducts(res.data)
+            }
+        )
+    },[])
+
+    const recommendProducts = [];
+    products.filter((item, index) => {
+        if (item.productCate === props.productCate) {
+            recommendProducts.push(item)
         }
-    ]
+        if (item.productSex === props.productSex) {
+            recommendProducts.push(item)
+        }
+    })
+
     return(
         <div className="ProductRecommend">
             <div className="newsletter-container flex-center">
                 <div className="newsletter-title">Related products</div>
                 <div className="RecommendProduct">
-                    {product.map(function(item, index) {
+                    {recommendProducts.slice(0,5).map(function(item, index) {
                         return (
                             <Product 
-                                imgUrl={item.imgUrl} 
-                                imgUrlHover={item.imgUrlHover} 
-                                productTitle={item.productTitle}
-                                productPrice={item.productPrice}
                                 key={index}
+                                product={item}
                             />
                         )
                     })}
