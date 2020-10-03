@@ -6,9 +6,10 @@ import BannerV2 from '../components/Banner/BannerV2.js'
 import Header from '../components/Header/Header.js'
 import ShopBody from "../components/Shop/ShopBody";
 import bg from '../assets/S3.jpg'
+import { faUniversalAccess } from "@fortawesome/free-solid-svg-icons";
 import axios from 'axios'
 
-function Men() {
+function Shop() {
 
     const [products, setProducts] = useState([]);
 
@@ -21,7 +22,7 @@ function Men() {
     },[])
     
     return (
-        <div className="Men">
+        <div className="Shop">
             <Header/>
             <BannerV2 bannerImage={bg} position={'120px'}/>
             <ShopBody
@@ -30,6 +31,6 @@ function Men() {
             <Newsletter/>
             <Footer/>
         </div>
-    )
+    );
 }
-export default Men;
+export default Shop;

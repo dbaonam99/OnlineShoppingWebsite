@@ -9,6 +9,7 @@ import {
 import Home from './pages/Home.js'
 import News from './pages/News.js'
 import Men from './pages/Men.js'
+import Shop from './pages/Shop.js'
 import Women from './pages/Women.js'
 import Contact from './pages/Contact.js'
 import Product from './pages/Product.js'
@@ -23,6 +24,7 @@ function App() {
         <Route path="/news" exact component={News}></Route>
         <Route path="/men" exact component={Men}></Route>
         <Route path="/women" exact component={Women}></Route>
+        <Route path="/shop" exact component={Shop}></Route>
         <Route path="/contact" exact component={Contact}></Route>
         <Route path="/product" exact component={Product}></Route>
         <Route path="/collection" exact component={Collection}></Route>
