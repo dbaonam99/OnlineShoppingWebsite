@@ -225,7 +225,7 @@ export default function ProductDetail() {
                 setTab={setTab}
                 id={"review"}
             />
-            <ProductRecommend/>
+            {/* <ProductRecommend/> */}
             <Newsletter/>
             <Footer/>
         </div>

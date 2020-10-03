@@ -1,0 +1,30 @@
+.ProductQuickView {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100vh;
+    z-index: 989799;
+    display: flex;
+    justify-content: center;
+    background: rgba(123, 123, 123, 0.7);
+}
+.ProductQuickView:hover {
+    cursor: crosshair;
+}
+.productquickview-container:hover {
+    cursor: pointer;
+}
+.productquickview-container {
+    width: 90%;
+    background-color: #fff;
+    z-index: 1000;
+}
+.productquickview-slide {
+    width: 50%;
+    height: 100%;
+}
+.productquickview-slide img {
+    width: 100%;
+    height: 100%;
+}

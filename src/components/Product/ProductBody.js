@@ -130,12 +130,7 @@ export default function ProductBody(props) {
                         })}
                     </div>
                     <div
-                        // thumbs={{ swiper: thumbsSwiper }}
                         className="product-slider flex"
-                        // spaceBetween={0}
-                        // slidesPerView={1}
-                        // width={width}
-                        // onSlideChange={updateIndex}
                         onMouseMove={handleMouseMove}
                         >
                         {productImg.map((item, index) => {
@@ -221,7 +216,7 @@ export default function ProductBody(props) {
                                 <FontAwesomeIcon icon={faPlus}/>
                             </div>
                         </div>
-                        <div className="product-info-addtocart flex-center">
+                        <div className="product-info-addtocart flex-center btn">
                             <FontAwesomeIcon icon={faCartPlus}/>
                             <p>Add to cart</p>
                         </div>

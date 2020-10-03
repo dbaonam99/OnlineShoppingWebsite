@@ -60,7 +60,7 @@ export default function Account(props) {
                                 }
                                 <p>Remember me</p>
                             </div>
-                            <button>LOGIN</button>
+                            <button className="btn">LOGIN</button>
                             <label>LOST YOUR PASSWORD?</label>
                         </form>
                     </div>
@@ -70,7 +70,7 @@ export default function Account(props) {
                         <form className="flex-col">
                             <input placeholder="Username"/>
                             <input placeholder="Password"/>
-                            <button>REGISTER</button>
+                            <button className="btn">REGISTER</button>
                         </form>
                     </div>
                 }

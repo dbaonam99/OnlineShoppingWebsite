@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import '../../App.css';
-import Product from '../Product.js';
+import Product from '../Product/Product.js';
 import axios from 'axios';
 import { faCircle } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
@@ -45,12 +45,15 @@ export default function BestSeller(props) {
                     return (
                         <Product 
                             key={index}
-                            imgUrl={item.imgUrl} 
-                            imgUrlHover={item.imgUrlHover} 
-                            productTitle={item.productTitle}
+                            imgUrl={item.productImg[0]} 
+                            imgUrlHover={item.productImg[1]} 
+                            productName={item.productName}
                             productPrice={item.productPrice}
                             productSale={item.productSale}
                             productSold={item.productSold}
+                            productVote={item.productVote}
+                            productDes={item.productDes}
+                            productCate={item.productCate}
                         />
                     )
                 })}        
@@ -58,13 +61,13 @@ export default function BestSeller(props) {
             {(products.length > 10 && products.length >= limit) && 
                 <div className="tab-loadmore flex-center">
                     <div 
-                        className="tab-loadmore-btn flex-center"
+                        className="tab-loadmore-btn btn"
                         onClick={handleClick}
                         >
                         Load More
                     </div>
                     {loading === true && 
-                        <div className="tab-loadmore-btn tab-loadmore-loading flex-center">
+                        <div className="tab-loadmore-btn tab-loadmore-loading btn-nothover">
                             <FontAwesomeIcon icon={faCircle} className="loading-icon" style={{animationDelay: `0s`}}></FontAwesomeIcon>
                             <FontAwesomeIcon icon={faCircle} className="loading-icon" style={{animationDelay: `.2s`}}></FontAwesomeIcon>
                             <FontAwesomeIcon icon={faCircle} className="loading-icon" style={{animationDelay: `.4s`}}></FontAwesomeIcon>

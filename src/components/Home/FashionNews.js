@@ -17,8 +17,6 @@ export default function FashionNews(props) {
         )
     },[])
 
-    console.log(news)
-
     const choosePage = (event) => {
         if (Number(event.target.id) === 0) {
             setCurrentPage(currentPage)

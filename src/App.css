@@ -136,6 +136,26 @@
   from {transform: translateX(-200px);}
   to {transform: translateX(0px)}
 }
+/* Button */
+
+.btn {
+  background-color: #232323 !important;
+  color: #fff !important;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.btn:hover {
+  background-color: #343434 !important;
+  color: #fff !important;
+}
+.btn-nothover {
+  background-color: #232323 !important;
+  color: #fff !important;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
 
 /* Header */
 
@@ -626,38 +646,8 @@
 }
 .tab-content {
   width: 100%;
-  position: relative;
+  /* position: relative; */
 }
-/* .tab-loading {
-  position: absolute;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  z-index: 3;
-  background-color: #fff;
-  padding-top: 180px;
-  display: flex;
-  justify-content: center;
-  opacity: 0;
-  transition: .9s;
-  z-index: -2;
-}
-.tab-loading-display {
-  opacity: 1;
-  z-index: 3 !important;
-  transition: none !important;
-}
-.tab-loading div {
-  width: 200px;
-  height: 20px;
-}
-.loading-icon {
-  margin: 10px;
-  background-color: #111;
-  animation-name: loading;
-  animation-duration: .5s;
-  animation-iteration-count: infinite;
-} */
 @keyframes loading {
   from {transform: scaleY(0);}
   to {transform: scaleY(10px);}
@@ -665,11 +655,10 @@
 .tab-loadmore {
   margin-bottom: 45px;
   margin-top: 20px;
-  color: #FFF;
   position: relative;
 }
 .tab-loadmore-btn {
-  background-color: #1a1a21;
+  /* background-color: #1a1a21; */
   width: 200px;
   height: 60px;
   font-size: 14px;
@@ -772,51 +761,40 @@
   height: 100%;
   top: 0;
   overflow: hidden;
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
 }
-
-.product-icon {
-  background-color: #252525;
-  position: absolute;
-  opacity: 0;
-  width: 50px;
-  height: 50px;
+.product-icon-box {
+  width: 40px;
+  height: 40px;
   border-radius: 50%;
-  color: white;
-  font-size: 18px;
-  align-items: center;
-  line-height: 55px;
+  margin: 0 10px;
 }
-
-.product-icon:hover {
-  background-color: #000;
+.icon-cart {
+  position: relative;
+  transition: .2s;
+  bottom: -55px;
 }
-
-.product-cart {
-  left: 50px;
-  bottom: -25px;
-  transition: all 0.4s;
+.Product:hover .icon-cart {
+  transform: translateY(-77px);
 }
-
-.product-cart .cart-icon-right {
-  margin-left: -2px;
+.icon-wishlist {
+  transition: .5s;
+  position: relative;
+  bottom: -55px;
 }
-
-.product-wishlist {
-  right: 50px;
-  bottom: -35px;
-  transition: all 0.7s;
+.Product:hover .icon-wishlist {
+  transform: translateY(-77px);
 }
-
-.Product:hover .product-wishlist{
-  transform: translateY(-58px);
-  opacity: 1;
+.icon-view {
+  transition: .8s;
+  position: relative;
+  bottom: -55px;
 }
-
-.Product:hover .product-cart{
-  transform: translateY(-48px);
-  opacity: 1;
+.Product:hover .icon-view {
+  transform: translateY(-77px);
 }
-
 /* Collection */
 
 .collection-container {
@@ -1735,8 +1713,6 @@
   line-height: 50px;
   width: 80%;
   height: 50px;
-  color: #fff;
-  background-color: #111;
   font-size: 14px;
 }
 
@@ -1926,8 +1902,6 @@
   font-size: 14px;
   text-transform: uppercase;
   font-weight: 600;
-  background-color: #232323;
-  color: #fff;
   font-family: sans-serif;
   padding: 20px;
   width: 70%;
@@ -2061,8 +2035,6 @@
   font-size: 14px;
   text-transform: uppercase;
   font-weight: 600;
-  background-color: #232323;
-  color: #fff;
   font-family: sans-serif;
   padding: 20px;
   width: 100%;
@@ -2298,18 +2270,13 @@
 }
 .product-info-addtocart {
   margin: 0 15px;
-  color: #fff;
   height: 100%;
-  background-color: #232323;
   padding: 0 20px;
   cursor: pointer;
 }
 .product-info-addtocart p {
   margin-left: 15px;
   font-size: 14px;
-}
-.product-info-addtocart:hover {
-  background-color: #343434;
 }
 .product-info-wishlist {
   width: 60px;
@@ -2487,15 +2454,10 @@
   line-height: 60px;
   text-align: center;
   width: 100%;
-  background-color: #232323;
   height: 60px;
-  color: #fff;
   margin: 40px 0;
   display: flex;
   justify-content: center;
-}
-.submit-btn:hover {
-  background-color: #343434;
 }
 /* ProductRecommend */
 .ProductRecommend {

@@ -114,7 +114,7 @@ export default function ProductReview(props) {
                                         </div>
                                     </div>
                                 </form>
-                                <div className="submit-btn">
+                                <div className="submit-btn btn">
                                     <p>Submit</p>
                                 </div>
                             </div>

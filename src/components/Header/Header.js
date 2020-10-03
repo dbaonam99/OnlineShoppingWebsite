@@ -52,13 +52,6 @@ function Header(props) {
         },
         {
             id: "2",
-            label: "News",
-            url: "/news",
-            dropdownContent: [
-            ]
-        },
-        {
-            id: "3",
             label: "Women",
             url: "/women",
             dropdownContent: [
@@ -101,7 +94,7 @@ function Header(props) {
             ]
         },
         {
-            id: "4",
+            id: "3",
             label: "Men",
             url: "/men",
             dropdownContent: [
@@ -129,6 +122,13 @@ function Header(props) {
                         "Travels bags"                        
                     ]
                 }
+            ]
+        },
+        {
+            id: "4",
+            label: "News",
+            url: "/news",
+            dropdownContent: [
             ]
         },
         {

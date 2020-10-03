@@ -17,7 +17,7 @@ export default class GetInTouch extends Component {
                         <input placeholder="Email"></input>
                         <input placeholder="Subject"></input>
                         <input placeholder="Message"></input>
-                        <button>Send message</button>
+                        <button className="btn">Send message</button>
                     </div>
                 </div>
             </div>

@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import '../../App.css';
-import Product from '../Product.js'
+import Product from '../Product/Product.js'
 import RangeSlider from './RangeSlider.js'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faCircle, faFilter, faTh, faThLarge } from "@fortawesome/free-solid-svg-icons";
@@ -297,7 +297,7 @@ export default class ShopBody extends Component {
                             <div className="shopbody-filter-title">Price</div>
                             <RangeSlider/>
                         </div>
-                        <div className="shopbody-filter-submit">
+                        <div className="shopbody-filter-submit btn">
                             <p>Filter</p>
                         </div>
                     </div>

@@ -1,6 +1,6 @@
 import React from 'react';
 import '../../App.css';
-import Product from '../Product.js'
+import Product from '../Product/Product.js'
 
 export default function ProductRecommend() {
     const product = [
