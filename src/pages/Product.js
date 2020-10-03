@@ -197,7 +197,6 @@ export default function ProductDetail() {
         }
     };
     
-    
 
     const setTab = (tab) => {
         setTabId(tab)

@@ -1,12 +1,50 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import '../../App.css';
-import BestSeller from "./BestSeller.js"
-import NewProducts from "./NewProducts.js"
-import SalesProducts from "./SalesProducts.js"
+import BestSeller from "./HomeTabContent.js"
+import axios from 'axios'
 
 export default function HomeTab() {
     const [currentTab, setCurrentTab] = useState(1)
     const [isActive, setIsActive] = useState(1)
+    const [products, setProducts] = useState([]);
+
+    useEffect(() => {
+        axios.get(`http://localhost:4000/products`)
+            .then(res => {
+                setProducts(res.data)
+            }
+        )
+    },[])
+    
+    //Get product sold
+    let height = 750;
+    if (products.length) {
+        products.sort((a,b) =>  b.productSold - a.productSold);
+        if (products.length <= 5) {
+            height = 360;
+        }
+    }
+
+
+    const dateProduct = [...products];
+    if (dateProduct) {
+        dateProduct.sort(function(a,b){
+            return new Date(b.productDate) - new Date(a.productDate);
+        });
+    }
+
+    // Get product selling
+    const sellingProduct = []
+    if (products.length) {
+        for (let i = 0; i < products.length; i++) {
+            if (Number(products[i].productSale) > 0) {
+                sellingProduct.push(products[i]);
+            }
+        }
+        if (sellingProduct.length <= 5) {
+            height = 360;
+        }
+    }
 
     return(
         <div className="HomeTab">
@@ -16,9 +54,27 @@ export default function HomeTab() {
                 <p onClick={() => {setCurrentTab(3); setIsActive(3)}} className={isActive === 3 ? "home-tab-active" : ""}>Sales Products</p>
             </div>
             <div className="tab-content">
-                {currentTab === 1 && <BestSeller/>}
-                {currentTab === 2 && <NewProducts/>}
-                {currentTab === 3 && <SalesProducts/>}
+                { // best seller
+                    currentTab === 1 && 
+                    <BestSeller 
+                        products={products}
+                        height={height}
+                    />
+                }
+                { // new product
+                    currentTab === 2 && 
+                    <BestSeller 
+                        products={dateProduct}
+                        height={height}
+                    />
+                }
+                { // sale product
+                    currentTab === 3 && 
+                    <BestSeller 
+                        products={sellingProduct}
+                        height={height}
+                    />
+                }
             </div>
         </div>
     )

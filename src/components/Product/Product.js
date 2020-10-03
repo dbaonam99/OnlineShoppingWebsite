@@ -6,20 +6,19 @@ import ProductQuickView from './ProductQuickView';
 
 export default function Product(props) {
 
-    const [url] = useState(props.imgUrl);
     const [hover, setHover] = useState(false);
     const [view, setView] = useState(false);
-    const [imgUrlHover] = useState(props.imgUrlHover);
+    const product = props.product;
 
     const closeView = (event) => {
-        console.log(event.target.className)
         document.body.style.overflow = 'unset';
-        if (event.target.className === 'ProductQuickView') {
-            setView(false)
-        } else {
-            setView(true)
-        }
+        // if (event.target.className === 'ProductQuickView') {
+        setView(false)
+        // } else {
+        //     setView(true)
+        // }
     }
+
     const openView = () => {
         setView(true)
     }
@@ -32,32 +31,24 @@ export default function Product(props) {
             <ProductQuickView 
                 view={view} 
                 closeView={closeView}
-                imgUrl={props.imgUrl} 
-                imgUrlHover={props.imgUrlHover} 
-                productName={props.productName}
-                productPrice={props.productPrice}
-                productSale={props.productSale}
-                productSold={props.productSold}
-                productVote={props.productVote}
-                productDes={props.productDes}
-                productCate={props.productCate}
+                product={product}
             />
             <div className="product-img"
                 onMouseOver={()=> {setHover(true)}}
                 onMouseOut={()=> {setHover(false)}}>
                 <div className="product-tag">
                     {
-                        props.productSale > 0 && <div className="product-tag-item sale">
-                            {props.productSale}%
+                        product.productSale > 0 && <div className="product-tag-item sale">
+                            {product.productSale}%
                         </div>
                     }
                     {
-                        props.productSold >= 40 && <div className="product-tag-item hot">
+                        product.productSold >= 40 && <div className="product-tag-item hot">
                             HOT
                         </div>
                     }
                     {
-                        props.productSale > 0 && <div className="product-tag-item new">
+                        product.productSale > 0 && <div className="product-tag-item new">
                             NEW
                         </div>
                     }
@@ -65,10 +56,10 @@ export default function Product(props) {
                 <div className="product-img-bg">
                     <img 
                         className=""
-                        src={url} alt=""></img>
+                        src={product.productImg[0]} alt=""></img>
                     <img 
                         className={hover === false ? "img-defalt hide" : "img-defalt"}
-                        src={imgUrlHover} alt=""></img>
+                        src={product.productImg[1]} alt=""></img>
                 </div>
                 <div className="product-overlay">
                     <div className="product-icon-box flex-center icon-cart btn">
@@ -86,10 +77,10 @@ export default function Product(props) {
                 </div>
             </div>
             <div className="product-title">
-                {props.productName}
+                {product.productName}
             </div>
             <div className="product-price">
-                {props.productPrice} VNĐ
+                {product.productPrice} VNĐ
             </div>
         </div>
     )
