@@ -26,14 +26,26 @@ export default function Product(props) {
         document.body.style.overflow = 'hidden';
     }
 
+    const classWidth = props.classWidth;
+
     return(
-        <div className="Product opa">
+        <div 
+            className={`Product opa ${classWidth}`}
+            style={{ 
+                width: `${props.width}px`,
+                marginLeft: `${props.marginLeft}px`,
+                marginRight: `${props.marginRight}px`
+            }}
+        >
             <ProductQuickView 
                 view={view} 
                 closeView={closeView}
                 product={product}
             />
             <div className="product-img"
+                style={{ 
+                    height: `${props.height}px`,
+                }}
                 onMouseOver={()=> {setHover(true)}}
                 onMouseOut={()=> {setHover(false)}}>
                 <div className="product-tag">

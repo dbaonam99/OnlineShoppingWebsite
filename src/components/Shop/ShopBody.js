@@ -1,4 +1,4 @@
-import React, { } from 'react';
+import React, { useState } from 'react';
 import '../../App.css';
 import Product from '../Product/Product.js'
 import RangeSlider from './RangeSlider.js'
@@ -8,6 +8,8 @@ import { faCircle, faFilter, faTh, faThLarge } from "@fortawesome/free-solid-svg
 export default function ShopBody(props) {
 
     const product = props.products;
+    const [gridTab, setGridTab] = useState(3);
+    const [currentTab, setCurrentTab] = useState(1);
 
     //Get all category
     const cate = Object.values(product.reduce((a, {productCate}) => {
@@ -49,6 +51,48 @@ export default function ShopBody(props) {
     for (let i = 0; i < size.length; i++) {
         sortedSize.push(size[i].productSize);
     }
+
+    let width, height, marginLeft, marginRight, classWidth = "";
+    if (gridTab === 1) {
+        width = '128'; // six
+        height = '153';
+        marginLeft = '16';
+        marginRight = '16';
+        classWidth = 'fix_width_six'
+    } else if (gridTab === 2) {
+        width = '160'; // five
+        height = '190';
+        marginLeft = '16';
+        marginRight = '16';
+        classWidth = 'fix_width_five'
+    }else if (gridTab === 3) {
+        width = '208'; // four
+        height = '247';
+        marginLeft = '16';
+        marginRight = '16';
+        classWidth = 'fix_width_four'
+    }
+
+
+    const soldProduct = [...product];
+    if (soldProduct.length > 0) { 
+        soldProduct.sort((a,b) => b.productSold - a.productSold)
+    }
+    const dateProduct = [...product];
+    if (dateProduct.length > 0) {
+        dateProduct.sort(function(a,b){
+            return new Date(b.productDate) - new Date(a.productDate);
+        });
+    }
+    const sellingProduct = [];
+    if (product.length > 0) {
+        for (let i = 0; i < product.length; i++) {
+            if (Number(product[i].productSale) > 0) {
+                sellingProduct.push(product[i]);
+            }
+        }
+    }
+
 
     return(
         <div className="ShopBody">
@@ -107,44 +151,137 @@ export default function ShopBody(props) {
                 <div className="shopbody-main">
                     <div className="shopbody-first flex">
                         <div className="shopbody-tab flex">
-                            <div className="shopbody-tab-item active">
+                            <div 
+                                onClick={() => {setCurrentTab(1)}}
+                                className={currentTab === 1 ? "shopbody-tab-item active" : "shopbody-tab-item"}
+                                >
                                 All Products
                             </div>
-                            <div className="shopbody-tab-item">
+                            <div 
+                                onClick={() => {setCurrentTab(2)}}
+                                className={currentTab === 2 ? "shopbody-tab-item active" : "shopbody-tab-item"}
+                                >
                                 Hot Products
                             </div>
-                            <div className="shopbody-tab-item">
+                            <div 
+                                onClick={() => {setCurrentTab(3)}}
+                                className={currentTab === 3 ? "shopbody-tab-item active" : "shopbody-tab-item"}
+                                >
                                 New Products
                             </div>
-                            <div className="shopbody-tab-item">
+                            <div 
+                                onClick={() => {setCurrentTab(4)}}
+                                className={currentTab === 4 ? "shopbody-tab-item active" : "shopbody-tab-item"}
+                                >
                                 Sale Products
                             </div>
                         </div>
 
                         <div className="shopbody-option flex">
                             <div className="shopbody-option-grid flex">
-                                <FontAwesomeIcon icon={faTh} className="grid-icon"/>
-                                <FontAwesomeIcon icon={faThLarge} className="grid-icon"/>
-                                <FontAwesomeIcon icon={faCircle} className="grid-icon"/>
+                                <div 
+                                    className="grid-icon-container"
+                                    onClick={()=> { setGridTab(1) }}
+                                >
+                                    <FontAwesomeIcon 
+                                            icon={faTh} 
+                                            className={gridTab === 1 ? "grid-icon grid-icon-active" : "grid-icon"}
+                                        />
+                                </div>
+                                <div className="grid-icon-container">
+                                    <FontAwesomeIcon 
+                                            icon={faThLarge} 
+                                            className={gridTab === 2 ? "grid-icon grid-icon-active" : "grid-icon"}
+                                            onClick={()=> { setGridTab(2) }}
+                                        />
+                                </div>
+                                <div className="grid-icon-container">
+                                    <FontAwesomeIcon 
+                                            icon={faCircle} 
+                                            className={gridTab === 3 ? "grid-icon grid-icon-active" : "grid-icon"}
+                                            onClick={()=> { setGridTab(3) }}
+                                        />
+                                </div>
                             </div>
                             <div className="shopbody-option-filter flex">
                                 <FontAwesomeIcon icon={faFilter} className="filter-icon"/>
-                                <p style={ {marginLeft: '10px'} }>Filter</p>
+                                <p style={{marginLeft: '10px'}}>Filter</p>
                             </div>
                         </div>
                     </div>
                     <div className="shopbody-line"></div>
-                    <div className="shopbody-products">
-                        {product.map(function(item, index) {
-                            return (
-                                <Product
-                                    key={index}
-                                    product={item}
-                                    // grid={grid}
-                                />
-                            )
-                        })}
-                    </div>
+                    { currentTab === 1 &&
+                        <div className="shopbody-products">
+                            {product.map(function(item, index) {
+                                return (
+                                    <Product
+                                        key={index}
+                                        product={item}
+                                        width={width}
+                                        height={height}
+                                        marginLeft={marginLeft}
+                                        marginRight={marginRight}
+                                        gridTab={gridTab}
+                                        classWidth={classWidth}
+                                    />
+                                )
+                            })}
+                        </div>
+                    }
+                    { currentTab === 2 &&
+                        <div className="shopbody-products">
+                            {soldProduct.map(function(item, index) {
+                                return (
+                                    <Product
+                                        key={index}
+                                        product={item}
+                                        width={width}
+                                        height={height}
+                                        marginLeft={marginLeft}
+                                        marginRight={marginRight}
+                                        gridTab={gridTab}
+                                        classWidth={classWidth}
+                                    />
+                                )
+                            })}
+                        </div>
+                    }
+                    { currentTab === 3 &&
+                        <div className="shopbody-products">
+                            {dateProduct.map(function(item, index) {
+                                return (
+                                    <Product
+                                        key={index}
+                                        product={item}
+                                        width={width}
+                                        height={height}
+                                        marginLeft={marginLeft}
+                                        marginRight={marginRight}
+                                        gridTab={gridTab}
+                                        classWidth={classWidth}
+                                    />
+                                )
+                            })}
+                        </div>
+                    }
+                    { currentTab === 4 &&
+                        <div className="shopbody-products">
+                            {sellingProduct.map(function(item, index) {
+                                return (
+                                    <Product
+                                        key={index}
+                                        product={item}
+                                        width={width}
+                                        height={height}
+                                        marginLeft={marginLeft}
+                                        marginRight={marginRight}
+                                        gridTab={gridTab}
+                                        classWidth={classWidth}
+                                    />
+                                )
+                            })}
+                        </div>
+                    }
                 </div>
             </div>
             <div className="shopbody-line"></div>

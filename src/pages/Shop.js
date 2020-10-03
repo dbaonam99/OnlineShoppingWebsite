@@ -6,7 +6,6 @@ import BannerV2 from '../components/Banner/BannerV2.js'
 import Header from '../components/Header/Header.js'
 import ShopBody from "../components/Shop/ShopBody";
 import bg from '../assets/S3.jpg'
-import { faUniversalAccess } from "@fortawesome/free-solid-svg-icons";
 import axios from 'axios'
 
 function Shop() {
