@@ -16,6 +16,13 @@ export default function ProductReview(props) {
         isHalf: true,
         edit: true
     }
+
+    let product = [];
+    let productVote = [];
+    if (props.product) {
+        product = props.product;
+        productVote = [...product.productVote];
+    }
     
     return(
         <div className="ProductReview" ref={props.bRef} id={props.id}>
@@ -31,7 +38,7 @@ export default function ProductReview(props) {
                         onClick={()=>{props.setTab(1)}}>
                         Reviews
                         <span className={props.tabId === 1 ? "span-active" : ""}>
-                            {props.productVote.length}
+                            {productVote.length}
                         </span>
                     </div>
                 </div>
@@ -39,13 +46,13 @@ export default function ProductReview(props) {
                     {
                         props.tabId === 0 && 
                         <div className="productreview-text"> 
-                            {props.productDes}
+                            {product.productDes}
                         </div>
                     }
                     {
                         props.tabId === 1 && 
                         <div className="productreview-list"> 
-                            {props.productVote.map((item, index) => {
+                            {product.productVote.map((item, index) => {
                                 const ratingStar = {
                                     size: 12,
                                     value: item.ratingStar,
@@ -122,7 +129,6 @@ export default function ProductReview(props) {
                     }
                 </div>
             </div>
-
             <div className="product-info-line"></div>
         </div>
     )

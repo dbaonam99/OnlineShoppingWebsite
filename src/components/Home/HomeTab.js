@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import '../../App.css';
-import BestSeller from "./HomeTabContent.js"
+import HomeTabContent from "./HomeTabContent.js"
 import axios from 'axios'
 
 export default function HomeTab() {
@@ -24,7 +24,6 @@ export default function HomeTab() {
             height = 360;
         }
     }
-
 
     const dateProduct = [...products];
     if (dateProduct) {
@@ -56,21 +55,21 @@ export default function HomeTab() {
             <div className="tab-content">
                 { // best seller
                     currentTab === 1 && 
-                    <BestSeller 
+                    <HomeTabContent 
                         products={products}
                         height={height}
                     />
                 }
                 { // new product
                     currentTab === 2 && 
-                    <BestSeller 
+                    <HomeTabContent 
                         products={dateProduct}
                         height={height}
                     />
                 }
                 { // sale product
                     currentTab === 3 && 
-                    <BestSeller 
+                    <HomeTabContent 
                         products={sellingProduct}
                         height={height}
                     />

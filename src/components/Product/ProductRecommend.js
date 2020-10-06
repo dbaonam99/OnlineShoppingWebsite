@@ -6,6 +6,10 @@ import axios from 'axios'
 export default function ProductRecommend(props) {
 
     const [products, setProducts] = useState([]);
+    let productInfo = [];
+    if (props.product) {
+        productInfo = props.product;
+    }
 
     useEffect(() => {
         axios.get(`http://localhost:4000/products`)
@@ -16,13 +20,14 @@ export default function ProductRecommend(props) {
     },[])
 
     const recommendProducts = [];
-    products.filter((item, index) => {
-        if (item.productCate === props.productCate) {
-            recommendProducts.push(item)
+    products.filter((item) => {
+        if (item.productCate === productInfo.productCate) {
+            recommendProducts.unshift(item)
         }
-        if (item.productSex === props.productSex) {
-            recommendProducts.push(item)
+        if (item.productSex === productInfo.productSex) {
+            recommendProducts.unshift(item)
         }
+        return true;
     })
 
     return(

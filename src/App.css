@@ -98,7 +98,17 @@
 
 .opa {
   animation-name: opa;
-  animation-duration: 1s;
+  animation-duration: .8s;
+}
+
+@keyframes opa {
+  from {opacity: 0}
+  to {opacity: 1}
+}
+
+.opa2 {
+  animation-name: opa;
+  animation-duration: 2s;
 }
 
 @keyframes active_line {
@@ -719,14 +729,15 @@
   width: 40px;
   height: 20px;
   margin: 10px 0;
+  text-align: center;
 }
-.product-img .sale {
+.sale {
   background: #1cd481;
 }
-.product-img .hot {
+.hot {
   background: #fc5050;
 }
-.product-img .new {
+.new {
   background: #fc9953;
 }
 .product-img-bg {
@@ -758,8 +769,8 @@
 .product-overlay {
   position: absolute;
   width: 100%;
-  height: 100%;
-  top: 0;
+  height: 25%;
+  bottom: 0;
   overflow: hidden;
   display: flex;
   align-items: flex-end;

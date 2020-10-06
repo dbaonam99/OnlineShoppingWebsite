@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import '../../App.css';
-import News from './News.js'
+import News from '../News/News.js'
 import classNames from 'classnames'
 import axios from 'axios'
 
@@ -67,12 +67,7 @@ export default function FashionNews(props) {
                     { currentNews.map(function(item, index) {
                         return (
                             <News 
-                                newImg={item.newImg} 
-                                newTime={item.newTime}
-                                newCate={item.newCate}
-                                newTitle={item.newTitle}
-                                newContent={item.newContent}
-                                newId={item.id}
+                                news={item}
                                 key={index}
                             />
                         )                        

@@ -3,8 +3,9 @@ import '../../App.css';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faCartPlus, faEye, faHeart } from "@fortawesome/free-solid-svg-icons";
 import ProductQuickView from './ProductQuickView';
+import { withRouter } from 'react-router-dom'
 
-export default function Product(props) {
+function Product(props) {
 
     const [hover, setHover] = useState(false);
     const [view, setView] = useState(false);
@@ -18,15 +19,18 @@ export default function Product(props) {
         //     setView(true)
         // }
     }
-
     const openView = () => {
         setView(true)
     }
     if(view){
         document.body.style.overflow = 'hidden';
     }
-
     const classWidth = props.classWidth;
+
+    const redirect = (target) => {
+        window.scrollTo(0,0);
+        props.history.push(`/products/${product._id}`);
+    }
 
     return(
         <div 
@@ -47,7 +51,8 @@ export default function Product(props) {
                     height: `${props.height}px`,
                 }}
                 onMouseOver={()=> {setHover(true)}}
-                onMouseOut={()=> {setHover(false)}}>
+                onMouseOut={()=> {setHover(false)}}
+                >
                 <div className="product-tag">
                     {
                         product.productSale > 0 && <div className="product-tag-item sale">
@@ -65,7 +70,9 @@ export default function Product(props) {
                         </div>
                     }
                 </div>
-                <div className="product-img-bg">
+                <div    
+                    className="product-img-bg"
+                    onClick={redirect}>
                     <img 
                         className=""
                         src={product.productImg[0]} alt=""></img>
@@ -73,14 +80,15 @@ export default function Product(props) {
                         className={hover === false ? "img-defalt hide" : "img-defalt"}
                         src={product.productImg[1]} alt=""></img>
                 </div>
-                <div className="product-overlay">
+                <div 
+                    className="product-overlay">
                     <div className="product-icon-box flex-center icon-cart btn">
                         <FontAwesomeIcon icon={faCartPlus} style={{marginRight: '3px'}}/>
                     </div>
                     <div className="product-icon-box flex-center icon-wishlist btn">
                         <FontAwesomeIcon icon={faHeart}/>
                     </div>
-                    <div 
+                    <div
                         className="product-icon-box flex-center icon-view btn"
                         onClick={openView}
                         >
@@ -97,3 +105,4 @@ export default function Product(props) {
         </div>
     )
 }
+export default withRouter(Product);

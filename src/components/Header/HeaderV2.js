@@ -10,9 +10,10 @@ import {  faSearch, faUser, faCartPlus } from "@fortawesome/free-solid-svg-icons
 import Search from './Search.js';
 import Account from './Account.js';
 import Cart from './Cart.js';
+import MenuItemDropdown from './MenuItemDropdown';
 
 
-function HeaderV2(props) {
+function Header(props) {
 
     const [scrolled, setScrolled] = useState(false);
     const [whiteBox, setWhiteBox] = useState(false);
@@ -21,6 +22,7 @@ function HeaderV2(props) {
     const [accountOpen, setAccountOpen] = useState(false);
     const [cartOpen, setCartOpen] = useState(false);
     const [disableBox, setDisableBox] = useState(false);
+    const [dropdownHover, setDropdownHover] = useState(false)
 
     const location = props.history.location.pathname;
 
@@ -31,9 +33,113 @@ function HeaderV2(props) {
         setCartOpen(false);
     }
 
-    useEffect(() => {
-        window.scrollTo(0, 0);
+    const handleHover = () => {
+        setDropdownHover(true)
+    }
+    const handleLeaveHover = () => {
+        setDropdownHover(false)
+    }
+    const handleClick = () => {
+        window.scrollTo(0,0)
+    }
 
+    const navBar = [
+        {
+            id: "1",
+            label: "Home",
+            url: "/",
+            dropdownContent: []
+        },
+        {
+            id: "2",
+            label: "Women",
+            url: "/women",
+            dropdownContent: [
+                {
+                    dropdownTitle: "Accessories",
+                    dropdownList: [
+                        "Sunglasses",
+                        "Jewelry",
+                        "watches",
+                    ]
+                },
+                {
+                    dropdownTitle: "Ready-to-wear",
+                    dropdownList: [
+                        'Shop by look',
+                        'Dresses',
+                        'Denim & pants',
+                        'Tops & shirts ',
+                        'Blazers',
+                        'Skirts',
+                        'Activewear',
+                    ]
+                },
+                {
+                    dropdownTitle: "Shoes",
+                    dropdownList: [
+                        'Sneakers',
+                        'Boots',
+                        'Pumps',
+                    ]
+                },
+                {
+                    dropdownTitle: "Bags",
+                    dropdownList: [
+                        'Shoulder bags',
+                        'Travels bags',
+                        'Tote bags',
+                    ]
+                }
+            ]
+        },
+        {
+            id: "3",
+            label: "Men",
+            url: "/men",
+            dropdownContent: [
+                {
+                    dropdownTitle: "Ready-to-wear",
+                    dropdownList: [
+                        "Shop by look", 
+                        "Shirts & T-shirts", 
+                        "Denim", "Pants", 
+                        "Blazers & jackets"
+                    ]
+                },
+                {
+                    dropdownTitle: "Shoes",
+                    dropdownList: [
+                        "Sneakers",
+                        "Sandals",
+                        "Loafers"
+                    ]
+                },
+                {
+                    dropdownTitle: "Bags",
+                    dropdownList: [
+                        "Business bags",
+                        "Travels bags"                        
+                    ]
+                }
+            ]
+        },
+        {
+            id: "4",
+            label: "News",
+            url: "/news",
+            dropdownContent: [
+            ]
+        },
+        {
+            id: "5",
+            label: "Contact",
+            url: "/contact",
+            dropdownContent: []
+        },
+    ]
+
+    useEffect(() => {
         if (location === "/news") {
             setWhiteText(true);
             setDisableBox(true);
@@ -44,27 +150,42 @@ function HeaderV2(props) {
 
         function onScroll() {
             if (location === "/news") {
-                if(window.pageYOffset < 100) { // top
-                    setWhiteBox(false)
-                    setWhiteText(true)
-                    setDisableBox(true)
+                if(window.pageYOffset < 50) { // top
+                    if (dropdownHover === true) {
+                        setWhiteBox(true)
+                        setWhiteText(false)
+                        setDisableBox(false)
+                    } else {
+                        setWhiteBox(false)
+                        setWhiteText(true)
+                        setDisableBox(true)
+                    }
                 } else if (this.prev < window.pageYOffset) { //down
+                    if (dropdownHover === true) {
+                        setScrolled(false)
+                    } else {
+                        setScrolled(true)
+                    }
                     setWhiteBox(true)
                     setDisableBox(false)
                     setWhiteText(false)
-                    setScrolled(true)
                 } else if (this.prev > window.pageYOffset) { //up
                     setScrolled(false)
                 }
             } else {
-                if(window.pageYOffset < 10) { // top
+                if(window.pageYOffset < 50) { // top
                     setWhiteBox(false)
                     setWhiteText(false)
                 } else if (this.prev < window.pageYOffset) { //down
+                    if (dropdownHover === true) {
+                        setScrolled(false)
+                    } else {
+                        setScrolled(true)
+                    }
                     setWhiteBox(true)
-                    setScrolled(true)
                 } else if (this.prev > window.pageYOffset) { //up
                     setScrolled(false)
+                    setWhiteText(false)
                 }
             }
             this.prev = window.pageYOffset;
@@ -74,7 +195,7 @@ function HeaderV2(props) {
         return() => {
             window.removeEventListener("scroll", onScroll);
         }
-    }, [location]);
+    }, [location, dropdownHover]);
 
     if(searchOpen || accountOpen || cartOpen){
         document.body.style.overflow = 'hidden';
@@ -93,6 +214,12 @@ function HeaderV2(props) {
                     setDisableBox(false);
                 }
             }}
+            onMouseOver={() => { 
+                if (location === "/news") {
+                    setWhiteText(false); 
+                    setDisableBox(false);
+                }
+            }}
             onMouseLeave={() => { 
                 if (location === "/news" && window.pageYOffset < 50) {
                     setWhiteText(true);
@@ -100,55 +227,29 @@ function HeaderV2(props) {
             }}
             >
             <ul className="menu flex-center">
-                <li>
-                    <Link 
-                        to="/" 
-                        className={classNames({
-                            active: location === "/",
-                            whitelink_header: whiteText === true
-                        })}
-                        id="1"
-                        >home</Link>
-                </li>
-                <li>
-                    <Link to="/news"
-                        className={classNames({
-                            active: location === "/news",
-                            whitelink_header: whiteText === true,
-                        })}
-                        id="2"
-                        >News</Link>
-                </li>
-                <li>
-                    <Link to="/men" 
-                        className={classNames({
-                            active: location === "/men",
-                            whitelink_header: whiteText === true
-                        })}
-                        id="3"
-                        >men</Link>
-                </li>
-                <li>
-                    <Link to="/women" 
-                        className={classNames({
-                            active: location === "/women",
-                            whitelink_header: whiteText === true
-                        })}
-                        id="4"
-                        >women</Link>
-                </li>
-                <li>
-                    <Link to="/contact" 
-                        className={classNames({
-                            active: location === "/contact",
-                            whitelink_header: whiteText === true
-                        })}
-                        id="5"
-                        >contact</Link>
-                </li>
+                {
+                    navBar.map((item, index)=> { 
+                        return (
+                            <MenuItemDropdown
+                                handleClick={handleClick}
+                                handleHover={handleHover}
+                                handleLeaveHover={handleLeaveHover}
+                                dropdownHover={dropdownHover}
+                                scrolled={scrolled}
+                                location={location}
+                                key={index}
+                                whiteText={whiteText}
+                                label={item.label}
+                                url={item.url}
+                                dropdownContent={item.dropdownContent} // dropdown text
+                                className="menu-item">
+                            </MenuItemDropdown>
+                        )
+                    })
+                }
             </ul>
             <div className="logo flex-center">
-                <Link to="/">
+                <Link to="/collection">
                     {
                         whiteText === true 
                             ? <img src="https://demo.uix.store/sober/wp-content/themes/sober/images/logo-light.svg" alt="logo"></img>
@@ -201,4 +302,4 @@ function HeaderV2(props) {
         </div>
     )
 }
-export default withRouter(HeaderV2);
+export default withRouter(Header);
