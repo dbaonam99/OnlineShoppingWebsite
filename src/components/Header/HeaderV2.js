@@ -288,7 +288,7 @@ function Header(props) {
                         className="cart-icon"
                         />
                     <div
-                        className={classNames('cart-count', {
+                        className={classNames('cart-count flex-center', {
                             cart_count_news_hover: whiteText === true
                         })}> 
                             

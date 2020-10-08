@@ -588,7 +588,7 @@
 
 .blackbox-link-medium {
   font-size: 14px;
-  margin-left: -270px;
+  margin-left: -220px;
 }
 
 
@@ -2532,7 +2532,7 @@
 /* Collection */
 
 .Collection {
-  padding: 5px;
+  /* padding: 5px; */
 }
 .CollectionList {
   margin-top: 5px;

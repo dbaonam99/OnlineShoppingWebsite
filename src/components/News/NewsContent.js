@@ -2,7 +2,7 @@ import React from 'react';
 import '../../Styles/News.css';
 import '../../App.css'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faFacebook, faFacebookF, faInstagram, faTwitter } from '@fortawesome/free-brands-svg-icons';
+import { faFacebookF, faInstagram, faTwitter } from '@fortawesome/free-brands-svg-icons';
 
 export default function NewsContent(props) {
 
@@ -31,7 +31,7 @@ export default function NewsContent(props) {
                 </div>
             </div>
             <div className="news-title newscontent-title">
-                <img src={news.newImg} width='100%'/>
+                <img src={news.newImg} width='100%' alt=""/>
             </div>
             <div className="newscontent-content flex-center">
                 <p>{news.newContent}</p>
