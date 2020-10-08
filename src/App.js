@@ -5,8 +5,6 @@ import {
   BrowserRouter as Router,
   Route
 } from "react-router-dom"; 
-
-
 import Home from './pages/Home.js'
 import News from './pages/News.js'
 import Men from './pages/Men.js'
@@ -15,7 +13,6 @@ import Contact from './pages/Contact.js'
 import ProductDetail from './pages/ProductDetail.js'
 import Collection from './pages/Collection';
 import NewsDetail from './pages/NewsDetail';
-import chat from './components/chat';
 import OpenChatBtn from './components/OpenChatBtn';
 
 
@@ -31,7 +28,6 @@ function App() {
         <Route path="/collection" exact component={Collection}></Route>
         <Route path="/products/:id" exact component={ProductDetail}></Route>
         <Route path="/news/:id" exact component={NewsDetail}></Route>
-        <Route path="/chat" exact component={chat}></Route>
       </div>
       <OpenChatBtn/>
     </Router>
