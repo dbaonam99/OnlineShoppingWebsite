@@ -30,6 +30,7 @@ export default function HomeTabContent(props) {
                         <Product 
                             key={index}
                             product={item}
+                            index={index}
                         />
                     )
                 })}        

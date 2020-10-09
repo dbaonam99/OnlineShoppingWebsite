@@ -1,8 +1,7 @@
 import React, { useState } from 'react';
 import '../../App.css';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faCartPlus, faEye, faHeart } from "@fortawesome/free-solid-svg-icons";
 import ProductQuickView from './ProductQuickView';
+import ProductOverlay from './ProductOverlay'
 import { withRouter } from 'react-router-dom'
 
 function Product(props) {
@@ -20,6 +19,7 @@ function Product(props) {
         // }
     }
     const openView = () => {
+        console.log("zxczxczxc")
         setView(true)
     }
     if(view){
@@ -80,21 +80,10 @@ function Product(props) {
                         className={hover === false ? "img-defalt hide" : "img-defalt"}
                         src={product.productImg[1]} alt=""></img>
                 </div>
-                <div 
-                    className="product-overlay">
-                    <div className="product-icon-box flex-center icon-cart btn">
-                        <FontAwesomeIcon icon={faCartPlus} style={{marginRight: '3px'}}/>
-                    </div>
-                    <div className="product-icon-box flex-center icon-wishlist btn">
-                        <FontAwesomeIcon icon={faHeart}/>
-                    </div>
-                    <div
-                        className="product-icon-box flex-center icon-view btn"
-                        onClick={openView}
-                        >
-                        <FontAwesomeIcon icon={faEye}/>
-                    </div>
-                </div>
+                <ProductOverlay
+                    product={product}
+                    openView={openView}
+                />
             </div>
             <div className="product-title">
                 {product.productName}

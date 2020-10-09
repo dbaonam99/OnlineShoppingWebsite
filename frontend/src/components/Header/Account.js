@@ -3,14 +3,18 @@ import '../../App.css';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faTimes , faCheck } from '@fortawesome/free-solid-svg-icons';
 import axios from 'axios'
+import {
+    withRouter
+} from 'react-router-dom'
 
-export default function Account(props) {
+function Account(props) {
 
     const [check, setCheck] = useState(false);
     const [tabID, setTabID] = useState(0);
-    const [user, setUser] = useState({});
     const [arrSuccess, setArrSuccess] = useState([]);
     const [arrErr, setArrErr] = useState([]);
+    const [user, setUser] = useState({});
+    const [userInfo, setUserInfo] = useState({});
 
     const handleOnChange = (event) => {
         setUser({...user , [event.target.name]: event.target.value})
@@ -24,9 +28,18 @@ export default function Account(props) {
                 loginPassword: user.loginPassword
             })
             .then(res => {
-                setArrSuccess(arrSuccess=>[...arrSuccess, res.data])
+                setArrSuccess(arrSuccess=>[...arrSuccess, "Login success!"])
+                localStorage.setItem('token', res.data.token);
+                setTimeout(()=> {
+                    window.location.reload(false);
+                    document.body.style.overflow = 'unset';
+                }, 1000)
+                setUserInfo(Object.assign(res.data.user, userInfo));
             })
             .catch(err => {
+                if (401 === err.response.status) {
+                    console.log("loi")
+                }
                 setArrErr(arrErr=>[...arrErr, err.response.data]);
             })
         } else {
@@ -37,12 +50,17 @@ export default function Account(props) {
             })
             .then(res => {
                 setArrSuccess(arrSuccess=>[...arrSuccess, res.data])
+                setTimeout(()=> {
+                    window.location.reload(false);
+                    document.body.style.overflow = 'unset';
+                }, 1000)
             })
             .catch(err => {
                 setArrErr(arrErr=>[...arrErr, err.response.data]);
             })
         }
     }
+
     let uniqueErr, uniqueSuccess = [];
     if (arrErr.length > 0) {
         uniqueErr = arrErr.filter(function(item, pos) {
@@ -54,7 +72,6 @@ export default function Account(props) {
             return arrSuccess.indexOf(item) === pos;
         })
     }
-
 
     return(
         <div className={props.accountOpen === false ? 'Account displayNone' : 'Account'}>
@@ -76,13 +93,13 @@ export default function Account(props) {
                         className='search-tab login-tab flex'>
                         <div 
                             className={tabID === 0 ? 'search-tab-cate search-tab-active' : 'search-tab-cate'}
-                            onClick={() => {setTabID(0);setArrErr([])}}
+                            onClick={() => {setTabID(0);setArrErr([]);setArrSuccess([])}}
                             >
                             Login
                         </div>
                         <div 
                             className={tabID === 1 ? 'search-tab-cate search-tab-active' : 'search-tab-cate'}
-                            onClick={() => {setTabID(1);setArrErr([])}}
+                            onClick={() => {setTabID(1);setArrErr([]);setArrSuccess([])}}
                             >
                             Register
                         </div>
@@ -103,12 +120,12 @@ export default function Account(props) {
                             </div>
                         }
                         { uniqueSuccess && 
-                            <div>
+                            <div >
                                 {
                                     uniqueSuccess.map((item, index) => {
                                         return(
-                                            <div key={index}>
-                                                <FontAwesomeIcon icon={faTimes} style={{ marginRight: '10px', color: 'red'}}/>
+                                            <div key={index} className="login-success">
+                                                <FontAwesomeIcon icon={faCheck} style={{ marginRight: '10px', color: 'green'}}/>
                                                 {item}
                                             </div>
                                         )
@@ -159,3 +176,5 @@ export default function Account(props) {
         </div>
     )
 }
+
+export default withRouter(Account);

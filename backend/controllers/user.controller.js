@@ -1,5 +1,6 @@
 var User = require("../models/user.model");
 const bcrypt = require('bcrypt');
+const jwt = require('jsonwebtoken'); 	
 
 module.exports.index = async function(req, res) {
 	var users = await User.find();
@@ -9,7 +10,7 @@ module.exports.index = async function(req, res) {
 module.exports.postLogin = async function(req, res) {
 	var email = req.body.loginEmail;
 	var password = req.body.loginPassword;
-
+ 
 	var user = await User.findOne({ userEmail: email });
 
 	if (!user) {
@@ -21,7 +22,9 @@ module.exports.postLogin = async function(req, res) {
 		return res.status(400).send('Wrong password!');
 	}
 
-	res.status(200).send('Login success');
+	const token = jwt.sign({_id: user._id}, 'hahaha', { expiresIn: 60 * (1/10) });
+
+	res.status(200).json({token: token, user: user});
 };
 
 module.exports.register = async function(req, res) {

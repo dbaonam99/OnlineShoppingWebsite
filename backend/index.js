@@ -5,6 +5,7 @@ const socketIo = require("socket.io");
 const server = http.createServer(app);
 const mongoose = require('mongoose');
 const bodyParser = require("body-parser");
+var cookieParser = require("cookie-parser");
 
 
 var productRoutes = require('./routes/product');
@@ -16,14 +17,18 @@ mongoose.set('useFindAndModify', false);
 
 var cors = require('cors');
 app.use(bodyParser.json());
+app.use(cookieParser('secret'));
 
 const io = socketIo(server);
 
 app.use(function(req, res, next) {
+  res.header('application/json;charset=UTF-8')
+  res.header('Access-Control-Allow-Credentials', true)
   res.header("Access-Control-Allow-Origin", "*");
-  res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
+  res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept, Authorization");
   next();
 });
+
 app.use("/products", productRoutes);
 app.use("/news", newsRoutes);
 app.use("/users", userRoutes);

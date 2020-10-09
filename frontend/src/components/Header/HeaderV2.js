@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import '../../App.css';
 import {
     Link,
@@ -11,6 +11,7 @@ import Search from './Search.js';
 import Account from './Account.js';
 import Cart from './Cart.js';
 import MenuItemDropdown from './MenuItemDropdown';
+import { CartContext } from '../../contexts/Cart';
 
 
 function Header(props) {
@@ -25,6 +26,7 @@ function Header(props) {
     const [dropdownHover, setDropdownHover] = useState(false)
 
     const location = props.history.location.pathname;
+    const { cartItems, clickedCart } = useContext(CartContext)
 
     function clickToClose() {
         document.body.style.overflow = 'unset';
@@ -147,6 +149,9 @@ function Header(props) {
             setWhiteText(false);
             setDisableBox(false);
         }
+        if (clickedCart) {
+            setScrolled(false)
+        }
 
         function onScroll() {
             if (location === "/news") {
@@ -195,11 +200,12 @@ function Header(props) {
         return() => {
             window.removeEventListener("scroll", onScroll);
         }
-    }, [location, dropdownHover]);
+    }, [clickedCart, location, dropdownHover]);
 
     if(searchOpen || accountOpen || cartOpen){
         document.body.style.overflow = 'hidden';
     }
+
 
     return(
         <div
@@ -269,15 +275,6 @@ function Header(props) {
                         }}
                         />
                 </div>
-                <div className="icon-container">
-                    <FontAwesomeIcon 
-                        icon={faUser} 
-                        className="icon"
-                        onClick={()=> {
-                            setAccountOpen(true)
-                        }}
-                        />
-                </div>
                 <div 
                     className="icon flex-center"
                     onClick={()=> {
@@ -291,9 +288,17 @@ function Header(props) {
                         className={classNames('cart-count flex-center', {
                             cart_count_news_hover: whiteText === true
                         })}> 
-                            
-                        <p>0</p>
+                        <p>{cartItems.length}</p>
                     </div>
+                </div>
+                <div className="icon-container">
+                    <FontAwesomeIcon 
+                        icon={faUser} 
+                        className="icon"
+                        onClick={()=> {
+                            setAccountOpen(true)
+                        }}
+                        />
                 </div>
             </div>
             <Search searchOpen={searchOpen} clickToClose={clickToClose}/>
