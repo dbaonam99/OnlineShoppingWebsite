@@ -14,7 +14,7 @@ function Account(props) {
     const [arrSuccess, setArrSuccess] = useState([]);
     const [arrErr, setArrErr] = useState([]);
     const [user, setUser] = useState({});
-    const [userInfo, setUserInfo] = useState({});
+    const [userInfo ,setUserInfo] = useState({})
 
     const handleOnChange = (event) => {
         setUser({...user , [event.target.name]: event.target.value})
@@ -29,12 +29,12 @@ function Account(props) {
             })
             .then(res => {
                 setArrSuccess(arrSuccess=>[...arrSuccess, "Login success!"])
-                localStorage.setItem('token', res.data.token);
                 setTimeout(()=> {
                     window.location.reload(false);
                     document.body.style.overflow = 'unset';
                 }, 1000)
                 setUserInfo(Object.assign(res.data.user, userInfo));
+                localStorage.setItem('token', res.data.token);
             })
             .catch(err => {
                 if (401 === err.response.status) {

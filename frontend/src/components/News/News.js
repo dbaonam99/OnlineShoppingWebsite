@@ -1,5 +1,5 @@
-import React from 'react';
-import { withRouter } from 'react-router-dom';
+import React, { useEffect } from 'react';
+import { Link, withRouter } from 'react-router-dom';
 import '../../App.css';
 
 function News(props) {
@@ -10,26 +10,31 @@ function News(props) {
     }
 
     const news = props.news;
+    const cateLink = (`/news/category/${news.newCate}`).toLowerCase()
 
     return(
         <div 
-            className="News"
-            onClick={redirect}>
-            <div className="news-img">
+            className="News">
+            <div className="news-img"
+                onClick={redirect}>
                 <img src={news.newImg} alt="z"></img>
             </div>
             <div className="news-info flex-center">
                 <div className="news-time">{news.newTime}</div>
-                <div className="news-cate">{news.newCate}</div>
+                <Link to={cateLink} className="news-cate" onClick={()=>{window.scrollTo(0,0);}}>{news.newCate}</Link>
             </div>
-            <div className="news-title-box">
+            <div 
+                className="news-title-box"
+                onClick={redirect}>
                 {news.newTitle}
             </div>
             <p className="news-content tripledot">
                 {news.newContent}
             </p>
-            <div className="news-link">
-                <a href="#.com">Read More</a>
+            <div 
+                className="news-link flex-center"
+                onClick={redirect}>
+                <p>Read More</p>
             </div>
         </div>
     )

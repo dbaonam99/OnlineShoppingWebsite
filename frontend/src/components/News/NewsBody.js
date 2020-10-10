@@ -4,8 +4,8 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import {  faFacebookF, faTwitter, faInstagram, faGoogle } from '@fortawesome/free-brands-svg-icons';
 import classNames from 'classnames'
 import axios from 'axios'
-
-export default function NewsBody() {
+import { withRouter } from 'react-router-dom';
+function NewsBody(props) {
     const [news, setNews] = useState([]);
     const [isSearchFocus, setIsSearchFocus] = useState(false);
     const [currentPage, setCurrentPage] = useState(1);
@@ -20,11 +20,19 @@ export default function NewsBody() {
     let splicedCate = []
 
     useEffect(() => {
-        axios.get(`http://localhost:4000/news`)
-            .then(res => {
-                setNews(res.data)
-            }
-        )
+        if (props.history.location.pathname === "/news") {
+            axios.get(`http://localhost:4000/news`)
+                .then(res => {
+                    setNews(res.data)
+                }
+            )
+        } else {
+            axios.get(`http://localhost:4000/news/category/${props.match.params.cate}`)
+                .then(res => {
+                    setNews(res.data)
+                }
+            )
+        }
     },[])
 
     const choosePage = (event) => {
@@ -107,7 +115,9 @@ export default function NewsBody() {
     
     return(
         <div className="NewsBody">
-            <div className="newsbanner-nav">
+            <div className={classNames("newsbanner-nav", {
+                displayNone: props.history.location.pathname !== "/news"
+            })}>
                 <div
                     className={currentTab === -1 ? "newsbanner-nav-active" : ""}
                     onClick={() => {
@@ -117,20 +127,19 @@ export default function NewsBody() {
                     >All Blog Posts
                 </div>
                 {sortedCate.map((item, index) => {
-                    return (
-                        <div
-                            key={index}
-                            id={index}
-                            className={currentTab === Number(index) ? "newsbanner-nav-active" : ""}
-                            onClick={(event) => {
-                                setCurrentTab(index)
-                                setCurrentTabText(event.currentTarget.textContent)
-                                setCurrentPage(1)
-                            }}
-                            >{item}
-                        </div>
-                    )
-                })}
+                return (
+                    <div
+                        key={index}
+                        id={index}
+                        className={currentTab === Number(index) ? "newsbanner-nav-active" : ""}
+                        onClick={(event) => {
+                            setCurrentTab(index)
+                            setCurrentTabText(event.currentTarget.textContent)
+                            setCurrentPage(1)
+                        }}
+                        >{item}
+                    </div>
+                )})}
             </div>
             <div className="newsbody-container">
                 <div className="newsbody-post">
@@ -270,3 +279,4 @@ export default function NewsBody() {
         </div>
     )
 }
+export default withRouter(NewsBody);

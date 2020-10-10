@@ -16,6 +16,7 @@ import NewsDetail from './pages/NewsDetail';
 import OpenChatBtn from './components/OpenChatBtn';
 
 import { CartProvider } from './contexts/Cart'
+import NewsCate from './pages/NewsCate';
 
 function App() {
   return (
@@ -30,6 +31,7 @@ function App() {
           <Route path="/collection" exact component={Collection}></Route>
           <Route path="/products/:id" exact component={ProductDetail}></Route>
           <Route path="/news/:id" exact component={NewsDetail}></Route>
+          <Route path="/news/category/:cate" exact component={NewsCate}></Route>
         </div>
         <OpenChatBtn/>
       </Router>

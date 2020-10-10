@@ -930,14 +930,17 @@
   font-weight: 500;
   color: #bbb;
 }
-
 .news-cate {
   font-size: 12px;
   margin: 10px 10px;
   font-weight: 500;
   color: #111;
+  text-decoration: none;
+  text-transform: uppercase;
 }
-
+.news-cate:hover {
+  text-decoration: underline;
+}
 .news-title-box {
   text-align: center;
   word-wrap: break-word;
@@ -946,8 +949,11 @@
   font-size: 20px;
   font-weight: 300;
   font-family: Poppins-medium;
+  cursor: pointer;
 }
-
+.news-title-box:hover {
+  text-decoration: underline;
+}
 .news-content {
   color: #777;
   font-size: 12px;
@@ -965,19 +971,22 @@
 }
 
 .news-link {
-  text-align: center;
   margin-bottom: 20px;
 }
-
-.news-link a {
+.news-link p {
   font-size: 12px;
   position: relative;
-  width: 200px;
   color: #000;
-  text-decoration: none;
+  text-align: center;
+  cursor: pointer;
 }
-
-.news-link a::after{
+.news-link p:hover {
+  color: #343434;
+}
+.news-link p:hover::after {
+  background: #343434;
+}
+.news-link p::after{
   content: '';
   display: block;
   height: 2px;
@@ -988,7 +997,6 @@
   width: 100%;
   position: absolute;
 }
-
 .pagnigation {
   width: 90px;
 }
@@ -1250,6 +1258,7 @@
   font-family: sans-serif;
   /* margin-top: -40px; */
   margin-bottom: 30px;
+  text-transform: capitalize;
 }
 
 .newsbanner-nav {
@@ -1296,9 +1305,9 @@
   font-size: 12px;
 }
 
-.newsbanner-breadcrumb div {
-  margin: 0 10px;
+.newsbanner-breadcrumb .link {
   text-transform: capitalize;
+  cursor: pointer;
 }
 
 /* NewsBody */
@@ -1396,6 +1405,9 @@
 
 .newsbody-small-info .newsbody-cate {
   margin-left: 20px;
+}
+.newsbody-cate:hover {
+  text-decoration: underline;
 }
 
 .newsbody-smaill-line {

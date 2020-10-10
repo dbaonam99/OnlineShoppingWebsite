@@ -143,7 +143,7 @@ function Header(props) {
     ]
 
     useEffect(() => {
-        if (location === "/news") {
+        if (location === "/news" || location === `/news/category/${props.match.params.cate}`) {
             setWhiteText(true);
             setDisableBox(true);
         } else {
@@ -156,7 +156,7 @@ function Header(props) {
         }
 
         function onScroll() {
-            if (location === "/news") {
+            if (location === "/news" || location === `/news/category/${props.match.params.cate}`) {
                 if(window.pageYOffset < 50) { // top
                     if (dropdownHover === true) {
                         setWhiteBox(true)
@@ -202,15 +202,10 @@ function Header(props) {
         return() => {
             window.removeEventListener("scroll", onScroll);
         }
-    }, [clickedCart, location, dropdownHover]);
+    }, [clickedCart, location, dropdownHover, props.match.params.cate]);
 
     if(searchOpen || accountOpen || cartOpen){
         document.body.style.overflow = 'hidden';
-    }
-
-    const token = localStorage.getItem('token')
-    if (token) {
-        console.log("co tocken")
     }
 
     return(
@@ -221,19 +216,19 @@ function Header(props) {
                 white_disable: disableBox === true
             })}
             onMouseEnter={() => { 
-                if (location === "/news") {
+                if (location === "/news" || location === `/news/category/${props.match.params.cate}`)  {
                     setWhiteText(false); 
                     setDisableBox(false);
                 }
             }}
             onMouseOver={() => { 
-                if (location === "/news") {
+                if (location === "/news" || location === `/news/category/${props.match.params.cate}`)  {
                     setWhiteText(false); 
                     setDisableBox(false);
                 }
             }}
             onMouseLeave={() => { 
-                if (location === "/news" && window.pageYOffset < 50) {
+                if ((location === "/news" && window.pageYOffset < 50) || (location === `/news/category/${props.match.params.cate}` && window.pageYOffset < 50)) {
                     setWhiteText(true);
                 }
             }}
@@ -297,13 +292,14 @@ function Header(props) {
                         <p>{cartItems.length}</p>
                     </div>
                 </div>
-                <div className="icon-container">
+                <div 
+                    className="icon-container"
+                    onClick={()=> {
+                        setAccountOpen(true)
+                    }}>
                     <FontAwesomeIcon 
                         icon={faUser} 
                         className="icon"
-                        onClick={()=> {
-                            setAccountOpen(true)
-                        }}
                         />
                 </div>
             </div>

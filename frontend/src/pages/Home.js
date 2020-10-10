@@ -8,7 +8,6 @@ import Newsletter from "../components/Layouts/Newsletter.js"
 import Footer from "../components/Layouts/Footer.js"
 import Banner from '../components/Banner/Banner.js'
 import Header from '../components/Header/Header.js'
-// import Service from "../components/Service.js"
 
 class Home extends Component {
     render() {
@@ -20,7 +19,6 @@ class Home extends Component {
                 <HomeTab/>
                 <Collection/>
                 <FashionNews/>
-                {/* <Service/> */}
                 <Newsletter/>
                 <Footer/>
             </div>

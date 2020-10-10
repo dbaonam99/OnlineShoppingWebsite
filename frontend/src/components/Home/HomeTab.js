@@ -7,7 +7,7 @@ export default function HomeTab() {
     const [currentTab, setCurrentTab] = useState(1)
     const [isActive, setIsActive] = useState(1)
     const [products, setProducts] = useState([]);
-
+    
     useEffect(() => {
         axios.get(`http://localhost:4000/products`)
             .then(res => {
