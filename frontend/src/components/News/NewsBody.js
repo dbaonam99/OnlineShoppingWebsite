@@ -1,17 +1,15 @@
 import React, { useEffect, useState } from 'react';
 import '../../App.css';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import {  faFacebookF, faTwitter, faInstagram, faGoogle } from '@fortawesome/free-brands-svg-icons';
 import axios from 'axios'
 import { withRouter } from 'react-router-dom';
 import NewsNavbar from './NewsNavbar';
 import NewsBodyBig from './NewsBodyBig';
 import NewBodySmall from './NewBodySmall';
 import NewsBodyPag from './NewsBodyPag';
+import NewsBodyWidget from './NewsBodyWidget';
 
 function NewsBody(props) {
     const [news, setNews] = useState([]);
-    const [isSearchFocus, setIsSearchFocus] = useState(false);
     const [currentPage, setCurrentPage] = useState(1);
     const newsPerPage = 5;
     const [currentTab, setCurrentTab] = useState(-1);
@@ -19,9 +17,9 @@ function NewsBody(props) {
     let firstPost = [];
     let sortedCate = [];
     let nextPosts = [];
+    let splicedCate = [];
     let pages = [];
     let pageNumbers = []; //Số trang được chia ra
-    let splicedCate = []
 
     useEffect(() => {
         if (props.history.location.pathname === "/news") {
@@ -100,7 +98,7 @@ function NewsBody(props) {
                 pages.push(currentPage - 1, currentPage);
             }
         }
-
+        
         //Get all category
         const cate = Object.values(news.reduce((a, {newCate}) => {
             a[newCate] = a[newCate] || {newCate, count: 0};
@@ -126,7 +124,7 @@ function NewsBody(props) {
         setCurrentPage(data)
     }
     const cateLink = (`/news/category/${firstPost.newCate}`)
-    
+
     return(
         <div className="NewsBody">
             <NewsNavbar
@@ -158,78 +156,7 @@ function NewsBody(props) {
                         pageNumbers = {pageNumbers}
                     />
                 </div>
-                <div className="newsbody-widget">
-                    <div className="widget-search">
-                        <div className="widget-title">Search</div>
-                        <form className={ isSearchFocus === true ? "widget-form widget_search_click" : "widget-form"} 
-                            onMouseEnter={() => { setIsSearchFocus(true)}}
-                            onMouseLeave={() => { setIsSearchFocus(false)}}>
-                            <input placeholder="Search the site"></input>
-                            <button>Search</button>
-                        </form>
-                    </div>
-                    <div className="widget-pop">
-                        <div className="widget-title">Popular Posts</div>
-                        {
-                            topViews.map((item, index) => {
-                                return(
-                                    <div key={index} className="widget-post">
-                                        <div className="widget-post-img" style={{backgroundImage: `url(${item.newImg})`}}></div>
-                                        <div className="widget-post-info">
-                                            <div className="widget-post-title">{item.newTitle}</div>
-                                            <div className="widget-post-info2">
-                                                <span className="widget-post-time">{item.newTime}</span>
-                                                <span className="widget-post-view">{item.newView} view</span>
-                                            </div>
-                                        </div>
-                                    </div>
-                                )
-                            })
-                        }
-                    </div>
-                    <div className="widget-cate">
-                        <div className="widget-title">Categorys</div>
-                        {
-                            splicedCate.map((item, index) => {
-                                return (
-                                    <div key={index} className="widget-cate-container">
-                                        <div className="widget-cate-div">
-                                            <div>{item.newCate}</div>
-                                            <div className="widget-cate-count">{item.count}</div>
-                                        </div>
-                                    </div>
-                                )
-                            })
-                        }
-                    </div>
-                    <div className="widget-connect">
-                        <div className="widget-title">Stay Connected</div>
-                        <div className="widget-connect-container">
-                            <div className="widget-icon">
-                                <FontAwesomeIcon icon={faFacebookF}/>
-                            </div>
-                            <div className="widget-icon">
-                                <FontAwesomeIcon icon={faTwitter}/>
-                            </div>
-                            <div className="widget-icon">
-                                <FontAwesomeIcon icon={faInstagram}/>
-                            </div>
-                            <div className="widget-icon">
-                                <FontAwesomeIcon icon={faGoogle}/>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div className="widget-newsletter">
-                        <div className="widget-title">Newsletter</div>
-                        <form className={ isSearchFocus === true ? "widget-form widget_search_click" : "widget-form"} 
-                            onMouseEnter={() => { setIsSearchFocus(true)}}
-                            onMouseLeave={() => { setIsSearchFocus(false)}}>
-                            <input placeholder="Enter your email"></input>
-                            <button>Send</button>
-                        </form>
-                    </div>
-                </div>
+                <NewsBodyWidget/>
             </div>
             <div className="newsbody-line"></div>
         </div>

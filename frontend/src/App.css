@@ -1490,7 +1490,6 @@
   border-bottom: 2px solid #23232c;
   transition: 1s;
 }
-
 .widget-form input {
   height: 50px;
   font-size: 12px;
@@ -1500,7 +1499,6 @@
   padding: 10px 50px 10px 0;
   transition: all .5s;
 }
-
 .widget-form input:focus {
   outline: none !important;
 }
@@ -1556,6 +1554,10 @@
   width: 100%;
   font-size: 12px;
   margin-bottom: 10px;
+  cursor: pointer;
+}
+.widget-post-title:hover {
+  text-decoration: underline;
 }
 
 .widget-post-time {
@@ -1581,7 +1583,10 @@
   display: flex;
   justify-content: space-between;
 }
-
+.widget-cate-div:hover {
+  text-decoration: underline;
+  cursor: pointer;
+}
 .widget-cate-div div {
   font-size: 11px;
   text-transform: uppercase;
