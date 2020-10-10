@@ -1328,17 +1328,14 @@
   margin-right: 25px;
   position: relative;
 }
-
 .newsbody-big { 
   flex-direction: column;
   position: relative;
 }
-
 .newsbody-small {
   /* background-color: green; */
   margin-top: 30px;
 }
-
 .newsbody-small-container {
   /* background-color: green; */
   display: flex;
@@ -1372,6 +1369,7 @@
   font-size: 18px;
   text-align: center;
   margin-bottom: 15px;
+  cursor: pointer;
 }
 
 .newsbody-content {
@@ -1402,9 +1400,11 @@
   text-transform: uppercase;
   margin-bottom: 10px;
 }
-
-.newsbody-small-info .newsbody-cate {
+.newsbody-cate {
   margin-left: 20px;
+  cursor: pointer;
+  color: #111 !important;
+  text-decoration: none;
 }
 .newsbody-cate:hover {
   text-decoration: underline;
@@ -1421,13 +1421,16 @@
 .newsbody-small-left .newsbody-content {
   text-align: left;
 }
-
 .newsbody-small-left .newsbody-title {
   text-align: left;
   width: 100%;
   font-size: 22px;
   font-family: sans-serif;
   font-weight: 500;
+  cursor: pointer;
+}
+.newsbody-title:hover {
+  text-decoration: underline;
 }
 
 .newsbody-small-left .newsbody-content {
@@ -1439,6 +1442,7 @@
   font-size: 12px;
   margin-top: 30px;
   position: relative;
+  cursor: pointer;
 }
 
 .newsbody-link::after {

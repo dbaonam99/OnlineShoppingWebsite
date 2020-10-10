@@ -12,7 +12,7 @@ export default function NewsContent(props) {
         Object.assign(news,props.news) // gán obj props.news vào news
     }
     const cateLink = (`/news/category/${news.newCate}`)
-    console.log(news.newCate)
+    
     return(
         <div className="NewsContent opa2">
             <div className="newsbody-info flex-center">

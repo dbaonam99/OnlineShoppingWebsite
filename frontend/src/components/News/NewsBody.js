@@ -2,9 +2,13 @@ import React, { useEffect, useState } from 'react';
 import '../../App.css';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import {  faFacebookF, faTwitter, faInstagram, faGoogle } from '@fortawesome/free-brands-svg-icons';
-import classNames from 'classnames'
 import axios from 'axios'
 import { withRouter } from 'react-router-dom';
+import NewsNavbar from './NewsNavbar';
+import NewsBodyBig from './NewsBodyBig';
+import NewBodySmall from './NewBodySmall';
+import NewsBodyPag from './NewsBodyPag';
+
 function NewsBody(props) {
     const [news, setNews] = useState([]);
     const [isSearchFocus, setIsSearchFocus] = useState(false);
@@ -33,7 +37,7 @@ function NewsBody(props) {
                 }
             )
         }
-    },[])
+    },[props.history.location.pathname, props.match.params.cate])
 
     const choosePage = (event) => {
         window.scrollTo(0,0);
@@ -112,95 +116,47 @@ function NewsBody(props) {
             sortedCate.push(splicedCate[i].newCate);
         }
     }
+    const setCurrentTabFunc = (data) => {
+        setCurrentTab(data)
+    }
+    const setCurrentTabTextFunc = (data) => {
+        setCurrentTabText(data)
+    }
+    const setCurrentPageFunc = (data) => {
+        setCurrentPage(data)
+    }
+    const cateLink = (`/news/category/${firstPost.newCate}`)
     
     return(
         <div className="NewsBody">
-            <div className={classNames("newsbanner-nav", {
-                displayNone: props.history.location.pathname !== "/news"
-            })}>
-                <div
-                    className={currentTab === -1 ? "newsbanner-nav-active" : ""}
-                    onClick={() => {
-                        setCurrentTab(-1);
-                        setCurrentPage(1);
-                    }}
-                    >All Blog Posts
-                </div>
-                {sortedCate.map((item, index) => {
-                return (
-                    <div
-                        key={index}
-                        id={index}
-                        className={currentTab === Number(index) ? "newsbanner-nav-active" : ""}
-                        onClick={(event) => {
-                            setCurrentTab(index)
-                            setCurrentTabText(event.currentTarget.textContent)
-                            setCurrentPage(1)
-                        }}
-                        >{item}
-                    </div>
-                )})}
-            </div>
+            <NewsNavbar
+                setCurrentTab = {setCurrentTabFunc}
+                setCurrentTabText = {setCurrentTabTextFunc}
+                setCurrentPage = {setCurrentPageFunc}
+                currentTab = {currentTab}
+                currentTabText = {currentTabText}
+                sortedCate = {sortedCate}
+            />
             <div className="newsbody-container">
                 <div className="newsbody-post">
-                    <div className="newsbody-big flex-center">
-                        <img className="newsbody-big-img" src={firstPost.newImg} alt="z"/>
-                        <div className="newsbody-info flex-center">
-                            <div className="newsbody-time">{firstPost.newTime}</div>
-                            <div className="newsbody-cate">{firstPost.newCate}</div>
-                        </div>
-                        <div className="newsbody-title">{firstPost.newTitle}</div>
-                        <div className="newsbody-content">{firstPost.newContent}</div>
-                        <div className="newsbody-link">Read More</div>
-                        <div className="newsbody-smaill-line"></div>
-                    </div>
+                    <NewsBodyBig
+                        firstPost = {firstPost}
+                        cateLink = {cateLink}
+                    />
                     {nextPosts.map((item, index) => {
                         return (
-                            <div className="newsbody-small" key={index}> 
-                                <div className="newsbody-small-container">
-                                    <img className="newsbody-small-img" src={item.newImg} alt="z"/>
-                                    <div className="newsbody-small-left">
-                                        <div className="newsbody-small-info flex-center">
-                                            <div className="newsbody-time">{item.newTime}</div>
-                                            <div className="newsbody-cate">{item.newCate}</div>
-                                        </div>
-                                        <div className="newsbody-title">{item.newTitle}</div>
-                                        <div className="newsbody-content">{item.newContent}</div>
-                                        <div className="newsbody-link">Read More</div>
-                                    </div>
-                                </div>
-                                <div className="newsbody-smaill-line"></div>
-                            </div>
+                            <NewBodySmall
+                                item={item}
+                                key={index}
+                            />
                         )
                     })}
-                    <div className="newspagnigation-container">
-                        <div className="newspagnigation" onClick={choosePage}>
-                            <div id="-1" className={classNames({
-                                newspagnigation_disable: currentPage === 1
-                            })}>←</div>
-                            { pages.map(function(number, index) { 
-                                if (currentPage === number) {
-                                    return (
-                                        <div key={number} id={number} className="newspagnigation-active">
-                                            {number}
-                                        </div>
-                                    )
-                                } else {
-                                    return (
-                                    <div 
-                                        key={number}
-                                        id={number}
-                                        >
-                                            {number}
-                                    </div>
-                                    )
-                                } 
-                            })}
-                            <div id="999" className={classNames({
-                                newspagnigation_disable: currentPage === pageNumbers.length
-                            })}>→</div>
-                        </div>
-                    </div>
+                    <NewsBodyPag
+                        choosePage = {choosePage}
+                        currentPage = {currentPage}
+                        pages = {pages}
+                        pageNumbers = {pageNumbers}
+                    />
                 </div>
                 <div className="newsbody-widget">
                     <div className="widget-search">
