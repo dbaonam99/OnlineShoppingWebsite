@@ -1,0 +1,78 @@
+.Login {
+    height: 100vh;
+    background-color: #777;
+    overflow: hidden;
+}
+.login-bg {
+    width: 100%;
+    position: relative;
+    bottom: 600px;
+}
+.login-overlay {
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.6);
+    position: absolute;
+    top: 0;
+}
+.login-box {
+    background-color: #fff;
+    width: 70%;
+    height: 500px;
+    border-radius: 5px;
+    padding: 5px;
+}
+.login-left {
+    width: 50%;
+}
+.login-right {
+    width: 50%;
+    position: relative;
+}
+.login-right img {
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 100%;
+}
+.animation-overlay {
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.3);
+    top: 0;
+    left: 0;
+    z-index: 3;
+    position: absolute;
+}
+.login-title {
+    font-size: 14px;
+    text-transform: uppercase;
+    margin: 20px 0;
+    color: #777;
+}
+.admin-login-form {
+    width: 80%;
+}
+.admin-login-form input {
+    font-size: 14px;
+    outline: none;
+    border: none;
+    height: 50px;
+    margin: 15px 0;
+    border-bottom: 2px #ddd solid;
+    transition: .5s;
+}
+.admin-login-form input:focus {
+    border-bottom: 2px #111 solid;
+}
+.admin-login-form input:hover {
+    border-bottom: 2px #111 solid;
+    transition: .5s;
+}
+.admin-login-form button {
+    margin-top: 40px;
+    height: 50px;
+    outline: none;
+    border: none;
+    font-size: 14px;
+}

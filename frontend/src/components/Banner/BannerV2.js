@@ -37,8 +37,7 @@ class BannerV2 extends Component {
                         </ScrollAnimation>
                         <div className="newsbanner-breadcrumb flex-center">
                             <div>Home</div>
-
-                            <FontAwesomeIcon icon={faAngleRight} className="cart-icon"/>
+                            <FontAwesomeIcon icon={faAngleRight} className="cart-icon" style={{margin: '0 10px'}}/>
                             <div>{locationText}</div>
                         </div>
                     </div>

@@ -4,9 +4,12 @@ import '../App.css'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faComment } from '@fortawesome/free-solid-svg-icons'
 import socketIOClient from "socket.io-client";
+import { withRouter } from 'react-router-dom'
+
+
 const ENDPOINT = "http://localhost:4000";
 
-export default function OpenChatBtn() {
+function OpenChatBtn(props) {
 
     const [openChat, setOpenChat] = useState(false);
     const [onHover, setOnHover] = useState(false); 
@@ -31,10 +34,12 @@ export default function OpenChatBtn() {
     const handleChange = (event) => {
         setInputValue(event.target.value)
     }
+    const location = props.history.location.pathname;
+    console.log(location)
 
     return (
         <div 
-            className="chat-btn"
+            className={location === "/admin" || location === "/admin/dashboard" ? "chat-btn displayNone" : "chat-btn"}
             onMouseEnter={()=> { setOnHover(true) }}
             onMouseLeave={()=> { if (openChat) { setOnHover(true) } else setOnHover(false) }}
         >
@@ -65,3 +70,5 @@ export default function OpenChatBtn() {
         </div>
     )
 }
+
+export default withRouter(OpenChatBtn);

@@ -14,11 +14,15 @@ import ProductDetail from './pages/ProductDetail.js'
 import Collection from './pages/Collection';
 import NewsDetail from './pages/NewsDetail';
 import OpenChatBtn from './components/OpenChatBtn';
-
-import { CartProvider } from './contexts/Cart'
 import NewsCate from './pages/NewsCate';
 
-function App() {
+
+import Login from './components/admin/Login/Login';
+
+import { CartProvider } from './contexts/Cart'
+import Dashboard from './components/admin/Dashboard/Dashboard';
+
+function App(props) {
   return (
     <CartProvider>
       <Router>
@@ -32,6 +36,8 @@ function App() {
           <Route path="/products/:id" exact component={ProductDetail}></Route>
           <Route path="/news/:id" exact component={NewsDetail}></Route>
           <Route path="/news/category/:cate" exact component={NewsCate}></Route>
+          <Route path="/admin" exact component={Login}></Route>
+          <Route path="/admin/dashboard" exact component={Dashboard}></Route>
         </div>
         <OpenChatBtn/>
       </Router>

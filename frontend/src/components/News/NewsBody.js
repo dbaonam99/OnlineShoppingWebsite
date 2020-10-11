@@ -54,8 +54,6 @@ function NewsBody(props) {
         }
     }
     
-    
-    const topViews = (news.sort((a, b) => b.newView - a.newView)).slice(0,3); //Top view on Category
     if (news.length > 0) {
         //Filt Posts depend on Category
         let filterNews = [];

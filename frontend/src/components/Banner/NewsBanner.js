@@ -42,7 +42,7 @@ function NewsBanner(props) {
                     </ScrollAnimation>
                     }
 
-                    <div className="newsbanner-breadcrumb flex-center">
+                    <div className="newsbanner-breadcrumb flex-center"> 
                         <Link className="a" to="/">Home</Link>
                         {
                             locationArr.map((item, index) => {

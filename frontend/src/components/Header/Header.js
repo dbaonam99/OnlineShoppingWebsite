@@ -12,6 +12,7 @@ import Account from './Account.js';
 import Cart from './Cart.js';
 import MenuItemDropdown from './MenuItemDropdown';
 import { CartContext } from '../../contexts/Cart';
+// import debounce from 'lodash.debounce';
 
 
 function Header(props) {
@@ -154,8 +155,8 @@ function Header(props) {
         if (clickedCart) {
             setScrolled(false)
         }
-
         function onScroll() {
+            console.log("z")
             if (location === "/news" || location === `/news/category/${props.match.params.cate}`) {
                 if(window.pageYOffset < 50) { // top
                     if (dropdownHover === true) {
@@ -198,6 +199,7 @@ function Header(props) {
             this.prev = window.pageYOffset;
         }
 
+        // window.addEventListener("scroll", debounce(onScroll, 50));
         window.addEventListener("scroll", onScroll);
         return() => {
             window.removeEventListener("scroll", onScroll);

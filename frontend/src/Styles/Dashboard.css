@@ -1,0 +1,116 @@
+.Dashboard {
+    width: 100%;
+    font-family: sans-serif !important;
+}
+.menu-line {
+    height: 0.5px;
+    width: 100%;
+    border-bottom: .7px #777 solid;
+    margin: 15px 0;
+}
+.DashboardMenu {
+    width: 20%;
+    height: 100vh;
+    background-color: blue;
+    background-image: url(https://images.unsplash.com/photo-1524504388940-b1c1722653e1?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=900&q=60);
+    background-size: cover;
+    background-position: -80px;
+    position: relative;
+    box-shadow: 0 16px 38px -12px rgba(0,0,0,.56),0 4px 25px 0 rgba(0,0,0,.12),0 8px 10px -5px rgba(0,0,0,.2);
+    z-index: 10000;
+    text-transform: uppercase;
+}
+.db-menu-overlay {
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    background-color: rgba(1, 1, 1, 0.75);
+    z-index: -10;
+}
+.db-menu {
+    width: 100%;
+    height: 100%;
+    color: #fff;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    overflow-y: scroll;
+}
+.db-menu::-webkit-scrollbar {
+    width: 0px;
+}
+
+.db-menu-user {
+    width: 100%;
+    font-size: 14px;
+    margin: 5px 0;
+    cursor: pointer;
+}
+.db-menu-user div {
+    align-items: center;
+    font-size: 12px;
+    justify-content: flex-start;
+}
+.db-menu-name {
+    flex-grow: 1;
+    margin-left: 10px;
+}
+.db-menu-avt {
+    display: flex;
+    align-items: center;
+    margin-right: 2px;
+}
+.db-menu-avt img {
+    width: 34px;
+    height: 34px;
+    border-radius: 50%;
+    margin-left: 3px;
+}
+.db-menu-user-opt {
+    width: 100%;
+    font-size: 14px;
+    transition: height .4s;
+    height: 0;
+    overflow: hidden;
+}
+.closeOpt {
+    height: 120px;
+}
+.closeOpt div:first-child {
+    margin-top: 15px;
+}
+.db-menu-listitem {
+    width: 100%;
+}
+.db-menu-item {
+    font-size: 12px;
+    width: 100%;
+    justify-content: flex-start;
+    padding: 10px;
+    margin-bottom: 10px;
+    cursor: pointer;
+    height: 50px;
+    border-radius: 5px;
+    transition: .4s;
+}
+.db-menu-item:hover {
+    background-color: #fff;
+    color: #000;
+}
+.db-menu-item p {
+    text-transform: uppercase;
+}
+.db-menu-item .icon {
+    margin-right: 20px;
+    width: 18px;
+    height: 18px;
+}
+
+
+
+.DashboardMain {
+    padding: 20px 30px;
+    background-color: #eaeaea;
+    width: 80%;
+}
