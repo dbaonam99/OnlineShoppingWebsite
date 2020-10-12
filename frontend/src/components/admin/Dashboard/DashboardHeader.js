@@ -1,7 +1,7 @@
 import React from 'react'
 import '../../../App.css'
 import '../../../Styles/Dashboard.css'
-import { faBell, faEllipsisV, faSearch } from '@fortawesome/free-solid-svg-icons'
+import { faBell, faEllipsisV, faListUl, faSearch } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 
 
@@ -12,7 +12,8 @@ export default function DashboardHeader(props) {
             <div className="flex-center">
                 <div className="menu-opt flex-center"
                     onClick={props.setOpenMenuOnClick}>
-                    <FontAwesomeIcon icon={faEllipsisV}/>
+                    { props.openMenu && <FontAwesomeIcon icon={faEllipsisV}/>}
+                    { props.openMenu === false && <FontAwesomeIcon icon={faListUl}/>}
                 </div>
                 <p>{props.itemName}</p>
             </div>

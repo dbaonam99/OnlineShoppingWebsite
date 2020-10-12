@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import '../../../App.css'
 import '../../../Styles/Dashboard.css'
-import DashboardMain from './DashboardMain'
+import DashboardBody from './DashboardBody'
 import DashboardMenu from './DashboardMenu'
 import { faChartLine, faFileInvoice, faHome, faInbox, faNewspaper, faTshirt, faUser } from '@fortawesome/free-solid-svg-icons'
 
@@ -63,10 +63,11 @@ export default function Dashboard() {
                 menuItems = {menuItems}
                 openMenu = {openMenu}
             />
-            <DashboardMain
+            <DashboardBody
                 tabId = {tabId}
                 menuItems = {menuItems}
                 setOpenMenuOnClick = {setOpenMenuOnClick}
+                openMenu = {openMenu}
             />
         </div>
     )

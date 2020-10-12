@@ -33,19 +33,14 @@ export default function DashboardMenu(props) {
                     <div className="flex-center" style={{height: '24px', marginLeft: '12px'}}>
                         <p className="logo-text">SB</p>
                     </div>
-                    {/* { hideText === false &&  
+                    { hideText === false &&  
                         <img 
                             alt="" 
                             src="https://demo.uix.store/sober/wp-content/themes/sober/images/logo-light.svg" 
                             height='24px'
                             style={{marginLeft:'27px'}}
-                        ></img> } */}
-                    <img 
-                        alt="" 
-                        src="https://demo.uix.store/sober/wp-content/themes/sober/images/logo-light.svg" 
-                        height='24px'
-                        style={{marginLeft:'27px'}}
-                    ></img> 
+                        ></img> 
+                    }
                 </div>              
                 <div className="menu-line"></div>
                 <div 
