@@ -35,7 +35,6 @@ function OpenChatBtn(props) {
         setInputValue(event.target.value)
     }
     const location = props.history.location.pathname;
-    console.log(location)
 
     return (
         <div 

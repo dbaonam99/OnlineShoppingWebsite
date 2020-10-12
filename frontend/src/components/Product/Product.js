@@ -19,7 +19,6 @@ function Product(props) {
         // }
     }
     const openView = () => {
-        console.log("zxczxczxc")
         setView(true)
     }
     if(view){

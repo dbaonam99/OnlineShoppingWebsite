@@ -19,6 +19,14 @@
     box-shadow: 0 16px 38px -12px rgba(0,0,0,.56),0 4px 25px 0 rgba(0,0,0,.12),0 8px 10px -5px rgba(0,0,0,.2);
     z-index: 10000;
     text-transform: uppercase;
+    transition: width .5s;
+}
+.DashboardMenu_small {
+    width: 80px;
+    transition: width .5s;
+}
+.DashboardMenu-disable {
+    visibility: hidden;
 }
 .db-menu-overlay {
     width: 100%;
@@ -31,20 +39,29 @@
     width: 100%;
     height: 100%;
     color: #fff;
-    padding: 20px;
+    padding: 15px;
     display: flex;
     flex-direction: column;
     align-items: center;
     overflow-y: scroll;
+    overflow-x: hidden;
 }
 .db-menu::-webkit-scrollbar {
     width: 0px;
 }
-
+.db-menu-logo {
+    margin-top: 5px;
+    width: 100%;
+    min-height: 24px;
+}
+.logo-text {
+    font-size: 22px;
+    font-family: sans-serif;
+    font-weight: 300;
+}
 .db-menu-user {
     width: 100%;
     font-size: 14px;
-    margin: 5px 0;
     cursor: pointer;
 }
 .db-menu-user div {
@@ -54,12 +71,13 @@
 }
 .db-menu-name {
     flex-grow: 1;
-    margin-left: 10px;
+    text-transform: uppercase;
+    margin-left: 35px;
+    white-space: nowrap;
 }
 .db-menu-avt {
     display: flex;
     align-items: center;
-    margin-right: 2px;
 }
 .db-menu-avt img {
     width: 34px;
@@ -75,7 +93,7 @@
     overflow: hidden;
 }
 .closeOpt {
-    height: 120px;
+    height: 125px;
 }
 .closeOpt div:first-child {
     margin-top: 15px;
@@ -85,7 +103,6 @@
 }
 .db-menu-item {
     font-size: 12px;
-    width: 100%;
     justify-content: flex-start;
     padding: 10px;
     margin-bottom: 10px;
@@ -98,19 +115,76 @@
     background-color: #fff;
     color: #000;
 }
-.db-menu-item p {
-    text-transform: uppercase;
+.db_menu_active {
+    background-color: #fff;
+    color: #000;
 }
 .db-menu-item .icon {
-    margin-right: 20px;
     width: 18px;
     height: 18px;
+    margin-left: 5px;
 }
-
-
-
 .DashboardMain {
     padding: 20px 30px;
     background-color: #eaeaea;
-    width: 80%;
+    flex-grow: 1;
+    height: 100vh;
+}
+.dashboard-header {
+    height: 41px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+.menu-opt {
+    cursor: pointer;
+    background-color: #fff;
+    margin-right: 20px;
+    width: 41px;
+    height: 41px;
+    border-radius: 50%;
+    color: #aaa;
+    border-color: #999;
+    transition: box-shadow .3s;
+    box-shadow: 0 2px 2px 0 hsla(0,0%,60%,.14),0 3px 1px -2px hsla(0,0%,60%,.2),0 1px 5px 0 hsla(0,0%,60%,.12);
+}
+.menu-opt:hover {
+    box-shadow: 0 14px 26px -12px hsla(0,0%,60%,.42),0 4px 23px 0 rgba(0,0,0,.12),0 8px 10px -5px hsla(0,0%,60%,.2);
+}
+.dashboard-header p {
+    font-size: 18px;
+    font-weight: 300;
+    font-family: sans-serif;
+    color: #777;
+}
+.menu-notice {
+    color: #777;
+    margin-left: 40px;
+}
+.menu-search div {
+    background: #fff;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    color: #777;
+    box-shadow: 0 2px 2px 0 hsla(0,0%,60%,.14),0 3px 1px -2px hsla(0,0%,60%,.2),0 1px 5px 0 hsla(0,0%,60%,.12);
+}
+.menu-search div:hover {
+    box-shadow: 0 14px 26px -12px hsla(0,0%,60%,.42),0 4px 23px 0 rgba(0,0,0,.12),0 8px 10px -5px hsla(0,0%,60%,.2);
+}
+.menu-search input {
+    font-size: 16px;
+    font-weight: 300;
+    font-family: sans-serif;
+    background: none;
+    outline: none;
+    border: none;
+    height: 40px;
+    border-bottom: 2px solid #ddd;
+}
+.menu-search input:hover {
+    border-bottom: 2px solid #777;
+}
+.menu-search input:focus {
+    border-bottom: 2px solid #777;
 }
