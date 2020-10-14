@@ -24,7 +24,8 @@ export default function DashboardMenu(props) {
     }, [setHideText, openMenu])
 
     return (
-        <div className={classNames("DashboardMenu", {
+        <div 
+            className={classNames("DashboardMenu", {
                 DashboardMenu_small: !openMenu
             })}>
             <div className="db-menu-overlay"></div>
@@ -33,7 +34,8 @@ export default function DashboardMenu(props) {
                     <div className="flex-center" style={{height: '24px', marginLeft: '12px'}}>
                         <p className="logo-text">SB</p>
                     </div>
-                    { hideText === false &&  
+                    { hideText === false
+                        &&  
                         <img 
                             alt="" 
                             src="https://demo.uix.store/sober/wp-content/themes/sober/images/logo-light.svg" 

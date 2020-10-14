@@ -3,14 +3,17 @@ import '../../../App.css'
 import '../../../Styles/Dashboard.css'
 import DashboardHeader from './DashboardHeader'
 import DashboardMain from './DashboardMain';
-
+import classNames from 'classnames'
 
 export default function DashboardBody(props) {
 
     const tabId = props.tabId;
 
     return (
-        <div className="DashboardBody">
+        <div 
+            className={classNames("DashboardBody", {
+                DashboardBody_small: !props.openMenu
+            })}>
             <DashboardHeader
                 itemName= {props.menuItems[tabId-1].name}
                 setOpenMenuOnClick = {props.setOpenMenuOnClick}

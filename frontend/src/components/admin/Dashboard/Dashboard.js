@@ -6,17 +6,6 @@ import DashboardMenu from './DashboardMenu'
 import { faChartLine, faFileInvoice, faHome, faInbox, faNewspaper, faTshirt, faUser } from '@fortawesome/free-solid-svg-icons'
 
 export default function Dashboard() {
-    const [tabId, setTabId] = useState("1");
-    const [openMenu, setOpenMenu] = useState(true);
-
-    const setTabIdOnClick = (id) => {
-        setTabId(id);
-    }
-    const setOpenMenuOnClick = (id) => {
-        if (openMenu) setOpenMenu(false);
-        else setOpenMenu(true);
-    }
-    
     const menuItems = [
         {
             id: "1",
@@ -54,11 +43,22 @@ export default function Dashboard() {
             icon: faChartLine
         },
     ]
+    const [tabId, setTabId] = useState("1");
+    const [openMenu, setOpenMenu] = useState(true);
+
+    const setTabIdOnClick = (id) => {
+        setTabId(id);
+    }
+    const setOpenMenuOnClick = (id) => {
+        if (openMenu) setOpenMenu(false);
+        else setOpenMenu(true);
+    }
 
     return (
         <div className="Dashboard flex">
             <DashboardMenu
                 setTabIdOnClick = {setTabIdOnClick}
+                setOpenMenuOnClick = {setOpenMenuOnClick}
                 tabId = {tabId}
                 menuItems = {menuItems}
                 openMenu = {openMenu}
@@ -66,8 +66,8 @@ export default function Dashboard() {
             <DashboardBody
                 tabId = {tabId}
                 menuItems = {menuItems}
-                setOpenMenuOnClick = {setOpenMenuOnClick}
                 openMenu = {openMenu}
+                setOpenMenuOnClick = {setOpenMenuOnClick}
             />
         </div>
     )
