@@ -93,6 +93,8 @@
     width: 100%;
 }
 .form-chat .intro {
+    font-size: 14px;
+    color: #555;
     height: 40px;
     outline: none;
     border: none;
@@ -103,6 +105,8 @@
     margin-top: 15px;
 }
 .form-chat .message {
+    font-size: 14px;
+    color: #555;
     height: 80px;
     outline: none;
     margin-top: 15px;
