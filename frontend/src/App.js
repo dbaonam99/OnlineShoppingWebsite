@@ -22,11 +22,13 @@ import Login from './components/admin/Login/Login';
 import { CartProvider } from './contexts/Cart'
 import Dashboard from './components/admin/Dashboard/Dashboard';
 import { UserProvider } from './contexts/User';
+import { ChatProvider } from './contexts/Chat';
 
 function App(props) {
   return (
     <UserProvider>
     <CartProvider>
+    <ChatProvider>
       <Router>
         <div className="App">
           <Route path="/" exact component={Home}></Route>
@@ -43,6 +45,7 @@ function App(props) {
         </div>
         <OpenChatBtn/>
       </Router>
+    </ChatProvider>
     </CartProvider>
     </UserProvider>
   );

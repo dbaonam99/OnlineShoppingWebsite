@@ -6,17 +6,24 @@ module.exports.index = async function(req, res) {
 };
 
 module.exports.newChat = async function(req, res) {
-	console.log(req.body)
 
+	var sessionId = req.body.sessionId;
 	var name = req.body.chatName;
 	var email = req.body.chatEmail;
 	var content = req.body.chatContent;
 
 	const data = {
+		sessionId: sessionId,
 		chatName: name,
 		chatEmail: email,
 		chatContent: content
 	}
-	console.log(data)
 	await Chat.create(data);
+};
+
+module.exports.chatData = function(req, res) {
+	var sessionId = req.params.sessionId;
+	Chat.find({ sessionId: sessionId }).then(function(chat) {
+		res.json(chat);
+	});
 };

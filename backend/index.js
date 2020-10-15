@@ -7,6 +7,7 @@ const mongoose = require('mongoose');
 const bodyParser = require("body-parser");
 var cookieParser = require("cookie-parser");
 
+var Chat = require("./models/chat.model");
 
 var productRoutes = require('./routes/product');
 var newsRoutes = require('./routes/news');
@@ -17,6 +18,7 @@ mongoose.connect('mongodb://localhost:27017/Shop', { useNewUrlParser: true , use
 mongoose.set('useFindAndModify', false);
 
 var cors = require('cors');
+const { create } = require('./models/chat.model');
 app.use(bodyParser.json());
 app.use(cookieParser('secret'));
 
@@ -37,13 +39,17 @@ app.use("/chat", chatRoutes);
 app.use(cors());
 app.options('*', cors());
 
-io.on('connection', function (client) {
+io.on('connection', async function (client) {
   client.on('join', function (data) {
-      console.log(data);
+    console.log("reloading...")
+    Chat.find({ sessionId: data.sessionId }).then(function(chat) {
+      client.emit('sendFirstInfo', chat);
+    }); 
   })
-  client.on('mess',function(data){
-    console.log(data); 
-    client.emit('thread',data);
+
+  
+  client.on('firstMessage',function(data){
+    client.emit('thread', data);
     client.broadcast.emit('thread',data);
   })
 })

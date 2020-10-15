@@ -1,13 +1,23 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import '../../../App.css'
 import '../../../Styles/Dashboard.css'
 import DashboardHeader from './DashboardHeader'
 import DashboardMain from './DashboardMain';
 import classNames from 'classnames'
+import Axios from 'axios';
 
 export default function DashboardBody(props) {
 
     const tabId = props.tabId;
+    const [chatData, setChatData] = useState([])
+
+    useEffect(() => {
+        Axios.get(`http://localhost:4000/chat`)
+            .then(res => {
+                setChatData(res.data)
+            }
+        )
+    },[])
 
     return (
         <div 
@@ -23,7 +33,23 @@ export default function DashboardBody(props) {
                 tabId === "1" && <DashboardMain/>
             }
             {
-                tabId === "2" && <div>tab 2</div>
+                tabId === "2" && 
+                chatData.map((item, index)=> {
+                    return (
+                        <div key={index}>
+                            <p>{item.chatName}</p>
+                            <p>{item.chatEmail}</p>
+                            {item.chatContent.map((item,index)=>{
+                                return (
+                                    <div key={index}>
+                                        <p>{item.text}</p>
+                                        <p>{item.date}</p>
+                                    </div>
+                                )
+                            })}
+                        </div>
+                    )
+                })
             }
             {
                 tabId === "3" && <div>tab 3</div>

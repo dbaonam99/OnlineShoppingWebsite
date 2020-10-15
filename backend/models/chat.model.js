@@ -6,6 +6,7 @@ var chatSchema = new mongoose.Schema({
 	chatContent: Array,
 	time: Date,
 	text: String,
+	sessionId: String,
 	},
     {
     	versionKey: false
