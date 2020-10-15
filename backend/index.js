@@ -11,6 +11,7 @@ var cookieParser = require("cookie-parser");
 var productRoutes = require('./routes/product');
 var newsRoutes = require('./routes/news');
 var userRoutes = require('./routes/user');
+var chatRoutes = require('./routes/chat');
 
 mongoose.connect('mongodb://localhost:27017/Shop', { useNewUrlParser: true , useUnifiedTopology: true});
 mongoose.set('useFindAndModify', false);
@@ -32,6 +33,7 @@ app.use(function(req, res, next) {
 app.use("/products", productRoutes);
 app.use("/news", newsRoutes);
 app.use("/users", userRoutes);
+app.use("/chat", chatRoutes);
 app.use(cors());
 app.options('*', cors());
 
@@ -40,7 +42,7 @@ io.on('connection', function (client) {
       console.log(data);
   })
   client.on('mess',function(data){
-    console.log(data);
+    console.log(data); 
     client.emit('thread',data);
     client.broadcast.emit('thread',data);
   })

@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import '../../App.css';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faTimes , faCheck } from '@fortawesome/free-solid-svg-icons';
@@ -7,14 +7,20 @@ import {
     withRouter
 } from 'react-router-dom'
 
+import { UserContext } from '../../contexts/User'
+
 function Account(props) {
+    const { 
+        userInfo,
+        setUserInfoFunc 
+    } = useContext(UserContext);
 
     const [check, setCheck] = useState(false);
     const [tabID, setTabID] = useState(0);
     const [arrSuccess, setArrSuccess] = useState([]);
     const [arrErr, setArrErr] = useState([]);
     const [user, setUser] = useState({});
-    const [userInfo ,setUserInfo] = useState({})
+    const [login, setLogin] = useState(false);
 
     const handleOnChange = (event) => {
         setUser({...user , [event.target.name]: event.target.value})
@@ -33,13 +39,10 @@ function Account(props) {
                     window.location.reload(false);
                     document.body.style.overflow = 'unset';
                 }, 1000)
-                setUserInfo(Object.assign(res.data.user, userInfo));
                 localStorage.setItem('token', res.data.token);
+                localStorage.setItem('user-id', res.data.user._id);
             })
             .catch(err => {
-                if (401 === err.response.status) {
-                    console.log("loi")
-                }
                 setArrErr(arrErr=>[...arrErr, err.response.data]);
             })
         } else {
@@ -60,6 +63,19 @@ function Account(props) {
             })
         }
     }
+
+    useEffect(()=> {
+        axios.get(`http://localhost:4000/users/${localStorage.getItem('user-id')}`, { 
+            headers: {"Authorization" : `Bearer ${localStorage.getItem('token')}`}
+        })
+        .then(res => {
+            setUserInfoFunc(res.data);
+            setLogin(true);
+        })
+        .catch(err => {
+            console.log(err);
+        })
+    },[])
 
     let uniqueErr, uniqueSuccess = [];
     if (arrErr.length > 0) {
@@ -88,6 +104,14 @@ function Account(props) {
                             />
                     </div>
                 </div >
+                
+                {login === true && 
+                    <div>
+                        {userInfo.userName}
+                    </div>
+                }
+                
+                {login === false && 
                 <div className={props.accountOpen === false ? '' : 'fadeIn'}>
                     <div 
                         className='search-tab login-tab flex'>
@@ -172,6 +196,7 @@ function Account(props) {
                         </div>
                     }
                 </div>
+                }
             </div>
         </div>
     )

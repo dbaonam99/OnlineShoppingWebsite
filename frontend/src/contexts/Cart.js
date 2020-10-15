@@ -10,7 +10,7 @@ export function CartProvider(props) {
     const addToCart = (product) => {
         setClickedCart(clickedCart + 1);
         setCartItems(cartItems.concat(product))
-    };
+    }; 
 
     return (
         <CartContext.Provider

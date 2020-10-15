@@ -18,21 +18,22 @@ function OpenChatBtn(props) {
 
     const socket = socketIOClient(ENDPOINT);
 
-    useEffect(() => {
+    useEffect(() => { 
         socket.on('connect', function (data) {
-            socket.emit('join', 'Hello server from client');
-        });
+            socket.emit('join', 'User connect to website');
+        })
         socket.on('thread', (data)=> {
             setChatData(chatData=>[...chatData, data]);
         })
-    }, []) 
+    }, [])
     
     const handleSubmit = (event) => {
         event.preventDefault();
         socket.emit('mess', inputValue);
     }
+
     const handleChange = (event) => {
-        setInputValue(event.target.value)
+        // setInputValue(event.target.value)
     }
     const location = props.history.location.pathname;
 
@@ -50,11 +51,20 @@ function OpenChatBtn(props) {
                 <p>Live Chat</p>
             </div>
             <div className={openChat ? "chat-box hide_chat_box" : "chat-box"}>
-                <form onSubmit={handleSubmit} className={openChat ? "form-chat hide_chat_box_item" : "form-chat"}>
-                    <input type="text" onChange={handleChange}></input>
-                    <button>Chat</button>
-                </form>
-                <ul>
+                <div className="chat-box-header">
+                    Live Chat
+                </div>
+                <div className="chat-box-body">
+                    <form onSubmit={handleSubmit} className={openChat ? "form-chat hide_chat_box_item" : "form-chat"}>
+                        <label>Introduce yourself *</label>
+                        <input type="text" onChange={handleChange} placeholder="Name" className="intro"></input>
+                        <input type="text" onChange={handleChange} placeholder="Email" className="intro"></input>
+                        <label>Message *</label>
+                        <textarea type="textarea" onChange={handleChange} className="message"></textarea>
+                        <button className="btn">Chat</button>
+                    </form>
+                </div>
+                {/* <ul>
                     {
                         chatData.map((item, index)=>{
                             return(
@@ -64,7 +74,7 @@ function OpenChatBtn(props) {
                             )
                         })
                     }
-                </ul>
+                </ul> */}
             </div>
         </div>
     )

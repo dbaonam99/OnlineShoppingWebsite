@@ -21,9 +21,11 @@ import Login from './components/admin/Login/Login';
 
 import { CartProvider } from './contexts/Cart'
 import Dashboard from './components/admin/Dashboard/Dashboard';
+import { UserProvider } from './contexts/User';
 
 function App(props) {
   return (
+    <UserProvider>
     <CartProvider>
       <Router>
         <div className="App">
@@ -42,6 +44,7 @@ function App(props) {
         <OpenChatBtn/>
       </Router>
     </CartProvider>
+    </UserProvider>
   );
 }
 

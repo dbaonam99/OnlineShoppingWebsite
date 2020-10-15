@@ -44,9 +44,9 @@
     box-shadow: 0 0 4px #111;
     border-radius: 10px;
     display: flex;
-    justify-content: center;
     align-items: center;
     flex-direction: column;
+    overflow: hidden;
 }
 .hide_chat_box {
     visibility: visible;
@@ -72,4 +72,47 @@
         height: 0;
         width: 0;
     }
+}
+.chat-box-header {
+    background-color: #111;  
+    color: #FFF;
+    width: 100%;
+    text-align: center;
+    font-size: 14px;
+    padding: 5px 0;
+}
+.chat-box-body {
+    font-size: 14px;
+    color: #777;
+    width: 100%;
+    padding: 10px 20px;
+}
+.form-chat {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+}
+.form-chat .intro {
+    height: 40px;
+    outline: none;
+    border: none;
+    margin-top: 10px;
+    border-bottom: 2px solid #ddd;
+}
+.form-chat label {
+    margin-top: 15px;
+}
+.form-chat .message {
+    height: 80px;
+    outline: none;
+    margin-top: 15px;
+}
+.form-chat button {
+  border: none;
+  background: none;
+  font-size: 14px;
+  text-transform: uppercase;
+  color: #232323;
+  height: 40px;
+  margin-top: 20px
 }

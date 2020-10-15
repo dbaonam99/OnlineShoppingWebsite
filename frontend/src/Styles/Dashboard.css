@@ -213,6 +213,12 @@
     height: 389px;
     margin: 40px 0;
 }
+.chart {
+    position: relative;
+    padding-top: 20px;
+    width: 70%;
+    height: 389px;
+}
 .top-location-container {
     display: flex;
     flex-direction: column;
@@ -434,10 +440,15 @@
     padding-bottom: 10px !important;
 }
 .review-product {
-    width: 70%;
+    flex-grow: 1;
+    width: 60%;
     margin: 0 10px;
     color: #111;
     font-family: sans-serif !important;
+}
+.review-product-star {
+    /* flex-grow: 2; */
+    width: 80px;
 }
 .review-product-item {
     align-items: flex-end;

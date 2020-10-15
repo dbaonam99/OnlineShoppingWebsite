@@ -433,6 +433,7 @@
   opacity: 0;
   z-index: -2;
   pointer-events: none;
+  /* display: none; */
 }
 .choose-slide {
   position: absolute;

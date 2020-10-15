@@ -6,7 +6,12 @@ module.exports.index = async function(req, res) {
 	var users = await User.find();
 	res.json(users);
 };
-
+module.exports.info = function(req, res) {
+	var id = req.params.id;
+	User.findById({ _id: id }).then(function(users) {
+		res.json(users);
+	});
+};
 module.exports.postLogin = async function(req, res) {
 	var email = req.body.loginEmail;
 	var password = req.body.loginPassword;
@@ -22,7 +27,7 @@ module.exports.postLogin = async function(req, res) {
 		return res.status(400).send('Wrong password!');
 	}
 
-	const token = jwt.sign({_id: user._id}, 'hahaha', { expiresIn: 60 * (1/10) });
+	const token = jwt.sign({_id: user._id}, 'hahaha');
 
 	res.status(200).json({token: token, user: user});
 };

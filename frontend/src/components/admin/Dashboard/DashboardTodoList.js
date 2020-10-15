@@ -4,7 +4,7 @@ import '../../../Styles/Dashboard.css'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import ReactStars from "react-rating-stars-component";
 
-export default function DashboardTaskList(props) {
+export default function DashboardTodoList(props) {
     const topRecentVote = props.topRecentVote;
 
     return (

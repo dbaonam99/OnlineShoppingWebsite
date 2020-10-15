@@ -7,7 +7,8 @@ import DashboardLocation from './DashboardLocation'
 import DashboardTopFive from './DashboardTopFive'
 import DashboardRecentReview from './DashboardRecentReview'
 import axios from 'axios'
-import DashboardTaskList from './DashboardTaskList'
+import DashboardRecentOrders from './DashboardRecentOrders'
+import DashboardChart from './DashboardChart'
 
 export default function DashboardMain() {
 
@@ -135,12 +136,15 @@ export default function DashboardMain() {
                     color = "orange"
                     topRecentVote = {topRecentVote}
                 />
-                <DashboardTaskList // recent orders
+                <DashboardRecentOrders // recent orders
                     icon = {faFileInvoice}
                     title = "Recent Order"
                     color = "green"
                     topRecentVote = {topRecentVote}
                 />
+            </div>
+            <div className="row flex">
+                <DashboardChart/>
             </div>
         </div>
     )

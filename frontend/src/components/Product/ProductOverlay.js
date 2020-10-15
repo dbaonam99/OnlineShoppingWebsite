@@ -8,7 +8,7 @@ import { CartContext } from '../../contexts/Cart'
 function ProductOverlay(props) {
 
     const { 
-        addToCart 
+        addToCart  
     } = useContext(CartContext);
 
     const cartClick = () => {
