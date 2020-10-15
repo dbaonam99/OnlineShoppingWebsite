@@ -12,6 +12,8 @@ module.exports.newChat = async function(req, res) {
 	var email = req.body.chatEmail;
 	var content = req.body.chatContent;
 
+	console.log(req.body.chatContent)
+
 	const data = {
 		sessionId: sessionId,
 		chatName: name,

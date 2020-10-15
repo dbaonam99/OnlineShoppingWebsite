@@ -41,16 +41,22 @@ app.options('*', cors());
 
 io.on('connection', async function (client) {
   client.on('join', function (data) {
-    console.log("reloading...")
     Chat.find({ sessionId: data.sessionId }).then(function(chat) {
       client.emit('sendFirstInfo', chat);
     }); 
   })
-
   
   client.on('firstMessage',function(data){
     client.emit('thread', data);
     client.broadcast.emit('thread',data);
+  })
+
+  client.on('messageSend',function(data){
+    client.emit('messageSend-thread', data);
+    client.broadcast.emit('messageSend-thread', data);
+    Chat.findOne({ sessionId: data.sessionId })
+        .updateOne({$push: { chatContent: {text: data.text, time: data.time} }})
+        .exec()
   })
 })
 

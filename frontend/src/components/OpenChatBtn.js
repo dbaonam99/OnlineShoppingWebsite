@@ -24,7 +24,8 @@ function OpenChatBtn(props) {
     //     chatData,
     //     setChatDataFunc
     // } = useContext(ChatContext)
-    const [chatData, setChatData] = useState({})
+    const [chatData, setChatData] = useState([])
+    const [chatList, setChatList] = useState([])
 
     useEffect(() => {
         if (sessionStorage.getItem('chat-id')) setOpenChatContent(true)
@@ -34,9 +35,16 @@ function OpenChatBtn(props) {
             })
             socket.on('sendFirstInfo', (data)=> {
                 setChatData(data);
+                if (data.length > 0) setChatList(data[0].chatContent)
             })
             socket.on('thread', (data)=> {
                 setChatData([data]);
+                console.log(data)
+                setChatList(data.chatContent)
+            })
+            socket.on('messageSend-thread', (data)=> {
+                setChatData(chatData=> [...chatData, {text: data.text, time: data.time}]);
+                setChatList(chatData=> [...chatData, data])
             })
         })
     }, [])
@@ -46,7 +54,7 @@ function OpenChatBtn(props) {
     }
     const location = props.history.location.pathname;
 
-    const sendChatOnSubmit = (event) => {
+    const sendFirstChatOnSubmit = (event) => {
         event.preventDefault();
         setOpenChatContent(true)
         if (!sessionStorage.getItem('chat-id')) {
@@ -76,6 +84,15 @@ function OpenChatBtn(props) {
         )
     }
 
+    const sendChatOnSubmit = (event) => {
+        event.preventDefault();
+        socket.emit('messageSend', {
+            sessionId: sessionStorage.getItem('chat-id'),
+            text: inputValue.messageSend,
+            time: new Date(),
+        });
+    }
+
     return (
         <div 
             className={location === "/admin" || location === "/admin/dashboard" ? "chat-btn displayNone" : "chat-btn"}
@@ -95,7 +112,7 @@ function OpenChatBtn(props) {
                 </div>
                 { openChatContent === false &&  
                     <div className="chat-box-body">
-                        <form onSubmit={sendChatOnSubmit} className={openChat ? "form-chat hide_chat_box_item" : "form-chat"}>
+                        <form onSubmit={sendFirstChatOnSubmit} className={openChat ? "form-chat hide_chat_box_item" : "form-chat"}>
                             <label>Introduce yourself *</label>
                             <input name="chatName" type="text" onChange={handleChange} placeholder="Name" className="intro" required></input>
                             <input name="chatEmail" type="text" onChange={handleChange} placeholder="Email" className="intro" required></input>
@@ -105,20 +122,23 @@ function OpenChatBtn(props) {
                         </form>
                     </div>
                 }
-                { (chatData[0] && openChatContent) && 
+                { (chatData.length > 0 && openChatContent) && 
                     <ul>
-                        <div className="chat-box-body" onSubmit={sendChatOnSubmit}>
+                        <div className="chat-box-body">
                             <form onSubmit={sendChatOnSubmit} className={openChat ? "form-chat hide_chat_box_item" : "form-chat"}>
                                 <label>{chatData[0].chatName}</label>
                                 <label>{chatData[0].chatTime}</label>
                                 <label>{chatData[0].chatEmail}</label>
-                                {(chatData[0].chatContent).map((item, index) => {
+                                {/* {chatData[0].chatContent.map((item, index) => { */}
+                                {chatList.map((item, index) => {
                                     return (
                                         <label key={index}>
-                                            {item.chatEmail}
+                                            {item.text}
                                         </label>
                                     )
                                 })}
+                               <input name="messageSend" type="text" onChange={handleChange} className="message"></input>
+                               <button>Chat</button>
                             </form>
                         </div>
                     </ul>
