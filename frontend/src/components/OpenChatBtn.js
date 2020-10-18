@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import '../Styles/Chat.css'
 import '../App.css'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
@@ -6,8 +6,6 @@ import { faComment } from '@fortawesome/free-solid-svg-icons'
 import socketIOClient from "socket.io-client";
 import { withRouter } from 'react-router-dom'
 import axios from 'axios'
-import { ChatContext } from '../contexts/Chat'
-
 
 const ENDPOINT = "http://localhost:4000";
 
@@ -39,12 +37,15 @@ function OpenChatBtn(props) {
             })
             socket.on('thread', (data)=> {
                 setChatData([data]);
-                console.log(data)
                 setChatList(data.chatContent)
             })
             socket.on('messageSend-thread', (data)=> {
-                setChatData(chatData=> [...chatData, {text: data.text, time: data.time}]);
-                setChatList(chatData=> [...chatData, data])
+                alert("checked")
+                // setChatData(chatData=> [...chatData, {text: data.text, time: data.time}]);
+                // setChatList(chatData=> [...chatData, data])
+            })
+            socket.on("admin-msg", function(data) {
+                alert(data);
             })
         })
     }, [])
@@ -71,17 +72,6 @@ function OpenChatBtn(props) {
                 }
             ]
         });
-        axios.post('http://localhost:4000/chat', {
-            sessionId: sessionStorage.getItem('chat-id'),
-            chatName: inputValue.chatName,
-            chatEmail: inputValue.chatEmail,
-            chatContent: [
-                {
-                    text: inputValue.chatContent,
-                    time: new Date()
-                }
-            ]}
-        )
     }
 
     const sendChatOnSubmit = (event) => {
@@ -126,19 +116,24 @@ function OpenChatBtn(props) {
                     <ul>
                         <div className="chat-box-body">
                             <form onSubmit={sendChatOnSubmit} className={openChat ? "form-chat hide_chat_box_item" : "form-chat"}>
-                                <label>{chatData[0].chatName}</label>
-                                <label>{chatData[0].chatTime}</label>
-                                <label>{chatData[0].chatEmail}</label>
-                                {/* {chatData[0].chatContent.map((item, index) => { */}
-                                {chatList.map((item, index) => {
-                                    return (
-                                        <label key={index}>
-                                            {item.text}
-                                        </label>
-                                    )
-                                })}
-                               <input name="messageSend" type="text" onChange={handleChange} className="message"></input>
-                               <button>Chat</button>
+                                <div className="chat-box-user flex" style={{background: '#ddd', width:'100%'}}>
+                                    <label>{chatData[0].chatName}</label>
+                                    <label>{chatData[0].chatTime}</label>
+                                    <label>{chatData[0].chatEmail}</label>
+                                </div>  
+                                <div className="flex-col" style={{overflowY: 'scroll'}}>
+                                    {chatList.map((item, index) => {
+                                        return (
+                                            <label key={index}>
+                                                {item.text}
+                                            </label>
+                                        )
+                                    })}
+                                </div>  
+                                <div style={{position: 'absolute', bottom: '0', left: '0', background: 'red', width: '100%'}}>
+                                    <input name="messageSend" type="text" onChange={handleChange} className="message"></input>
+                                    <button>Chat</button>
+                                </div>
                             </form>
                         </div>
                     </ul>

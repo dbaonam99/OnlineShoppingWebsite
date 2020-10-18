@@ -39,24 +39,47 @@ app.use("/chat", chatRoutes);
 app.use(cors());
 app.options('*', cors());
 
+
 io.on('connection', async function (client) {
-  client.on('join', function (data) {
+  client.on('join', function (data) { // Client join
     Chat.find({ sessionId: data.sessionId }).then(function(chat) {
       client.emit('sendFirstInfo', chat);
-    }); 
-  })
-  
-  client.on('firstMessage',function(data){
-    client.emit('thread', data);
-    client.broadcast.emit('thread',data);
+    });
   })
 
-  client.on('messageSend',function(data){
-    client.emit('messageSend-thread', data);
-    client.broadcast.emit('messageSend-thread', data);
+  client.on('admin-join', async function(data) { // Client join
+    client.join('admin') // Client join room 'admin'
+    const allchat = await Chat.find(); // Load all chat to admin box
+    client.emit('send-all-chat', allchat)
+  })
+  
+  client.on('firstMessage', async function(data) { // Client send first
+    // client.join(data.sessionId) // Client join these room
+    // io.in(data.sessionId).emit('thread', data);
+    await Chat.create(data)
+    const allchat = await Chat.find(); // Load all chat to admin box
+    io.in('admin').emit('client-msg', {
+      userChatInfo: [data],
+      allchat: allchat
+    });
+  })
+
+  client.on('messageSend', async function(data){
+    // client.emit('messageSend-thread', data);
+
+    const userChatInfo = await Chat.find({ sessionId : data.sessionId })
     Chat.findOne({ sessionId: data.sessionId })
-        .updateOne({$push: { chatContent: {text: data.text, time: data.time} }})
-        .exec()
+      .updateOne({$push: { chatContent: {text: data.text, time: data.time} }})
+      .exec()
+    const allchat = await Chat.find(); // Load all chat to admin box
+    io.in('admin').emit('client-msg', {
+      userChatInfo: userChatInfo, 
+      allchat: allchat
+    });
+  })
+
+  client.on('messageSend-admin',function(data) {
+    io.in(data.roomId).emit('admin-msg', data); // Admin send message
   })
 })
 

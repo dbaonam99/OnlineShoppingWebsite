@@ -135,7 +135,7 @@
     margin-left: 5px;
 }
 .DashboardBody {
-    padding: 15px 30px;
+    padding: 20px 30px;
     background-color: #eaeaea;
     flex-grow: 1;
     margin-left: 20%;
@@ -487,4 +487,55 @@
     font-size: 14px;
     font-weight: 500;
     font-family: sans-serif;
+}
+
+.boxchat-admin {
+    background-color: #fff;
+    width: 100%;
+    border-radius: 5px;
+    padding: 20px;
+    overflow: hidden;
+}
+.boxchat-list {
+    width: 30%;
+    background-color: #fff;
+    padding-right: 20px;
+}
+.boxchat-item {
+    margin: 10px 0;
+    height: 64px;
+    border-radius: 10px;
+}
+.boxchat-item:hover {
+    background-color: #eee;
+}
+.boxchat-main {
+    width: 70%;
+    height: 500px;
+    border-left: 1px #ddd solid;
+}
+.boxchat-box {
+    width: 100%;
+    height: 90%;
+    padding: 20px;
+}
+.boxchat-search input {
+    width: 100%;
+    height: 36px;
+    outline: none;
+    border: 1px #ddd solid;
+    border-radius: 10px;
+    margin-bottom: 20px;
+    padding: 0 10px;
+}
+.boxchat-type {
+    height: 10%;
+    padding: 20px;
+    width: 100%;
+}
+.boxchat-type input {
+    width: 90%;
+}
+.boxchat-type button {
+    width: 10%;
 }
