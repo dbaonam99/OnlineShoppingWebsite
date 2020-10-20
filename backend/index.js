@@ -13,6 +13,7 @@ var productRoutes = require('./routes/product');
 var newsRoutes = require('./routes/news');
 var userRoutes = require('./routes/user');
 var chatRoutes = require('./routes/chat');
+var emailRoutes = require('./routes/email');
 
 mongoose.connect('mongodb://localhost:27017/Shop', { useNewUrlParser: true , useUnifiedTopology: true});
 mongoose.set('useFindAndModify', false);
@@ -36,6 +37,7 @@ app.use("/products", productRoutes);
 app.use("/news", newsRoutes);
 app.use("/users", userRoutes);
 app.use("/chat", chatRoutes);
+app.use("/email", emailRoutes);
 app.use(cors());
 app.options('*', cors());
 

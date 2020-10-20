@@ -1,5 +1,5 @@
 .loading-page {
-    background-color: #fff;
+    background-color: #111;
     height: 100vh;
     width: 100%;
     display: flex;
@@ -28,7 +28,6 @@
     color: #fff;
     font-weight: normal;
     letter-spacing: 10px;
-    mix-blend-mode: difference;
     white-space: nowrap;
 }
 .hello {
