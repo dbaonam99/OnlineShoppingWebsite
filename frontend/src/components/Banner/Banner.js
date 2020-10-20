@@ -7,7 +7,7 @@ class Banner extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            currentBanner: 1
+            currentBanner: 3
         };
     }
 
@@ -29,7 +29,7 @@ class Banner extends Component {
             this.setState({
                 currentBanner: this.getNextBanner(this.state.currentBanner)
             })
-        }, 2000);
+        }, 5000);
     }
 
     render() {

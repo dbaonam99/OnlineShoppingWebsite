@@ -1,0 +1,65 @@
+.loading-page {
+    background-color: #fff;
+    height: 100vh;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 999999999;
+    position: fixed;
+    transition: 1.5s;
+}
+.disable-loading {
+    opacity: 0;
+    visibility: hidden;
+}
+.loading-page-container {
+    /* background-color: red; */
+    position: absolute;
+}
+.text {
+    text-align: center;
+    text-transform: uppercase;
+    font-size: 20px;
+    opacity: 0;
+    transition: 1s;
+    font-family: fmain;
+    line-height: normal;
+    color: #fff;
+    font-weight: normal;
+    letter-spacing: 10px;
+    mix-blend-mode: difference;
+    white-space: nowrap;
+}
+.hello {
+    animation-name: hello;
+    animation-duration: 3s;
+    animation-iteration-count: initial;
+}
+@keyframes hello {
+    0% {
+        opacity: 0;
+    }
+    50% {
+        opacity: 1;
+    }
+    100% {
+        opacity: 0;
+    }
+}
+.welcome {
+    animation-name: welcome;
+    animation-duration: 3s;
+    animation-delay: 2.7s;
+}
+@keyframes welcome {
+    0% {
+        opacity: 0;
+    }
+    50% {
+        opacity: 1;
+    }
+    100% {
+        opacity: 0;
+    }
+}

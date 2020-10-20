@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import './App.css';
 import './Styles/Chat.css'
 import {
@@ -25,12 +25,29 @@ import { UserProvider } from './contexts/User';
 import { ChatProvider } from './contexts/Chat';
 
 import { ToastContainer } from 'react-toastify';
+import LoadingPage from './components/LoadingPage';
 
 function App(props) {
+
+  const [loading, setLoading] = useState(true);
+  useEffect(()=>{
+    setTimeout(()=>{
+      setLoading(false)
+      document.body.style.overflow = 'unset';
+    }, 5000)
+  },[])
+
+  if(loading){
+    document.body.style.overflow = 'hidden';
+  }
+
   return (
     <UserProvider>
     <CartProvider>
     <ChatProvider>
+      <LoadingPage
+        loading={loading}
+      />
       <Router>
         <div className="App">
           <ToastContainer/>
