@@ -40,47 +40,56 @@ app.use(cors());
 app.options('*', cors());
 
 
-io.on('connection', async function (client) {
-  client.on('join', function (data) { // Client join
-    Chat.find({ sessionId: data.sessionId }).then(function(chat) {
-      client.emit('sendFirstInfo', chat);
-    });
-  })
-
-  client.on('admin-join', async function(data) { // Client join
-    client.join('admin') // Client join room 'admin'
-    const allchat = await Chat.find(); // Load all chat to admin box
-    client.emit('send-all-chat', allchat)
+io.on('connection', async function (socket) {
+  socket.on('join', async function (data) {
+    if (data.isAdmin === true) {
+      socket.join('admin')
+      const allchat = await Chat.find();
+      io.in('admin').emit('send-all-chat', allchat)
+    } 
+    else if (data.isAdmin === false){
+      socket.join(data.sessionId)
+      Chat.find({ sessionId: data.sessionId }).then(function(chat) {
+        socket.emit('sendFirstInfo', chat);
+      })
+    }
   })
   
-  client.on('firstMessage', async function(data) { // Client send first
-    // client.join(data.sessionId) // Client join these room
-    // io.in(data.sessionId).emit('thread', data);
+  socket.on('firstMessage', async function(data) {
+
+    socket.join('test')
+
+    let roomIds = socket.rooms;
+
     await Chat.create(data)
-    const allchat = await Chat.find(); // Load all chat to admin box
+    const allchat = await Chat.find();
     io.in('admin').emit('client-msg', {
       userChatInfo: [data],
       allchat: allchat
     });
   })
 
-  client.on('messageSend', async function(data){
-    // client.emit('messageSend-thread', data);
-
-    const userChatInfo = await Chat.find({ sessionId : data.sessionId })
+  socket.on('messageSend', async function(data) {
     Chat.findOne({ sessionId: data.sessionId })
       .updateOne({$push: { chatContent: {text: data.text, time: data.time} }})
       .exec()
-    const allchat = await Chat.find(); // Load all chat to admin box
-    io.in('admin').emit('client-msg', {
-      userChatInfo: userChatInfo, 
-      allchat: allchat
-    });
+    const userChatInfo = await Chat.find({ sessionId : data.sessionId })
+    const allchat = await Chat.find();
+    setTimeout(() => {
+      io.in('admin').emit('client-msg', {
+        userChatInfo: userChatInfo,
+        allchat: allchat
+      })
+    }, 100)
   })
 
-  client.on('messageSend-admin',function(data) {
-    io.in(data.roomId).emit('admin-msg', data); // Admin send message
+  socket.on('messageSend-admin',function(data) {
+    Chat.findOne({ sessionId: data.roomId })
+      .updateOne({$push: { chatContent: {fromAdmin: true, text: data.text, time: data.time} }})
+      .exec()
+    socket.to('test').emit('admin-msg', data); 
   })
+
 })
 
 server.listen(4000, () => console.log(`Listening on port ${4000}`));

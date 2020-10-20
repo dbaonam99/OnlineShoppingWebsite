@@ -66,16 +66,16 @@ function Account(props) {
 
     useEffect(()=> {
         axios.get(`http://localhost:4000/users/${localStorage.getItem('user-id')}`, { 
-            headers: {"Authorization" : `Bearer ${localStorage.getItem('token')}`}
+            headers: {"authorization" : `Bearer ${localStorage.getItem('token')}`}
         })
         .then(res => {
-            setUserInfoFunc(res.data);
+            setUserInfoFunc(res.data.user);
             setLogin(true);
         })
         .catch(err => {
             console.log(err);
         })
-    },[setUserInfoFunc])
+    },[])
 
     let uniqueErr, uniqueSuccess = [];
     if (arrErr.length > 0) {

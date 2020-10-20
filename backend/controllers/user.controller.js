@@ -25,10 +25,9 @@ module.exports.postLogin = async function(req, res) {
 	const validPassword = await bcrypt.compare(password, user.userPassword);
 	if (!validPassword) {
 		return res.status(400).send('Wrong password!');
-	}
+	} 
 
-	const token = jwt.sign({_id: user._id}, 'hahaha');
-
+	const token = jwt.sign({user}, 'hahaha');
 	res.status(200).json({token: token, user: user});
 };
 

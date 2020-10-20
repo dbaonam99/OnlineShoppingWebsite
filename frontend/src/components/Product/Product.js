@@ -59,7 +59,7 @@ function Product(props) {
                         </div>
                     }
                     {
-                        product.productSold >= 40 && <div className="product-tag-item hot">
+                        product.productSold > 40 && <div className="product-tag-item hot">
                             HOT
                         </div>
                     }

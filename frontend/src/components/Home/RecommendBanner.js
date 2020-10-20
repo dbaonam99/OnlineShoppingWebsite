@@ -4,7 +4,7 @@ import b1 from '../../assets/b1.jpg';
 import b2 from '../../assets/b2.jpg';
 import b3 from '../../assets/b3.jpg';
 import b4 from '../../assets/b4.jpg';
-import ScrollAnimation from 'react-animate-on-scroll';
+// import ScrollAnimation from 'react-animate-on-scroll';
 import {
     Link
   } from "react-router-dom"; 
@@ -18,7 +18,7 @@ export default function RecommendBanner() {
     return(
         <div className="RecommendBanner flex-center">
             <div className="RecommendBanner-container flex-center">
-                <ScrollAnimation animateIn='fadeInLeft' className="banner-box img-hover">
+                <div className="banner-box img-hover">
                     <img src={b1} alt="banner" width="100%" height="100%"></img>
                     <div className="blackbox-center-container">
                         <div className="blackbox-title">New Arrivals</div>
@@ -30,10 +30,10 @@ export default function RecommendBanner() {
                                 >Shop now</Link>
                         </div>
                     </div>
-                </ScrollAnimation>
+                </div>
                 <div className="banner-box">
                     <div className="banner-top flex-center">
-                        <ScrollAnimation className="banner-top2 img-hover" animateIn='fadeInRight'>
+                        <div className="banner-top2 img-hover">
                             <img src={b2} alt="banner" width="100%" height="100%"></img>
                             <div className="blackbox-center-container">
                                 <div className="blackbox-title blackbox-title-small">Woman Collection</div>
@@ -44,8 +44,8 @@ export default function RecommendBanner() {
                                         onClick={handleClick}>Shop now</Link>
                                 </div>
                             </div>
-                        </ScrollAnimation>
-                        <ScrollAnimation className="banner-top2 img-hover" animateIn='fadeInRight'>
+                        </div>
+                        <div className="banner-top2 img-hover">
                             <img src={b3} alt="banner" width="100%" height="100%"></img>
                             <div className="blackbox-center-container">
                                 <div className="blackbox-title blackbox-title-small">Man Collection</div>
@@ -56,9 +56,9 @@ export default function RecommendBanner() {
                                         onClick={handleClick}>Shop now</Link>
                                 </div>
                             </div>
-                        </ScrollAnimation>
+                        </div>
                     </div>
-                    <ScrollAnimation className="banner-bottom img-hover" animateIn='fadeInRight'>
+                    <div className="banner-bottom img-hover">
                         <img src={b4} alt="banner" width="100%" height="100%"></img>
                             <div className="blackbox-center-container">
                             <div className="blackbox-title blackbox-title-medium">Free Shipping On All Orders</div>
@@ -69,7 +69,7 @@ export default function RecommendBanner() {
                                     onClick={handleClick}>Shop now</Link>
                             </div>
                         </div>
-                    </ScrollAnimation>
+                    </div>
                 </div>
             </div>
         </div>

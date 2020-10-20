@@ -16,13 +16,15 @@ export default function DashboardInbox(props) {
     const socket = socketIOClient(ENDPOINT);
 
     useEffect(() => {
-        socket.on('connect', function (data) {
-            socket.emit('admin-join', 'admin joining...')
+        socket.emit('join', {
+            sessionId: 'admin',
+            isAdmin: true
         })
         socket.on('send-all-chat', (data)=>{
             setAllChatData(data)
         })
         socket.on("client-msg", function(data) {
+            console.log(data.allchat)
             setAllChatData(data.allchat)
         })
     },[])
@@ -34,12 +36,12 @@ export default function DashboardInbox(props) {
     const sendChatInput = (event) => {
         event.preventDefault();
         socket.emit('messageSend-admin', {
-            chatInput: chatInput,
+            fromAdmin: true,
+            text: chatInput,
+            time: new Date(),
             roomId: roomId
         });
     }
-
-    if (allChatData.length > 0) console.log(allChatData[roomIndex].chatContent)
 
     return (
         <div className="boxchat-admin flex">
@@ -87,30 +89,5 @@ export default function DashboardInbox(props) {
                 </div>
             </div>
         </div>
-        // allChatData.map((item, index)=> {
-        //     return (
-        //         <div 
-        //             key={index} className="flex"
-        //             onClick={()=>{
-        //                 setSessionId(item.sessionId)
-        //                 console.log(item.sessionId)
-        //                 socket.on('connect', function (data) {
-        //                     socket.emit('sendRoomId', sessionId);
-        //                 })
-        //             }}
-        //         >
-        //             <p>{item.chatName}</p>
-        //             <p>{item.chatEmail}</p>
-        //             {/* {item.chatContent.map((item,index)=>{
-        //                 return (
-        //                     <div key={index}>
-        //                         <p>{item.text}</p>
-        //                         <p>{item.date}</p>
-        //                     </div>
-        //                 )
-        //             })} */}
-        //         </div>
-        //     )
-        // })
     )
 }

@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import '../../App.css';
 import classNames from 'classnames';
-import ScrollAnimation from 'react-animate-on-scroll'; 
 
 class Banner extends Component {
     constructor(props) {
@@ -40,54 +39,54 @@ class Banner extends Component {
                     <div className={classNames('banner-first flex-center', {
                         hide: currentBanner !== 1
                     })}>
-                        <ScrollAnimation animateIn='fadeInDown' animateOut='fadeOutUp'>
+                        <div>
                             <div className="banner-title">
                                 New Arrivals
                             </div>
-                        </ScrollAnimation>
+                        </div>
                         <div className="flex-center">
-                            <ScrollAnimation animateIn='fadeInLeft' animateOut='fadeOutRight'>
+                            <div>
                                 <div className="banner-link">
                                     Woman collection
                                 </div>
-                            </ScrollAnimation>
-                            <ScrollAnimation animateIn='fadeInRight' animateOut='fadeOutLeft'>
+                            </div>
+                            <div>
                                 <div className="banner-link">
                                     Man collection
                                 </div>
-                            </ScrollAnimation>
+                            </div>
                         </div>
                     </div>
                     <div className={classNames('banner-second flex-center', {
                         hide: currentBanner !== 2
                     })}>
-                        <ScrollAnimation animateIn='fadeInDown' animateOut='fadeOutUp'>
+                        <div>
                             <div className="banner-title">
                                 White Collection
                             </div>
-                        </ScrollAnimation>
+                        </div>
                         <div className="">
-                            <ScrollAnimation animateIn='fadeInLeft' animateOut='fadeOutRight'>
+                            <div>
                                 <div className="banner-link banner-link-second">
                                     Shop now
                                 </div>
-                            </ScrollAnimation>
+                            </div>
                         </div>
                     </div>
                     <div className={classNames('banner-third flex-center', {
                         hide: currentBanner !== 3
                     })}>
-                        <ScrollAnimation animateIn='fadeInDown' animateOut='fadeOutUp'>
+                        <div>
                             <div className="banner-title">
                                 Linen Collection
                             </div>
-                        </ScrollAnimation>
+                        </div>
                         <div className="flex-center">
-                            <ScrollAnimation animateIn='fadeInLeft' animateOut='fadeOutRight'>
+                            <div>
                                 <div className="banner-link">
                                     Shop now
                                 </div>
-                            </ScrollAnimation>
+                            </div>
                         </div>
                     </div>
                 </div>
