@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import '../../App.css';
+import '../../Styles/Animation.css';
 import classNames from 'classnames';
 
 class Banner extends Component {
@@ -28,7 +29,7 @@ class Banner extends Component {
             this.setState({
                 currentBanner: this.getNextBanner(this.state.currentBanner)
             })
-        }, 5000);
+        }, 2000);
     }
 
     render() {
@@ -40,18 +41,18 @@ class Banner extends Component {
                         hide: currentBanner !== 1
                     })}>
                         <div>
-                            <div className="banner-title">
+                            <div className={currentBanner === 1 ? "banner-title fadeInDown" :"banner-title"}>
                                 New Arrivals
                             </div>
                         </div>
                         <div className="flex-center">
                             <div>
-                                <div className="banner-link">
+                                <div className={currentBanner === 1 ? "banner-link fadeInLeft" :"banner-link"}>
                                     Woman collection
                                 </div>
                             </div>
                             <div>
-                                <div className="banner-link">
+                            <div className={currentBanner === 1 ? "banner-link fadeInRight" :"banner-link"}>
                                     Man collection
                                 </div>
                             </div>
@@ -61,13 +62,13 @@ class Banner extends Component {
                         hide: currentBanner !== 2
                     })}>
                         <div>
-                            <div className="banner-title">
+                            <div className={currentBanner === 2 ? "banner-title fadeInDown" :"banner-title"}>
                                 White Collection
                             </div>
                         </div>
-                        <div className="">
+                        <div>
                             <div>
-                                <div className="banner-link banner-link-second">
+                                <div className={currentBanner === 2 ? "banner-link fadeInUp" :"banner-link"} style={{marginLeft: '190px'}}>
                                     Shop now
                                 </div>
                             </div>
@@ -77,13 +78,13 @@ class Banner extends Component {
                         hide: currentBanner !== 3
                     })}>
                         <div>
-                            <div className="banner-title">
+                            <div className={currentBanner === 3 ? "banner-title fadeInDown" :"banner-title"}>
                                 Linen Collection
                             </div>
                         </div>
                         <div className="flex-center">
                             <div>
-                                <div className="banner-link">
+                                <div className={currentBanner === 3 ? "banner-link fadeInUp" :"banner-link"}>
                                     Shop now
                                 </div>
                             </div>

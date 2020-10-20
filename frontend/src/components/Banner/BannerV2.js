@@ -5,7 +5,6 @@ import {  faAngleRight } from "@fortawesome/free-solid-svg-icons";
 import {
     withRouter
   } from "react-router-dom"; 
-import ScrollAnimation from 'react-animate-on-scroll'; 
 
   
 class BannerV2 extends Component {
@@ -32,9 +31,9 @@ class BannerV2 extends Component {
                     }}
                     >
                     <div className="newsbanner-overlay flex-center another-overlay">
-                        <ScrollAnimation animateIn='fadeInDown' animateOut='fadeOutUp' className="newsbanner-title">
+                        <div className="newsbanner-title">
                             {locationText}
-                        </ScrollAnimation>
+                        </div>
                         <div className="newsbanner-breadcrumb flex-center">
                             <div>Home</div>
                             <FontAwesomeIcon icon={faAngleRight} className="cart-icon" style={{margin: '0 10px'}}/>

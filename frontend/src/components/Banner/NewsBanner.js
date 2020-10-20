@@ -7,7 +7,6 @@ import {
     withRouter
   } from "react-router-dom"; 
 
-import ScrollAnimation from 'react-animate-on-scroll'; 
 
 function NewsBanner(props) {
 
@@ -32,14 +31,14 @@ function NewsBanner(props) {
             <div className="newsbanner-container">
                 <div className="newsbanner-overlay flex-center">
                     { locationArr[1] &&
-                        <ScrollAnimation animateIn='fadeInDown' animateOut='fadeOutUp'  className="newsbanner-title">
+                        <div className="newsbanner-title">
                         {locationArr[1]}
-                    </ScrollAnimation>
+                    </div>
                     }
                     { locationArr[0] && !locationArr[1] &&
-                        <ScrollAnimation animateIn='fadeInDown' animateOut='fadeOutUp'  className="newsbanner-title">
+                        <div className="newsbanner-title">
                         {locationArr[0]}
-                    </ScrollAnimation>
+                    </div>
                     }
 
                     <div className="newsbanner-breadcrumb flex-center"> 
