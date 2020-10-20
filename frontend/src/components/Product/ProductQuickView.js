@@ -1,17 +1,19 @@
-import React, { useState } from 'react';
+import React, { useContext, useState } from 'react';
 import '../../Styles/Product.css';
 import '../../App.css';
-import { faCartPlus, faHeart, faMinus, faPlus, faTimes } from '@fortawesome/free-solid-svg-icons';
+import { faCartPlus, faCheckCircle, faHeart, faMinus, faPlus, faTimes } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import ReactStars from 'react-rating-stars-component';
 import { Link } from 'react-router-dom';
 import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
+import { CartContext } from '../../contexts/Cart';
 
 export default function ProductQuickView(props) {
 
     const [countCart, setCountCart] = useState(1);
+    const [toast, setToast] = useState(false)
     const product = props.product;
     
     let ratingList = product.productVote.map(a => a.ratingStar); // get all rating
@@ -35,6 +37,19 @@ export default function ProductQuickView(props) {
         autoplaySpeed: 2000
     };
 
+
+    const { 
+        addToCart  
+    } = useContext(CartContext);
+
+    const cartClick = () => {
+        addToCart(props.product)
+        setToast(true)
+        setTimeout(()=>{
+            setToast(false)
+        }, 2000)
+    }
+
     return(
         <div>
             <div className={props.view === true ? 'ProductQuickView' : 'ProductQuickView displayNone'}>
@@ -42,6 +57,10 @@ export default function ProductQuickView(props) {
                     className="productquickview-container flex"
                     onClick={()=>{}}
                 >
+                    <div className={toast ? "toast toast-show" : "toast"}>
+                        <FontAwesomeIcon icon={faCheckCircle} className="icon"/>
+                        Product is added to cart successfully
+                    </div>
                     <div
                         className="view-close flex-center"
                         onClick={props.closeView}
@@ -123,7 +142,9 @@ export default function ProductQuickView(props) {
                                     <FontAwesomeIcon icon={faPlus}/>
                                 </div>
                             </div>
-                            <div className="product-info-addtocart flex-center btn">
+                            <div className="product-info-addtocart flex-center btn"
+                                onClick={cartClick}
+                            >
                                 <FontAwesomeIcon icon={faCartPlus}/>
                                 <p>Add to cart</p>
                             </div>

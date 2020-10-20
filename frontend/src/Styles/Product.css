@@ -7,7 +7,7 @@
     z-index: 9999;
     display: flex;
     justify-content: center;
-    background: rgba(1, 1, 1, 0.8);
+    background: rgba(1, 1, 1, 0.9);
     transition: .5s;
 }
 .ProductQuickView:hover {
@@ -65,4 +65,23 @@
 }
 .productquickview-tag .new {
     background: #fc9953;
+}
+.toast {
+    height: 50px;
+    background-color: #b4fac5;
+    color: #248d63;
+    position: absolute;
+    z-index: 10000;
+    top: 20px;
+    right: -500px;
+    transition: .3s;
+    line-height: 50px;
+    font-size: 14px;
+    padding: 0 20px;
+}
+.toast .icon {
+    margin-right: 20px;
+}
+.toast-show {
+    right: 0;
 }

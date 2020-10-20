@@ -5,6 +5,10 @@ import { faCartPlus, faEye, faHeart } from "@fortawesome/free-solid-svg-icons";
 
 import { CartContext } from '../../contexts/Cart'
 
+import { toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+
+
 function ProductOverlay(props) {
 
     const { 

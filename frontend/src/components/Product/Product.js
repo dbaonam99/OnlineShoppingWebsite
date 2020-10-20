@@ -12,11 +12,7 @@ function Product(props) {
 
     const closeView = (event) => {
         document.body.style.overflow = 'unset';
-        // if (event.target.className === 'ProductQuickView') {
         setView(false)
-        // } else {
-        //     setView(true)
-        // }
     }
     const openView = () => {
         setView(true)

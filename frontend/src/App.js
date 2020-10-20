@@ -24,6 +24,8 @@ import Dashboard from './components/admin/Dashboard/Dashboard';
 import { UserProvider } from './contexts/User';
 import { ChatProvider } from './contexts/Chat';
 
+import { ToastContainer } from 'react-toastify';
+
 function App(props) {
   return (
     <UserProvider>
@@ -31,6 +33,7 @@ function App(props) {
     <ChatProvider>
       <Router>
         <div className="App">
+          <ToastContainer/>
           <Route path="/" exact component={Home}></Route>
           <Route path="/news" exact component={News}></Route>
           <Route path="/men" exact component={Men}></Route>

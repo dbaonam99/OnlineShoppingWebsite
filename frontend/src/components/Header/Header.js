@@ -155,6 +155,7 @@ function Header(props) {
         if (clickedCart) {
             setScrolled(false)
         }
+        
         function onScroll() {
             if (location === "/news" || location === `/news/category/${props.match.params.cate}`) {
                 if(window.pageYOffset < 50) { // top
