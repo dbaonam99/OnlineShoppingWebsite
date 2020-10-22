@@ -142,7 +142,7 @@ function BannerV3(props) {
     ]
 
     useEffect(() => {
-        if (location === "/news" || location === "/collection") {
+        if (location === "/news" || location ===  `/collection/${path}`) {
             setWhiteText(true);
             setDisableBox(true);
         } else {
@@ -154,7 +154,7 @@ function BannerV3(props) {
         }
 
         function onScroll() {
-            if (location === "/news" || location === "/collection") {
+            if (location === "/news" || location ===  `/collection/${path}`) {
                 if(window.pageYOffset < 50) { // top
                     if (dropdownHover === true) {
                         setWhiteBox(true)
@@ -206,6 +206,7 @@ function BannerV3(props) {
         document.body.style.overflow = 'hidden';
     }
 
+    const path = props.history.location.pathname.slice(12);
     return(
         <div
             className={classNames('Header HeaderV3', {
@@ -214,19 +215,19 @@ function BannerV3(props) {
                 white_disable: disableBox === true
             })}
             onMouseEnter={() => { 
-                if (location === "/news" || location === "/collection") {
+                if (location === "/news" || location === `/collection/${path}`) {
                     setWhiteText(false); 
                     setDisableBox(false);
                 }
             }}
             onMouseOver={() => { 
-                if (location === "/news" || location === "/collection") {
+                if (location === "/news" || location ===  `/collection/${path}`) {
                     setWhiteText(false); 
                     setDisableBox(false);
                 }
             }}
             onMouseLeave={() => { 
-                if ((location === "/news" && window.pageYOffset < 50) || (location === "/collection" && window.pageYOffset < 50)) {
+                if ((location === "/news" && window.pageYOffset < 50) || (location ===  `/collection/${path}` && window.pageYOffset < 50)) {
                     setWhiteText(true);
                 }
             }}

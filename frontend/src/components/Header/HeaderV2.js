@@ -255,7 +255,7 @@ function Header(props) {
                 }
             </ul>
             <div className="logo flex-center">
-                <Link to="/collection">
+                <Link to="/">
                     {
                         whiteText === true 
                             ? <img src="https://demo.uix.store/sober/wp-content/themes/sober/images/logo-light.svg" alt="logo"></img>

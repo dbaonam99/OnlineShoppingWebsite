@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import React, { Component, useEffect, useState } from "react";
 import "../App.css";
 import RecommendBanner from "../components/Home/RecommendBanner.js"
 import HomeTab from "../components/Home/HomeTab.js"
@@ -8,21 +8,31 @@ import Newsletter from "../components/Layouts/Newsletter.js"
 import Footer from "../components/Layouts/Footer.js"
 import Banner from '../components/Banner/Banner.js'
 import Header from '../components/Header/Header.js'
+import axios from 'axios';
 
-class Home extends Component {
-    render() {
-        return (
-            <div className="Home">
-                <Header/>
-                <Banner/>
-                <RecommendBanner/>
-                <HomeTab/>
-                <Collection/>
-                <FashionNews/>
-                <Newsletter/>
-                <Footer/>
-            </div>
-        );
-    }
+function Home() {
+    const [collection, setCollection] = useState([]);
+    useEffect(()=>{
+        axios.get(`http://localhost:4000/collection`)
+            .then(res => {
+                setCollection(res.data)
+            }
+        )
+    },[])
+
+    return (
+        <div className="Home">
+            <Header/>
+            <Banner 
+                collection = {collection}
+            />
+            <RecommendBanner/>
+            <HomeTab/>
+            <Collection/>
+            <FashionNews/>
+            <Newsletter/>
+            <Footer/>
+        </div>
+    )
 }
 export default Home;

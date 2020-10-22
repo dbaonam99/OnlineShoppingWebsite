@@ -88,13 +88,14 @@ export default function ProductQuickView(props) {
                                 </div>
                             }
                         </div>
-                        <Slider {...settings}>
-                            {product.productImg.map((item, index) => {
-                                return (
-                                    <img key={index} src={item} alt="" className="view-img"/>
-                                )
-                            })}
-                        </Slider>
+                        { props.view === true && <Slider {...settings}>
+                                {product.productImg.map((item, index) => {
+                                    return (
+                                        <img key={index} src={item} alt="" className="view-img"/>
+                                    )
+                                })}
+                            </Slider>
+                        }
                     </div>
 
                     <div className="product-info-detail" style={{padding: '0', marginTop: '70px'}}>

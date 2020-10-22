@@ -31,10 +31,14 @@ function App(props) {
 
   const [loading, setLoading] = useState(true);
   useEffect(()=>{
-    setTimeout(()=>{
+    if (window.location.href.split('/')[3] === "") {
+      setTimeout(()=>{
+        setLoading(false)
+        document.body.style.overflow = 'unset';
+      }, 5500)
+    } else {
       setLoading(false)
-      document.body.style.overflow = 'unset';
-    }, 5000)
+    }
   },[])
 
   if(loading){
@@ -45,26 +49,30 @@ function App(props) {
     <UserProvider>
     <CartProvider>
     <ChatProvider>
-      <LoadingPage
-        loading={loading}
-      />
-      <Router>
-        <div className="App">
-          <ToastContainer/>
-          <Route path="/" exact component={Home}></Route>
-          <Route path="/news" exact component={News}></Route>
-          <Route path="/men" exact component={Men}></Route>
-          <Route path="/women" exact component={Women}></Route>
-          <Route path="/contact" exact component={Contact}></Route>
-          <Route path="/collection" exact component={Collection}></Route>
-          <Route path="/products/:id" exact component={ProductDetail}></Route>
-          <Route path="/news/:id" exact component={NewsDetail}></Route>
-          <Route path="/news/category/:cate" exact component={NewsCate}></Route>
-          <Route path="/admin" exact component={Login}></Route>
-          <Route path="/admin/dashboard" exact component={Dashboard}></Route>
-        </div>
-        <OpenChatBtn/>
-      </Router>
+      { loading === true &&
+        <LoadingPage
+          loading={loading}
+        />
+      }
+      { loading === false &&
+        <Router>
+          <div className="App">
+            <ToastContainer/>
+            <Route path="/" exact component={Home}></Route>
+            <Route path="/news" exact component={News}></Route>
+            <Route path="/men" exact component={Men}></Route>
+            <Route path="/women" exact component={Women}></Route>
+            <Route path="/contact" exact component={Contact}></Route>
+            <Route path="/collection/:id" exact component={Collection}></Route>
+            <Route path="/products/:id" exact component={ProductDetail}></Route>
+            <Route path="/news/:id" exact component={NewsDetail}></Route>
+            <Route path="/news/category/:cate" exact component={NewsCate}></Route>
+            <Route path="/admin" exact component={Login}></Route>
+            <Route path="/admin/dashboard" exact component={Dashboard}></Route>
+          </div>
+          <OpenChatBtn/>
+        </Router>
+      }
     </ChatProvider>
     </CartProvider>
     </UserProvider>

@@ -427,6 +427,7 @@
   flex-direction: column;
 }
 .hide {
+  visibility: hidden;
   opacity: 0;
 }
 .displayNone {
@@ -470,6 +471,10 @@
 .banner-link {
   font-size: 11px;
   margin: 0 20px;
+  cursor: pointer;
+}
+.zindex {
+  z-index: 999976876867;
 }
 .banner-link-second {
   margin-left: 180px;
