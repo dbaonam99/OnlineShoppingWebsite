@@ -539,3 +539,119 @@
 .boxchat-type button {
     width: 10%;
 }
+
+
+
+.dashboard-product {
+    /* background-color: #fff; */
+    position: relative;
+}
+.dashboard-table {
+    width: 100%;
+    border-collapse: collapse;
+}
+.dashboard-table tr {
+    border-bottom: 1px #ddd solid;
+}
+.dashboard-table tr:hover {
+    background-color: #f7f7f7;
+}
+.dashboard-table tr th, .dashboard-table tr td {
+    padding-left: 10px;
+}
+.dashboard-table tr:nth-child(even) {
+    background-color: #f7f7f7;
+}
+.dashboard-table tr:first-child {
+    height: 40px;
+    cursor: pointer;
+}
+.dashboard-table tr:first-child:hover {
+    background-color: #fff;
+}
+.dashboard-table tr th {
+    font-size: 16px;
+    font-family: sans-serif;
+    font-weight: 300;
+    color: #111;
+    text-align: left;
+    border: none;
+}
+.table-title:first-child {
+    width: 150px;
+}
+.table-title:last-child {
+    width: 80px;
+}
+.dashboard-table td p {
+    width: 10px;
+    font-size: 14px;
+    font-family: sans-serif;
+    font-weight: 300;
+    color: #555;
+    text-align: left;
+    width: max-content;
+    /* Add ... if text is full */
+    display: -webkit-box;
+    -webkit-line-clamp: 1;
+    -webkit-box-orient: vertical;
+    max-width: 100%;
+    overflow: hidden;
+}
+
+select {
+    outline: none;
+}
+.action-item {
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    margin-right: 5px;
+    color: #FFF;
+    font-size: 12px;
+}
+.dashboard-addnew {
+    justify-content: space-between;
+    align-items: center;
+    height: 40px;
+    margin-bottom: 20px;
+}
+.dashboard-addnew-btn {
+    font-size: 14px;
+    padding: 5px 20px;
+    cursor: pointer;
+}
+.dashboard-addnew-search input {
+    border: none;
+    outline: none;
+    border-bottom: 1px #ddd solid;
+    font-size: 14px;
+    width: 200px;
+    padding: 5px;
+    transition: .5s;
+}
+.dashboard-addnew-search input:focus {
+    border-bottom: 1px #777 solid;
+}
+.dashboard-addnew-search input:hover {
+    border-bottom: 1px #777 solid;
+}
+
+.DashboardProductInfo {
+    width: 80%;
+    left: 20%;
+    height: 100vh;
+    background-color: rgba(1, 1, 1, 0.7);
+    position: fixed;
+    z-index: 13;
+    top: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.create-box {
+    width: 80%;
+    height: 80%;
+    background-color: #fff;
+    border-radius: 10px;
+}

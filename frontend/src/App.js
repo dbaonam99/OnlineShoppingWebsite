@@ -34,16 +34,11 @@ function App(props) {
     if (window.location.href.split('/')[3] === "") {
       setTimeout(()=>{
         setLoading(false)
-        document.body.style.overflow = 'unset';
       }, 5500)
     } else {
       setLoading(false)
     }
   },[])
-
-  if(loading){
-    document.body.style.overflow = 'hidden';
-  }
 
   return (
     <UserProvider>

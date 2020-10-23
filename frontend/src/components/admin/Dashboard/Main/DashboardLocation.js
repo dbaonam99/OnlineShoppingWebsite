@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
-import '../../../App.css'
-import '../../../Styles/Dashboard.css'
+import '../../../../App.css'
+import '../../../../Styles/Dashboard.css'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faGlobe } from '@fortawesome/free-solid-svg-icons'
 

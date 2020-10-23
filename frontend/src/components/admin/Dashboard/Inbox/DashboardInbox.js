@@ -1,6 +1,6 @@
 import React from 'react'
-import '../../../App.css'
-import '../../../Styles/Dashboard.css'
+import '../../../../App.css'
+import '../../../../Styles/Dashboard.css'
 import { useEffect, useState } from 'react'
 import socketIOClient from "socket.io-client";
 
@@ -8,7 +8,7 @@ const ENDPOINT = "http://localhost:4000";
 
 export default function DashboardInbox(props) {
     const [allChatData, setAllChatData] = useState([])
-    const [chatContent, setChatContent] = useState([])
+    // const [chatContent, setChatContent] = useState([])
     const [roomId, setRoomId] = useState(0);
     const [roomIndex, setRoomIndex] = useState(0)
     const [chatInput, setChatInput] = useState("")
@@ -57,7 +57,7 @@ export default function DashboardInbox(props) {
                                 key={index}
                                 className="boxchat-item flex-col"
                                 onClick={()=>{
-                                    setChatContent(item.chatContent)
+                                    // setChatContent(item.chatContent)
                                     setRoomId(item.sessionId)
                                     setRoomIndex(index)
                                 }}

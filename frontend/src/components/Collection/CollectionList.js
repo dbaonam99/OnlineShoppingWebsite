@@ -1,6 +1,6 @@
-import Axios from 'axios';
-import React, { useEffect } from 'react'
-import CollectionItem from './CollectionItem'
+// import Axios from 'axios';
+import React from 'react'
+// import CollectionItem from './CollectionItem'
 
 export default function CollectionList(props) {
     // const collectionItems = [

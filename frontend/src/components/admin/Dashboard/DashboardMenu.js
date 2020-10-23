@@ -78,7 +78,10 @@ export default function DashboardMenu(props) {
                                     className={classNames("db-menu-item flex-center", {
                                         db_menu_active: props.tabId === item.id,
                                     })}
-                                    onClick={() => props.setTabIdOnClick(item.id)}
+                                    onClick={() => {
+                                        props.setTabIdOnClick(item.id);
+                                        props.setCloseCreateFunc(false);
+                                    }}
                                 >
                                     <FontAwesomeIcon icon={item.icon} style={{fontSize: '18px'}} className="icon"/>
                                     {hideText===false&&<p className="db-menu-name">{item.name}</p>}

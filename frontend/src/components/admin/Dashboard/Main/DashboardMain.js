@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
-import '../../../App.css'
-import '../../../Styles/Dashboard.css'
+import '../../../../App.css'
+import '../../../../Styles/Dashboard.css'
 import { faFileInvoice, faMoneyBillWave, faStar, faTshirt, faUser } from '@fortawesome/free-solid-svg-icons'
 import DashboardTotalCount from './DashboardTotalCount'
 import DashboardLocation from './DashboardLocation'

@@ -43,7 +43,7 @@ export default function Dashboard() {
             icon: faChartLine
         },
     ]
-    const [tabId, setTabId] = useState("2");
+    const [tabId, setTabId] = useState("4");
     const [openMenu, setOpenMenu] = useState(true);
 
     const setTabIdOnClick = (id) => {
@@ -54,6 +54,18 @@ export default function Dashboard() {
         else setOpenMenu(true);
     }
 
+    const [openCreate, setOpenCreate] = useState(false)
+
+    const setOpenCreateFunc = () => {
+        document.body.style.overflow = 'hidden';
+        setOpenCreate(true)
+    }
+    const setCloseCreateFunc = (bool) => {
+        document.body.style.overflow = 'unset';
+        setOpenCreate(bool)
+    }
+
+
     return (
         <div className="Dashboard flex">
             <DashboardMenu
@@ -61,13 +73,16 @@ export default function Dashboard() {
                 setOpenMenuOnClick = {setOpenMenuOnClick}
                 tabId = {tabId}
                 menuItems = {menuItems}
-                openMenu = {openMenu}
+                openMenu = {openMenu} 
+                setCloseCreateFunc={setCloseCreateFunc}
             />
             <DashboardBody
                 tabId = {tabId}
                 menuItems = {menuItems}
                 openMenu = {openMenu}
+                openCreate = {openCreate}
                 setOpenMenuOnClick = {setOpenMenuOnClick}
+                setOpenCreateFunc={setOpenCreateFunc}
             />
         </div>
     )

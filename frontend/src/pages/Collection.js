@@ -1,10 +1,10 @@
-import React, { Component, useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import "../App.css";
 import Newsletter from "../components/Layouts/Newsletter.js"
 import Footer from "../components/Layouts/Footer.js"
 import BannerV3 from '../components/Banner/BannerV3.js'
 import HeaderV3 from '../components/Header/HeaderV3.js'
-import bg from '../assets/collection2.jpg'
+// import bg from '../assets/collection2.jpg'
 import CollectionList from '../components/Collection/CollectionList.js'
 import Axios from "axios";
 import { withRouter } from "react-router-dom";

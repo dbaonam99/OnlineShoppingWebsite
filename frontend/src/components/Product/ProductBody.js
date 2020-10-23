@@ -91,7 +91,7 @@ export default function ProductBody(props) {
             activeColor: "#fda32a",
             color: "#ddd",
             isHalf: true
-        };
+        }
     }
 
     return(
