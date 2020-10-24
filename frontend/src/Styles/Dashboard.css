@@ -743,6 +743,7 @@ select {
     height: 70px;
     position: relative;
     margin-right: 10px;
+    margin-bottom: 10px;
 }
 .create-box-img img {
     position: relative;
@@ -759,7 +760,7 @@ select {
 }
 .create-box-img-overlay .icon {
     position: absolute;
-    top: 3px;
+    top: 0;
     right: 3px;
     color: #777;
     cursor: pointer;

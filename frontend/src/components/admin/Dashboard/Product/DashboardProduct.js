@@ -1,13 +1,12 @@
 import { faTshirt } from '@fortawesome/free-solid-svg-icons'
 import React, { useEffect, useState } from 'react'
-import DashboardBoxItems from './DashboardBoxItem'
+import DashboardProductTable from './DashboardProductTable'
 import axios from 'axios'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faCheckCircle } from '@fortawesome/free-solid-svg-icons'
 
 export default function DashboardProduct(props) {
 
-    const [products, setProducts] = useState([])
 
     const table = [
         "Name",
@@ -21,14 +20,6 @@ export default function DashboardProduct(props) {
         "Rating",
         "Action"
     ]
-    
-    useEffect(()=>{
-        axios.get(`http://localhost:4000/products`)
-            .then(res => {
-                setProducts(res.data)
-            }
-        )
-    },[props.isChange])
 
     return (
         <div className="dashboard-product">
@@ -36,16 +27,16 @@ export default function DashboardProduct(props) {
                 <FontAwesomeIcon icon={faCheckCircle} className="icon"/>
                 Update products successfully
             </div>
-            <DashboardBoxItems 
+            <DashboardProductTable
                 icon = {faTshirt}
                 title = "Products"
                 color = "pink"
                 table = {table}
-                products = {products}
                 setOpenCreateFunc = {props.setOpenCreateFunc}
-                setCloseCreateFunc={props.setCloseCreateFunc}
+                setCloseCreateFunc = {props.setCloseCreateFunc}
                 setOpenEditFunc = {props.setOpenEditFunc}
                 setCloseEditFunc = {props.setCloseEditFunc}
+                isChange = {props.isChange}
             />
         </div>
     )

@@ -29,7 +29,11 @@ module.exports.postProduct = async function(req, res) {
 		productDes: req.body.productDes,
 		productSold: 0,
 	}
-	console.log(data)
-	// await Product.create(data);
+	await Product.create(data);
+	res.status(200);
+}
+
+module.exports.deleteProduct = async function(req, res) {
+	await Product.findByIdAndRemove({_id: req.body.productId})
 	res.status(200);
 }

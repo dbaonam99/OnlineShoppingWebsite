@@ -1,11 +1,31 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import '../../../../App.css'
 import '../../../../Styles/Dashboard.css'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import ReactStars from "react-rating-stars-component";
 import { faPencilAlt, faTimes } from '@fortawesome/free-solid-svg-icons';
+import axios from 'axios';
 
-export default function DashboardBoxItems(props) {
+export default function DashboardProductTable(props) {
+
+    const [products, setProducts] = useState([])
+    
+    useEffect(()=>{
+        axios.get(`http://localhost:4000/products`)
+            .then(res => {
+                setProducts(res.data)
+            }
+        )
+    },[props.isChange])
+
+    const deleteOnClick = (event) => {
+        axios.post(`http://localhost:4000/products/delete/:${event.target.id}`, {
+            productId: event.target.id
+        })
+        setProducts(products.filter((item)=>{
+            return item._id !== event.target.id
+        }))
+    }
 
     return (
         <div className="topfive flex-col" style={{width: '100%'}}>
@@ -38,7 +58,7 @@ export default function DashboardBoxItems(props) {
                                 }
                             </tr>
                             {
-                                props.products.map((item, index) => {
+                                products.map((item, index) => {
                                     const date = new Date(item.productDate)
                                     const day = date.getDay();
                                     const month = date.getMonth();
@@ -118,9 +138,10 @@ export default function DashboardBoxItems(props) {
                                                     </div>
                                                     <div 
                                                         className="action-item flex-center action-red"
-                                                        // onClick={deleteOnClick}
+                                                        onClick={deleteOnClick}
+                                                        id={item._id}
                                                         >
-                                                        <FontAwesomeIcon icon={faTimes}/>
+                                                        <FontAwesomeIcon style={{pointerEvents: 'none'}} icon={faTimes}/>
                                                     </div>
                                                 </div>
                                             </td>

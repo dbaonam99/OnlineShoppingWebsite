@@ -17,6 +17,7 @@ export default function DashboardProductEdit(props) {
     const [sex, setSex] = useState("")
     const [file, setFile] = useState([])
     const product = props.product
+    const [productImg, setProductImg] = useState([])
 
     const checkedSize = (event) => {
         if (event.target.id === "1") {
@@ -50,6 +51,7 @@ export default function DashboardProductEdit(props) {
     }
     
     useEffect(()=> {
+        setProductImg(product.productImg)
         axios.get(`http://localhost:4000/category`)
             .then(res => {
                 setCate(res.data)
@@ -100,6 +102,12 @@ export default function DashboardProductEdit(props) {
         cateInput.current.value = ""
     }
 
+    const deleteImg = (event) => {
+        const items = [...productImg]
+        items.splice(event.target.id, 1)
+        setProductImg(items)
+    }
+
     return (
         <div className="DashboardProductInfo">
             <div className="create-box">
@@ -132,23 +140,33 @@ export default function DashboardProductEdit(props) {
                             <div className="right">
                                 <input 
                                     onChange={(event) => {
-                                        setFile(event.target.files)
+                                        const files = event.target.files;
+                                        for (let i = 0; i< files.length; i++) {
+                                            setProductImg(product=>[...product, URL.createObjectURL(files[i])])
+                                        }
+                                        setFile(productImg)
                                     }}
-                                    type="file" 
+                                    type="file"
                                     name="productImg"
                                     className="noborder"
                                     multiple="multiple"
                                     style={{height: '50px'}}
                                     required
                                 ></input>
-                                <div className="flex">
-                                    { product.productImg && 
-                                        product.productImg.map((item, index) => {
+                                <div className="flex" style={{ overflowY: 'hidden', flexWrap:'wrap'}}>
+                                    { productImg && 
+                                        productImg.map((item, index) => {
                                             return (
                                                 <div className="create-box-img">
                                                     <img key={index} src={item} alt=""></img>
-                                                    <div className="create-box-img-overlay">
-                                                        <FontAwesomeIcon icon={faTimes} className="icon"/>
+                                                    <div 
+                                                        className="create-box-img-overlay"
+                                                    >
+                                                        <p
+                                                            id={index}
+                                                            onClick={deleteImg}
+                                                            className="icon">X
+                                                        </p>
                                                     </div>
                                                 </div>
                                             )
