@@ -80,7 +80,6 @@ export default function Dashboard() {
         setOpenEdit(bool)
     }
 
-
     return (
         <div className="Dashboard flex">
             <DashboardMenu

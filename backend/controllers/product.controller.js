@@ -22,13 +22,14 @@ module.exports.postProduct = async function(req, res) {
 		productSale: req.body.productSale,
 		productPrice: req.body.productPrice,
 		productCate: req.body.productCate,
-		productSize: req.body.productSize,
+		productSize: req.body.productSize.split(","),
 		productSex: req.body.productSex,
 		productDate: req.body.productDate,
 		productImg: imgArr,
 		productDes: req.body.productDes,
 		productSold: 0,
 	}
-	await Product.create(data);
+	console.log(data)
+	// await Product.create(data);
 	res.status(200);
 }

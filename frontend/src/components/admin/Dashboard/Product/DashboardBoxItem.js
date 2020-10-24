@@ -114,7 +114,7 @@ export default function DashboardBoxItems(props) {
                                                         onClick={props.setOpenEditFunc}
                                                         id={item._id}
                                                         >
-                                                        <FontAwesomeIcon icon={faPencilAlt}/>
+                                                        <FontAwesomeIcon style={{pointerEvents: 'none'}} icon={faPencilAlt}/>
                                                     </div>
                                                     <div 
                                                         className="action-item flex-center action-red"

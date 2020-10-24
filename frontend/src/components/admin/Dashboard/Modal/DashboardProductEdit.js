@@ -16,7 +16,7 @@ export default function DashboardProductEdit(props) {
     const [size, setSize] = useState([])
     const [sex, setSex] = useState("")
     const [file, setFile] = useState([])
-    const [product, setProduct] = useState({})
+    const product = props.product
 
     const checkedSize = (event) => {
         if (event.target.id === "1") {
@@ -55,14 +55,16 @@ export default function DashboardProductEdit(props) {
                 setCate(res.data)
             }
         )
-        console.log(props.productId)
-        axios.get(`http://localhost:4000/products/${props.productId}`)
-            .then(res => {
-                setProduct(res.data)
+        if (product) {
+            if (product.productSize) {
+                for (let i of product.productSize) {
+                    if(i === "Small") setIsCheckedSmall(true)
+                    if(i === "Medium") setIsCheckedMedium(true)
+                    if(i === "Large") setIsCheckedLarge(true)
+                }
             }
-        )
-
-    },[props.productId])
+        }
+    },[product])
 
     const onSubmit = (event) => {
         event.preventDefault()
@@ -85,7 +87,7 @@ export default function DashboardProductEdit(props) {
         formData.append("productSex", sex);
         formData.append("productDate", new Date());
         axios.post('http://localhost:4000/products', formData, config)
-        props.setCloseCreateFunc(false);
+        props.setCloseEditFunc(false);
         props.setToastFunc(true);
     }
 
@@ -97,7 +99,6 @@ export default function DashboardProductEdit(props) {
         setCateValue(inputValue.cate)
         cateInput.current.value = ""
     }
-
 
     return (
         <div className="DashboardProductInfo">
@@ -122,7 +123,7 @@ export default function DashboardProductEdit(props) {
                             <div className="right">
                                 <input 
                                     type="text" name="name" 
-                                    value={product.productName}
+                                    value={product.productName || 0}
                                     onChange={handleOnChange} required></input>
                             </div>
                         </div>
@@ -137,20 +138,46 @@ export default function DashboardProductEdit(props) {
                                     name="productImg"
                                     className="noborder"
                                     multiple="multiple"
+                                    style={{height: '50px'}}
                                     required
-                                    ></input>
+                                ></input>
+                                <div className="flex">
+                                    { product.productImg && 
+                                        product.productImg.map((item, index) => {
+                                            return (
+                                                <div className="create-box-img">
+                                                    <img key={index} src={item} alt=""></img>
+                                                    <div className="create-box-img-overlay">
+                                                        <FontAwesomeIcon icon={faTimes} className="icon"/>
+                                                    </div>
+                                                </div>
+                                            )
+                                        })
+                                    }
+                                </div>
                             </div>
                         </div>
                         <div className="create-box-row flex">
                             <div className="left flex">Defaut price </div>
                             <div className="right">
-                                <input type="number" name="price" placeholder="USD" onChange={handleOnChange} required></input>
+                                <input 
+                                    type="number" name="price" 
+                                    placeholder="USD" 
+                                    value={product.productPrice || 0}
+                                    onChange={handleOnChange} required
+                                ></input>
                             </div>
                         </div>
                         <div className="create-box-row flex">
                             <div className="left flex">Sale </div>
                             <div className="right flex-center">
-                                <input type="number" placeholder="%" style={{ width: "100px"}} onChange={handleOnChange} name="sale" required></input>
+                                <input 
+                                    type="number" placeholder="%" 
+                                    style={{ width: "100px"}} 
+                                    onChange={handleOnChange} 
+                                    name="sale" 
+                                    value={product.productSale || 0}
+                                    required></input>
                                 <label>From: </label>
                                 <input type="date"  name="fromdate" onChange={handleOnChange} placeholder="dd/mm/yyyy" pattern="(^(((0[1-9]|1[0-9]|2[0-8])[\/](0[1-9]|1[012]))|((29|30|31)[\/](0[13578]|1[02]))|((29|30)[\/](0[4,6,9]|11)))[\/](19|[2-9][0-9])\d\d$)|(^29[\/]02[\/](19|[2-9][0-9])(00|04|08|12|16|20|24|28|32|36|40|44|48|52|56|60|64|68|72|76|80|84|88|92|96)$)"/>
                                 <label>To: </label>
@@ -162,7 +189,8 @@ export default function DashboardProductEdit(props) {
                             <div className="right flex-center">
                                 <select style={{ width: "350px"}} 
                                     onChange={(event) => {setCateValue(event.target.value)}}
-                                    value={cateValue}>
+                                    value={cateValue || product.productCate}
+                                >
                                     <option></option>
                                     { cate.length > 0 &&
                                         cate.map((item, index) => {
@@ -192,7 +220,7 @@ export default function DashboardProductEdit(props) {
                             <div className="right flex">
                                 <select style={{ width: "200px"}} 
                                     onChange={(event) => {setSex(event.target.value)}}
-                                    value={sex}
+                                    value={sex || product.productSex}
                                     required>
                                     <option></option>
                                     <option>Man</option>
@@ -220,13 +248,17 @@ export default function DashboardProductEdit(props) {
                         <div className="create-box-row flex">
                             <div className="left flex">Description </div>
                             <div className="right">
-                                <input type="text" name="des" onChange={handleOnChange} required></input>
+                                <input 
+                                    type="text" 
+                                    name="des" 
+                                    value={product.productDes || ""}
+                                    onChange={handleOnChange} required></input>
                             </div>
                         </div>
 
                         <div className="flex-center" style={{marginTop: '40px'}}>
                             <button className="create-box-btn btn">
-                                Add product
+                                Update product
                             </button>
                         </div>
                     </form>

@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import '../../../App.css'
 import '../../../Styles/Dashboard.css'
 import DashboardHeader from './DashboardHeader'
@@ -8,12 +8,14 @@ import DashboardInbox from './Inbox/DashboardInbox';
 import DashboardProduct from './Product/DashboardProduct';
 import DashboardProductEdit from './Modal/DashboardProductEdit';
 import DashboardProductCreate from './Modal/DashboardProductCreate';
+import Axios from 'axios';
 
 export default function DashboardBody(props) {
 
     const tabId = props.tabId;
     const [toast, setToast] = useState(false)
     const [isChange, setIsChange] = useState(false)
+    const [product, setProduct] = useState({})
 
     const setToastFunc = (bool) => {
         setIsChange(true)
@@ -22,6 +24,14 @@ export default function DashboardBody(props) {
             setToast(false)
         }, 3000)
     }
+    
+    useEffect(()=> {
+        Axios.get(`http://localhost:4000/products/${props.productId}`)
+            .then(res => {
+                setProduct(res.data)
+            }
+        )
+    },[props.productId])
 
     return (
         <div 
@@ -38,7 +48,7 @@ export default function DashboardBody(props) {
                 <DashboardProductEdit
                     setCloseEditFunc={props.setCloseEditFunc}
                     setToastFunc={setToastFunc}
-                    productId={props.productId}
+                    product={product}
                 />
             }
             <DashboardHeader

@@ -52,8 +52,7 @@ export default function DashboardProductCreate(props) {
         axios.get(`http://localhost:4000/category`)
             .then(res => {
                 setCate(res.data)
-            }
-        )
+            }) 
     },[])
 
     const onSubmit = (event) => {
