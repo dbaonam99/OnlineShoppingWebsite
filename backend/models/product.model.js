@@ -5,6 +5,22 @@ var productSchema = new mongoose.Schema({
 	productPrice: String,
 	productImg: Array,
 	productDate: Date,
+	productName: String,
+    productSale: Number,
+    productPrice: Number,
+    productCate: String,
+    productColor: String,
+    productSize: Array,
+    productSex: String,
+    productSold: Number,
+	productDes: String,
+	productVote: Array,
+	name: String,
+	ratingTitle: String,
+	ratingText: String,
+	ratingDate: Date,
+	ratingStar: Number,
+	ratingImg: Array
 	},
     {
     	versionKey: false

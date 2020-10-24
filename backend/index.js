@@ -14,6 +14,7 @@ var newsRoutes = require('./routes/news');
 var userRoutes = require('./routes/user');
 var chatRoutes = require('./routes/chat');
 var emailRoutes = require('./routes/email');
+var categoryRoutes = require('./routes/category');
 var collectionRoutes = require('./routes/collection');
 
 mongoose.connect('mongodb://localhost:27017/Shop', { useNewUrlParser: true , useUnifiedTopology: true});
@@ -23,6 +24,7 @@ var cors = require('cors');
 const { create } = require('./models/chat.model');
 app.use(bodyParser.json());
 app.use(cookieParser('secret'));
+app.use(express.static('public'))
 
 const io = socketIo(server);
 
@@ -40,6 +42,7 @@ app.use("/users", userRoutes);
 app.use("/chat", chatRoutes);
 app.use("/email", emailRoutes);
 app.use("/collection", collectionRoutes);
+app.use("/category", categoryRoutes);
 app.use(cors());
 app.options('*', cors());
 

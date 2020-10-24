@@ -2,6 +2,8 @@ import { faTshirt } from '@fortawesome/free-solid-svg-icons'
 import React, { useEffect, useState } from 'react'
 import DashboardBoxItems from './DashboardBoxItem'
 import axios from 'axios'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faCheckCircle } from '@fortawesome/free-solid-svg-icons'
 
 export default function DashboardProduct(props) {
 
@@ -30,6 +32,10 @@ export default function DashboardProduct(props) {
 
     return (
         <div className="dashboard-product">
+            <div className={props.toast ? "toast toast-show" : "toast"} style={{top: '-20px'}}>
+                <FontAwesomeIcon icon={faCheckCircle} className="icon"/>
+                Product is added successfully
+            </div>
             <DashboardBoxItems
                 icon = {faTshirt}
                 title = "Products"
@@ -37,6 +43,7 @@ export default function DashboardProduct(props) {
                 table = {table}
                 products = {products}
                 setOpenCreateFunc = {props.setOpenCreateFunc}
+                setCloseCreateFunc={props.setCloseCreateFunc}
             />
         </div>
     )

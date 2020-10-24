@@ -11,12 +11,26 @@ import DashboardProductInfo from './Product/DashboardProductInfo';
 export default function DashboardBody(props) {
 
     const tabId = props.tabId;
+    const [toast, setToast] = useState(false)
+
+    const setToastFunc = (bool) => {
+        setToast(true)
+        setTimeout(()=>{
+            setToast(false)
+        }, 3000)
+    }
+
     return (
         <div 
             className={classNames("DashboardBody", {
                 DashboardBody_small: !props.openMenu
             })}>
-            {props.openCreate && <DashboardProductInfo/>}
+            {props.openCreate && 
+                <DashboardProductInfo
+                    setCloseCreateFunc={props.setCloseCreateFunc}
+                    setToastFunc={setToastFunc}
+                />
+            }
             <DashboardHeader
                 itemName= {props.menuItems[tabId-1].name}
                 setOpenMenuOnClick = {props.setOpenMenuOnClick}
@@ -35,6 +49,7 @@ export default function DashboardBody(props) {
                 tabId === "4" && 
                 <DashboardProduct
                     setOpenCreateFunc={props.setOpenCreateFunc}
+                    toast={toast}
                 />
             }
             {

@@ -83,6 +83,7 @@ export default function Dashboard() {
                 openCreate = {openCreate}
                 setOpenMenuOnClick = {setOpenMenuOnClick}
                 setOpenCreateFunc={setOpenCreateFunc}
+                setCloseCreateFunc={setCloseCreateFunc}
             />
         </div>
     )
