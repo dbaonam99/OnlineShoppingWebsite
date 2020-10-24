@@ -30,13 +30,21 @@ export default function DashboardProduct(props) {
         )
     },[])
 
+    if (props.isChange) {
+        axios.get(`http://localhost:4000/products`)
+            .then(res => {
+                setProducts(res.data)
+            }
+        )
+    }
+
     return (
         <div className="dashboard-product">
             <div className={props.toast ? "toast toast-show" : "toast"} style={{top: '-20px'}}>
                 <FontAwesomeIcon icon={faCheckCircle} className="icon"/>
                 Product is added successfully
             </div>
-            <DashboardBoxItems
+            <DashboardBoxItems 
                 icon = {faTshirt}
                 title = "Products"
                 color = "pink"

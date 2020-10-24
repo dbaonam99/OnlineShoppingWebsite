@@ -6,14 +6,16 @@ import DashboardMain from './Main/DashboardMain';
 import classNames from 'classnames'
 import DashboardInbox from './Inbox/DashboardInbox';
 import DashboardProduct from './Product/DashboardProduct';
-import DashboardProductInfo from './Product/DashboardProductInfo';
+import DashboardProductInfo from './DashboardProductInfo';
 
 export default function DashboardBody(props) {
 
     const tabId = props.tabId;
     const [toast, setToast] = useState(false)
+    const [isChange, setIsChange] = useState(false)
 
     const setToastFunc = (bool) => {
+        setIsChange(true)
         setToast(true)
         setTimeout(()=>{
             setToast(false)
@@ -50,6 +52,7 @@ export default function DashboardBody(props) {
                 <DashboardProduct
                     setOpenCreateFunc={props.setOpenCreateFunc}
                     toast={toast}
+                    isChange={isChange}
                 />
             }
             {
