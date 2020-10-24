@@ -109,10 +109,16 @@ export default function DashboardBoxItems(props) {
                                             </td>
                                             <td>
                                                 <div className="action-table flex">
-                                                    <div className="action-item flex-center" style={{backgroundColor: "#40a33f"}}> 
+                                                    <div 
+                                                        className="action-item flex-center action-green"
+                                                        onClick={props.setOpenEditFunc}
+                                                        > 
                                                         <FontAwesomeIcon icon={faPencilAlt}/>
                                                     </div>
-                                                    <div className="action-item flex-center" style={{backgroundColor: "red"}}>
+                                                    <div 
+                                                        className="action-item flex-center action-red"
+                                                        // onClick={deleteOnClick}
+                                                        >
                                                         <FontAwesomeIcon icon={faTimes}/>
                                                     </div>
                                                 </div>

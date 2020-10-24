@@ -6,7 +6,9 @@ import DashboardMain from './Main/DashboardMain';
 import classNames from 'classnames'
 import DashboardInbox from './Inbox/DashboardInbox';
 import DashboardProduct from './Product/DashboardProduct';
-import DashboardProductInfo from './DashboardProductInfo';
+import DashboardProductInfo from './Modal/DashboardProductCreate';
+import DashboardProductEdit from './Modal/DashboardProductEdit';
+import DashboardProductCreate from './Modal/DashboardProductCreate';
 
 export default function DashboardBody(props) {
 
@@ -28,8 +30,14 @@ export default function DashboardBody(props) {
                 DashboardBody_small: !props.openMenu
             })}>
             {props.openCreate && 
-                <DashboardProductInfo
+                <DashboardProductCreate
                     setCloseCreateFunc={props.setCloseCreateFunc}
+                    setToastFunc={setToastFunc}
+                />
+            }
+            {props.openEdit && 
+                <DashboardProductEdit
+                    setCloseEditFunc={props.setCloseEditFunc}
                     setToastFunc={setToastFunc}
                 />
             }
@@ -51,6 +59,7 @@ export default function DashboardBody(props) {
                 tabId === "4" && 
                 <DashboardProduct
                     setOpenCreateFunc={props.setOpenCreateFunc}
+                    setOpenEditFunc={props.setOpenEditFunc}
                     toast={toast}
                     isChange={isChange}
                 />

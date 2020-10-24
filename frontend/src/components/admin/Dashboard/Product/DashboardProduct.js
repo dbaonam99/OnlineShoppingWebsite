@@ -52,6 +52,8 @@ export default function DashboardProduct(props) {
                 products = {products}
                 setOpenCreateFunc = {props.setOpenCreateFunc}
                 setCloseCreateFunc={props.setCloseCreateFunc}
+                setOpenEditFunc = {props.setOpenEditFunc}
+                setCloseEditFunc = {props.setCloseEditFunc}
             />
         </div>
     )

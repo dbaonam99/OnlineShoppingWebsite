@@ -724,3 +724,17 @@ select {
     background-color: green;
     color: #fff;
 }
+.action-green {
+    background-color: #50c35f;
+    transition: .5s;
+}
+.action-green:hover {
+    background-color:#40a33f;
+}
+.action-red {
+    background-color: #fc4455;
+    transition: .5s;
+}
+.action-red:hover {
+    background-color: #fc0005;
+}

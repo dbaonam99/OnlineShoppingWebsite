@@ -60,9 +60,22 @@ export default function Dashboard() {
         document.body.style.overflow = 'hidden';
         setOpenCreate(true)
     }
+
     const setCloseCreateFunc = (bool) => {
         document.body.style.overflow = 'unset';
         setOpenCreate(bool)
+    }
+
+    const [openEdit, setOpenEdit] = useState(false)
+
+    const setOpenEditFunc = () => {
+        document.body.style.overflow = 'hidden';
+        setOpenEdit(true)
+    }
+    
+    const setCloseEditFunc = (bool) => {
+        document.body.style.overflow = 'unset';
+        setOpenEdit(bool)
     }
 
 
@@ -75,15 +88,19 @@ export default function Dashboard() {
                 menuItems = {menuItems}
                 openMenu = {openMenu} 
                 setCloseCreateFunc={setCloseCreateFunc}
+                setCloseEditFunc={setCloseEditFunc}
             />
             <DashboardBody
                 tabId = {tabId}
                 menuItems = {menuItems}
                 openMenu = {openMenu}
                 openCreate = {openCreate}
+                openEdit = {openEdit}
                 setOpenMenuOnClick = {setOpenMenuOnClick}
                 setOpenCreateFunc={setOpenCreateFunc}
                 setCloseCreateFunc={setCloseCreateFunc}
+                setOpenEditFunc={setOpenEditFunc}
+                setCloseEditFunc={setCloseEditFunc}
             />
         </div>
     )

@@ -3,7 +3,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faTimes } from '@fortawesome/free-solid-svg-icons'
 import axios from 'axios'
 
-export default function DashboardProductInfo(props) {
+export default function DashboardProductCreate(props) {
 
     const createForm = useRef();
     const cateInput = useRef();
