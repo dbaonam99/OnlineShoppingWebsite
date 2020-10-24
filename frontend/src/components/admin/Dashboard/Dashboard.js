@@ -45,6 +45,7 @@ export default function Dashboard() {
     ]
     const [tabId, setTabId] = useState("4");
     const [openMenu, setOpenMenu] = useState(true);
+    const [productId, setProductId] = useState("")
 
     const setTabIdOnClick = (id) => {
         setTabId(id);
@@ -68,9 +69,10 @@ export default function Dashboard() {
 
     const [openEdit, setOpenEdit] = useState(false)
 
-    const setOpenEditFunc = () => {
+    const setOpenEditFunc = (event) => {
         document.body.style.overflow = 'hidden';
         setOpenEdit(true)
+        setProductId(event.target.id)
     }
     
     const setCloseEditFunc = (bool) => {
@@ -101,6 +103,7 @@ export default function Dashboard() {
                 setCloseCreateFunc={setCloseCreateFunc}
                 setOpenEditFunc={setOpenEditFunc}
                 setCloseEditFunc={setCloseEditFunc}
+                productId={productId}
             />
         </div>
     )

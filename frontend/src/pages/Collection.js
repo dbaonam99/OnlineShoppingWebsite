@@ -20,7 +20,7 @@ function Collection(props) {
                 setCollection(res.data)
             }
         )
-    },[])
+    },[path])
     
     return (
         <div className="Collection">

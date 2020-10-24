@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React from 'react'
 import '../../../../App.css'
 import '../../../../Styles/Dashboard.css'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
@@ -112,7 +112,8 @@ export default function DashboardBoxItems(props) {
                                                     <div 
                                                         className="action-item flex-center action-green"
                                                         onClick={props.setOpenEditFunc}
-                                                        > 
+                                                        id={item._id}
+                                                        >
                                                         <FontAwesomeIcon icon={faPencilAlt}/>
                                                     </div>
                                                     <div 

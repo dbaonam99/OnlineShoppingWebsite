@@ -6,7 +6,6 @@ import DashboardMain from './Main/DashboardMain';
 import classNames from 'classnames'
 import DashboardInbox from './Inbox/DashboardInbox';
 import DashboardProduct from './Product/DashboardProduct';
-import DashboardProductInfo from './Modal/DashboardProductCreate';
 import DashboardProductEdit from './Modal/DashboardProductEdit';
 import DashboardProductCreate from './Modal/DashboardProductCreate';
 
@@ -39,6 +38,7 @@ export default function DashboardBody(props) {
                 <DashboardProductEdit
                     setCloseEditFunc={props.setCloseEditFunc}
                     setToastFunc={setToastFunc}
+                    productId={props.productId}
                 />
             }
             <DashboardHeader

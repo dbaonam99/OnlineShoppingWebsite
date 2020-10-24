@@ -141,6 +141,8 @@ function BannerV3(props) {
         },
     ]
 
+    const path = props.history.location.pathname.slice(12);
+
     useEffect(() => {
         if (location === "/news" || location ===  `/collection/${path}`) {
             setWhiteText(true);
@@ -200,13 +202,13 @@ function BannerV3(props) {
         return() => {
             window.removeEventListener("scroll", onScroll);
         }
-    }, [clickedCart, location, dropdownHover]);
+    }, [clickedCart, location, dropdownHover, path]);
 
     if(searchOpen || accountOpen || cartOpen){
         document.body.style.overflow = 'hidden';
     }
 
-    const path = props.history.location.pathname.slice(12);
+
     return(
         <div
             className={classNames('Header HeaderV3', {

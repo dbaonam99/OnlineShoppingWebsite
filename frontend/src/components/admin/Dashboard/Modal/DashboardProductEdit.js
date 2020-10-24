@@ -16,6 +16,7 @@ export default function DashboardProductEdit(props) {
     const [size, setSize] = useState([])
     const [sex, setSex] = useState("")
     const [file, setFile] = useState([])
+    const [product, setProduct] = useState({})
 
     const checkedSize = (event) => {
         if (event.target.id === "1") {
@@ -54,7 +55,14 @@ export default function DashboardProductEdit(props) {
                 setCate(res.data)
             }
         )
-    },[])
+        console.log(props.productId)
+        axios.get(`http://localhost:4000/products/${props.productId}`)
+            .then(res => {
+                setProduct(res.data)
+            }
+        )
+
+    },[props.productId])
 
     const onSubmit = (event) => {
         event.preventDefault()
@@ -90,12 +98,13 @@ export default function DashboardProductEdit(props) {
         cateInput.current.value = ""
     }
 
+
     return (
         <div className="DashboardProductInfo">
             <div className="create-box">
                 <div className="create-box-title flex">
                     <div className="create-box-title-text">
-                        Product infomation Product infomationProduct infomationProduct infomationProduct infomationProduct infomationProduct infomationProduct infomationProduct infomation
+                        Product infomation
                     </div>
                     <div 
                         className="create-box-title-close flex-center"
@@ -106,117 +115,122 @@ export default function DashboardProductEdit(props) {
                         <FontAwesomeIcon icon={faTimes}/>
                     </div>
                 </div>
-                <form onSubmit={onSubmit} encType="multipart/form-data" ref={createForm}>
-                    <div className="create-box-row flex">
-                        <div className="left flex">Name</div>
-                        <div className="right">
-                            <input type="text" name="name" onChange={handleOnChange} required></input>
-                        </div>
-                    </div>
-                    <div className="create-box-row flex">
-                        <div className="left flex">Images </div>
-                        <div className="right">
-                            <input 
-                                onChange={(event) => {
-                                    setFile(event.target.files)
-                                }}
-                                type="file" 
-                                name="productImg"
-                                className="noborder"
-                                multiple="multiple"
-                                required
-                                ></input>
-                        </div>
-                    </div>
-                    <div className="create-box-row flex">
-                        <div className="left flex">Defaut price </div>
-                        <div className="right">
-                            <input type="number" name="price" placeholder="USD" onChange={handleOnChange} required></input>
-                        </div>
-                    </div>
-                    <div className="create-box-row flex">
-                        <div className="left flex">Sale </div>
-                        <div className="right flex-center">
-                            <input type="number" placeholder="%" style={{ width: "100px"}} onChange={handleOnChange} name="sale" required></input>
-                            <label>From: </label>
-                            <input type="date"  name="fromdate" onChange={handleOnChange} placeholder="dd/mm/yyyy" pattern="(^(((0[1-9]|1[0-9]|2[0-8])[\/](0[1-9]|1[012]))|((29|30|31)[\/](0[13578]|1[02]))|((29|30)[\/](0[4,6,9]|11)))[\/](19|[2-9][0-9])\d\d$)|(^29[\/]02[\/](19|[2-9][0-9])(00|04|08|12|16|20|24|28|32|36|40|44|48|52|56|60|64|68|72|76|80|84|88|92|96)$)"/>
-                            <label>To: </label>
-                            <input type="date"  name="todate" onChange={handleOnChange} placeholder="dd/mm/yyyy" pattern="(^(((0[1-9]|1[0-9]|2[0-8])[\/](0[1-9]|1[012]))|((29|30|31)[\/](0[13578]|1[02]))|((29|30)[\/](0[4,6,9]|11)))[\/](19|[2-9][0-9])\d\d$)|(^29[\/]02[\/](19|[2-9][0-9])(00|04|08|12|16|20|24|28|32|36|40|44|48|52|56|60|64|68|72|76|80|84|88|92|96)$)"/>
-                        </div>
-                    </div>
-                    <div className="create-box-row flex">
-                        <div className="left flex">Category </div>
-                        <div className="right flex-center">
-                            <select style={{ width: "350px"}} 
-                                onChange={(event) => {setCateValue(event.target.value)}}
-                                value={cateValue}>
-                                <option></option>
-                                { cate.length > 0 &&
-                                    cate.map((item, index) => {
-                                        return(
-                                            <option key={index}>{item.cateName}</option>
-                                        )
-                                    })
-                                }
-                            </select>
-                            <input type="text" name="cate" placeholder="New category?" style={{  margin:'0 10px'}} onChange={handleOnChange} ref={cateInput}></input>
-                            <div className="btn" style={{
-                                fontSize: '14px',
-                                fontFamily: 'sans-serif',
-                                fontWeight: '300',
-                                padding: '0 10px',
-                                cursor: 'pointer',
-                                width: '350px',
-                                height: '30px'
-                            }}
-                            onClick={addNewCate}>
-                                Add new category
+                { product && 
+                    <form onSubmit={onSubmit} encType="multipart/form-data" ref={createForm}>
+                        <div className="create-box-row flex">
+                            <div className="left flex">Name</div>
+                            <div className="right">
+                                <input 
+                                    type="text" name="name" 
+                                    value={product.productName}
+                                    onChange={handleOnChange} required></input>
                             </div>
                         </div>
-                    </div>
-                    <div className="create-box-row flex">
-                        <div className="left flex">Sex </div>
-                        <div className="right flex">
-                            <select style={{ width: "200px"}} 
-                                onChange={(event) => {setSex(event.target.value)}}
-                                value={sex}
-                                required>
-                                <option></option>
-                                <option>Man</option>
-                                <option>Woman</option>
-                            </select>
+                        <div className="create-box-row flex">
+                            <div className="left flex">Images </div>
+                            <div className="right">
+                                <input 
+                                    onChange={(event) => {
+                                        setFile(event.target.files)
+                                    }}
+                                    type="file" 
+                                    name="productImg"
+                                    className="noborder"
+                                    multiple="multiple"
+                                    required
+                                    ></input>
+                            </div>
                         </div>
-                    </div>
-                    <div className="create-box-row flex">
-                        <div className="left flex">Size </div>
-                        <div className="right flex">
-                            <div 
-                                className={isCheckedSmall ? "size-check isChecked" : "size-check"}
-                                id="1" 
-                                onClick={checkedSize}>Small</div>
-                            <div 
-                                className={isCheckedMedium ? "size-check isChecked" : "size-check"}
-                                id="2" 
-                                onClick={checkedSize}>Medium</div>
-                            <div 
-                                className={isCheckedLarge ? "size-check isChecked" : "size-check"}
-                                id="3" 
-                                onClick={checkedSize}>Large</div>
+                        <div className="create-box-row flex">
+                            <div className="left flex">Defaut price </div>
+                            <div className="right">
+                                <input type="number" name="price" placeholder="USD" onChange={handleOnChange} required></input>
+                            </div>
                         </div>
-                    </div>
-                    <div className="create-box-row flex">
-                        <div className="left flex">Description </div>
-                        <div className="right">
-                            <input type="text" name="des" onChange={handleOnChange} required></input>
+                        <div className="create-box-row flex">
+                            <div className="left flex">Sale </div>
+                            <div className="right flex-center">
+                                <input type="number" placeholder="%" style={{ width: "100px"}} onChange={handleOnChange} name="sale" required></input>
+                                <label>From: </label>
+                                <input type="date"  name="fromdate" onChange={handleOnChange} placeholder="dd/mm/yyyy" pattern="(^(((0[1-9]|1[0-9]|2[0-8])[\/](0[1-9]|1[012]))|((29|30|31)[\/](0[13578]|1[02]))|((29|30)[\/](0[4,6,9]|11)))[\/](19|[2-9][0-9])\d\d$)|(^29[\/]02[\/](19|[2-9][0-9])(00|04|08|12|16|20|24|28|32|36|40|44|48|52|56|60|64|68|72|76|80|84|88|92|96)$)"/>
+                                <label>To: </label>
+                                <input type="date"  name="todate" onChange={handleOnChange} placeholder="dd/mm/yyyy" pattern="(^(((0[1-9]|1[0-9]|2[0-8])[\/](0[1-9]|1[012]))|((29|30|31)[\/](0[13578]|1[02]))|((29|30)[\/](0[4,6,9]|11)))[\/](19|[2-9][0-9])\d\d$)|(^29[\/]02[\/](19|[2-9][0-9])(00|04|08|12|16|20|24|28|32|36|40|44|48|52|56|60|64|68|72|76|80|84|88|92|96)$)"/>
+                            </div>
                         </div>
-                    </div>
+                        <div className="create-box-row flex">
+                            <div className="left flex">Category </div>
+                            <div className="right flex-center">
+                                <select style={{ width: "350px"}} 
+                                    onChange={(event) => {setCateValue(event.target.value)}}
+                                    value={cateValue}>
+                                    <option></option>
+                                    { cate.length > 0 &&
+                                        cate.map((item, index) => {
+                                            return(
+                                                <option key={index}>{item.cateName}</option>
+                                            )
+                                        })
+                                    }
+                                </select>
+                                <input type="text" name="cate" placeholder="New category?" style={{  margin:'0 10px'}} onChange={handleOnChange} ref={cateInput}></input>
+                                <div className="btn" style={{
+                                    fontSize: '14px',
+                                    fontFamily: 'sans-serif',
+                                    fontWeight: '300',
+                                    padding: '0 10px',
+                                    cursor: 'pointer',
+                                    width: '350px',
+                                    height: '30px'
+                                }}
+                                onClick={addNewCate}>
+                                    Add new category
+                                </div>
+                            </div>
+                        </div>
+                        <div className="create-box-row flex">
+                            <div className="left flex">Sex </div>
+                            <div className="right flex">
+                                <select style={{ width: "200px"}} 
+                                    onChange={(event) => {setSex(event.target.value)}}
+                                    value={sex}
+                                    required>
+                                    <option></option>
+                                    <option>Man</option>
+                                    <option>Woman</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div className="create-box-row flex">
+                            <div className="left flex">Size </div>
+                            <div className="right flex">
+                                <div 
+                                    className={isCheckedSmall ? "size-check isChecked" : "size-check"}
+                                    id="1" 
+                                    onClick={checkedSize}>Small</div>
+                                <div 
+                                    className={isCheckedMedium ? "size-check isChecked" : "size-check"}
+                                    id="2" 
+                                    onClick={checkedSize}>Medium</div>
+                                <div 
+                                    className={isCheckedLarge ? "size-check isChecked" : "size-check"}
+                                    id="3" 
+                                    onClick={checkedSize}>Large</div>
+                            </div>
+                        </div>
+                        <div className="create-box-row flex">
+                            <div className="left flex">Description </div>
+                            <div className="right">
+                                <input type="text" name="des" onChange={handleOnChange} required></input>
+                            </div>
+                        </div>
 
-                    <div className="flex-center" style={{marginTop: '40px'}}>
-                    <button className="create-box-btn btn">
-                        Add product
-                    </button>
-                </div>
-                </form>
+                        <div className="flex-center" style={{marginTop: '40px'}}>
+                            <button className="create-box-btn btn">
+                                Add product
+                            </button>
+                        </div>
+                    </form>
+                }
             </div>
         </div>
     )
