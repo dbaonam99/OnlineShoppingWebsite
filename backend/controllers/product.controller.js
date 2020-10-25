@@ -33,6 +33,29 @@ module.exports.postProduct = async function(req, res) {
 	res.status(200);
 }
 
+module.exports.updateProduct = async function(req, res) {
+	const imgArr = [];
+	req.files.map((item)=>{
+		imgArr.push(`http://localhost:4000/${item.path.split("/").slice(1).join("/")}`)
+	})
+	const data = {
+		productName: req.body.productName,
+		productSale: req.body.productSale,
+		productPrice: req.body.productPrice,
+		productCate: req.body.productCate,
+		productSize: req.body.productSize.split(","),
+		productSex: req.body.productSex,
+		productDate: req.body.productDate,
+		productImg: imgArr,
+		productDes: req.body.productDes,
+		productSold: 0,
+	}
+	console.log(data)
+	// await Product.create(data);
+	res.status(200);
+}
+
+
 module.exports.deleteProduct = async function(req, res) {
 	await Product.findByIdAndRemove({_id: req.body.productId})
 	res.status(200);

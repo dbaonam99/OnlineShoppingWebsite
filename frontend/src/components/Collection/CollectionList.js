@@ -44,7 +44,6 @@ export default function CollectionList(props) {
 
 
     const collection = props.collection;
-    console.log(collection)
     // const collectionItems = collection.collectionItems;
     // if (collection) {
     //     collectionItems.map((item)=>{

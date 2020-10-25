@@ -671,7 +671,7 @@ select {
     width: 100%;
     justify-content: space-between;
 }
-.left {
+.dashboard-left {
     width: 20%;
     text-align: left;
     font-size: 14px;
@@ -679,11 +679,11 @@ select {
     font-weight: 300;
     align-items: center;
 }
-.right {
+.dashboard-right {
     width: 70%;
     text-align: left;
 }
-.right input {
+.dashboard-right input {
     outline: none;
     border: none;
     padding: 5px 5px;
@@ -691,11 +691,11 @@ select {
     height: 100%;
     width: 100%;
 }
-.right input:focus, 
-.right input:hover {
+.dashboard-right input:focus, 
+.dashboard-right input:hover {
     border-bottom: 2px #777 solid;
 }
-.right label {
+.dashboard-right label {
     font-size: 14px;
     font-family: sans-serif;
     font-weight: 300;

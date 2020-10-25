@@ -87,8 +87,7 @@ export default function DashboardProductEdit(props) {
         formData.append("productSize", size);
         formData.append("productDes", inputValue.des);
         formData.append("productSex", sex);
-        formData.append("productDate", new Date());
-        axios.post('http://localhost:4000/products', formData, config)
+        axios.post(`http://localhost:4000/products/update`, formData, config)
         props.setCloseEditFunc(false);
         props.setToastFunc(true);
     }
@@ -127,8 +126,8 @@ export default function DashboardProductEdit(props) {
                 { product && 
                     <form onSubmit={onSubmit} encType="multipart/form-data" ref={createForm}>
                         <div className="create-box-row flex">
-                            <div className="left flex">Name</div>
-                            <div className="right">
+                            <div className="dashboard-left flex">Name</div>
+                            <div className="dashboard-right">
                                 <input 
                                     type="text" name="name" 
                                     value={product.productName || 0}
@@ -136,8 +135,8 @@ export default function DashboardProductEdit(props) {
                             </div>
                         </div>
                         <div className="create-box-row flex">
-                            <div className="left flex">Images </div>
-                            <div className="right">
+                            <div className="dashboard-left flex">Images </div>
+                            <div className="dashboard-right">
                                 <input 
                                     onChange={(event) => {
                                         const files = event.target.files;
@@ -151,7 +150,6 @@ export default function DashboardProductEdit(props) {
                                     className="noborder"
                                     multiple="multiple"
                                     style={{height: '50px'}}
-                                    required
                                 ></input>
                                 <div className="flex" style={{ overflowY: 'hidden', flexWrap:'wrap'}}>
                                     { productImg && 
@@ -176,8 +174,8 @@ export default function DashboardProductEdit(props) {
                             </div>
                         </div>
                         <div className="create-box-row flex">
-                            <div className="left flex">Defaut price </div>
-                            <div className="right">
+                            <div className="dashboard-left flex">Defaut price </div>
+                            <div className="dashboard-right">
                                 <input 
                                     type="number" name="price" 
                                     placeholder="USD" 
@@ -187,8 +185,8 @@ export default function DashboardProductEdit(props) {
                             </div>
                         </div>
                         <div className="create-box-row flex">
-                            <div className="left flex">Sale </div>
-                            <div className="right flex-center">
+                            <div className="dashboard-left flex">Sale </div>
+                            <div className="dashboard-right flex-center">
                                 <input 
                                     type="number" placeholder="%" 
                                     style={{ width: "100px"}} 
@@ -203,8 +201,8 @@ export default function DashboardProductEdit(props) {
                             </div>
                         </div>
                         <div className="create-box-row flex">
-                            <div className="left flex">Category </div>
-                            <div className="right flex-center">
+                            <div className="dashboard-left flex">Category </div>
+                            <div className="dashboard-right flex-center">
                                 <select style={{ width: "350px"}} 
                                     onChange={(event) => {setCateValue(event.target.value)}}
                                     value={cateValue || product.productCate}
@@ -234,8 +232,8 @@ export default function DashboardProductEdit(props) {
                             </div>
                         </div>
                         <div className="create-box-row flex">
-                            <div className="left flex">Sex </div>
-                            <div className="right flex">
+                            <div className="dashboard-left flex">Sex </div>
+                            <div className="dashboard-right flex">
                                 <select style={{ width: "200px"}} 
                                     onChange={(event) => {setSex(event.target.value)}}
                                     value={sex || product.productSex}
@@ -247,8 +245,8 @@ export default function DashboardProductEdit(props) {
                             </div>
                         </div>
                         <div className="create-box-row flex">
-                            <div className="left flex">Size </div>
-                            <div className="right flex">
+                            <div className="dashboard-left flex">Size </div>
+                            <div className="dashboard-right flex">
                                 <div 
                                     className={isCheckedSmall ? "size-check isChecked" : "size-check"}
                                     id="1" 
@@ -264,8 +262,8 @@ export default function DashboardProductEdit(props) {
                             </div>
                         </div>
                         <div className="create-box-row flex">
-                            <div className="left flex">Description </div>
-                            <div className="right">
+                            <div className="dashboard-left flex">Description </div>
+                            <div className="dashboard-right">
                                 <input 
                                     type="text" 
                                     name="des" 
