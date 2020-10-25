@@ -8,7 +8,7 @@ import { CartContext } from '../../contexts/Cart';
 export default function Account(props) {
 
     const [tabID, setTabID] = useState(0);
-    const { cartItems, cartCombine } = useContext(CartContext)
+    const { cartCombine, removeFromCart } = useContext(CartContext)
     const [countCart, setCountCart] = useState(1);
 
     return(
@@ -44,6 +44,12 @@ export default function Account(props) {
                 { tabID === 0 &&
                     <div className="search-form login-form fadeToRight" style={{width: '100%'}}>
                         <div className="cart-list">
+                            {
+                                cartCombine.length === 0 && 
+                                <div>
+                                    No cart
+                                </div>
+                            }
                             {
                                 cartCombine.map((item, index) => {
                                     return (
@@ -81,8 +87,10 @@ export default function Account(props) {
                                             </div>
                                             <div className="cart-product-price">{item.productPrice}</div>
                                             <div className="cart-product-totalprice">{item.productPrice * countCart}</div>
-                                            <div className="cart-product-delete">
-                                                <FontAwesomeIcon icon={faTimes}/>
+                                            <div className="cart-product-delete"
+                                                onClick={removeFromCart}
+                                                id={item._id}>
+                                                <FontAwesomeIcon style={{pointerEvents: 'none'}} icon={faTimes}/>
                                             </div>
                                         </div>
                                     )

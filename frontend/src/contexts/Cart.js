@@ -9,8 +9,18 @@ export function CartProvider(props) {
 
     const addToCart = (product) => {
         setClickedCart(clickedCart + 1) // scroll on click to cart
-        
         setCartItems(cartItems=>[...cartItems, product])
+    }
+
+    const removeFromCart = (event) => {
+        const id = event.target.id
+        const virtualCart = [...cartItems]
+        console.log(virtualCart)
+        for (let i=0;i<virtualCart.length;i++) {
+            if (virtualCart[i]._id === event.target.id)
+                virtualCart.splice(i, 1)
+        }
+        setCartItems(virtualCart)
     }
 
     const cartCombine = Object.values(cartItems.reduce((a, {_id, productName, productPrice, productImg}) => {
@@ -19,14 +29,14 @@ export function CartProvider(props) {
         return a;
     }, Object.create(null)));
  
-    console.log(cartCombine)
     return (
         <CartContext.Provider
             value={{
                 cartCombine: cartCombine,
                 cartItems: cartItems,
                 addToCart: addToCart,
-                clickedCart: clickedCart
+                clickedCart: clickedCart,
+                removeFromCart: removeFromCart
             }}
         >
             {props.children}
