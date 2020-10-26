@@ -24,6 +24,7 @@ function Header(props) {
     const [cartOpen, setCartOpen] = useState(false);
     const [disableBox, setDisableBox] = useState(false);
     const [dropdownHover, setDropdownHover] = useState(false)
+    const [totalCart, setTotalCart] = useState(0)
 
     const location = props.history.location.pathname;
     const { cartItems, clickedCart } = useContext(CartContext)
@@ -196,11 +197,17 @@ function Header(props) {
             this.prev = window.pageYOffset;
         }
 
+        let totalCartVirtual = 0;
+        for (let i in cartItems) {
+            totalCartVirtual += cartItems[i].count
+        }
+        setTotalCart(totalCartVirtual)
+
         window.addEventListener("scroll", onScroll);
         return() => {
             window.removeEventListener("scroll", onScroll);
         }
-    }, [clickedCart, location, dropdownHover]);
+    }, [clickedCart, location, dropdownHover, cartItems]);
 
     if(searchOpen || accountOpen || cartOpen){
         document.body.style.overflow = 'hidden';
@@ -288,7 +295,7 @@ function Header(props) {
                         className={classNames('cart-count flex-center', {
                             cart_count_news_hover: whiteText === true
                         })}> 
-                        <p>{cartItems.length}</p>
+                        <p>{totalCart}</p>
                     </div>
                 </div>
                 <div className="icon-container">

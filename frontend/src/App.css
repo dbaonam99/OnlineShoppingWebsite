@@ -2181,8 +2181,8 @@
 .cart-item {
   border-top: 1px #eee solid;
   border-bottom: 1px #eee solid;
-  height: 140px;
-  padding: 20px 0;
+  height: 100px;
+  padding: 10px 0;
   align-items: center;
   justify-content: space-between;
 }

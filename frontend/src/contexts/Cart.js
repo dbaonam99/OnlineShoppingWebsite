@@ -7,36 +7,81 @@ export function CartProvider(props) {
     const [cartItems, setCartItems] = useState([]);
     const [clickedCart, setClickedCart] = useState(0);
 
-    const addToCart = (product) => {
+
+    const isExists = (cartItems = [], item = {}) => {
+        for (let cartItem of cartItems) {
+            if (cartItem._id === item._id) {
+                return cartItem;
+            }
+        }
+        return false;
+    }
+
+    const addToCart = (product = {}) => {
         setClickedCart(clickedCart + 1) // scroll on click to cart
-        setCartItems(cartItems=>[...cartItems, product])
+        const virtualCart = [...cartItems] 
+
+        if (cartItems.length === 0) {
+            virtualCart.push({...product, count: 1})
+        } else {
+            if (!isExists(cartItems, product)) {
+                virtualCart.push({...product, count: 1})
+            } else {
+                for (let i = 0; i < virtualCart.length; i++) {
+                    if (virtualCart[i]._id === product._id) {
+                        virtualCart[i].count += 1
+                        break
+                    }
+                }
+            }
+        }
+        setCartItems(virtualCart)
     }
 
     const removeFromCart = (event) => {
         const id = event.target.id
         const virtualCart = [...cartItems]
-        console.log(virtualCart)
         for (let i=0;i<virtualCart.length;i++) {
-            if (virtualCart[i]._id === event.target.id)
+            if (virtualCart[i]._id === id) {
                 virtualCart.splice(i, 1)
+            }
         }
         setCartItems(virtualCart)
     }
 
-    const cartCombine = Object.values(cartItems.reduce((a, {_id, productName, productPrice, productImg}) => {
-        a[_id] = a[_id] || {_id, productName, productPrice, productImg, count: 0};
-        a[_id].count++;
-        return a;
-    }, Object.create(null)));
- 
+    const minusCount = (event) => {
+        const id = event.target.id
+        const virtualCart = [...cartItems]
+        for (let i=0;i<virtualCart.length;i++) {
+            if (virtualCart[i]._id === id) {
+                if (virtualCart[i].count > 1) {
+                    virtualCart[i].count = virtualCart[i].count - 1
+                }
+            }
+        }
+        setCartItems(virtualCart)
+    }
+    
+    const plusCount = (event) => {
+        const id = event.target.id
+        const virtualCart = [...cartItems]
+        for (let i=0;i<virtualCart.length;i++) {
+            if (virtualCart[i]._id === id) {
+                virtualCart[i].count += 1
+            }
+        }
+        setCartItems(virtualCart)
+    }
+    
     return (
         <CartContext.Provider
             value={{
-                cartCombine: cartCombine,
                 cartItems: cartItems,
                 addToCart: addToCart,
                 clickedCart: clickedCart,
-                removeFromCart: removeFromCart
+                removeFromCart: removeFromCart,
+                plusCount: plusCount,
+                minusCount: minusCount
             }}
         >
             {props.children}

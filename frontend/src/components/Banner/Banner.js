@@ -10,7 +10,7 @@ function Banner (props) {
     useEffect(()=>{
         const slide = setInterval(() => {
             setCurrentBanner(currentBanner + 1)
-        }, 3000);
+        }, 5000);
         return() => {
             clearInterval(slide)
         }

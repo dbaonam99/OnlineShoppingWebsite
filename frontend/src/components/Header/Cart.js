@@ -2,14 +2,13 @@ import React, { useContext, useState } from 'react';
 import '../../App.css';
 import '../../Styles/Product.css';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faMinus, faPlus, faTimes  } from '@fortawesome/free-solid-svg-icons';
+import { faTimes  } from '@fortawesome/free-solid-svg-icons';
 import { CartContext } from '../../contexts/Cart';
+import CartItem from './CartItem';
 
 export default function Account(props) {
 
-    const [tabID, setTabID] = useState(0);
-    const { cartCombine, removeFromCart } = useContext(CartContext)
-    const [countCart, setCountCart] = useState(1);
+    const [tabID, setTabID] = useState(0)
 
     return(
         <div className={props.cartOpen === false ? 'Cart displayNone' : 'Cart'}>
@@ -23,7 +22,7 @@ export default function Account(props) {
                         icon={faTimes}
                         className="icon"
                         />
-                </div> 
+                </div>
             </div >
             <div className={props.cartOpen === false ? '' : 'fadeIn'}>
                 <div 
@@ -42,62 +41,7 @@ export default function Account(props) {
                     </div>
                 </div>
                 { tabID === 0 &&
-                    <div className="search-form login-form fadeToRight" style={{width: '100%'}}>
-                        <div className="cart-list">
-                            {
-                                cartCombine.length === 0 && 
-                                <div>
-                                    No cart
-                                </div>
-                            }
-                            {
-                                cartCombine.map((item, index) => {
-                                    return (
-                                        <div className="cart-item flex">
-                                            <div className="cart-product-img">
-                                                <img src={item.productImg[0]} width="80px" height="100%"></img>
-                                            </div>
-                                            <div className="cart-product-name">{item.productName}</div>
-                                            <div className="cart-product-amount flex-center">
-                                                <div className="count-cart noselect">
-                                                    <div className="count-cart-item left flex-center"
-                                                        onClick={() => { 
-                                                            if (countCart > 1) setCountCart(countCart-1) 
-                                                        }}
-                                                        >
-                                                        <FontAwesomeIcon icon={faMinus}/>
-                                                    </div> 
-                                                    <div className="count-cart-item text flex-center">
-                                                        <form style={{width: '100%', margin: '0', height: '30px'}}>
-                                                            <input 
-                                                                style={{width: '100%', margin: '0', height: '30px'}}
-                                                                type="text" 
-                                                                value={countCart || item.count}
-                                                                onChange={e => setCountCart(Number(e.target.value))}
-                                                            />
-                                                        </form>
-                                                    </div>
-                                                    <div 
-                                                        className="count-cart-item right flex-center"
-                                                        onClick={() => { setCountCart(countCart+1) }}
-                                                        >
-                                                        <FontAwesomeIcon icon={faPlus}/>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div className="cart-product-price">{item.productPrice}</div>
-                                            <div className="cart-product-totalprice">{item.productPrice * countCart}</div>
-                                            <div className="cart-product-delete"
-                                                onClick={removeFromCart}
-                                                id={item._id}>
-                                                <FontAwesomeIcon style={{pointerEvents: 'none'}} icon={faTimes}/>
-                                            </div>
-                                        </div>
-                                    )
-                                })
-                            }
-                        </div>
-                    </div>
+                    <CartItem/>
                 }
                 { tabID === 1 && 
                     <div className="search-form login-form fadeToLeft">
