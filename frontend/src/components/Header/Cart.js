@@ -5,6 +5,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faTimes  } from '@fortawesome/free-solid-svg-icons';
 import { CartContext } from '../../contexts/Cart';
 import CartItem from './CartItem';
+import WishListItem from './WishListItem';
 
 export default function Account(props) {
 
@@ -44,11 +45,7 @@ export default function Account(props) {
                     <CartItem/>
                 }
                 { tabID === 1 && 
-                    <div className="search-form login-form fadeToLeft">
-                        <form className="flex-col">
-                            <button>wishlist</button>
-                        </form>
-                    </div>
+                    <WishListItem/>
                 }
             </div>
         </div>

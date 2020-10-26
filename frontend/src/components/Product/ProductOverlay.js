@@ -10,11 +10,16 @@ import 'react-toastify/dist/ReactToastify.css';
 function ProductOverlay(props) {
 
     const { 
-        addToCart  
+        addToCart,
+        addToWishList
     } = useContext(CartContext);
 
     const cartClick = () => {
         addToCart(props.product)
+    }
+
+    const wishListClick = () => {
+        addToWishList(props.product)
     }
 
     return (
@@ -25,7 +30,9 @@ function ProductOverlay(props) {
             >
                 <FontAwesomeIcon icon={faCartPlus} style={{marginRight: '3px'}}/>
             </div>
-            <div className="product-icon-box flex-center icon-wishlist btn">
+            <div className="product-icon-box flex-center icon-wishlist btn"
+                onClick={wishListClick}
+            >
                 <FontAwesomeIcon icon={faHeart}/>
             </div>
             <div

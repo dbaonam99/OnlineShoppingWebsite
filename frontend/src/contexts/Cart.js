@@ -5,6 +5,7 @@ export const CartContext = React.createContext();
 export function CartProvider(props) {
     
     const [cartItems, setCartItems] = useState([]);
+    const [wishListItems, setWishListItems] = useState([]);
     const [clickedCart, setClickedCart] = useState(0);
 
 
@@ -15,6 +16,20 @@ export function CartProvider(props) {
             }
         }
         return false;
+    }
+
+    const addToWishList = (product = {}) => {
+        
+        const virtualCart = [...wishListItems] 
+
+        if (wishListItems.length === 0) {
+            virtualCart.push({...product})
+        } else {
+            if (!isExists(wishListItems, product)) {
+                virtualCart.push({...product})
+            }
+        }
+        setWishListItems(virtualCart)
     }
 
     const addToCart = (product = {}) => {
@@ -78,10 +93,12 @@ export function CartProvider(props) {
             value={{
                 cartItems: cartItems,
                 addToCart: addToCart,
+                wishListItems: wishListItems,
+                addToWishList: addToWishList,
                 clickedCart: clickedCart,
                 removeFromCart: removeFromCart,
                 plusCount: plusCount,
-                minusCount: minusCount
+                minusCount: minusCount,
             }}
         >
             {props.children}
