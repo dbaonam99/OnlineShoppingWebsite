@@ -23,9 +23,8 @@ import { CartProvider } from './contexts/Cart'
 import Dashboard from './components/admin/Dashboard/Dashboard';
 import { UserProvider } from './contexts/User';
 import { ChatProvider } from './contexts/Chat';
-
-import { ToastContainer } from 'react-toastify';
 import LoadingPage from './components/LoadingPage';
+import Toast from './components/Toast';
 
 function App(props) {
 
@@ -52,7 +51,7 @@ function App(props) {
       { loading === false &&
         <Router>
           <div className="App">
-            <ToastContainer/>
+            <Toast/>
             <Route path="/" exact component={Home}></Route>
             <Route path="/news" exact component={News}></Route>
             <Route path="/men" exact component={Men}></Route>

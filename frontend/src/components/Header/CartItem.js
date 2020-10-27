@@ -5,15 +5,28 @@ import { CartContext } from '../../contexts/Cart';
 
 export default function CartItem(props) {
 
-    const { cartItems, minusCount, plusCount, removeFromCart } = useContext(CartContext)
+    const { cartItems, minusCount, plusCount, removeFromCart, updateCount } = useContext(CartContext)
 
     return (
         <div className="search-form login-form fadeToRight" style={{width: '100%'}}>
             <div className="cart-list">
                 {
                     cartItems.length === 0 && 
-                    <div>
-                        No cart
+                    <div style={{textAlign: 'center', color: '#777'}}>
+                        No products in the cart.
+                    </div>
+                }
+                {
+                    cartItems.length > 0 && 
+                    <div className="cart-item flex" style={{border: 'none'}}>
+                        <div className="cart-product-img flex" style={{alignItems: 'center', justifyContent: 'flex-start'}}>Image</div>
+                        <div className="cart-product-name flex" style={{alignItems: 'center', justifyContent: 'flex-start'}}>Name</div>
+                        <div className="cart-product-amount flex" style={{alignItems: 'center', justifyContent: 'center'}}>Amount</div>
+                        <div className="cart-product-price flex" style={{alignItems: 'center', justifyContent: 'center'}}>Price</div>
+                        <div className="cart-product-totalprice flex" style={{alignItems: 'center', justifyContent: 'center'}}>Total price</div>
+                        <div className="cart-product-delete" style={{visibility: "hidden"}}>
+                            <FontAwesomeIcon style={{pointerEvents: 'none'}} icon={faTimes}/>
+                        </div>
                     </div>
                 }
                 {
@@ -23,7 +36,7 @@ export default function CartItem(props) {
                                 <div className="cart-product-img">
                                     <img src={item.productImg[0]} width="80px" height="100%"></img>
                                 </div>
-                                <div className="cart-product-name">{item.productName}</div>
+                                <div className="cart-product-name flex" style={{alignItems: 'center', justifyContent: 'flex-start'}}>{item.productName}</div>
                                 <div className="cart-product-amount flex-center">
                                     <div className="count-cart noselect">
                                         <div 
@@ -39,7 +52,8 @@ export default function CartItem(props) {
                                                     style={{width: '100%', margin: '0', height: '30px'}}
                                                     type="text" 
                                                     value={item.count}
-                                                    // onChange={e => setCountCart(Number(e.target.value))}
+                                                    id={item._id}
+                                                    onChange={updateCount}
                                                 />
                                             </form>
                                         </div>
@@ -52,8 +66,8 @@ export default function CartItem(props) {
                                         </div>
                                     </div>
                                 </div>
-                                <div className="cart-product-price">{item.productPrice}</div>
-                                <div className="cart-product-totalprice">{item.productPrice}</div>
+                                <div className="cart-product-price flex" style={{alignItems: 'center', justifyContent: 'center'}}>{item.productPrice}</div>
+                                <div className="cart-product-totalprice flex" style={{alignItems: 'center', justifyContent: 'center'}}>{item.productPrice * item.count}</div>
                                 <div className="cart-product-delete"
                                     onClick={removeFromCart}
                                     id={item._id}>

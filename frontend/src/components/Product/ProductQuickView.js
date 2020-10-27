@@ -35,8 +35,7 @@ export default function ProductQuickView(props) {
         slidesToScroll: 1,
         autoplay: true,
         autoplaySpeed: 2000
-    };
-
+    }
 
     const { 
         addToCart  

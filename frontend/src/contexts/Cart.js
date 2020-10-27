@@ -7,6 +7,7 @@ export function CartProvider(props) {
     const [cartItems, setCartItems] = useState([]);
     const [wishListItems, setWishListItems] = useState([]);
     const [clickedCart, setClickedCart] = useState(0);
+    const [toast, setToast] = useState(false)
 
 
     const isExists = (cartItems = [], item = {}) => {
@@ -30,6 +31,11 @@ export function CartProvider(props) {
             }
         }
         setWishListItems(virtualCart)
+
+        // setToast(true)
+        // setTimeout(()=>{
+        //     setToast(false)
+        // }, 2000)
     }
 
     const addToCart = (product = {}) => {
@@ -64,6 +70,17 @@ export function CartProvider(props) {
         setCartItems(virtualCart)
     }
 
+    const removeFromWishList = (event) => {
+        const id = event.target.id
+        const virtualCart = [...wishListItems]
+        for (let i=0;i<virtualCart.length;i++) {
+            if (virtualCart[i]._id === id) {
+                virtualCart.splice(i, 1)
+            }
+        }
+        setWishListItems(virtualCart)
+    }
+
     const minusCount = (event) => {
         const id = event.target.id
         const virtualCart = [...cartItems]
@@ -87,6 +104,18 @@ export function CartProvider(props) {
         }
         setCartItems(virtualCart)
     }
+
+    const updateCount = (event) => {
+        const id = event.target.id
+        const value = event.target.value
+        const virtualCart = [...cartItems]
+        for (let i=0;i<virtualCart.length;i++) {
+            if (virtualCart[i]._id === id) {
+                virtualCart[i].count = value
+            }
+        }
+        setCartItems(virtualCart)
+    }
     
     return (
         <CartContext.Provider
@@ -99,6 +128,9 @@ export function CartProvider(props) {
                 removeFromCart: removeFromCart,
                 plusCount: plusCount,
                 minusCount: minusCount,
+                toast: toast,
+                removeFromWishList: removeFromWishList,
+                updateCount: updateCount
             }}
         >
             {props.children}

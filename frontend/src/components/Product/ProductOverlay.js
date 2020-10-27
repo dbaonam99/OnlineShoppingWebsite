@@ -1,13 +1,13 @@
-import React, { useContext } from 'react';
+import React, { useContext, useState } from 'react';
 import '../../App.css';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faCartPlus, faEye, faHeart } from "@fortawesome/free-solid-svg-icons";
+import { faCartPlus, faCircle, faEye, faHeart } from "@fortawesome/free-solid-svg-icons";
 
 import { CartContext } from '../../contexts/Cart'
-import 'react-toastify/dist/ReactToastify.css';
-
 
 function ProductOverlay(props) {
+
+    const [loading, setLoading] = useState(0)
 
     const { 
         addToCart,
@@ -15,11 +15,19 @@ function ProductOverlay(props) {
     } = useContext(CartContext);
 
     const cartClick = () => {
-        addToCart(props.product)
+        setLoading(1)
+        setTimeout(()=>{
+            setLoading(0)
+            addToCart(props.product)
+        }, 1000)
     }
 
     const wishListClick = () => {
-        addToWishList(props.product)
+        setLoading(2)
+        setTimeout(()=>{
+            setLoading(0)
+            addToWishList(props.product)
+        }, 1000)
     }
 
     return (
@@ -28,12 +36,26 @@ function ProductOverlay(props) {
             <div className="product-icon-box flex-center icon-cart btn"
                 onClick={cartClick}
             >
-                <FontAwesomeIcon icon={faCartPlus} style={{marginRight: '3px'}}/>
+                { loading === 1 && 
+                    <div className="flex">
+                        <FontAwesomeIcon icon={faCircle} className="loading-icon" style={{animationDelay: `0s`, margin: '0 2px', fontSize: '6px'}}></FontAwesomeIcon>
+                        <FontAwesomeIcon icon={faCircle} className="loading-icon" style={{animationDelay: `.2s`, margin: '0 2px', fontSize: '6px'}}></FontAwesomeIcon>
+                        <FontAwesomeIcon icon={faCircle} className="loading-icon" style={{animationDelay: `.4s`, margin: '0 2px', fontSize: '6px'}}></FontAwesomeIcon>
+                    </div>
+                }
+                { loading !== 1 &&  <FontAwesomeIcon icon={faCartPlus} style={{marginRight: '3px'}}/> }
             </div>
             <div className="product-icon-box flex-center icon-wishlist btn"
                 onClick={wishListClick}
             >
-                <FontAwesomeIcon icon={faHeart}/>
+                { loading === 2 && 
+                    <div className="flex">
+                        <FontAwesomeIcon icon={faCircle} className="loading-icon" style={{animationDelay: `0s`, margin: '0 2px', fontSize: '6px'}}></FontAwesomeIcon>
+                        <FontAwesomeIcon icon={faCircle} className="loading-icon" style={{animationDelay: `.2s`, margin: '0 2px', fontSize: '6px'}}></FontAwesomeIcon>
+                        <FontAwesomeIcon icon={faCircle} className="loading-icon" style={{animationDelay: `.4s`, margin: '0 2px', fontSize: '6px'}}></FontAwesomeIcon>
+                    </div>
+                }
+                { loading !== 2 && <FontAwesomeIcon icon={faHeart}/>}
             </div>
             <div
                 className="product-icon-box flex-center icon-view btn"
