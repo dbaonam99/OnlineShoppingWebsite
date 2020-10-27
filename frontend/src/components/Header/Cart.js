@@ -3,13 +3,16 @@ import '../../App.css';
 import '../../Styles/Product.css';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faTimes  } from '@fortawesome/free-solid-svg-icons';
-import { CartContext } from '../../contexts/Cart';
 import CartItem from './CartItem';
 import WishListItem from './WishListItem';
+import { CartContext } from '../../contexts/Cart';
 
 export default function Account(props) {
 
     const [tabID, setTabID] = useState(0)
+    const {
+        total
+    } = useContext(CartContext)
 
     return(
         <div className={props.cartOpen === false ? 'Cart displayNone' : 'Cart'}>
@@ -48,6 +51,15 @@ export default function Account(props) {
                     <WishListItem/>
                 }
             </div>
+            { tabID === 0 &&
+                <div className="cart-checkout-box flex-center">
+                    <div className="cart-checkout-text flex">
+                        <p>Total: </p>
+                        <p> {total}</p>
+                    </div>
+                    <div className="cart-checkout-btn btn">Checkout</div>
+                </div>
+            }
         </div>
     )
 }

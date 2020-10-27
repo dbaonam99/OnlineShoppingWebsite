@@ -8,6 +8,7 @@ export function CartProvider(props) {
     const [wishListItems, setWishListItems] = useState([]);
     const [clickedCart, setClickedCart] = useState(0);
     const [toast, setToast] = useState(false)
+    const [total, setTotal] = useState(0)
 
 
     const isExists = (cartItems = [], item = {}) => {
@@ -111,11 +112,24 @@ export function CartProvider(props) {
         const virtualCart = [...cartItems]
         for (let i=0;i<virtualCart.length;i++) {
             if (virtualCart[i]._id === id) {
-                virtualCart[i].count = value
+                virtualCart[i].count = Number(value)
             }
         }
         setCartItems(virtualCart)
     }
+
+    const getTotal = () => {
+        console.log("-------------")
+        let virtualTotal = 0
+        for (let i in cartItems) {
+            virtualTotal += cartItems[i].count * cartItems[i].productPrice
+        }
+        setTotal(virtualTotal)
+    }
+
+    useEffect(()=>{
+        getTotal()
+    }, [cartItems])
     
     return (
         <CartContext.Provider
@@ -130,7 +144,8 @@ export function CartProvider(props) {
                 minusCount: minusCount,
                 toast: toast,
                 removeFromWishList: removeFromWishList,
-                updateCount: updateCount
+                updateCount: updateCount,
+                total: total
             }}
         >
             {props.children}

@@ -2180,6 +2180,7 @@
 
 .cart-list {
   width: 100%;
+  margin-bottom: 100px;
 }
 .cart-item {
   border-top: 1px #eee solid;
@@ -2208,6 +2209,25 @@
 .cart-product-totalprice {
   width: 10%;
   height: 100%;
+}
+.cart-checkout-box {
+  width: 100%;
+  background-color: #fff;
+  border: 1px #ddd solid;
+  height: 100px;
+  position: fixed;
+  bottom: 0;
+  left: 0;
+}
+.cart-checkout-text {
+  width: 20%;
+  height: 100%;
+  align-items: center;
+  justify-content: space-between;
+  margin-right: 100px;
+}
+.cart-checkout-btn {
+  padding: 10px 20px;
 }
 /* Product Detail */
 .ProductBody {
