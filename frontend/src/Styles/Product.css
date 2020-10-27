@@ -26,9 +26,13 @@
     width: 50%;
     height: 100%;
 }
+.slick-slider, .slick-list, .slick-track, .slick-track div {
+    height: 100%;
+}
 .view-img {
     width: 100%;
     height: 100%;
+    background-color: red;
 }
 .view-close {
     position: absolute;
@@ -65,25 +69,4 @@
 }
 .productquickview-tag .new {
     background: #fc9953;
-}
-.toast {
-    height: 50px;
-    background-color: #b4fac5;
-    color: #248d63;
-    position: fixed;
-    top: 110px;
-    right: 0;
-    transition: .6s;
-    line-height: 50px;
-    font-size: 14px;
-    padding: 0 20px;
-    opacity: 0;
-    z-index: 100;
-}
-.toast .icon {
-    margin-right: 20px;
-}
-.toast-show {
-    z-index: 10000;
-    opacity: 1;
 }

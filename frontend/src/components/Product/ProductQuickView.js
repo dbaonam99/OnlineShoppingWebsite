@@ -56,7 +56,7 @@ export default function ProductQuickView(props) {
                     className="productquickview-container flex"
                     onClick={()=>{}}
                 >
-                    <div className={toast ? "toast toast-show" : "toast"}>
+                    <div className={toast ? "toast toast-show" : "toast"} style={{top: '20px'}}>
                         <FontAwesomeIcon icon={faCheckCircle} className="icon"/>
                         Product is added to cart successfully
                     </div>
@@ -87,10 +87,11 @@ export default function ProductQuickView(props) {
                                 </div>
                             }
                         </div>
-                        { props.view === true && <Slider {...settings}>
+                        { props.view === true && 
+                            <Slider {...settings}>
                                 {product.productImg.map((item, index) => {
                                     return (
-                                        <img key={index} src={item} alt="" className="view-img"/>
+                                        <img key={index} src={item} alt="" className="view-img"/> 
                                     )
                                 })}
                             </Slider>

@@ -16,6 +16,9 @@ export default function DashboardProductCreate(props) {
     const [size, setSize] = useState([])
     const [sex, setSex] = useState("")
     const [file, setFile] = useState([])
+    const [file2, setFile2] = useState([])
+
+    const [productImg, setProductImg] = useState([])
 
     const checkedSize = (event) => {
         if (event.target.id === "1") {
@@ -62,11 +65,22 @@ export default function DashboardProductCreate(props) {
                 'content-type': 'multipart/form-data'
             }
         }
+
         const formData = new FormData();
-        const imageArr = Array.from(file);
+
+        const virutalFile = []
+        file.forEach(item=>{
+            const itemArr = Array.prototype.slice.call(item)
+            for (let i of itemArr) {
+                virutalFile.push(i)
+            }
+        })
+        
+        const imageArr = Array.from(virutalFile);
         imageArr.forEach(image => {
             formData.append('productImg', image);
         });
+
         formData.append("productName", inputValue.name);
         formData.append("productSale", inputValue.sale);
         formData.append("productPrice", inputValue.price);
@@ -89,14 +103,20 @@ export default function DashboardProductCreate(props) {
         cateInput.current.value = ""
     }
 
+    const deleteImg = (event) => {
+        const items = [...productImg]
+        items.splice(event.target.id, 1)
+        setProductImg(items)
+    }
+
     return (
         <div className="DashboardProductInfo">
-            <div className="create-box">
+            <div className="create-box"> 
                 <div className="create-box-title flex">
                     <div className="create-box-title-text">
                         Product infomation
                     </div>
-                    <div 
+                    <div  
                         className="create-box-title-close flex-center"
                         onClick={()=>{
                             props.setCloseCreateFunc(false);
@@ -107,35 +127,59 @@ export default function DashboardProductCreate(props) {
                 </div>
                 <form onSubmit={onSubmit} encType="multipart/form-data" ref={createForm}>
                     <div className="create-box-row flex">
-                        <div className="left flex">Name</div>
-                        <div className="right">
+                        <div className="dashboard-left flex">Name</div>
+                        <div className="dashboard-right">
                             <input type="text" name="name" onChange={handleOnChange} required></input>
                         </div>
                     </div>
                     <div className="create-box-row flex">
-                        <div className="left flex">Images </div>
-                        <div className="right">
+                        <div className="dashboard-left flex">Images </div>
+                        <div className="dashboard-right">
                             <input 
-                                onChange={(event) => {
-                                    setFile(event.target.files)
-                                }}
-                                type="file" 
-                                name="productImg"
-                                className="noborder"
-                                multiple="multiple"
-                                required
-                                ></input>
+                            onChange={(event) => {
+                                const files = event.target.files;
+                                for (let i = 0; i< files.length; i++) {
+                                    setProductImg(product=>[...product, URL.createObjectURL(files[i])])
+                                }
+                                setFile(file=>[...file, files])
+                            }}
+                            type="file"
+                            name="productImg"
+                            className="noborder"
+                            multiple="multiple"
+                            style={{height: '50px'}}
+                            ></input>
+                            <div className="flex" style={{ overflowY: 'hidden', flexWrap:'wrap'}}>
+                                { productImg && 
+                                    productImg.map((item, index) => {
+                                        return (
+                                            <div className="create-box-img">
+                                                <img key={index} src={item} alt=""></img>
+                                                <div 
+                                                    className="create-box-img-overlay"
+                                                >
+                                                    <p
+                                                        id={index}
+                                                        onClick={deleteImg}
+                                                        className="icon">X
+                                                    </p>
+                                                </div>
+                                            </div>
+                                        )
+                                    })
+                                }
+                            </div>
                         </div>
                     </div>
                     <div className="create-box-row flex">
-                        <div className="left flex">Defaut price </div>
-                        <div className="right">
+                        <div className="dashboard-left flex">Defaut price </div>
+                        <div className="dashboard-right">
                             <input type="number" name="price" placeholder="USD" onChange={handleOnChange} required></input>
                         </div>
                     </div>
                     <div className="create-box-row flex">
-                        <div className="left flex">Sale </div>
-                        <div className="right flex-center">
+                        <div className="dashboard-left flex">Sale </div>
+                        <div className="dashboard-right flex-center">
                             <input type="number" placeholder="%" style={{ width: "100px"}} onChange={handleOnChange} name="sale" required></input>
                             <label>From: </label>
                             <input type="date"  name="fromdate" onChange={handleOnChange} placeholder="dd/mm/yyyy" pattern="(^(((0[1-9]|1[0-9]|2[0-8])[\/](0[1-9]|1[012]))|((29|30|31)[\/](0[13578]|1[02]))|((29|30)[\/](0[4,6,9]|11)))[\/](19|[2-9][0-9])\d\d$)|(^29[\/]02[\/](19|[2-9][0-9])(00|04|08|12|16|20|24|28|32|36|40|44|48|52|56|60|64|68|72|76|80|84|88|92|96)$)"/>
@@ -144,8 +188,8 @@ export default function DashboardProductCreate(props) {
                         </div>
                     </div>
                     <div className="create-box-row flex">
-                        <div className="left flex">Category </div>
-                        <div className="right flex-center">
+                        <div className="dashboard-left flex">Category </div>
+                        <div className="dashboard-right flex-center">
                             <select style={{ width: "350px"}} 
                                 onChange={(event) => {setCateValue(event.target.value)}}
                                 value={cateValue}>
@@ -174,8 +218,8 @@ export default function DashboardProductCreate(props) {
                         </div>
                     </div>
                     <div className="create-box-row flex">
-                        <div className="left flex">Sex </div>
-                        <div className="right flex">
+                        <div className="dashboard-left flex">Sex </div>
+                        <div className="dashboard-right flex">
                             <select style={{ width: "200px"}} 
                                 onChange={(event) => {setSex(event.target.value)}}
                                 value={sex}
@@ -187,8 +231,8 @@ export default function DashboardProductCreate(props) {
                         </div>
                     </div>
                     <div className="create-box-row flex">
-                        <div className="left flex">Size </div>
-                        <div className="right flex">
+                        <div className="dashboard-left flex">Size </div>
+                        <div className="dashboard-right flex">
                             <div 
                                 className={isCheckedSmall ? "size-check isChecked" : "size-check"}
                                 id="1" 
@@ -204,8 +248,8 @@ export default function DashboardProductCreate(props) {
                         </div>
                     </div>
                     <div className="create-box-row flex">
-                        <div className="left flex">Description </div>
-                        <div className="right">
+                        <div className="dashboard-left flex">Description </div>
+                        <div className="dashboard-right">
                             <input type="text" name="des" onChange={handleOnChange} required></input>
                         </div>
                     </div>

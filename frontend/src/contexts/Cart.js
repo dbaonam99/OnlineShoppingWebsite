@@ -4,12 +4,10 @@ export const CartContext = React.createContext();
 
 export function CartProvider(props) {
     
-    const [cartItems, setCartItems] = useState([]);
-    const [wishListItems, setWishListItems] = useState([]);
-    const [clickedCart, setClickedCart] = useState(0);
-    const [toast, setToast] = useState(false)
+    const [cartItems, setCartItems] = useState([])
+    const [wishListItems, setWishListItems] = useState([])
+    const [clickedCart, setClickedCart] = useState(0)
     const [total, setTotal] = useState(0)
-
 
     const isExists = (cartItems = [], item = {}) => {
         for (let cartItem of cartItems) {
@@ -32,11 +30,6 @@ export function CartProvider(props) {
             }
         }
         setWishListItems(virtualCart)
-
-        // setToast(true)
-        // setTimeout(()=>{
-        //     setToast(false)
-        // }, 2000)
     }
 
     const addToCart = (product = {}) => {
@@ -142,7 +135,6 @@ export function CartProvider(props) {
                 removeFromCart: removeFromCart,
                 plusCount: plusCount,
                 minusCount: minusCount,
-                toast: toast,
                 removeFromWishList: removeFromWishList,
                 updateCount: updateCount,
                 total: total

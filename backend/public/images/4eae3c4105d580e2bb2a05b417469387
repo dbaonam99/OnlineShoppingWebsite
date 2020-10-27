@@ -1,0 +1,128 @@
+{\rtf1\ansi\ansicpg1252\cocoartf2513
+\cocoatextscaling0\cocoaplatform0{\fonttbl\f0\fswiss\fcharset0 Helvetica;}
+{\colortbl;\red255\green255\blue255;}
+{\*\expandedcolortbl;;}
+\paperw11900\paperh16840\vieww12000\viewh13480\viewkind0
+\deftab720
+\pard\pardeftab720\partightenfactor0
+
+\f0\fs22 \cf0 ///////// 1 /////////\
+create user BAITHI identified by oracle123456;\
+GRANT dba to BAITHI;\
+\
+CREATE TABLE "HANGHANGKHONG"(\
+	MAHANG VARCHAR2(10),\
+	TENHANG VARCHAR2(50),\
+	NGTL DATE,\
+	DUONGBAY INT\
+);\
+CREATE TABLE "CHUYENBAY"(\
+	MACB VARCHAR2(10),\
+	MAHANG VARCHAR2(10),\
+	XUATPHAT VARCHAR2(50),\
+	DIEMDEN VARCHAR2(50),\
+	BATDAU DATETIME,	\
+	TGBAY INT\
+);\
+CREATE TABLE "NHANVIEN"(\
+	MANV VARCHAR2(10),\
+	HOTEN VARCHAR2(50),\
+	GIOITINH VARCHAR2(10),\
+	NGSINH DATE,\
+	NGVL DATE,\
+	CHUYENMON VARCHAR2(50)\
+);\
+CREATE TABLE "PHANCONG"(\
+	MACB VARCHAR2(10),\
+	MANV VARCHAR2(10),\
+	NHIEMVU VARCHAR2(50)\
+);\
+\
+ALTER TABLE HANGHANGKHONG ADD CONSTRAINT HANGHANGKHONG PRIMARY KEY(MAHANG);\
+ALTER TABLE CHUYENBAY ADD CONSTRAINT CHUYENBAY PRIMARY KEY(MACB);\
+ALTER TABLE CHUYENBAY ADD (CONSTRAINT CHUYEN_FK FOREIGN KEY (MAHANG) REFERENCES HANGHANGKHONG(MAHANG));\
+ALTER TABLE NHANVIEN ADD CONSTRAINT NHANVIEN PRIMARY KEY(MANV);\
+ALTER TABLE PHANCONG ADD (CONSTRAINT PHANCONG_FK FOREIGN KEY (MACB) REFERENCES CHUYENBAY(MACB));\
+ALTER TABLE PHANCONG ADD (CONSTRAINT PHANCONG_FK1 FOREIGN KEY (MANV) REFERENCES NHANVIEN(MANV));\
+ALTER TABLE PHANCONG  ADD CONSTRAINT PHANCONG PRIMARY KEY(MACB, MANV);\
+\pard\pardeftab720\partightenfactor0
+\cf0 \
+///////// 2 /////////\
+\pard\pardeftab720\partightenfactor0
+\cf0 INSERT INTO HANGHANGKHONG VALUES('VN','Vietnam Airlines 'DATE,'1956-01-15',52);\
+INSERT INTO HANGHANGKHONG VALUES('VJ','Vietjet Air',DATE'2011-12-25',33);\
+INSERT INTO HANGHANGKHONG VALUES('BL','Vietjet Air',DATE '1990-12-01',13);\
+INSERT INTO CHUYENBAY VALUES('VN550','VN','TP.HCM','Singapore ', '2015-12-20 13:15:00',2);\
+INSERT INTO CHUYENBAY VALUES('VJ331','VJ','\uc0\u272 \'e0 N\u7861 ng','Vinh', '2015-12-28 22:30:00',1);\
+INSERT INTO CHUYENBAY VALUES('BL696','BL','TP.HCM','\uc0\u272 \'e0 L\u7841 t','2015-12-24 06:00:00',0.5);\
+INSERT INTO NHANVIEN VALUES('NV01','LAM VAN BEN','NAM','1978-09-10', '2000-06-05','PHI CONG');\
+INSERT INTO NHANVIEN VALUES('NV03','HOANG THANH TUNG','NAM','1983-07-29', '2007-04-11','TIEP VIEN');\
+INSERT INTO NHANVIEN VALUES('NV02','DUONG THI LUC','NU','1989-03-22','2013-11-12','TIEP VIEN');\
+INSERT INTO PHANCONG VALUES('VN550','NV01','CO TRUONG');\
+INSERT INTO PHANCONG VALUES('VN550','NV02','TIEP VIEN');\
+INSERT INTO PHANCONG VALUES('BL696','NV03','TIEP VIEN TRUONG');\
+\pard\pardeftab720\partightenfactor0
+\cf0 \
+///////// 3 /////////\
+\pard\pardeftab720\partightenfactor0
+\cf0 ALTER TABLE NHANVIEN ADD CONSTRAINT CHUYENMON_NHANVIEN CHECK (CHUYENMON = 'TIEP VIEN' OR CHUYENMON = 'PHI CONG');\
+\pard\pardeftab720\partightenfactor0
+\cf0 \
+///////// 4 /////////\
+\pard\pardeftab720\partightenfactor0
+\cf0 CREATE TRIGGER BATDAU_NGTL_INSERT ON CHUYENBAY  AFTER INSERT \
+AS \
+\pard\pardeftab720\li720\partightenfactor0
+\cf0 DECLARE   @BATDAU	 smalldatetime \
+DECLARE   @NGTL	smalldatetime \
+SELECT       @BATDAU=BATDAU,  @NGTL=NGTL\
+FROM 	 HANGHANGKHONG, inserted\
+WHERE        HANGHANGKHONG.MAHANG=inserted.MAHANG\
+IF @NGTL< @BATDAU\
+BEGIN\
+	rollback transaction\
+	\expnd0\expndtw0\kerning0
+DBMS_OUTPUT.PUT_LINE(\kerning1\expnd0\expndtw0 'NGAY BAT DAU PHAI LON HON NGYA THANH LAP')\
+END;\
+\pard\pardeftab720\partightenfactor0
+\cf0 \
+///////// 5 /////////\expnd0\expndtw0\kerning0
+\
+\pard\pardeftab720\partightenfactor0
+\cf0 SELECT MANV, HOTEN, GIOITINH, NGSINH, NGVL, CHUYENMON\
+FROM NHANVIEN\
+WHERE month(NGSINH) = '07'\
+\pard\pardeftab720\partightenfactor0
+\cf0 \kerning1\expnd0\expndtw0 \
+///////// 6 /////////\expnd0\expndtw0\kerning0
+\
+\pard\pardeftab720\partightenfactor0
+\cf0 SELECT TOP 1 C.MACB\
+FROM PHANCONG P JOIN CHUYENBAY C ON P.MACB = C.MACB\
+GROUP BY MACB\
+ORDER BY COUNT(MANV) DESC\
+\pard\pardeftab720\partightenfactor0
+\cf0 \kerning1\expnd0\expndtw0 \
+///////// 7 /////////\expnd0\expndtw0\kerning0
+\
+\pard\pardeftab720\partightenfactor0
+\cf0 SELECT MACB\
+FROM CHUYENBAY C JOIN PHANCONG P ON C.MACB = P.MACB\
+WHERE XUATPHAT = 'DA NANG' AND COUNT(MANV)<2\
+GROUP BY MACB\
+\pard\pardeftab720\partightenfactor0
+\cf0 \kerning1\expnd0\expndtw0 \
+///////// 8 /////////\expnd0\expndtw0\kerning0
+\
+\pard\pardeftab720\partightenfactor0
+\cf0 SELECT MANV, HOTEN\
+FROM NHANVIEN N\
+WHERE NOT EXISTS(\
+				SELECT *\
+				FROM CHUYENBAY C\
+				WHERE NOT EXISTS(\
+						SELECT *\
+						FROM PHANCONG P\
+						WHERE P.MANV = N.MANV\
+						AND P.MACB = C.MACB))\
+}

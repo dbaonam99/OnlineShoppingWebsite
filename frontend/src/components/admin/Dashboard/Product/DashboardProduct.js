@@ -1,12 +1,10 @@
 import { faTshirt } from '@fortawesome/free-solid-svg-icons'
-import React, { useEffect, useState } from 'react'
+import React from 'react'
 import DashboardProductTable from './DashboardProductTable'
-import axios from 'axios'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faCheckCircle } from '@fortawesome/free-solid-svg-icons'
 
 export default function DashboardProduct(props) {
-
 
     const table = [
         "Name",
@@ -23,7 +21,7 @@ export default function DashboardProduct(props) {
 
     return (
         <div className="dashboard-product">
-            <div className={props.toast ? "toast toast-show" : "toast"} style={{top: '-20px'}}>
+            <div className={props.toast ? "toast toast-show" : "toast"} style={{top: '20px'}}>
                 <FontAwesomeIcon icon={faCheckCircle} className="icon"/>
                 Update products successfully
             </div>

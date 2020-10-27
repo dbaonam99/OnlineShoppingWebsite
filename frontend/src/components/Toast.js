@@ -3,10 +3,10 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import React, { useContext } from 'react'
 import { CartContext } from '../contexts/Cart'
 
-import '../Styles/Product.css'
+import '../Styles/Toast.css'
 
 export default function Toast(props) {
-
+ 
     const {
         toast
     } = useContext(CartContext)

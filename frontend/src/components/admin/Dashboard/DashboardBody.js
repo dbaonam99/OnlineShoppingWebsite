@@ -19,6 +19,9 @@ export default function DashboardBody(props) {
 
     const setToastFunc = (bool) => {
         setIsChange(true)
+        setTimeout(()=>{
+            setIsChange(false)
+        }, 100)
         setToast(true)
         setTimeout(()=>{
             setToast(false)

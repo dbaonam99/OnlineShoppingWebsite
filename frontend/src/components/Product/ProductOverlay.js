@@ -19,7 +19,7 @@ function ProductOverlay(props) {
         setTimeout(()=>{
             setLoading(0)
             addToCart(props.product)
-        }, 1000)
+        }, 500)
     }
 
     const wishListClick = () => {
@@ -27,7 +27,7 @@ function ProductOverlay(props) {
         setTimeout(()=>{
             setLoading(0)
             addToWishList(props.product)
-        }, 1000)
+        }, 500)
     }
 
     return (
