@@ -3,7 +3,7 @@ import '../../../../App.css'
 import '../../../../Styles/Dashboard.css'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import ReactStars from "react-rating-stars-component";
-import { faPencilAlt, faTimes } from '@fortawesome/free-solid-svg-icons';
+import { faLongArrowAltDown, faPencilAlt, faSort, faTimes } from '@fortawesome/free-solid-svg-icons';
 import axios from 'axios';
 import classNames from 'classnames'
 
@@ -12,6 +12,10 @@ export default function DashboardProductTable(props) {
     const [products, setProducts] = useState([])
     // const [searchInput, setSearchInput] = useState("")
     const [constProducts, setConstProducts] = useState([])
+    const [isSortByName, setIsSortByName] = useState(false)
+    const [isSortByPrice, setIsSortByPrice] = useState(false)
+    const [isSortBySale, setIsSortBySale] = useState(false)
+    const [isSortBySold, setIsSortBySold] = useState(false)
     
     useEffect(()=>{
         axios.get(`http://localhost:4000/products`)
@@ -91,6 +95,101 @@ export default function DashboardProductTable(props) {
         setProducts(search)
     }
 
+    const sortTable = (event) => {
+        if (event.target.id === "Name") {
+            if (isSortByName) {
+                const sortByName = [...products]
+                sortByName.sort(function(a, b) {
+                    var nameA = a.productName.toLowerCase();
+                    var nameB = b.productName.toLowerCase(); 
+                    if(nameA === nameB) return 0; 
+                    return nameA > nameB ? 1 : -1;
+                })
+                setIsSortByName(false)
+                setProducts(sortByName)
+            } else {
+                const sortByName = [...products]
+                sortByName.sort(function(a, b) {
+                    var nameA = a.productName.toLowerCase();
+                    var nameB = b.productName.toLowerCase(); 
+                    if(nameA === nameB) return 0; 
+                    return nameA < nameB ? 1 : -1;
+                })
+                setIsSortByName(true)
+                setProducts(sortByName)
+            }
+        }
+        if (event.target.id === "Price") {
+            if (isSortByPrice) {
+                const sortByName = [...products]
+                sortByName.sort(function(a, b) {
+                    var nameA = a.productName;
+                    var nameB = b.productName; 
+                    if(nameA === nameB) return 0; 
+                    return nameA > nameB ? 1 : -1;
+                })
+                setIsSortByPrice(false)
+                setProducts(sortByName)
+            } else {
+                const sortByName = [...products]
+                sortByName.sort(function(a, b) {
+                    var nameA = a.productName;
+                    var nameB = b.productName; 
+                    if(nameA === nameB) return 0; 
+                    return nameA < nameB ? 1 : -1;
+                })
+                setIsSortByPrice(true)
+                setProducts(sortByName)
+            }
+        }
+        if (event.target.id === "Sale") {
+            if (isSortBySale) {
+                const sortByName = [...products]
+                sortByName.sort(function(a, b) {
+                    var nameA = a.productName;
+                    var nameB = b.productName; 
+                    if(nameA === nameB) return 0; 
+                    return nameA > nameB ? 1 : -1;
+                })
+                setIsSortBySale(false)
+                setProducts(sortByName)
+            } else {
+                const sortByName = [...products]
+                sortByName.sort(function(a, b) {
+                    var nameA = a.productName;
+                    var nameB = b.productName; 
+                    if(nameA === nameB) return 0; 
+                    return nameA < nameB ? 1 : -1;
+                })
+                setIsSortBySale(true)
+                setProducts(sortByName)
+            }
+        }
+        if (event.target.id === "Sold") {
+            if (isSortBySold) {
+                const sortByName = [...products]
+                sortByName.sort(function(a, b) {
+                    var nameA = a.productName;
+                    var nameB = b.productName; 
+                    if(nameA === nameB) return 0; 
+                    return nameA > nameB ? 1 : -1;
+                })
+                setIsSortBySold(false)
+                setProducts(sortByName)
+            } else {
+                const sortByName = [...products]
+                sortByName.sort(function(a, b) {
+                    var nameA = a.productName;
+                    var nameB = b.productName; 
+                    if(nameA === nameB) return 0; 
+                    return nameA < nameB ? 1 : -1;
+                })
+                setIsSortBySold(true)
+                setProducts(sortByName)
+            }
+        }
+    }
+
     return (
         <div className="topfive flex-col" style={{width: '100%'}}>
             <div className={`headerbox flex-center ${props.color}`}>
@@ -119,7 +218,15 @@ export default function DashboardProductTable(props) {
                                 {
                                     props.table.map((item, index) => {
                                         return (
-                                            <th key={index} className="table-title">{item}</th>
+                                            <th 
+                                                key={index} className="table-title"
+                                                onClick={(event)=>{
+                                                    sortTable(event)
+                                                }}
+                                                id={item}
+                                            >
+                                                {item}
+                                            </th>
                                         )
                                     })
                                 }
