@@ -75,19 +75,23 @@ export default function DashboardProductEdit(props) {
                 'content-type': 'multipart/form-data'
             }
         }
+
         const formData = new FormData();
+
         const imageArr = Array.from(file);
         imageArr.forEach(image => {
             formData.append('productImg', image);
         });
-        formData.append("productName", inputValue.name);
-        formData.append("productSale", inputValue.sale);
-        formData.append("productPrice", inputValue.price);
-        formData.append("productCate", cateValue);
-        formData.append("productSize", size);
-        formData.append("productDes", inputValue.des);
-        formData.append("productSex", sex);
-        axios.post(`http://localhost:4000/products/update`, formData, config)
+
+        // formData.append("productName", inputValue.name);
+        // formData.append("productSale", inputValue.sale);
+        // formData.append("productPrice", inputValue.price);
+        // formData.append("productCate", cateValue);
+        // formData.append("productSize", size);
+        // formData.append("productDes", inputValue.des);
+        // formData.append("productSex", sex);
+        // formData.append("productDate", new Date());
+        axios.post(`http://localhost:4000/products/update/${product._id}`, formData, config)
         props.setCloseEditFunc(false);
         props.setToastFunc(true);
     }
@@ -102,9 +106,17 @@ export default function DashboardProductEdit(props) {
     }
 
     const deleteImg = (event) => {
+        const id = event.target.id
+        const virutalFile = [...file]
+        virutalFile.splice(id, 1)
+        setFile(virutalFile)
+
         const items = [...productImg]
-        items.splice(event.target.id, 1)
+        items.splice(id, 1)
         setProductImg(items)
+        axios.post(`http://localhost:4000/products/update/${product._id}`, {
+            deleteImgId: id
+        })
     }
 
     return (
@@ -143,7 +155,11 @@ export default function DashboardProductEdit(props) {
                                         for (let i = 0; i< files.length; i++) {
                                             setProductImg(product=>[...product, URL.createObjectURL(files[i])])
                                         }
-                                        setFile(productImg)
+                                        const fileArr = Array.prototype.slice.call(files)
+                                        fileArr.forEach(item=>{
+                                            
+                                            setFile(file=>[...file, item])
+                                        })
                                     }}
                                     type="file"
                                     name="productImg"

@@ -15,6 +15,7 @@ module.exports.product = function(req, res) {
 module.exports.postProduct = async function(req, res) {
 	const imgArr = [];
 	req.files.map((item)=>{
+		console.log(item)
 		imgArr.push(`http://localhost:4000/${item.path.split("/").slice(1).join("/")}`)
 	})
 	const data = {
@@ -29,29 +30,61 @@ module.exports.postProduct = async function(req, res) {
 		productDes: req.body.productDes,
 		productSold: 0,
 	}
-	await Product.create(data);
+	await Product.create(data)
 	res.status(200);
 }
 
 module.exports.updateProduct = async function(req, res) {
-	const imgArr = [];
-	req.files.map((item)=>{
-		imgArr.push(`http://localhost:4000/${item.path.split("/").slice(1).join("/")}`)
-	})
-	const data = {
-		productName: req.body.productName,
-		productSale: req.body.productSale,
-		productPrice: req.body.productPrice,
-		productCate: req.body.productCate,
-		productSize: req.body.productSize.split(","),
-		productSex: req.body.productSex,
-		productDate: req.body.productDate,
-		productImg: imgArr,
-		productDes: req.body.productDes,
-		productSold: 0,
+	var id = req.params.id;
+	
+	if (req.body.deleteImgId) {
+		const product = await Product.findById(id)
+		const deletedProduct = [...product.productImg]
+		deletedProduct.splice(0, 1)
+		const deletedData = {
+			productName: product.productName,
+			productSale: product.productSale,
+			productPrice: product.productPrice,
+			productCate: product.productCate,
+			productSize: product.productSize,
+			productSex: product.productSex,
+			productDate: product.productDate,
+			productImg: deletedProduct,
+			productDes: product.productDes,
+			productSold: 0,
+		}
+		await Product.findByIdAndUpdate(id, deletedData)
 	}
-	console.log(data)
-	// await Product.create(data);
+
+	const imgArr = [];
+	if (req.files) {
+		req.files.map((item)=>{
+			imgArr.push(`http://localhost:4000/${item.path.split("/").slice(1).join("/")}`)
+		})
+	}
+	const data = {
+	// 	productName: req.body.productName,
+	// 	productSale: req.body.productSale,
+	// 	productPrice: req.body.productPrice,
+	// 	productCate: req.body.productCate,
+	// 	productSize: req.body.productSize.split(","),
+	// 	productSex: req.body.productSex,
+	// 	productDate: req.body.productDate,
+		productImg: imgArr,
+	// 	productDes: req.body.productDes,
+	// 	productSold: 0,
+	}
+	Product.findOneAndUpdate(
+		{_id: id},
+		{$push: { 
+			productImg: data.productImg 
+		}},
+		function (error) {
+			if (error) {
+				console.log(error);
+			}
+		}
+	)
 	res.status(200);
 }
 

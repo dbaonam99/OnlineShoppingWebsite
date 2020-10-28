@@ -16,7 +16,6 @@ export default function DashboardProductCreate(props) {
     const [size, setSize] = useState([])
     const [sex, setSex] = useState("")
     const [file, setFile] = useState([])
-    const [file2, setFile2] = useState([])
 
     const [productImg, setProductImg] = useState([])
 
@@ -68,15 +67,7 @@ export default function DashboardProductCreate(props) {
 
         const formData = new FormData();
 
-        const virutalFile = []
-        file.forEach(item=>{
-            const itemArr = Array.prototype.slice.call(item)
-            for (let i of itemArr) {
-                virutalFile.push(i)
-            }
-        })
-        
-        const imageArr = Array.from(virutalFile);
+        const imageArr = Array.from(file);
         imageArr.forEach(image => {
             formData.append('productImg', image);
         });
@@ -104,11 +95,16 @@ export default function DashboardProductCreate(props) {
     }
 
     const deleteImg = (event) => {
+        const virutalFile = [...file]
+        virutalFile.splice(event.target.id, 1)
+        setFile(virutalFile)
+
         const items = [...productImg]
         items.splice(event.target.id, 1)
         setProductImg(items)
     }
 
+    console.log(file)
     return (
         <div className="DashboardProductInfo">
             <div className="create-box"> 
@@ -136,24 +132,28 @@ export default function DashboardProductCreate(props) {
                         <div className="dashboard-left flex">Images </div>
                         <div className="dashboard-right">
                             <input 
-                            onChange={(event) => {
-                                const files = event.target.files;
-                                for (let i = 0; i< files.length; i++) {
-                                    setProductImg(product=>[...product, URL.createObjectURL(files[i])])
-                                }
-                                setFile(file=>[...file, files])
-                            }}
-                            type="file"
-                            name="productImg"
-                            className="noborder"
-                            multiple="multiple"
-                            style={{height: '50px'}}
+                                onChange={(event) => {
+                                    const files = event.target.files;
+                                    for (let i = 0; i< files.length; i++) {
+                                        setProductImg(product=>[...product, URL.createObjectURL(files[i])])
+                                    }
+                                    const fileArr = Array.prototype.slice.call(files)
+                                    fileArr.forEach(item=>{
+                                        
+                                        setFile(file=>[...file, item])
+                                    })
+                                }}
+                                type="file"
+                                name="productImg"
+                                className="noborder"
+                                multiple="multiple"
+                                style={{height: '50px'}}
                             ></input>
                             <div className="flex" style={{ overflowY: 'hidden', flexWrap:'wrap'}}>
                                 { productImg && 
                                     productImg.map((item, index) => {
                                         return (
-                                            <div className="create-box-img">
+                                            <div key={index} className="create-box-img">
                                                 <img key={index} src={item} alt=""></img>
                                                 <div 
                                                     className="create-box-img-overlay"

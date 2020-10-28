@@ -34,7 +34,7 @@ export default function DashboardBody(props) {
                 setProduct(res.data)
             }
         )
-    },[props.productId])
+    },[props.productId, props.openEdit])
 
     return (
         <div 
