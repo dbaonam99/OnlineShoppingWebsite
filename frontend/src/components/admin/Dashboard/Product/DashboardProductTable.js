@@ -5,18 +5,67 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import ReactStars from "react-rating-stars-component";
 import { faPencilAlt, faTimes } from '@fortawesome/free-solid-svg-icons';
 import axios from 'axios';
+import classNames from 'classnames'
 
 export default function DashboardProductTable(props) {
 
     const [products, setProducts] = useState([])
+    // const [searchInput, setSearchInput] = useState("")
+    const [constProducts, setConstProducts] = useState([])
     
     useEffect(()=>{
         axios.get(`http://localhost:4000/products`)
             .then(res => {
                 setProducts(res.data)
+                setConstProducts(res.data)
             }
         )
-    },[props.isChange])
+    },[props.isChange]) 
+
+    const [currentPage, setCurrentPage] = useState(1);
+    const itemsPerPage = 10;
+
+    const choosePage = (event) => {
+        if (Number(event.target.id) === 0) {
+            setCurrentPage(currentPage)
+        } else if (Number(event.target.id) === -1) {
+            if (currentPage > 1) {
+                setCurrentPage(currentPage - 1)
+            } else {
+                setCurrentPage(1);
+            }
+        } else if (Number(event.target.id) === 999) {
+            setCurrentPage(currentPage + 1)
+        } else {
+            setCurrentPage(Number(event.target.id))
+        }
+    }
+
+    const indexOfLast = currentPage * itemsPerPage;
+    const indexOfFirst = indexOfLast - itemsPerPage;
+    const current = products.slice(indexOfFirst, indexOfLast);
+    const pageNumbers = [];
+    for (let i = 1; i <= Math.ceil(products.length / itemsPerPage); i++) {
+        pageNumbers.push(i);
+    }
+
+    const pages = [];
+
+    if (currentPage === 2) {
+        pages.push(currentPage - 1, currentPage, currentPage + 1);
+    } else {
+        if (currentPage === 1) {
+            pages.push(currentPage, currentPage + 1, currentPage + 2 );
+        } else if (currentPage === 2) {
+            pages.push(currentPage - 1, currentPage, currentPage + 1);
+        } else if (currentPage > 2 && currentPage < pageNumbers.length - 1) {
+            pages.push(currentPage -1, currentPage, currentPage + 1);
+        } else if (currentPage === pageNumbers.length - 1) {
+            pages.push(currentPage - 1, currentPage, currentPage + 1);
+        } else {
+            pages.push(currentPage - 2, currentPage - 1, currentPage);
+        }
+    }
 
     const deleteOnClick = (event) => {
         axios.post(`http://localhost:4000/products/delete/:${event.target.id}`, {
@@ -25,6 +74,21 @@ export default function DashboardProductTable(props) {
         setProducts(products.filter((item)=>{
             return item._id !== event.target.id
         }))
+    }
+
+    const searchOnSubmit = (event) =>{
+        event.preventDefault()
+    }
+    const searchOnChange = (event) => {
+        // setSearchInput(event.target.value)
+        const searchInput = event.target.value
+        const search = []
+        for (let i in constProducts) {
+            if ((constProducts[i].productName).toLowerCase().includes(searchInput)) {
+                search.push(constProducts[i])
+            }
+        }
+        setProducts(search)
     }
 
     return (
@@ -43,7 +107,10 @@ export default function DashboardProductTable(props) {
                             onClick={props.setOpenCreateFunc}
                         >Add new</div>
                         <div className="dashboard-addnew-search">
-                            <input type="text" placeholder="Search records"></input>
+                            <form onSubmit={searchOnSubmit}>
+                                <input type="text" placeholder="Search records"
+                                onChange={searchOnChange}></input>
+                            </form>
                         </div>
                     </div>
                     <table className="dashboard-table" style={{tableLayout: 'fixed'}}>
@@ -58,7 +125,7 @@ export default function DashboardProductTable(props) {
                                 }
                             </tr>
                             {
-                                products.map((item, index) => {
+                                current.map((item, index) => {
                                     const date = new Date(item.productDate)
                                     const day = date.getDay();
                                     const month = date.getMonth();
@@ -151,6 +218,35 @@ export default function DashboardProductTable(props) {
                             }
                         </tbody>
                     </table>
+                    
+                    <div className="pagination-container flex" style={{ justifyContent: 'flex-end', margin: '20px 0'}}>
+                        <div className="pagnigation flex-center" onClick={choosePage}>
+                            <div id="-1" className={classNames({
+                                pagnigation_disable: currentPage === 1
+                            })}>←</div>
+                            { pages.map(function(number, index) { 
+                                if (currentPage === number) {
+                                    return (
+                                        <div key={number} id={number} className="pagnigation-active">
+                                            {number}
+                                        </div>
+                                    )
+                                } else {
+                                    return (
+                                    <div 
+                                        key={number}
+                                        id={number}
+                                        >
+                                            {number}
+                                    </div>
+                                    )
+                                }
+                            })}
+                            <div id="999" className={classNames({
+                                pagnigation_disable: currentPage === pageNumbers.length
+                            })}>→</div>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>

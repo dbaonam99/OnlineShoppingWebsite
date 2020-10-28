@@ -74,7 +74,6 @@ module.exports.updateProduct = async function(req, res) {
 		productDes: req.body.productDes
 	}
 
-	console.log(data)
 	Product.findByIdAndUpdate(
 		{_id: id},
 		{$push: img},

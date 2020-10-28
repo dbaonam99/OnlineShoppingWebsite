@@ -140,6 +140,7 @@
     flex-grow: 1;
     margin-left: 20%;
     transition: .5s;
+    min-height: 100vh;
 }
 .DashboardBody_small {
     margin-left: 80px;
