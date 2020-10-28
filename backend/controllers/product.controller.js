@@ -15,7 +15,6 @@ module.exports.product = function(req, res) {
 module.exports.postProduct = async function(req, res) {
 	const imgArr = [];
 	req.files.map((item)=>{
-		console.log(item)
 		imgArr.push(`http://localhost:4000/${item.path.split("/").slice(1).join("/")}`)
 	})
 	const data = {
@@ -62,29 +61,31 @@ module.exports.updateProduct = async function(req, res) {
 			imgArr.push(`http://localhost:4000/${item.path.split("/").slice(1).join("/")}`)
 		})
 	}
-	const data = {
-	// 	productName: req.body.productName,
-	// 	productSale: req.body.productSale,
-	// 	productPrice: req.body.productPrice,
-	// 	productCate: req.body.productCate,
-	// 	productSize: req.body.productSize.split(","),
-	// 	productSex: req.body.productSex,
-	// 	productDate: req.body.productDate,
-		productImg: imgArr,
-	// 	productDes: req.body.productDes,
-	// 	productSold: 0,
+	const img = {
+		productImg: imgArr
 	}
-	Product.findOneAndUpdate(
+	const data = {
+		productName: req.body.productName,
+		productSale: req.body.productSale,
+		productPrice: req.body.productPrice,
+		productCate: req.body.productCate,
+		productSize: req.body.productSize.split(","),
+		productSex: req.body.productSex,
+		productDes: req.body.productDes
+	}
+
+	console.log(data)
+	Product.findByIdAndUpdate(
 		{_id: id},
-		{$push: { 
-			productImg: data.productImg 
-		}},
+		{$push: img},
 		function (error) {
-			if (error) {
-				console.log(error);
-			}
 		}
 	)
+	Product.findByIdAndUpdate(id, data, function(error) {
+		if (error) {
+			console.log(error);
+		}
+	})
 	res.status(200);
 }
 

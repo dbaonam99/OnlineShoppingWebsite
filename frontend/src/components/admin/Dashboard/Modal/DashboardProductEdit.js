@@ -12,35 +12,54 @@ export default function DashboardProductEdit(props) {
     const [isCheckedLarge, setIsCheckedLarge] = useState(false);
     const [inputValue, setInputValue] = useState([])
     const [cate, setCate] = useState([])
-    const [cateValue, setCateValue] = useState("")
-    const [size, setSize] = useState([])
     const [sex, setSex] = useState("")
     const [file, setFile] = useState([])
     const product = props.product
+
+
     const [productImg, setProductImg] = useState([])
+    const [productName, setProductName] = useState("")
+    const [productSale, setProductSale] = useState(0)
+    const [productPrice, setProductPrice] = useState(0)
+    const [productDes, setProductDes] = useState("")
+    const [productCate, setProductCate] = useState("")
+    const [productSize, setProductSize] = useState([])
+    const [productSex, setProductSex] = useState([])
 
     const checkedSize = (event) => {
         if (event.target.id === "1") {
             if (isCheckedSmall) {
+                const size = productSize.filter((item)=> {
+                    return item !== 'Small'
+                })
+                setProductSize(size)
                 setIsCheckedSmall(false)
             } else {
-                setSize(size=>[...size, 'Small'])
+                setProductSize(productSize=>[...productSize, 'Small'])
                 setIsCheckedSmall(true)
             }
         }
         if (event.target.id === "2") {
             if (isCheckedMedium) {
+                const size = productSize.filter((item)=> {
+                    return item !== 'Medium'
+                })
+                setProductSize(size)
                 setIsCheckedMedium(false)
             } else {
-                setSize(size=>[...size, 'Medium'])
+                setProductSize(productSize=>[...productSize, 'Medium'])
                 setIsCheckedMedium(true)
             }
         }
         if (event.target.id === "3") {
+            const size = productSize.filter((item)=> {
+                return item !== 'Large'
+            })
+            setProductSize(size)
             if (isCheckedLarge) {
                 setIsCheckedLarge(false)
             } else {
-                setSize(size=>[...size, 'Large'])
+                setProductSize(productSize=>[...productSize, 'Large'])
                 setIsCheckedLarge(true)
             }
         }
@@ -51,7 +70,14 @@ export default function DashboardProductEdit(props) {
     }
     
     useEffect(()=> {
+        setProductName(product.productName)
         setProductImg(product.productImg)
+        setProductSale(product.productSale)
+        setProductPrice(product.productPrice)
+        setProductDes(product.productDes)
+        setProductCate(product.productCate)
+        setProductSex(product.productSex)
+        setProductSize(product.productSize)
         axios.get(`http://localhost:4000/category`)
             .then(res => {
                 setCate(res.data)
@@ -83,14 +109,14 @@ export default function DashboardProductEdit(props) {
             formData.append('productImg', image);
         });
 
-        // formData.append("productName", inputValue.name);
-        // formData.append("productSale", inputValue.sale);
-        // formData.append("productPrice", inputValue.price);
-        // formData.append("productCate", cateValue);
-        // formData.append("productSize", size);
-        // formData.append("productDes", inputValue.des);
-        // formData.append("productSex", sex);
-        // formData.append("productDate", new Date());
+        formData.append("productName", productName);
+        formData.append("productSale", productSale);
+        formData.append("productPrice", productPrice);
+        formData.append("productCate", productCate);
+        formData.append("productSize", productSize);
+        formData.append("productDes", productDes);
+        formData.append("productSex", productSex);
+        formData.append("productDate", new Date());
         axios.post(`http://localhost:4000/products/update/${product._id}`, formData, config)
         props.setCloseEditFunc(false);
         props.setToastFunc(true);
@@ -101,7 +127,7 @@ export default function DashboardProductEdit(props) {
             cateName: inputValue.cate
         })
         setCate(cate=>[...cate, {cateName: inputValue.cate}])
-        setCateValue(inputValue.cate)
+        setProductCate(inputValue.cate)
         cateInput.current.value = ""
     }
 
@@ -142,8 +168,11 @@ export default function DashboardProductEdit(props) {
                             <div className="dashboard-right">
                                 <input 
                                     type="text" name="name" 
-                                    value={product.productName || 0}
-                                    onChange={handleOnChange} required></input>
+                                    value={productName}
+                                    onChange={(event)=>{
+                                        setProductName(event.target.value)
+                                    }} required
+                                ></input>
                             </div>
                         </div>
                         <div className="create-box-row flex">
@@ -195,8 +224,10 @@ export default function DashboardProductEdit(props) {
                                 <input 
                                     type="number" name="price" 
                                     placeholder="USD" 
-                                    value={product.productPrice || 0}
-                                    onChange={handleOnChange} required
+                                    value={productPrice}
+                                    onChange={(event)=>{
+                                        setProductPrice(event.target.value)
+                                    }} required
                                 ></input>
                             </div>
                         </div>
@@ -206,9 +237,11 @@ export default function DashboardProductEdit(props) {
                                 <input 
                                     type="number" placeholder="%" 
                                     style={{ width: "100px"}} 
-                                    onChange={handleOnChange} 
                                     name="sale" 
-                                    value={product.productSale || 0}
+                                    value={productSale}
+                                    onChange={(event)=>{
+                                        setProductSale(event.target.value)
+                                    }}
                                     required></input>
                                 <label>From: </label>
                                 <input type="date"  name="fromdate" onChange={handleOnChange} placeholder="dd/mm/yyyy" pattern="(^(((0[1-9]|1[0-9]|2[0-8])[\/](0[1-9]|1[012]))|((29|30|31)[\/](0[13578]|1[02]))|((29|30)[\/](0[4,6,9]|11)))[\/](19|[2-9][0-9])\d\d$)|(^29[\/]02[\/](19|[2-9][0-9])(00|04|08|12|16|20|24|28|32|36|40|44|48|52|56|60|64|68|72|76|80|84|88|92|96)$)"/>
@@ -220,8 +253,8 @@ export default function DashboardProductEdit(props) {
                             <div className="dashboard-left flex">Category </div>
                             <div className="dashboard-right flex-center">
                                 <select style={{ width: "350px"}} 
-                                    onChange={(event) => {setCateValue(event.target.value)}}
-                                    value={cateValue || product.productCate}
+                                    onChange={(event) => {setProductCate(event.target.value)}}
+                                    value={productCate}
                                 >
                                     <option></option>
                                     { cate.length > 0 &&
@@ -251,8 +284,8 @@ export default function DashboardProductEdit(props) {
                             <div className="dashboard-left flex">Sex </div>
                             <div className="dashboard-right flex">
                                 <select style={{ width: "200px"}} 
-                                    onChange={(event) => {setSex(event.target.value)}}
-                                    value={sex || product.productSex}
+                                    onChange={(event) => {setProductSex(event.target.value)}}
+                                    value={productSex}
                                     required>
                                     <option></option>
                                     <option>Man</option>
@@ -283,8 +316,10 @@ export default function DashboardProductEdit(props) {
                                 <input 
                                     type="text" 
                                     name="des" 
-                                    value={product.productDes || ""}
-                                    onChange={handleOnChange} required></input>
+                                    value={productDes || ""}
+                                    onChange={(event)=>{
+                                        setProductDes(event.target.value)
+                                    }}required></input>
                             </div>
                         </div>
 
