@@ -50,30 +50,26 @@ app.options('*', cors());
 io.on('connection', async function (socket) {
   socket.on('join', async function (data) {
     if (data.isAdmin === true) {
-      socket.join('admin')
+      socket.join(data.sessionId)
       const allchat = await Chat.find();
       io.in('admin').emit('send-all-chat', allchat)
-    } 
-    else if (data.isAdmin === false){
-      socket.join(data.sessionId)
-      Chat.find({ sessionId: data.sessionId }).then(function(chat) {
-        socket.emit('sendFirstInfo', chat);
-      })
+    } else {
+      if (data.sessionId) {
+        socket.join(data.sessionId)
+        Chat.find({ sessionId: data.sessionId }).then(function(chat) {
+          socket.emit('sendFirstInfo', chat);
+        })
+      }
     }
   })
   
   socket.on('firstMessage', async function(data) {
-
-    socket.join('test')
-
-    let roomIds = socket.rooms;
-
     await Chat.create(data)
     const allchat = await Chat.find();
     io.in('admin').emit('client-msg', {
       userChatInfo: [data],
       allchat: allchat
-    });
+    })
   })
 
   socket.on('messageSend', async function(data) {
@@ -94,9 +90,8 @@ io.on('connection', async function (socket) {
     Chat.findOne({ sessionId: data.roomId })
       .updateOne({$push: { chatContent: {fromAdmin: true, text: data.text, time: data.time} }})
       .exec()
-    socket.to('test').emit('admin-msg', data); 
+    socket.to(data.roomId).emit('admin-msg', data); 
   })
-
 })
 
 server.listen(4000, () => console.log(`Listening on port ${4000}`));

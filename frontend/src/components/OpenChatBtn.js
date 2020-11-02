@@ -5,6 +5,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faComment, faPaperPlane } from '@fortawesome/free-solid-svg-icons'
 import socketIOClient from "socket.io-client"
 import { withRouter } from 'react-router-dom'
+import axios from 'axios'
 
 const ENDPOINT = "http://localhost:4000";
 
@@ -14,31 +15,36 @@ function OpenChatBtn(props) {
     const [openChat, setOpenChat] = useState(false)
     const [onHover, setOnHover] = useState(false)
     const [inputValue, setInputValue] = useState("")
-    const [openChatContent, setOpenChatContent] = useState(false)
+    // const [openChatContent, setOpenChatContent] = useState(false)
 
     const socket = socketIOClient(ENDPOINT)
     const [chatList, setChatList] = useState([])
 
     useEffect(() => {
-        if (sessionStorage.getItem('chat-id')) setOpenChatContent(true)
-        socket.on('connect', function (data) {
-            socket.emit('join', {
-                sessionId: sessionStorage.getItem('chat-id'),
-                isAdmin: false
-            })
-            socket.on('sendFirstInfo', (data)=> {
-                if (data.length > 0) setChatList(data[0].chatContent)
-            })
-            socket.on('thread', (data)=> {
-                setChatList(data.chatContent)
-            })
-            socket.on("admin-msg", function(data) {
-                alert("checked")
-                setChatList(chatList=> [...chatList, data]);
-                setTimeout(()=>{
-                    messageRef.current.scrollIntoView({ behavior: "smooth" })
-                }, 100)
-            })
+        if (!sessionStorage.getItem('chat-id')) {
+            sessionStorage.setItem('chat-id', Math.floor(Math.random() * 190000000) + 100000000);
+        }
+        axios.get(`http://localhost:4000/chat/${sessionStorage.getItem('chat-id')}`)
+            .then(res => {
+                if (res.data.length > 0)
+                    setChatList(res.data[0].chatContent)
+            }
+        )
+        socket.emit('join', {
+            sessionId: sessionStorage.getItem('chat-id'),
+            isAdmin: false
+        })
+        socket.on('sendFirstInfo', (data)=> {
+            if (data.length > 0) setChatList(data[0].chatContent)
+        })
+        socket.on('thread', (data)=> {
+            setChatList(data.chatContent)
+        })
+        socket.on("admin-msg", function(data) {
+            setChatList(chatList=> [...chatList, data]);
+            setTimeout(()=>{
+                messageRef.current.scrollIntoView({ behavior: "smooth" })
+            }, 100)
         })
     }, [])
 
@@ -49,10 +55,6 @@ function OpenChatBtn(props) {
 
     const sendFirstChatOnSubmit = (event) => {
         event.preventDefault()
-        setOpenChatContent(true)
-        if (!sessionStorage.getItem('chat-id')) {
-            sessionStorage.setItem('chat-id', Math.floor(Math.random() * 190000000) + 100000000);
-        }
         socket.emit('firstMessage', {
             sessionId: sessionStorage.getItem('chat-id'),
             chatName: inputValue.chatName,
@@ -84,6 +86,8 @@ function OpenChatBtn(props) {
         inputRef.current.value = "";
     }
 
+    console.log(chatList)
+
     return (
         <div 
             className={location === "/admin" || location === "/admin/dashboard" ? "chat-btn displayNone" : "chat-btn"}
@@ -110,7 +114,7 @@ function OpenChatBtn(props) {
                 <div className="chat-box-header">
                     Live Chat
                 </div>
-                { openChatContent === false &&  
+                { (chatList.length === 0) &&
                     <div className="chat-box-body">
                         <form onSubmit={sendFirstChatOnSubmit} className={openChat ? "form-chat hide_chat_box_item" : "form-chat"}>
                             <label>Introduce yourself *</label>
@@ -122,7 +126,7 @@ function OpenChatBtn(props) {
                         </form>
                     </div>
                 }
-                { (chatList.length > 0 && openChatContent) && 
+                { (chatList.length > 0) && 
                     <div className="chat-box-body no-p">
                         <form onSubmit={sendChatOnSubmit} className={openChat ? "form-chat hide_chat_box_item" : "form-chat"}>
                             {/* <div className="chat-box-user flex" style={{background: '#ddd', width:'100%'}}>

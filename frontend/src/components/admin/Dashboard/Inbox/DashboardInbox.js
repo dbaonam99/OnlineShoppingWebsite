@@ -2,13 +2,13 @@ import React from 'react'
 import '../../../../App.css'
 import '../../../../Styles/Dashboard.css'
 import { useEffect, useState } from 'react'
-import socketIOClient from "socket.io-client";
+import socketIOClient from "socket.io-client"
+import axios from 'axios'
 
 const ENDPOINT = "http://localhost:4000";
 
 export default function DashboardInbox(props) {
     const [allChatData, setAllChatData] = useState([])
-    // const [chatContent, setChatContent] = useState([])
     const [roomId, setRoomId] = useState(0);
     const [roomIndex, setRoomIndex] = useState(0)
     const [chatInput, setChatInput] = useState("")
@@ -35,13 +35,23 @@ export default function DashboardInbox(props) {
 
     const sendChatInput = (event) => {
         event.preventDefault();
-        socket.emit('messageSend-admin', {
+        const data = {
             fromAdmin: true,
             text: chatInput,
             time: new Date(),
             roomId: roomId
-        });
+        }
+        socket.emit('messageSend-admin', data)
+
+        axios.get(`http://localhost:4000/chat`)
+            .then(res => {
+                setAllChatData(res.data)
+            }
+        )
+        // setAllChatData(allChatData=> [...allChatData, data])
     }
+
+    console.log(allChatData)
 
     return (
         <div className="boxchat-admin flex">

@@ -581,8 +581,14 @@
 .table-title:first-child {
     width: 150px;
 }
+.table-new-title:first-child {
+    width: 250px;
+}
 .table-title:last-child {
     width: 80px;
+}
+#Content {
+    width: 250px;
 }
 .dashboard-table td p {
     width: 10px;
@@ -768,4 +774,10 @@ select {
 }
 .create-box-img-overlay .icon:hover {
     color: #222;
+}
+
+
+.DashboardEditor {
+    height: 500px;
+    border: 1px solid #eee;
 }
