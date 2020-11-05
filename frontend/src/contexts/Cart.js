@@ -112,7 +112,6 @@ export function CartProvider(props) {
     }
 
     const getTotal = () => {
-        console.log("-------------")
         let virtualTotal = 0
         for (let i in cartItems) {
             virtualTotal += cartItems[i].count * cartItems[i].productPrice

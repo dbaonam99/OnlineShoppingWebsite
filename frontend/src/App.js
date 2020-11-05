@@ -28,7 +28,8 @@ import Toast from './components/Toast';
 
 function App(props) {
 
-  const [loading, setLoading] = useState(true);
+  const [loading, setLoading] = useState(true)
+
   useEffect(()=>{
     if (window.location.href.split('/')[3] === "") {
       setTimeout(()=>{
@@ -45,7 +46,7 @@ function App(props) {
     <ChatProvider>
       { loading === true &&
         <LoadingPage
-          loading={loading}
+          loading={loading} 
         />
       }
       { loading === false &&

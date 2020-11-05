@@ -28,6 +28,7 @@ function BannerV3(props) {
     const location = props.history.location.pathname;
     const { cartItems, clickedCart } = useContext(CartContext)
     const [totalCart, setTotalCart] = useState(0)
+    const path = props.history.location.pathname.slice(12);
 
     function clickToClose() {
         document.body.style.overflow = 'unset';
@@ -207,13 +208,12 @@ function BannerV3(props) {
         return() => {
             window.removeEventListener("scroll", onScroll);
         }
-    }, [clickedCart, location, dropdownHover, cartItems]);
+    }, [clickedCart, location, dropdownHover, cartItems, path]);
 
     if(searchOpen || accountOpen || cartOpen){
         document.body.style.overflow = 'hidden';
     }
 
-    const path = props.history.location.pathname.slice(12);
     return(
         <div
             className={classNames('Header HeaderV3', {

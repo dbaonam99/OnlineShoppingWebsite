@@ -9,7 +9,7 @@ export default function LoadingPage(props) {
             </div>
             <div className="loading-page-container">
                 <p className="loading-text welcome">Welcome to SOBER shop</p>
-            </div>
+            </div> 
         </div>
     )
 }

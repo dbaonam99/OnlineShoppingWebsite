@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useState } from 'react'
+import React, { useContext } from 'react'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faCartPlus, faTimes  } from '@fortawesome/free-solid-svg-icons';
 import { CartContext } from '../../contexts/Cart';
@@ -31,7 +31,7 @@ export default function WishListItem(props) {
                         return (
                             <div className="cart-item flex" key={index}>
                                 <div className="cart-product-img">
-                                    <img src={item.productImg[0]} width="80px" height="100%"></img>
+                                    <img src={item.productImg[0]} width="80px" height="100%" alt=""></img>
                                 </div>
                                 <div className="cart-product-name">{item.productName}</div>
                                 <div className="cart-product-price">{item.productPrice}</div>

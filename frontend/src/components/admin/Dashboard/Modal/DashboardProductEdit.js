@@ -12,7 +12,7 @@ export default function DashboardProductEdit(props) {
     const [isCheckedLarge, setIsCheckedLarge] = useState(false);
     const [inputValue, setInputValue] = useState([])
     const [cate, setCate] = useState([])
-    const [sex, setSex] = useState("")
+    // const [sex, setSex] = useState("")
     const [file, setFile] = useState([])
     const product = props.product
 

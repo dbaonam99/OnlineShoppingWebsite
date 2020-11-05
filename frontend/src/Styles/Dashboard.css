@@ -506,6 +506,24 @@
     margin: 10px 0;
     height: 64px;
     border-radius: 10px;
+    padding: 10px;
+}
+.boxchat-avt {
+    margin-right: 10px;
+}
+.boxchat-avt img {
+    border-radius: 50%;
+    width: 48px;
+    height: 48px;
+}
+.boxchat-name {
+    font-size: 16px;
+    text-transform: capitalize;
+}
+.boxchat-first {
+    font-size: 12px;
+    color: #777;
+    text-transform: capitalize;
 }
 .boxchat-item:hover {
     background-color: #eee;
@@ -518,7 +536,29 @@
 .boxchat-box {
     width: 100%;
     height: 90%;
-    padding: 20px;
+    padding-left: 20px;
+}
+.boxchat-box-info {
+    display: flex;
+    height: 36px;
+    margin-bottom: 10px;
+}
+.boxchat-box-avt {
+    height: 100%;
+    margin-bottom: 20px;
+    justify-content: flex-start;
+    margin-right: 20px;
+}
+.boxchat-box-avt img {
+    border-radius: 50%;
+    width: 32px;
+    height: 32px;
+}
+.boxchat-contents {
+    border-top: 1px #ddd solid;
+}
+.boxchat-contents-item {
+    margin-top: 10px;
 }
 .boxchat-search input {
     width: 100%;
@@ -526,21 +566,83 @@
     outline: none;
     border: 1px #ddd solid;
     border-radius: 10px;
-    margin-bottom: 20px;
+    margin-bottom: 10px;
     padding: 0 10px;
 }
 .boxchat-type {
     height: 10%;
-    padding: 20px;
     width: 100%;
+    padding-left: 20px;
+}
+.boxchat-type-form {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
 }
 .boxchat-type input {
+    outline: none;
+    border: 1px #ddd solid;
+    padding: 0 10px;
     width: 90%;
+    height: 70%;
+    border-radius: 10px;
+    margin-right: 5px;
 }
 .boxchat-type button {
     width: 10%;
+    height: 70%;
+    border: none;
+    border: 1px #ddd solid;
+    background-color: #fff;
+    border-radius: 10px;
+    cursor: pointer;
 }
 
+.box-chat-clienttext {
+    margin: 3px 0;
+    clear: right;
+}
+.box-chat-clienttext p {
+    margin: 0;
+    border-radius: 15px;
+    padding: 5px 8px;
+    width: max-content;
+    color: #FFF;
+    background-color: #0e0e0e;
+}
+.box-chat-admintext {
+    margin: 3px 0;
+    text-align: right;
+    float: right;
+    clear: right;
+}
+.box-chat-admintext p {
+    border-radius: 15px;
+    padding: 5px 8px;
+    text-align: right;
+    width: max-content;
+    background-color: #eeecec;
+}
+
+.boxchat-contents {
+    height: 90%;
+    overflow-y: scroll;
+    margin: 5px;
+}
+
+/* width */
+.boxchat-contents::-webkit-scrollbar {
+    display: none !important;
+  }
+/* Track */
+.boxchat-contents::-webkit-scrollbar-track {
+    display: none !important;
+}
+/* Handle */
+.boxchat-contents::-webkit-scrollbar-thumb {
+display: none !important;
+}
 
 
 .dashboard-product {

@@ -57,7 +57,7 @@ export default function HomeTab() {
                     currentTab === 1 && 
                     <HomeTabContent 
                         products={products}
-                        height={height}
+                        height={height} 
                     />
                 }
                 { // new product

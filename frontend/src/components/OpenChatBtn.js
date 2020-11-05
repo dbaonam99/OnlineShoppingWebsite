@@ -78,15 +78,13 @@ function OpenChatBtn(props) {
             sessionId: sessionStorage.getItem('chat-id'),
             text: inputValue.messageSend,
             time: new Date(),
-        });
+        })
         setChatList(chatList=> [...chatList, {text: inputValue.messageSend, time: new Date()}])
         setTimeout(()=>{
             messageRef.current.scrollIntoView({ behavior: "smooth" })
         }, 100)
         inputRef.current.value = "";
     }
-
-    console.log(chatList)
 
     return (
         <div 
