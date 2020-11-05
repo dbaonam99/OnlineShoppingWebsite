@@ -20,8 +20,8 @@ export default function CartItem(props) {
                     cartItems.length > 0 && 
                     <div className="cart-item flex" style={{border: 'none'}}>
                         <div className="cart-product-img flex" style={{alignItems: 'center', justifyContent: 'flex-start'}}>Image</div>
-                        <div className="cart-product-name flex" style={{alignItems: 'center', justifyContent: 'flex-start'}}>Name</div>
-                        <div className="cart-product-amount flex" style={{alignItems: 'center', justifyContent: 'center'}}>Amount</div>
+                        <div className="cart-product-name flex-center" style={{alignItems: 'center', justifyContent: 'flex-start'}}>Name</div>
+                        <div className="cart-product-amount flex-center" style={{alignItems: 'center', justifyContent: 'center'}}>Amount</div>
                         <div className="cart-product-price flex" style={{alignItems: 'center', justifyContent: 'center'}}>Price</div>
                         <div className="cart-product-totalprice flex" style={{alignItems: 'center', justifyContent: 'center'}}>Total price</div>
                         <div className="cart-product-delete" style={{visibility: "hidden"}}>

@@ -88,7 +88,6 @@ module.exports.updateProduct = async function(req, res) {
 	res.status(200);
 }
 
-
 module.exports.deleteProduct = async function(req, res) {
 	await Product.findByIdAndRemove({_id: req.body.productId})
 	res.status(200);

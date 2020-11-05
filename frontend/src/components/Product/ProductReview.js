@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import '../../App.css';
 
 import ReactStars from "react-rating-stars-component";
@@ -8,13 +8,18 @@ import ProductReviewContent from './ProductReviewContent';
 
 export default function ProductReview(props) {
 
+    const [ratingValue, setRatingValue] = useState(0)
+
     const defaultStar = {
         size: 24,
         value: 0,
         activeColor: "#fda32a",
         color: "#ddd",
         isHalf: true,
-        edit: true
+        edit: true,
+        onChange: newValue => {
+            setRatingValue(newValue)
+        }
     }
 
     let product = [];
@@ -23,7 +28,19 @@ export default function ProductReview(props) {
         product = props.product;
         productVote = [...product.productVote];
     }
+
+    const [input, setInput] = useState("")
+
+    const reviewChange = (event) => {
+        setInput({...input , [event.target.name]: event.target.value})
+    }
     
+    const sendReview = (event) => {
+        event.preventDefault()
+        console.log(input)
+        console.log(ratingValue)
+    }
+
     return(
         <div className="ProductReview" ref={props.bRef} id={props.id}>
             <div className="productreview-container">
@@ -106,24 +123,39 @@ export default function ProductReview(props) {
                                 <div>Add A Review</div>
                                 <div style={{ color: "#888", textAlign: 'center', fontSize: '12px', marginBottom: '20px'}}>Your email address will not be published. Required fields are marked *</div>
                                 <div style={{ color: "#888", fontSize: '14px', marginBottom: '10px'}}>Your rating *</div>
-                                <ReactStars {...defaultStar} />
-                                <form className="review-form">
+                                <ReactStars {...defaultStar}/>
+                                <form className="review-form" onSubmit={sendReview}>
                                     <p className="review-form-title">Your review *</p>
-                                    <input type="text" className="w-100 no-outline"></input>
+                                    <input 
+                                        type="text" 
+                                        className="w-100 no-outline" 
+                                        name="reviewText"
+                                        onChange={reviewChange}
+                                    ></input>
                                     <div className="flex w-100">
                                         <div className="w-100 mr-2">
                                             <p className="review-form-title">Name *</p>
-                                            <input type="text" className="w-100 no-outline"></input>
+                                            <input 
+                                                type="text" 
+                                                className="w-100 no-outline" 
+                                                name="reviewName"
+                                                onChange={reviewChange}
+                                            ></input>
                                         </div>
                                         <div className="w-100 ml-2">
                                             <p className="review-form-title">Email *</p>
-                                            <input type="email" className="w-100 no-outline"></input>
+                                            <input 
+                                                type="email" 
+                                                className="w-100 no-outline" 
+                                                name="reviewEmail"
+                                                onChange={reviewChange}
+                                            ></input>
                                         </div>
                                     </div>
+                                    <button className="submit-btn btn">
+                                        Submit
+                                    </button>
                                 </form>
-                                <div className="submit-btn btn">
-                                    <p>Submit</p>
-                                </div>
                             </div>
                         </div>
                     }

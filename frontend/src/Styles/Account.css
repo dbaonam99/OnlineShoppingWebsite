@@ -1,0 +1,121 @@
+.AccountInfo {
+    height: 100%;
+    width: 100%;
+}
+.accountinfo-container {
+    
+}
+.accountinfo-menu {
+    width: 20%;
+    height: 100%;
+    padding-right: 20px;
+}
+.accountinfo-main {
+    width: 80%;
+    border-left: 1px #ddd solid;
+    padding: 20px;
+    padding-top: 0;
+}
+.accountinfo-avt {
+    height: 69px;
+    align-items: center;
+    border-bottom: 1px #ddd solid;
+}
+.accountinfo-avt-name {
+    margin-left: 20px;
+}
+.accountinfo-menu-item {
+    display: flex;
+    align-items: center;
+    margin: 20px 0;
+    cursor: pointer;
+    padding: 10px 20px;
+    transition: .2s;
+    border-radius: 10px;
+}
+.accountinfo-menu-item:hover {
+    background-color: #111;
+    color: #FFF;
+}
+.accountinfo-active {
+    background-color: #111;
+    color: #FFF;
+}
+.accountinfo-title {
+    height: 69px;
+    padding-bottom: 20px;
+    border-bottom: 1px #ddd solid;
+}
+.accountinfo-title p:first-child {
+    font-size: 18px;
+}
+.accountinfo-title p:last-child {
+    font-size: 14px;
+    color: #666;
+    margin-top: 5px;
+}
+
+.accountinfo-body {
+    width: 100%;
+    height: 380px;
+    padding-top: 10px;
+}
+.accountinfo-body form {
+    width: 100%;
+    height: 100%;
+}
+.accountinfo-body2 {
+    width: 100%;
+    height: 85%;
+}
+.accountinfo-body form table {
+    height: 100%;
+    width: 70%;
+}
+.accountinfo-editavt {
+    width: 30%;
+    border-left: 1px #ddd solid;
+    align-items: center;
+    flex-direction: column;
+    align-items: center;
+    padding-left: 20px;
+    padding-top: 50px;
+}
+.accountinfo-editavt-input {
+    margin-top: 50px;
+    font-size: 12px;
+    border: none;
+    width: 200px;
+}
+
+.accountinfo-body form table tr td:first-child {
+    width: 25%;
+    text-align: right;
+    padding-right: 20px;
+    font-size: 14px;
+    color: #666;
+}
+.accountinfo-body .input {
+    width: 90%;
+    border: none;
+    outline: none;
+    font-size: 14px !important;
+    border-bottom: 2px #ddd solid !important;
+    margin-bottom: 2px;
+    font-size: 14px;
+    color: #111;
+}
+.accountinfo-body input:hover, .accountinfo-body input:focus {
+    border-bottom: 2px #111 solid !important;
+}
+.accountinfo-btn-row {
+    margin-top: 20px;
+    display: flex;
+    justify-content: center;
+}
+.accountinfo-btn {
+    padding: 10px 20px;
+    border: none;
+    outline: none;
+    margin-top: 10px;
+}

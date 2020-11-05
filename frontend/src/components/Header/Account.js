@@ -8,10 +8,10 @@ import {
 } from 'react-router-dom'
 
 import { UserContext } from '../../contexts/User'
+import AccountInfo from './AccountInfo'
 
 function Account(props) {
     const { 
-        userInfo,
         setUserInfoFunc 
     } = useContext(UserContext);
 
@@ -106,9 +106,7 @@ function Account(props) {
                 </div >
                 
                 {login === true && 
-                    <div>
-                        {userInfo.userName}
-                    </div>
+                    <AccountInfo/>
                 }
                 
                 {login === false && 

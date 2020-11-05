@@ -53,7 +53,7 @@ export default function DashboardMenu(props) {
                         <div className="db-menu-avt flex-center">
                             <img alt="" src="https://3.bp.blogspot.com/-kZtIWvxcorE/XG6Raeh5FWI/AAAAAAAALf4/RzyQNykxgJYqz-tK5nBBBIqlOEm2qU-mwCLcBGAs/s1600/0061jeoUly1g0e0l5schoj30u00u0kk2.jpg"></img>
                         </div>
-                        { hideText === false && <p className="db-menu-name" style={{marginLeft: '26px'}}>Name cgim</p> }
+                        { hideText === false && <p className="db-menu-name" style={{marginLeft: '26px'}}>Name</p> }
                         { hideText === false && openUserOpt === true && <FontAwesomeIcon icon={faAngleUp} style={{fontSize: '18px'}}/>}
                         { hideText === false && openUserOpt === false && <FontAwesomeIcon icon={faAngleDown} style={{fontSize: '18px'}}/>}
                     </div>

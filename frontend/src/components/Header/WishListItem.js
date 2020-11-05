@@ -33,8 +33,8 @@ export default function WishListItem(props) {
                                 <div className="cart-product-img">
                                     <img src={item.productImg[0]} width="80px" height="100%" alt=""></img>
                                 </div>
-                                <div className="cart-product-name">{item.productName}</div>
-                                <div className="cart-product-price">{item.productPrice}</div>
+                                <div className="cart-product-name flex-center">{item.productName}</div>
+                                <div className="cart-product-price flex-center">{item.productPrice}</div>
                                 
                                 <div className="product-info-addtocart flex-center btn"
                                     onClick={(event)=> {
