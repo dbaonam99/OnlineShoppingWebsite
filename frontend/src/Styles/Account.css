@@ -103,7 +103,9 @@
     border-bottom: 2px #ddd solid !important;
     margin-bottom: 2px;
     font-size: 14px;
-    color: #111;
+    color: #666;
+    font-family: sans-serif;
+    padding: 5px 0;
 }
 .accountinfo-body input:hover, .accountinfo-body input:focus {
     border-bottom: 2px #111 solid !important;

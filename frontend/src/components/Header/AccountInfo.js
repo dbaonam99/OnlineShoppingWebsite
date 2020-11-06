@@ -6,8 +6,33 @@ import {
 } from 'react-router-dom'
 import { UserContext } from '../../contexts/User'
 import axios from 'axios'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faCheckCircle } from '@fortawesome/free-solid-svg-icons';
 
 function AccountInfo(props) {
+
+    const tinh = [
+        {
+            id: 1,
+            name: "Hà Nội"
+        },
+        {
+            id: 2,
+            name: "TP.HCM"
+        }
+    ]
+    const huyen = [
+        {
+            id: 1,
+            name: "Quận Hoàn Kiếm",
+            tinhId: 1
+        },
+        {
+            id: 2,
+            name: "Quận 1",
+            tinhId: 2
+        },
+    ]
 
     const { 
         userInfo,
@@ -20,6 +45,9 @@ function AccountInfo(props) {
     const [userPassword, setUserPassword] = useState("")
     const [userAvt, setUserAvt] = useState("")
     const [file, setFile] = useState("")
+    const [provinceId, setProvinceId] = useState("")
+
+    const [toast, setToast] = useState(false)
     
     useEffect(()=>{
         setUserFullName(userInfo.userFullName)
@@ -52,13 +80,23 @@ function AccountInfo(props) {
             .catch(err => {
                 console.log(err.response.data);
             })
+        
+        setToast(true)
+        setTimeout(()=>{
+            setToast(false)
+        }, 2000)
     }
 
-    console.log(userInfo.userAvt)
+    console.log(provinceId)
 
     return(
         <div className='AccountInfo'>
             <div className="accountinfo-container flex">
+
+                <div className={toast ? "toast toast-show" : "toast"} style={{top: '20px'}}>
+                    <FontAwesomeIcon icon={faCheckCircle} className="icon"/>
+                    Change account infomation success!
+                </div>
                 <div className="accountinfo-menu">
                     <div className="accountinfo-avt flex">
                         <img 
@@ -103,7 +141,7 @@ function AccountInfo(props) {
                                         <table>
                                             <tr>
                                                 <td>Username</td>
-                                                <td>
+                                                <td style={{fontFamily: 'sans-serif'}}>
                                                     {userInfo.userName}
                                                 </td>
                                             </tr>
@@ -135,6 +173,50 @@ function AccountInfo(props) {
                                                         }}
                                                         value={userEmail}
                                                     ></input>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>Province</td>
+                                                <td>
+                                                    <select 
+                                                        className="input"
+                                                        name="tinh" 
+                                                        // value={provinceValue}
+                                                        onChange={(event)=>{
+                                                            setProvinceId(event.target.selectedIndex)
+                                                        }}
+                                                    >
+                                                        <option disabled selected value>select a province</option>
+                                                        {tinh.map((item, index) => {
+                                                            return (
+                                                                <option 
+                                                                    key={index}
+                                                                    value={item.name}
+                                                                >{item.name}</option>
+                                                            )
+                                                        })}
+                                                    </select>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>District</td>
+                                                <td>
+                                                    <select 
+                                                        className="input"
+                                                        name="huyen" 
+                                                    >
+                                                        <option disabled selected value>select a district</option>
+                                                        {huyen.map((item, index) => {
+                                                            if (item.tinhId === provinceId) {
+                                                                return (
+                                                                    <option
+                                                                        key={index}
+                                                                        value={item.name}
+                                                                        >{item.name}</option>
+                                                                )
+                                                            }
+                                                        })}
+                                                    </select>
                                                 </td>
                                             </tr>
                                             <tr>
