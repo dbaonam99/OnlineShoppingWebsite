@@ -186,7 +186,6 @@ export default function DashboardProductEdit(props) {
                                         }
                                         const fileArr = Array.prototype.slice.call(files)
                                         fileArr.forEach(item=>{
-                                            
                                             setFile(file=>[...file, item])
                                         })
                                     }}

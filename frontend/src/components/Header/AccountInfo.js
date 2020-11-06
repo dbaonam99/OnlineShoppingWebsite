@@ -5,28 +5,56 @@ import {
     withRouter
 } from 'react-router-dom'
 import { UserContext } from '../../contexts/User'
-
+import axios from 'axios'
 
 function AccountInfo(props) {
 
     const { 
-        userInfo
+        userInfo,
+        setUserInfoFunc
     } = useContext(UserContext);
-
-    console.log(userInfo)
 
     const [tabId, setTabId] = useState(1);
     const [userFullName, setUserFullName] = useState("")
     const [userEmail, setUserEmail] = useState("")
-    const [userOldPassword, setUserOldPassword] = useState("")
-    const [userNewPassword, setUserNewPassword] = useState("")
+    const [userPassword, setUserPassword] = useState("")
     const [userAvt, setUserAvt] = useState("")
-
+    const [file, setFile] = useState("")
+    
     useEffect(()=>{
         setUserFullName(userInfo.userFullName)
         setUserEmail(userInfo.userEmail)
-        setUserAvt(userInfo.userAvt || "https://scontent-sin6-1.xx.fbcdn.net/v/t1.0-9/73321413_146697059956770_7174055866474168320_n.jpg?_nc_cat=107&ccb=2&_nc_sid=09cbfe&_nc_ohc=ni-Cr2_KyP0AX-BfQkv&_nc_ht=scontent-sin6-1.xx&oh=9cbda6699093e8dbb061a92c5bb58c7e&oe=5FCB1CFC")
+        setUserAvt(userInfo.userAvt)
     },[])
+
+    const submitInfo = (event) => {
+        event.preventDefault()
+        const config = {
+            headers: {
+                'content-type': 'multipart/form-data'
+            }
+        }
+        const formData = new FormData();
+        const imageArr = Array.from(file);
+        imageArr.forEach(image => {
+            formData.append('userAvt', image);
+        });
+        formData.append("userFullName", userFullName);
+        formData.append("userEmail", userEmail);
+        formData.append("userPassword", userPassword);
+        localStorage.removeItem('token')
+        axios.post(`http://localhost:4000/users/update/${userInfo._id}`, formData, config)
+            .then(res => {
+                console.log(res.data.user)
+                setUserInfoFunc(res.data.user);
+                localStorage.setItem('token', res.data.token);
+            })
+            .catch(err => {
+                console.log(err.response.data);
+            })
+    }
+
+    console.log(userInfo.userAvt)
 
     return(
         <div className='AccountInfo'>
@@ -36,7 +64,7 @@ function AccountInfo(props) {
                         <img 
                             style={{borderRadius: '50%'}}
                             className="accountinfo-avt-img"
-                            src={userAvt} 
+                            src={userInfo.userAvt} 
                             alt=""
                             width="48px"
                             height="48px"
@@ -53,11 +81,12 @@ function AccountInfo(props) {
                             className={tabId === 2 ? "accountinfo-active accountinfo-menu-item flex" : "accountinfo-menu-item flex"} 
                             onClick={()=> setTabId(2)}>Orders</div>
                         <div 
-                            className={tabId === 3 ? "accountinfo-active accountinfo-menu-item flex" : "accountinfo-menu-item flex"} 
-                            onClick={()=> setTabId(3)}>Notification</div>
-                        <div 
-                            className={tabId === 4 ? "accountinfo-active accountinfo-menu-item flex" : "accountinfo-menu-item flex"}  
-                            onClick={()=> setTabId(4)}>Log out</div>
+                            className={tabId === 3 ? "accountinfo-active accountinfo-menu-item flex" : "accountinfo-menu-item flex"}  
+                            onClick={()=> {
+                                localStorage.removeItem('token');
+                                window.location.reload(false);
+                            }}
+                            >Log out</div>
                     </div>
                 </div>
                 <div className="accountinfo-main">
@@ -69,7 +98,7 @@ function AccountInfo(props) {
                                 <p>Manage account information for account security</p>
                             </div>
                             <div className="accountinfo-body flex">
-                                <form>
+                                <form onSubmit={submitInfo} encType="multipart/form-data" >
                                     <div className="accountinfo-body2 flex">
                                         <table>
                                             <tr>
@@ -97,7 +126,7 @@ function AccountInfo(props) {
                                                 <td>Email</td>
                                                 <td>
                                                     <input 
-                                                        type="email"
+                                                        type="text"
                                                         className="input"
                                                         name="email" 
                                                         value={userEmail}
@@ -109,32 +138,17 @@ function AccountInfo(props) {
                                                 </td>
                                             </tr>
                                             <tr>
-                                                <td>Old password</td>
-                                                <td>
-                                                    <input 
-                                                        type="password"
-                                                        className="input"
-                                                        name="email" 
-                                                        value={userOldPassword}
-                                                        onChange={(event)=>{
-                                                            setUserOldPassword(event.target.value)
-                                                        }}
-                                                        value={userOldPassword}
-                                                    ></input>
-                                                </td>
-                                            </tr>
-                                            <tr>
                                                 <td>New password</td>
                                                 <td>
                                                     <input 
                                                         type="password"
                                                         className="input"
                                                         name="email" 
-                                                        value={userNewPassword}
+                                                        value={userPassword}
                                                         onChange={(event)=>{
-                                                            setUserNewPassword(event.target.value)
+                                                            setUserPassword(event.target.value)
                                                         }}
-                                                        value={userNewPassword}
+                                                        value={userPassword}
                                                     ></input>
                                                 </td>
                                             </tr>
@@ -150,9 +164,18 @@ function AccountInfo(props) {
                                                 height="100px"
                                             ></img>
                                             <input 
+                                                onChange={(event) => {
+                                                    const files = event.target.files;
+                                                    setUserAvt(URL.createObjectURL(files[0]))
+                                                    const fileArr = Array.prototype.slice.call(files)
+                                                    fileArr.forEach(item=>{
+                                                        setFile(file=>[...file, item])
+                                                    })
+                                                }}
                                                 type="file"
-                                                className="accountinfo-editavt-input">
-                                            </input>
+                                                name="avatar"
+                                                className="accountinfo-editavt-input"
+                                            ></input>
                                         </div>
                                         
                                     </div>
@@ -166,14 +189,6 @@ function AccountInfo(props) {
                     {
                         tabId === 2 && 
                         <div>2</div>
-                    }
-                    {
-                        tabId === 3 && 
-                        <div>3</div>
-                    }
-                    {
-                        tabId === 4 && 
-                        <div>4</div>
                     }
                 </div>
             </div>

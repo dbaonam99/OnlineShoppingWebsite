@@ -5,7 +5,7 @@ var userSchema = new mongoose.Schema({
 	userFullName: String,
 	userEmail: String,
 	userPassword: String,
-	userAvt: String,
+	userAvt: String, 
 	},
     {
     	versionKey: false
