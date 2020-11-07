@@ -50,6 +50,8 @@ module.exports.register = async function(req, res) {
 	const data = {
 		userAvt: "https://scontent-sin6-1.xx.fbcdn.net/v/t1.0-9/73321413_146697059956770_7174055866474168320_n.jpg?_nc_cat=107&ccb=2&_nc_sid=09cbfe&_nc_ohc=ni-Cr2_KyP0AX-BfQkv&_nc_ht=scontent-sin6-1.xx&oh=9cbda6699093e8dbb061a92c5bb58c7e&oe=5FCB1CFC",
 		userName: req.body.registerName,
+		userTinh: "",
+		userHuyen: "",
 		userFullName: "",
 		userEmail: email,
 		userPassword: req.body.password
@@ -77,11 +79,14 @@ module.exports.updateUser = async function(req, res) {
 	}
 
 	const data = {
-		userFullName: req.body.userFullName,
-		userEmail: req.body.userEmail
+		userName: req.body.userName,
+		userEmail: req.body.userEmail,
+		userTinh: req.body.userTinh,
+		userHuyen: req.body.userHuyen
 	}
 
 	// userPassword
+	console.log(data)
 
 	await User.findByIdAndUpdate(
 		{_id: id}, data,
