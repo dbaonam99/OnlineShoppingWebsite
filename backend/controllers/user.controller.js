@@ -78,15 +78,25 @@ module.exports.updateUser = async function(req, res) {
 		)
 	}
 
+	if(req.body.userPassword !== "") {
+		try {
+			const salt = await bcrypt.genSalt();
+			req.body.password = await bcrypt.hash(req.body.userPassword, salt);
+		} catch {}
+		await User.findByIdAndUpdate(
+			{_id: id}, {userPassword: req.body.password},
+			function (error) {
+			}
+		)
+	}
+
+
 	const data = {
 		userName: req.body.userName,
 		userEmail: req.body.userEmail,
 		userTinh: req.body.userTinh,
 		userHuyen: req.body.userHuyen
 	}
-
-	// userPassword
-	console.log(data)
 
 	await User.findByIdAndUpdate(
 		{_id: id}, data,

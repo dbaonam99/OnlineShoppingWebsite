@@ -5423,7 +5423,7 @@ function AccountInfo(props) {
         const imageArr = Array.from(file);
         imageArr.forEach(image => {
             formData.append('userAvt', image);
-        });
+        })
         formData.append("userName", userName);
         formData.append("userEmail", userEmail);
         formData.append("userPassword", userPassword);
