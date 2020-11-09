@@ -15,12 +15,12 @@ var productSchema = new mongoose.Schema({
     productSold: Number,
 	productDes: String,
 	productVote: Array,
-	name: String,
-	ratingTitle: String,
-	ratingText: String,
-	ratingDate: Date,
-	ratingStar: Number,
-	ratingImg: Array
+	// name: String,
+	// ratingTitle: String,
+	// ratingText: String,
+	// ratingDate: Date,
+	// ratingStar: Number,
+	// ratingImg: Array
 	},
     {
     	versionKey: false

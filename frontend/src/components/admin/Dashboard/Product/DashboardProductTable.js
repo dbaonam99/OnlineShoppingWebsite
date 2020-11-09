@@ -27,7 +27,7 @@ export default function DashboardProductTable(props) {
     },[props.isChange]) 
 
     const [currentPage, setCurrentPage] = useState(1);
-    const itemsPerPage = 10;
+    const itemsPerPage = 5;
 
     const choosePage = (event) => {
         if (Number(event.target.id) === 0) {
@@ -189,7 +189,6 @@ export default function DashboardProductTable(props) {
             }
         }
     }
-
     return (
         <div className="topfive flex-col" style={{width: '100%'}}>
             <div className={`headerbox flex-center ${props.color}`}>
@@ -238,20 +237,12 @@ export default function DashboardProductTable(props) {
                                     const month = date.getMonth();
                                     const year = date.getFullYear();
                                     const shortedDate = day + '/' + month + '/' + year;
-
                                     //Counting star vote
                                     const ratingList = item.productVote.map(a => a.ratingStar); // get all rating
                                     const totalRating = ratingList.reduce((a, b) => a + b, 0)
 
-                                    const averageRating = totalRating/ratingList.length;
-                                    const ratingStar = {
-                                        size: 12,
-                                        value: averageRating,
-                                        edit: false,
-                                        activeColor: "#fda32a",
-                                        color: "#ddd",
-                                        isHalf: true
-                                    }
+                                    const averageRating = totalRating/ratingList.length
+                                    
                                     return (
                                         <tr key={index}>
                                             <td className="table-name">
@@ -281,25 +272,19 @@ export default function DashboardProductTable(props) {
                                             <td>
                                                 <p>{item.productSold}</p>
                                             </td>
-                                            {/* <td>
-                                                <p style={{textTransform: 'uppercase'}}>{item.productCate}</p>
-                                            </td> */}
-                                            {/* <td>
-                                                <select>
-                                                {
-                                                    item.productSize.map((item, index)=> {
-                                                        return (
-                                                                <option>{item}</option>
-                                                        )
-                                                    })
-                                                }
-                                                </select>
-                                            </td> */}
                                             <td>
                                                 <p>{shortedDate}</p>
                                             </td>
                                             <td>
-                                                <ReactStars {...ratingStar}/>
+                                                {averageRating}
+                                                <ReactStars {...{
+                                                    size: 12,
+                                                    value: averageRating,
+                                                    edit: false,
+                                                    activeColor: "#fda32a",
+                                                    color: "#ddd",
+                                                    isHalf: true
+                                                }}/>
                                             </td>
                                             <td>
                                                 <div className="action-table flex">

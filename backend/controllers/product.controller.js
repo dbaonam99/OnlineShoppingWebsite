@@ -88,6 +88,18 @@ module.exports.updateProduct = async function(req, res) {
 	res.status(200);
 }
 
+module.exports.reviewProduct = async function(req, res) {
+	var id = req.params.id;
+
+	Product.findByIdAndUpdate(
+		{_id: id},
+		{$push: {productVote: req.body}},
+		function (error) {
+		}
+	)
+	res.status(200);
+}
+
 module.exports.deleteProduct = async function(req, res) {
 	await Product.findByIdAndRemove({_id: req.body.productId})
 	res.status(200);

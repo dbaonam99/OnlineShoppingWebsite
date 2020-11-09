@@ -32,7 +32,7 @@ export default function CartItem(props) {
                 {
                     cartItems.map((item, index) => {
                         return (
-                            <div className="cart-item flex">
+                            <div className="cart-item flex" key={index}>
                                 <div className="cart-product-img">
                                     <img src={item.productImg[0]} width="80px" height="100%" alt=""></img>
                                 </div>

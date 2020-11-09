@@ -1,14 +1,28 @@
-import React, { useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import '../../App.css';
 
 import ReactStars from "react-rating-stars-component";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faComment, faThumbsUp } from '@fortawesome/free-solid-svg-icons';
 import ProductReviewContent from './ProductReviewContent';
+import { UserContext } from '../../contexts/User';
+import axios from 'axios'
 
 export default function ProductReview(props) {
 
+    const { 
+        userInfo
+    } = useContext(UserContext);
+
     const [ratingValue, setRatingValue] = useState(0)
+    const [reviewInput, setReviewInput] = useState("")
+    const [nameInput, setNameInput] = useState("")
+    const [emailInput, setEmailInput] = useState("")
+
+    useEffect(()=>{
+        setNameInput(userInfo.userName)
+        setEmailInput(userInfo.userEmail)
+    },[userInfo])
 
     const defaultStar = {
         size: 24,
@@ -28,17 +42,17 @@ export default function ProductReview(props) {
         product = props.product;
         productVote = [...product.productVote];
     }
-
-    const [input, setInput] = useState("")
-
-    const reviewChange = (event) => {
-        setInput({...input , [event.target.name]: event.target.value})
-    }
     
     const sendReview = (event) => {
         event.preventDefault()
-        console.log(input)
-        console.log(ratingValue)
+        axios.post(`http://localhost:4000/products/review/${product._id}`, {
+            ratingName: nameInput,
+            ratingDate: new Date(),
+            ratingText: reviewInput,
+            ratingEmail: emailInput,
+            ratingStar: ratingValue,
+            ratingAvt: userInfo.userAvt
+        })
     }
 
     return(
@@ -84,11 +98,11 @@ export default function ProductReview(props) {
                                         key={index}
                                         >
                                         <div className="reviewer">
-                                            <img src="https://scontent.fvca1-2.fna.fbcdn.net/v/t1.0-9/73321413_146697059956770_7174055866474168320_n.jpg?_nc_cat=107&_nc_sid=09cbfe&_nc_ohc=LxnVeUN0iWEAX-FROIZ&_nc_ht=scontent.fvca1-2.fna&oh=832b14ac63d67b7f58e34eec08fed9ad&oe=5F97B27C" width="100%" height="100%" alt=""></img>
+                                            <img src={item.ratingAvt} width="100%" height="100%" alt=""></img>
                                         </div>
                                         <div className="review-info">
                                             <div className="review-first flex">
-                                                <div className="reviewer-name">{item.name}</div>
+                                                <div className="reviewer-name">{item.ratingName}</div>
                                                 <div className="reviewer-ratingStar">
                                                     <ReactStars {...ratingStar} />
                                                 </div>
@@ -97,7 +111,7 @@ export default function ProductReview(props) {
                                                 {item.ratingDate}
                                             </div>
                                             <ProductReviewContent content={item.ratingText}/>
-                                            <div className="review-img flex">
+                                            {/* <div className="review-img flex">
                                                 {item.ratingImg.map((item, index) => {
                                                     return (
                                                         <img 
@@ -109,7 +123,7 @@ export default function ProductReview(props) {
                                                         ></img>
                                                     )
                                                 })}
-                                            </div>
+                                            </div> */}
                                             <div className="review-like">
                                                 <FontAwesomeIcon icon={faThumbsUp} className="mr-5"></FontAwesomeIcon>
                                                 <FontAwesomeIcon icon={faComment}></FontAwesomeIcon>
@@ -130,7 +144,9 @@ export default function ProductReview(props) {
                                         type="text" 
                                         className="w-100 no-outline" 
                                         name="reviewText"
-                                        onChange={reviewChange}
+                                        onChange={(event)=>{
+                                            setReviewInput(event.target.value)
+                                        }}
                                     ></input>
                                     <div className="flex w-100">
                                         <div className="w-100 mr-2">
@@ -139,16 +155,22 @@ export default function ProductReview(props) {
                                                 type="text" 
                                                 className="w-100 no-outline" 
                                                 name="reviewName"
-                                                onChange={reviewChange}
+                                                onChange={(event)=>{
+                                                    setNameInput(event.target.value)
+                                                }}
+                                                value={nameInput}
                                             ></input>
                                         </div>
                                         <div className="w-100 ml-2">
                                             <p className="review-form-title">Email *</p>
                                             <input 
-                                                type="email" 
+                                                type="text" 
                                                 className="w-100 no-outline" 
                                                 name="reviewEmail"
-                                                onChange={reviewChange}
+                                                onChange={(event)=>{
+                                                    setEmailInput(event.target.value)
+                                                }}
+                                                value={emailInput}
                                             ></input>
                                         </div>
                                     </div>

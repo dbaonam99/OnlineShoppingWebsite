@@ -22,7 +22,7 @@ export default function ProductQuickView(props) {
 
     const ratingStar = {
         size: 12,
-        value: averageRating,
+        value: averageRating || 0,
         edit: false,
         activeColor: "#fda32a",
         color: "#ddd",

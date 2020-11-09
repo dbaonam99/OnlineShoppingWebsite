@@ -95,7 +95,9 @@ module.exports.updateUser = async function(req, res) {
 		userName: req.body.userName,
 		userEmail: req.body.userEmail,
 		userTinh: req.body.userTinh,
-		userHuyen: req.body.userHuyen
+		userHuyen: req.body.userHuyen,
+		userPhone: req.body.userPhone,
+		userAddress: req.body.userAddress
 	}
 
 	await User.findByIdAndUpdate(

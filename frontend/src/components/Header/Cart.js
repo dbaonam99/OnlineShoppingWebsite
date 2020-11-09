@@ -6,8 +6,9 @@ import { faTimes  } from '@fortawesome/free-solid-svg-icons';
 import CartItem from './CartItem';
 import WishListItem from './WishListItem';
 import { CartContext } from '../../contexts/Cart';
+import { withRouter } from 'react-router-dom';
 
-export default function Account(props) {
+function Account(props) {
 
     const [tabID, setTabID] = useState(0)
     const {
@@ -57,9 +58,16 @@ export default function Account(props) {
                         <p>Total: </p>
                         <p> {total}</p>
                     </div>
-                    <div className="cart-checkout-btn btn">Checkout</div>
+                    <div 
+                        className="cart-checkout-btn btn"
+                        onClick={()=>{
+                            props.history.push(`/checkout`);
+                            window.location.reload(false);
+                        }}
+                    >Checkout</div> 
                 </div>
             }
         </div>
     )
 }
+export default withRouter(Account);

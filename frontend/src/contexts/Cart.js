@@ -18,6 +18,16 @@ export function CartProvider(props) {
         return false;
     }
 
+    useEffect(()=>{
+        if (localStorage.getItem('cart')) {
+            setCartItems(JSON.parse(localStorage.getItem('cart')))
+        }
+        if (localStorage.getItem('wishlist')) {
+            setWishListItems(JSON.parse(localStorage.getItem('wishlist')))
+        }
+        getTotal()
+    }, [])
+    
     const addToWishList = (product = {}) => {
         
         const virtualCart = [...wishListItems] 
@@ -29,6 +39,7 @@ export function CartProvider(props) {
                 virtualCart.push({...product})
             }
         }
+        localStorage.setItem('wishlist', JSON.stringify(virtualCart))
         setWishListItems(virtualCart)
     }
 
@@ -50,6 +61,8 @@ export function CartProvider(props) {
                 }
             }
         }
+        console.log(virtualCart)
+        localStorage.setItem('cart', JSON.stringify(virtualCart))
         setCartItems(virtualCart)
     }
 
@@ -61,6 +74,7 @@ export function CartProvider(props) {
                 virtualCart.splice(i, 1)
             }
         }
+        localStorage.setItem('cart', JSON.stringify(virtualCart))
         setCartItems(virtualCart)
     }
 
@@ -72,6 +86,7 @@ export function CartProvider(props) {
                 virtualCart.splice(i, 1)
             }
         }
+        localStorage.setItem('wishlist', JSON.stringify(virtualCart))
         setWishListItems(virtualCart)
     }
 
@@ -85,6 +100,7 @@ export function CartProvider(props) {
                 }
             }
         }
+        localStorage.setItem('cart', JSON.stringify(virtualCart))
         setCartItems(virtualCart)
     }
     
@@ -96,6 +112,7 @@ export function CartProvider(props) {
                 virtualCart[i].count += 1
             }
         }
+        localStorage.setItem('cart', JSON.stringify(virtualCart))
         setCartItems(virtualCart)
     }
 
@@ -108,20 +125,19 @@ export function CartProvider(props) {
                 virtualCart[i].count = Number(value)
             }
         }
+        localStorage.setItem('cart', JSON.stringify(virtualCart))
         setCartItems(virtualCart)
     }
 
     const getTotal = () => {
+        console.log(cartItems)
         let virtualTotal = 0
         for (let i in cartItems) {
             virtualTotal += cartItems[i].count * cartItems[i].productPrice
         }
+        localStorage.setItem('total', JSON.stringify(virtualTotal))
         setTotal(virtualTotal)
     }
-
-    useEffect(()=>{
-        getTotal()
-    }, [cartItems])
     
     return (
         <CartContext.Provider

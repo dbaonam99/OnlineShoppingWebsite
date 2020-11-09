@@ -25,6 +25,7 @@ import { UserProvider } from './contexts/User';
 import { ChatProvider } from './contexts/Chat';
 import LoadingPage from './components/LoadingPage';
 import Toast from './components/Toast';
+import Checkout from './pages/Checkout';
 
 function App(props) {
 
@@ -64,6 +65,7 @@ function App(props) {
             <Route path="/news/category/:cate" exact component={NewsCate}></Route>
             <Route path="/admin" exact component={Login}></Route>
             <Route path="/admin/dashboard" exact component={Dashboard}></Route>
+            <Route path="/checkout" exact component={Checkout}></Route>
           </div>
           <OpenChatBtn/>
         </Router>
