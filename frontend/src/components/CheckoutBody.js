@@ -1,6 +1,10 @@
 import React, { useContext, useEffect, useState } from 'react';
 import { UserContext } from '../contexts/User';
 import '../Styles/BannerV4.css'
+import axios from 'axios'
+import {
+    withRouter
+} from 'react-router-dom'
 
 function CheckoutBody(props) {
     const tinh = [
@@ -5381,8 +5385,9 @@ function CheckoutBody(props) {
     const [userHuyen, setUserHuyen] = useState(null)
     const [addressInput, setAddressInput] = useState(null)
     const [cartList, setCartList] = useState([])
-    const total = localStorage.getItem('total')
+    const subTotal = localStorage.getItem('total')
     const [shipping, setShipping] = useState(0)
+    const total = Number(subTotal) + Number(shipping)
 
     useEffect(()=>{
         setNameInput(userInfo.userName)
@@ -5410,7 +5415,44 @@ function CheckoutBody(props) {
     }
 
     const placeAnOrder = () => {
-        
+        var orderPaymenntMethod = "";
+        if (methodPayment === 1) {
+            orderPaymenntMethod = "cash on delivery"
+        } else if (methodPayment === 2) {
+            orderPaymenntMethod = "direct back transfer"
+        } else if (methodPayment === 3) {
+            orderPaymenntMethod = "paypal"
+        } else {
+            orderPaymenntMethod = ""
+        }
+        var cartId = []
+        for (let i in cartList) {
+            cartId.push(
+                {
+                    id: cartList[i]._id,
+                    amount: cartList[i].count 
+                }
+            )
+        }
+        if (orderPaymenntMethod === "") {
+            alert("Fill in all infomation please")
+        } else {
+            axios.post('http://localhost:4000/order', {
+                orderName: nameInput,
+                orderEmail: emailInput,
+                orderPhone: phoneInput,
+                orderAddress: addressInput,
+                orderTinh: userTinh,
+                orderHuyen: userHuyen,
+                orderList: cartId,
+                orderTotal: total,
+                orderPaymenntMethod: orderPaymenntMethod
+            })
+            localStorage.removeItem('total')
+            localStorage.removeItem('cart')
+            props.history.push(`/men`);
+            window.location.reload(false);
+        }
     }
 
     return(
@@ -5533,7 +5575,7 @@ function CheckoutBody(props) {
                 <div className="billing-detail-title">Your order</div>
                 <div className="billing-detail-form"> 
                     <div className="billing-detail-list">
-                        {    
+                        {
                             cartList.map((item, index)=>{
                                 return (
                                     <div 
@@ -5555,7 +5597,7 @@ function CheckoutBody(props) {
                             <div style={{width:'60px', height: '60px', lineHeight: '60px', fontSize: '18px'}}>SUBTOTAL</div>
                             <div className="billing-detail-name"></div>
                             <div className="billing-detail-count" style={{color: '#111'}}></div>
-                            <div className="billing-detail-price">{total} vnđ</div>
+                            <div className="billing-detail-price">{subTotal} vnđ</div>
                         </div>
                         <div className="billing-detail-item flex">
                             <div style={{width:'60px', height: '60px', lineHeight: '60px', fontSize: '18px'}}>SHIPPING</div>
@@ -5574,7 +5616,7 @@ function CheckoutBody(props) {
                             <div style={{width:'60px', height: '60px', lineHeight: '60px', fontSize: '18px'}}>TOTAL</div>
                             <div className="billing-detail-name"></div>
                             <div className="billing-detail-count" style={{color: '#111'}}></div>
-                            <div className="billing-detail-price">{Number(total) + Number(shipping)} vnđ</div>
+                            <div className="billing-detail-price">{Number(subTotal) + Number(shipping)} vnđ</div>
                         </div>
                         <div className="billing-detail-payment">
                             <div style={{fontSize: '18px'}}>PAYMENT METHOD</div>
@@ -5626,4 +5668,4 @@ function CheckoutBody(props) {
     )
 }
 
-export default CheckoutBody;
+export default withRouter(CheckoutBody)
