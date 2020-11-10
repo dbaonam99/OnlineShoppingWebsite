@@ -90,7 +90,6 @@ module.exports.updateUser = async function(req, res) {
 		)
 	}
 
-
 	const data = {
 		userName: req.body.userName,
 		userEmail: req.body.userEmail,

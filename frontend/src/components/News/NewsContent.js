@@ -49,7 +49,7 @@ export default function NewsContent(props) {
                 className="newscontent-content flex-center"
                 dangerouslySetInnerHTML={{__html: news.newContent}}>
             </div>
-            <div className="newscontent-pag flex-center">
+            {/* <div className="newscontent-pag flex-center">
                 <div className="newscontent-pag-container flex">
                     <div>
                         Previous
@@ -58,7 +58,7 @@ export default function NewsContent(props) {
                         Next
                     </div>
                 </div>
-            </div>
+            </div> */}
         </div>
     )
 }

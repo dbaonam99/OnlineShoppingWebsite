@@ -11,14 +11,15 @@ export default function DashboardNewsTable(props) {
     const [news, setNews] = useState([])
     // const [searchInput, setSearchInput] = useState("")
     // const [isSortByName, setIsSortByName] = useState(false)
-    // const [isSortByPrice, setIsSortByPrice] = useState(false)
-    // const [isSortBySale, setIsSortBySale] = useState(false)
-    // const [isSortBySold, setIsSortBySold] = useState(false)
+    const [isSortByTitle, setIsSortByTitle] = useState(false)
+    const [isSortByView, setIsSortByView] = useState(false)
+    const [constNews, setConstNews] = useState([])
     
     useEffect(()=>{
         axios.get(`http://localhost:4000/news`)
             .then(res => {
                 setNews(res.data)
+                setConstNews(res.data)
             }
         )
     },[props.isChange]) 
@@ -68,124 +69,78 @@ export default function DashboardNewsTable(props) {
         }
     }
 
-    // const deleteOnClick = (event) => {
-    //     axios.post(`http://localhost:4000/products/delete/:${event.target.id}`, {
-    //         productId: event.target.id
-    //     })
-    //     setProducts(products.filter((item)=>{
-    //         return item._id !== event.target.id
-    //     }))
-    // }
+    const deleteOnClick = (event) => {
+        axios.post(`http://localhost:4000/news/delete/:${event.target.id}`, {
+            productId: event.target.id
+        })
+        setNews(news.filter((item)=>{
+            return item._id !== event.target.id
+        }))
+    }
 
-    // const searchOnSubmit = (event) =>{
-    //     event.preventDefault()
-    // }
-    // const searchOnChange = (event) => {
-    //     // setSearchInput(event.target.value)
-    //     const searchInput = event.target.value
-    //     const search = []
-    //     for (let i in constProducts) {
-    //         if ((constProducts[i].productName).toLowerCase().includes(searchInput)) {
-    //             search.push(constProducts[i])
-    //         }
-    //     }
-    //     setProducts(search)
-    // }
+    const searchOnSubmit = (event) =>{
+        event.preventDefault()
+    }
+    const searchOnChange = (event) => {
+        // setSearchInput(event.target.value)
+        const searchInput = event.target.value
+        const search = []
+        for (let i in constNews) {
+            if ((constNews[i].newTitle).toLowerCase().includes(searchInput)) {
+                search.push(constNews[i])
+            }
+        }
+        setNews(search)
+    }
 
-    // const sortTable = (event) => {
-    //     if (event.target.id === "Name") {
-    //         if (isSortByName) {
-    //             const sortByName = [...products]
-    //             sortByName.sort(function(a, b) {
-    //                 var nameA = a.productName.toLowerCase();
-    //                 var nameB = b.productName.toLowerCase(); 
-    //                 if(nameA === nameB) return 0; 
-    //                 return nameA > nameB ? 1 : -1;
-    //             })
-    //             setIsSortByName(false)
-    //             setProducts(sortByName)
-    //         } else {
-    //             const sortByName = [...products]
-    //             sortByName.sort(function(a, b) {
-    //                 var nameA = a.productName.toLowerCase();
-    //                 var nameB = b.productName.toLowerCase(); 
-    //                 if(nameA === nameB) return 0; 
-    //                 return nameA < nameB ? 1 : -1;
-    //             })
-    //             setIsSortByName(true)
-    //             setProducts(sortByName)
-    //         }
-    //     }
-    //     if (event.target.id === "Price") {
-    //         if (isSortByPrice) {
-    //             const sortByName = [...products]
-    //             sortByName.sort(function(a, b) {
-    //                 var nameA = a.productName;
-    //                 var nameB = b.productName; 
-    //                 if(nameA === nameB) return 0; 
-    //                 return nameA > nameB ? 1 : -1;
-    //             })
-    //             setIsSortByPrice(false)
-    //             setProducts(sortByName)
-    //         } else {
-    //             const sortByName = [...products]
-    //             sortByName.sort(function(a, b) {
-    //                 var nameA = a.productName;
-    //                 var nameB = b.productName; 
-    //                 if(nameA === nameB) return 0; 
-    //                 return nameA < nameB ? 1 : -1;
-    //             })
-    //             setIsSortByPrice(true)
-    //             setProducts(sortByName)
-    //         }
-    //     }
-    //     if (event.target.id === "Sale") {
-    //         if (isSortBySale) {
-    //             const sortByName = [...products]
-    //             sortByName.sort(function(a, b) {
-    //                 var nameA = a.productName;
-    //                 var nameB = b.productName; 
-    //                 if(nameA === nameB) return 0; 
-    //                 return nameA > nameB ? 1 : -1;
-    //             })
-    //             setIsSortBySale(false)
-    //             setProducts(sortByName)
-    //         } else {
-    //             const sortByName = [...products]
-    //             sortByName.sort(function(a, b) {
-    //                 var nameA = a.productName;
-    //                 var nameB = b.productName; 
-    //                 if(nameA === nameB) return 0; 
-    //                 return nameA < nameB ? 1 : -1;
-    //             })
-    //             setIsSortBySale(true)
-    //             setProducts(sortByName)
-    //         }
-    //     }
-    //     if (event.target.id === "Sold") {
-    //         if (isSortBySold) {
-    //             const sortByName = [...products]
-    //             sortByName.sort(function(a, b) {
-    //                 var nameA = a.productName;
-    //                 var nameB = b.productName; 
-    //                 if(nameA === nameB) return 0; 
-    //                 return nameA > nameB ? 1 : -1;
-    //             })
-    //             setIsSortBySold(false)
-    //             setProducts(sortByName)
-    //         } else {
-    //             const sortByName = [...products]
-    //             sortByName.sort(function(a, b) {
-    //                 var nameA = a.productName;
-    //                 var nameB = b.productName; 
-    //                 if(nameA === nameB) return 0; 
-    //                 return nameA < nameB ? 1 : -1;
-    //             })
-    //             setIsSortBySold(true)
-    //             setProducts(sortByName)
-    //         }
-    //     }
-    // }
+    const sortTable = (event) => {
+        if (event.target.id === "Title") {
+            if (isSortByTitle) {
+                const sortByTitle = [...news]
+                sortByTitle.sort(function(a, b) {
+                    var titleA = a.newTitle.toLowerCase();
+                    var titleB = b.newTitle.toLowerCase(); 
+                    if(titleA === titleB) return 0; 
+                    return titleA > titleB ? 1 : -1;
+                })
+                setIsSortByTitle(false)
+                setNews(sortByTitle)
+            } else {
+                const sortByTitle = [...news]
+                sortByTitle.sort(function(a, b) {
+                    var titleA = a.newTitle.toLowerCase();
+                    var titleB = b.newTitle.toLowerCase(); 
+                    if(titleA === titleB) return 0; 
+                    return titleA < titleB ? 1 : -1;
+                })
+                setIsSortByTitle(true)
+                setNews(sortByTitle)
+            }
+        }
+        if (event.target.id === "Views") {
+            if (isSortByView) {
+                const sortByView = [...news]
+                sortByView.sort(function(a, b) {
+                    var ViewA = a.productView;
+                    var ViewB = b.productView; 
+                    if(ViewA === ViewB) return 0; 
+                    return ViewA > ViewB ? 1 : -1;
+                })
+                setIsSortByView(false)
+                setNews(sortByView)
+            } else {
+                const sortByView = [...news]
+                sortByView.sort(function(a, b) {
+                    var ViewA = a.productView;
+                    var ViewB = b.productView; 
+                    if(ViewA === ViewB) return 0; 
+                    return ViewA < ViewB ? 1 : -1;
+                })
+                setIsSortByView(true)
+                setNews(sortByView)
+            }
+        }
+    }
 
     return (
         <div className="topfive flex-col" style={{width: '100%'}}>
@@ -204,10 +159,10 @@ export default function DashboardNewsTable(props) {
                         >Add new</div>
                         <div className="dashboard-addnew-search">
                             <form 
-                                // onSubmit={searchOnSubmit}
+                                onSubmit={searchOnSubmit}
                             >
                                 <input type="text" placeholder="Search records"
-                                    // onChange={searchOnChange}
+                                    onChange={searchOnChange}
                                 ></input>
                             </form>
                         </div>
@@ -220,9 +175,9 @@ export default function DashboardNewsTable(props) {
                                         return (
                                             <th 
                                                 key={index} className="table-new-title"
-                                                // onClick={(event)=>{
-                                                //     sortTable(event)
-                                                // }}
+                                                onClick={(event)=>{
+                                                    sortTable(event)
+                                                }}
                                                 id={item}
                                             >
                                                 {item}
@@ -233,9 +188,9 @@ export default function DashboardNewsTable(props) {
                             </tr>
                             {
                                 current.map((item, index) => {
-                                    const date = new Date(item.newDate)
-                                    const day = date.getDay();
-                                    const month = date.getMonth();
+                                    const date = new Date(item.newTime)
+                                    const day = date.getDate();
+                                    const month = date.getMonth() + 1;
                                     const year = date.getFullYear();
                                     const shortedDate = day + '/' + month + '/' + year;
 
@@ -250,7 +205,6 @@ export default function DashboardNewsTable(props) {
                                                 }}
                                             >
                                                 <p 
-                                                    style={{WebkitLineClamp: '3'}} 
                                                     dangerouslySetInnerHTML={{__html: item.newContent}}
                                                 ></p>
                                             </td>
@@ -258,7 +212,7 @@ export default function DashboardNewsTable(props) {
                                                 <p>{item.newCate}</p>
                                             </td>
                                             <td>
-                                                <p>{item.newTime}</p>
+                                                <p>{shortedDate}</p>
                                             </td>
                                             <td>
                                                 <p>{item.newView}</p>
@@ -274,7 +228,7 @@ export default function DashboardNewsTable(props) {
                                                     </div>
                                                     <div 
                                                         className="action-item flex-center action-red"
-                                                        // onClick={deleteOnClick}
+                                                        onClick={deleteOnClick}
                                                         id={item._id}
                                                         >
                                                         <FontAwesomeIcon style={{pointerEvents: 'none'}} icon={faTimes}/>

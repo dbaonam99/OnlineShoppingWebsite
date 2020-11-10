@@ -35,3 +35,7 @@ module.exports.postNews = async function(req, res) {
 	await News.create(data)
 	res.status(200);
 }
+module.exports.deleteNews = async function(req, res) {
+	await News.findByIdAndRemove({_id: req.body.productId})
+	res.status(200);
+}
