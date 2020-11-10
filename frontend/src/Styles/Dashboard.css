@@ -448,8 +448,21 @@
     font-family: sans-serif !important;
 }
 .review-product-star {
-    /* flex-grow: 2; */
     width: 80px;
+}
+.star-rating {
+}
+.star-rating .star{
+    margin: 0 2px;
+    font-size: 12px;
+    color: #ddd;
+}
+.star-rating-list {
+    position: relative;
+    overflow: hidden;
+}
+.star-color {
+    color: #fda32a !important;
 }
 .review-product-item {
     align-items: flex-end;

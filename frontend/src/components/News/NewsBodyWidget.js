@@ -55,6 +55,13 @@ function NewsBodyWidget(props) {
                 <div className="widget-title">Popular Posts</div>
                 {
                     topViews.map((item, index) => {
+
+                        const date = new Date(item.newTime)
+                        const day = date.getDate()
+                        const month = date.getMonth() + 1
+                        const year = date.getFullYear()
+                        const timeStr = day + '.' + month + '.' +year
+
                         return(
                             <div key={index} className="widget-post">
                                 <div 
@@ -74,7 +81,7 @@ function NewsBodyWidget(props) {
                                         }}
                                     >{item.newTitle}</div>
                                     <div className="widget-post-info2">
-                                        <span className="widget-post-time">{item.newTime}</span>
+                                        <span className="widget-post-time">{timeStr}</span>
                                         <span className="widget-post-view">{item.newView} view</span>
                                     </div>
                                 </div>

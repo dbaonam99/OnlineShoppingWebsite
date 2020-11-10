@@ -12,13 +12,19 @@ export default function NewsContent(props) {
         Object.assign(news,props.news) // gán obj props.news vào news
     }
     const cateLink = (`/news/category/${news.newCate}`)
+
+    const date = new Date(news.newTime)
+    const day = date.getDate()
+    const month = date.getMonth() + 1
+    const year = date.getFullYear()
+    const timeStr = day + '.' + month + '.' +year
     
     return(
         <div className="NewsContent opa2">
             <div className="newsbody-info flex-center">
-                <div className="newsbody-time" style={{color: '#777'}}>20.10 2016</div>
+                <div className="newsbody-time" style={{color: '#777'}}>{timeStr}</div>
                 <Link 
-                    to={cateLink} 
+                    to={cateLink}
                     className="newsbody-cate a" 
                     onClick={()=>{window.scrollTo(0,0)}}
                     style={{color: '#111'}}
@@ -39,8 +45,9 @@ export default function NewsContent(props) {
             <div className="news-title newscontent-title">
                 <img src={news.newImg} width='100%' alt=""/>
             </div>
-            <div className="newscontent-content flex-center">
-                <p>{news.newContent}</p>
+            <div 
+                className="newscontent-content flex-center"
+                dangerouslySetInnerHTML={{__html: news.newContent}}>
             </div>
             <div className="newscontent-pag flex-center">
                 <div className="newscontent-pag-container flex">

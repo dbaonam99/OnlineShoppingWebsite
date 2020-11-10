@@ -17,7 +17,7 @@ function News(props) {
             className="News">
             <div className="news-img"
                 onClick={redirect}>
-                <img src={news.newImg} alt="z"></img>
+                <img src={news.newImg} alt=""></img>
             </div>
             <div className="news-info flex-center">
                 <div className="news-time">{news.newTime}</div>

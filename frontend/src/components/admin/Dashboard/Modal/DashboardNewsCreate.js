@@ -9,20 +9,29 @@ export default function DashboardNewsCreate(props) {
     const createForm = useRef();
     const cateInput = useRef();
     const [inputValue, setInputValue] = useState([])
-    const [cate, setCate] = useState([])
     const [cateValue, setCateValue] = useState("")
     const [file, setFile] = useState([])
+    const [newsContent, setNewsContent] = useState("")
+    const [newsImg, setNewsImg] = useState([])
+    const [cateList, setCateList] = useState([])
 
     const handleOnChange = (event) => {
         setInputValue({...inputValue, [event.target.name]: event.target.value})
     }
     
     useEffect(()=> {
-        axios.get(`http://localhost:4000/category`)
-            .then(res => {
-                setCate(res.data)
-            })
+        axios.get(`http://localhost:4000/news`)
+                .then(res => {
+                    const test = Object.values(res.data.reduce((a, {newCate}) => {
+                        a[newCate] = a[newCate] || {newCate};
+                        return a;
+                    }, Object.create(null)));
+                    setCateList(test)
+                }
+            )
     },[])
+
+    console.log(cateList)
 
     const onSubmit = (event) => {
         event.preventDefault()
@@ -36,28 +45,35 @@ export default function DashboardNewsCreate(props) {
 
         const imageArr = Array.from(file);
         imageArr.forEach(image => {
-            formData.append('news', image);
+            formData.append('newImg', image);
         });
-
-        formData.append("productName", inputValue.name);
-        formData.append("productSale", inputValue.sale);
-        formData.append("productPrice", inputValue.price);
-        formData.append("productDate", new Date());
-        axios.post('http://localhost:4000/products', formData, config)
+        console.log(newsContent)
+        formData.append("newTime", new Date());
+        formData.append("newCate", cateValue);
+        formData.append("newTitle", inputValue.title);
+        formData.append("newContent", newsContent);
+        axios.post('http://localhost:4000/news', formData, config)
         props.setCloseCreateFunc(false);
         props.setToastFunc(true);
     }
 
     const addNewCate = () => {
-        axios.post('http://localhost:4000/category', {
-            cateName: inputValue.cate
-        })
-        setCate(cate=>[...cate, {cateName: inputValue.cate}])
-        setCateValue(inputValue.cate)
+        setCateList(cateList => [...cateList, {newCate: inputValue.cate}])
         cateInput.current.value = ""
     }
 
-    console.log(file)
+    const deleteImg = (event) => {
+        const virutalFile = [...file]
+        virutalFile.splice(event.target.id, 1)
+        setFile(virutalFile)
+
+        const items = [...newsImg]
+        items.splice(event.target.id, 1)
+        setNewsImg(items)
+    }
+
+    // console.log(cateValue)
+
     return (
         <div className="DashboardProductInfo">
             <div className="create-box"> 
@@ -82,16 +98,60 @@ export default function DashboardNewsCreate(props) {
                         </div>
                     </div>
                     <div className="create-box-row flex">
+                        <div className="dashboard-left flex">Images </div>
+                        <div className="dashboard-right">
+                            <input 
+                                onChange={(event) => {
+                                    const files = event.target.files;
+                                    for (let i = 0; i< files.length; i++) {
+                                        setNewsImg(news=>[...news, URL.createObjectURL(files[i])])
+                                    }
+                                    const fileArr = Array.prototype.slice.call(files)
+                                    fileArr.forEach(item=>{
+                                        
+                                        setFile(file=>[...file, item])
+                                    })
+                                }}
+                                type="file"
+                                name="newsImg"
+                                className="noborder"
+                                multiple="multiple"
+                                style={{height: '50px'}}
+                            ></input>
+                            <div className="flex" style={{ overflowY: 'hidden', flexWrap:'wrap'}}>
+                                { newsImg && 
+                                    newsImg.map((item, index) => {
+                                        return (
+                                            <div key={index} className="create-box-img">
+                                                <img key={index} src={item} alt=""></img>
+                                                <div 
+                                                    className="create-box-img-overlay"
+                                                >
+                                                    <p
+                                                        id={index}
+                                                        onClick={deleteImg}
+                                                        className="icon">X
+                                                    </p>
+                                                </div>
+                                            </div>
+                                        )
+                                    })
+                                }
+                            </div>
+                        </div>
+                    </div>
+                    <div className="create-box-row flex">
                         <div className="dashboard-left flex">Category </div>
                         <div className="dashboard-right flex-center">
                             <select style={{ width: "350px"}} 
                                 onChange={(event) => {setCateValue(event.target.value)}}
                                 value={cateValue}>
                                 <option></option>
-                                { cate.length > 0 &&
-                                    cate.map((item, index) => {
+                                { cateList.length > 0 &&
+                                    cateList.map((item, index) => {
+                                        console.log(item.newCate)
                                         return(
-                                            <option key={index}>{item.cateName}</option>
+                                            <option key={index}>{item.newCate}</option>
                                         )
                                     })
                                 }
@@ -111,8 +171,11 @@ export default function DashboardNewsCreate(props) {
                             </div>
                         </div>
                     </div>
-                    <DashboardEditor/>
-
+                    <div style={{border: '1px #ddd solid'}}>
+                        <DashboardEditor
+                            setNewsContent= {setNewsContent}
+                        />
+                    </div>
                     <div className="flex-center" style={{marginTop: '40px'}}>
                     <button className="create-box-btn btn">
                         Add product

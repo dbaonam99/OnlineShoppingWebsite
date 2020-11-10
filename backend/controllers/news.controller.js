@@ -18,4 +18,20 @@ module.exports.cate = function(req, res) {
 	News.find({ newCate: cate }).then(function(news) {
 		res.json(news);
 	});
-};
+}
+module.exports.postNews = async function(req, res) {
+	const imgArr = [];
+	req.files.map((item)=>{
+		imgArr.push(`http://localhost:4000/${item.path.split("/").slice(1).join("/")}`)
+	})
+	const data = {
+		newImg: imgArr[0],
+		newTime: req.body.newTime,
+		newCate: req.body.newCate,
+		newTitle: req.body.newTitle,
+		newContent: req.body.newContent,
+		newView: 0
+	}
+	await News.create(data)
+	res.status(200);
+}

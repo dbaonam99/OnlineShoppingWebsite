@@ -6,6 +6,7 @@
     margin-top: 20px;
     font-weight: 400;
     font-size: 40px;
+    text-transform: capitalize;
 }
 .newscontent-share {
     width: 100%;

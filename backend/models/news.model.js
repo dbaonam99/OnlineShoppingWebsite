@@ -6,6 +6,7 @@ var newsSchema = new mongoose.Schema({
 	newCate: String,
 	newTitle: String,
 	newContent: String,
+	newView: Number,
 	},
     {
     	versionKey: false

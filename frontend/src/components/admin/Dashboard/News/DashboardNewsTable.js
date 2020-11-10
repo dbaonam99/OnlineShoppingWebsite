@@ -249,7 +249,10 @@ export default function DashboardNewsTable(props) {
                                                     padding: '10px 10px',
                                                 }}
                                             >
-                                                <p style={{webkitLineClamp: '3'}}>{item.newContent}</p>
+                                                <p 
+                                                    style={{WebkitLineClamp: '3'}} 
+                                                    dangerouslySetInnerHTML={{__html: item.newContent}}
+                                                ></p>
                                             </td>
                                             <td>
                                                 <p>{item.newCate}</p>

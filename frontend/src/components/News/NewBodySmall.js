@@ -6,6 +6,12 @@ function NewsBodySmall(props) {
 
     const item = props.item;
 
+    const date = new Date(item.newTime)
+    const day = date.getDate()
+    const month = date.getMonth() + 1
+    const year = date.getFullYear()
+    const timeStr = day + '.' + month + '.' +year
+
     return(
         <div className="newsbody-small"> 
             <div className="newsbody-small-container">
@@ -19,7 +25,7 @@ function NewsBodySmall(props) {
                 />
                 <div className="newsbody-small-left">
                     <div className="newsbody-small-info flex-center">
-                        <div className="newsbody-time">{item.newTime}</div>
+                        <div className="newsbody-time">{timeStr}</div>
                         <div 
                             className="newsbody-cate" 
                             onClick={()=>{
@@ -35,7 +41,7 @@ function NewsBodySmall(props) {
                             props.history.push(`/news/${item._id}`)
                         }}
                     >{item.newTitle}</div>
-                    <div className="newsbody-content">{item.newContent}</div>
+                    <div className="newsbody-content" dangerouslySetInnerHTML={{__html: item.newContent}} ></div>
                     <div 
                         className="newsbody-link"
                         onClick={()=>{

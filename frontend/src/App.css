@@ -1379,6 +1379,7 @@
   text-align: center;
   margin-bottom: 15px;
   cursor: pointer;
+  text-transform: capitalize;
 }
 
 .newsbody-content {

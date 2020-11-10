@@ -3,7 +3,7 @@ import '../../../../App.css'
 import '../../../../Styles/Dashboard.css'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import ReactStars from "react-rating-stars-component";
-import { faLongArrowAltDown, faPencilAlt, faSort, faTimes } from '@fortawesome/free-solid-svg-icons';
+import { faPencilAlt, faTimes } from '@fortawesome/free-solid-svg-icons';
 import axios from 'axios';
 import classNames from 'classnames'
 
@@ -84,7 +84,6 @@ export default function DashboardProductTable(props) {
         event.preventDefault()
     }
     const searchOnChange = (event) => {
-        // setSearchInput(event.target.value)
         const searchInput = event.target.value
         const search = []
         for (let i in constProducts) {
@@ -121,71 +120,71 @@ export default function DashboardProductTable(props) {
         }
         if (event.target.id === "Price") {
             if (isSortByPrice) {
-                const sortByName = [...products]
-                sortByName.sort(function(a, b) {
-                    var nameA = a.productName;
-                    var nameB = b.productName; 
-                    if(nameA === nameB) return 0; 
-                    return nameA > nameB ? 1 : -1;
+                const sortByPrice = [...products]
+                sortByPrice.sort(function(a, b) {
+                    var priceA = a.productPrice;
+                    var priceB = b.productPrice; 
+                    if(priceA === priceB) return 0; 
+                    return priceA > priceB ? 1 : -1;
                 })
                 setIsSortByPrice(false)
-                setProducts(sortByName)
+                setProducts(sortByPrice)
             } else {
-                const sortByName = [...products]
-                sortByName.sort(function(a, b) {
-                    var nameA = a.productName;
-                    var nameB = b.productName; 
-                    if(nameA === nameB) return 0; 
-                    return nameA < nameB ? 1 : -1;
+                const sortByPrice = [...products]
+                sortByPrice.sort(function(a, b) {
+                    var priceA = a.productPrice;
+                    var priceB = b.productPrice; 
+                    if(priceA === priceB) return 0; 
+                    return priceA < priceB ? 1 : -1;
                 })
                 setIsSortByPrice(true)
-                setProducts(sortByName)
+                setProducts(sortByPrice)
             }
         }
         if (event.target.id === "Sale") {
             if (isSortBySale) {
-                const sortByName = [...products]
-                sortByName.sort(function(a, b) {
-                    var nameA = a.productName;
-                    var nameB = b.productName; 
-                    if(nameA === nameB) return 0; 
-                    return nameA > nameB ? 1 : -1;
+                const sortBySale = [...products]
+                sortBySale.sort(function(a, b) {
+                    var saleA = a.productSale;
+                    var saleB = b.productSale; 
+                    if(saleA === saleB) return 0; 
+                    return saleA > saleB ? 1 : -1;
                 })
                 setIsSortBySale(false)
-                setProducts(sortByName)
+                setProducts(sortBySale)
             } else {
-                const sortByName = [...products]
-                sortByName.sort(function(a, b) {
-                    var nameA = a.productName;
-                    var nameB = b.productName; 
-                    if(nameA === nameB) return 0; 
-                    return nameA < nameB ? 1 : -1;
+                const sortBySale = [...products]
+                sortBySale.sort(function(a, b) {
+                    var saleA = a.productSale;
+                    var saleB = b.productSale; 
+                    if(saleA === saleB) return 0; 
+                    return saleA < saleB ? 1 : -1;
                 })
                 setIsSortBySale(true)
-                setProducts(sortByName)
+                setProducts(sortBySale)
             }
         }
         if (event.target.id === "Sold") {
             if (isSortBySold) {
-                const sortByName = [...products]
-                sortByName.sort(function(a, b) {
-                    var nameA = a.productName;
-                    var nameB = b.productName; 
-                    if(nameA === nameB) return 0; 
-                    return nameA > nameB ? 1 : -1;
+                const sortBySold = [...products]
+                sortBySold.sort(function(a, b) {
+                    var SoldA = a.productSold;
+                    var SoldB = b.productSold; 
+                    if(SoldA === SoldB) return 0; 
+                    return SoldA > SoldB ? 1 : -1;
                 })
                 setIsSortBySold(false)
-                setProducts(sortByName)
+                setProducts(sortBySold)
             } else {
-                const sortByName = [...products]
-                sortByName.sort(function(a, b) {
-                    var nameA = a.productName;
-                    var nameB = b.productName; 
-                    if(nameA === nameB) return 0; 
-                    return nameA < nameB ? 1 : -1;
+                const sortBySold = [...products]
+                sortBySold.sort(function(a, b) {
+                    var SoldA = a.productSold;
+                    var SoldB = b.productSold; 
+                    if(SoldA === SoldB) return 0; 
+                    return SoldA < SoldB ? 1 : -1;
                 })
                 setIsSortBySold(true)
-                setProducts(sortByName)
+                setProducts(sortBySold)
             }
         }
     }
@@ -233,16 +232,22 @@ export default function DashboardProductTable(props) {
                             {
                                 current.map((item, index) => {
                                     const date = new Date(item.productDate)
-                                    const day = date.getDay();
-                                    const month = date.getMonth();
+                                    const day = date.getDate();
+                                    const month = date.getMonth() + 1;
                                     const year = date.getFullYear();
                                     const shortedDate = day + '/' + month + '/' + year;
                                     //Counting star vote
                                     const ratingList = item.productVote.map(a => a.ratingStar); // get all rating
-                                    const totalRating = ratingList.reduce((a, b) => a + b, 0)
-
-                                    const averageRating = totalRating/ratingList.length
                                     
+                                    const totalRating = ratingList.reduce((a, b) => a + b, 0);
+
+                                    var averageRating = 0;
+                                    if (totalRating === 0) {
+                                        averageRating = 0
+                                    } else {
+                                        averageRating = totalRating/Number(ratingList.length);
+                                    }
+
                                     return (
                                         <tr key={index}>
                                             <td className="table-name">
@@ -275,16 +280,24 @@ export default function DashboardProductTable(props) {
                                             <td>
                                                 <p>{shortedDate}</p>
                                             </td>
-                                            <td>
-                                                {averageRating}
-                                                <ReactStars {...{
-                                                    size: 12,
-                                                    value: averageRating,
-                                                    edit: false,
-                                                    activeColor: "#fda32a",
-                                                    color: "#ddd",
-                                                    isHalf: true
-                                                }}/>
+                                            <td className="star-rating">
+                                                <div className="star-rating-list flex">
+                                                    <p className={ 
+                                                        averageRating > 0 ? "star-color star" :"star"
+                                                    }>★</p>
+                                                    <p className={ 
+                                                        averageRating > 1 ? "star-color star" :"star"
+                                                    }>★</p>
+                                                    <p className={ 
+                                                        averageRating > 2 ? "star-color star" :"star"
+                                                    }>★</p>
+                                                    <p className={ 
+                                                        averageRating > 3 ? "star-color star" :"star"
+                                                    }>★</p>
+                                                    <p className={ 
+                                                        averageRating > 4 ? "star-color star" :"star"
+                                                    }>★</p>
+                                                </div>
                                             </td>
                                             <td>
                                                 <div className="action-table flex">
