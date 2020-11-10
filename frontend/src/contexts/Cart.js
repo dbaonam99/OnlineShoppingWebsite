@@ -25,7 +25,7 @@ export function CartProvider(props) {
         if (localStorage.getItem('wishlist')) {
             setWishListItems(JSON.parse(localStorage.getItem('wishlist')))
         }
-        getTotal()
+        setTotal(JSON.parse(localStorage.getItem('total')))
     }, [])
     
     const addToWishList = (product = {}) => {
@@ -61,9 +61,9 @@ export function CartProvider(props) {
                 }
             }
         }
-        console.log(virtualCart)
         localStorage.setItem('cart', JSON.stringify(virtualCart))
         setCartItems(virtualCart)
+        getTotal(virtualCart)
     }
 
     const removeFromCart = (event) => {
@@ -76,6 +76,7 @@ export function CartProvider(props) {
         }
         localStorage.setItem('cart', JSON.stringify(virtualCart))
         setCartItems(virtualCart)
+        getTotal(virtualCart)
     }
 
     const removeFromWishList = (event) => {
@@ -102,6 +103,7 @@ export function CartProvider(props) {
         }
         localStorage.setItem('cart', JSON.stringify(virtualCart))
         setCartItems(virtualCart)
+        getTotal(virtualCart)
     }
     
     const plusCount = (event) => {
@@ -114,6 +116,7 @@ export function CartProvider(props) {
         }
         localStorage.setItem('cart', JSON.stringify(virtualCart))
         setCartItems(virtualCart)
+        getTotal(virtualCart)
     }
 
     const updateCount = (event) => {
@@ -127,13 +130,13 @@ export function CartProvider(props) {
         }
         localStorage.setItem('cart', JSON.stringify(virtualCart))
         setCartItems(virtualCart)
+        getTotal(virtualCart)
     }
 
-    const getTotal = () => {
-        console.log(cartItems)
+    const getTotal = (arr) => {
         let virtualTotal = 0
-        for (let i in cartItems) {
-            virtualTotal += cartItems[i].count * cartItems[i].productPrice
+        for (let i in arr) {
+            virtualTotal += arr[i].count * arr[i].productPrice
         }
         localStorage.setItem('total', JSON.stringify(virtualTotal))
         setTotal(virtualTotal)

@@ -5381,6 +5381,8 @@ function CheckoutBody(props) {
     const [userHuyen, setUserHuyen] = useState(null)
     const [addressInput, setAddressInput] = useState(null)
     const [cartList, setCartList] = useState([])
+    const total = localStorage.getItem('total')
+    const [shipping, setShipping] = useState(0)
 
     useEffect(()=>{
         setNameInput(userInfo.userName)
@@ -5400,6 +5402,16 @@ function CheckoutBody(props) {
         }
         setCartList((JSON.parse(localStorage.getItem('cart'))))
     },[userInfo])
+
+    const [methodPayment, setMethodPayMent] = useState(0)
+
+    const checkedPayMent = (event) => {
+        setMethodPayMent(Number(event.target.id))
+    }
+
+    const placeAnOrder = () => {
+        
+    }
 
     return(
         <div className="CheckoutBody">
@@ -5516,6 +5528,99 @@ function CheckoutBody(props) {
                         </tbody>
                     </table>
                 </form>
+            </div>
+            <div className="billing-detail">
+                <div className="billing-detail-title">Your order</div>
+                <div className="billing-detail-form"> 
+                    <div className="billing-detail-list">
+                        {    
+                            cartList.map((item, index)=>{
+                                return (
+                                    <div 
+                                        key={index}
+                                        className="billing-detail-item"
+                                    >
+                                        <img src={item.productImg[0]} alt="" width="60px" height="60px"></img>
+                                        <div className="billing-detail-name">{item.productName}</div>
+                                        <div className="billing-detail-count">
+                                            <p>x</p>
+                                            {item.count}
+                                        </div>
+                                        <div className="billing-detail-price">{item.productPrice * item.count} vnđ</div>
+                                    </div>
+                                )
+                            }) 
+                        }
+                        <div className="billing-detail-item flex">
+                            <div style={{width:'60px', height: '60px', lineHeight: '60px', fontSize: '18px'}}>SUBTOTAL</div>
+                            <div className="billing-detail-name"></div>
+                            <div className="billing-detail-count" style={{color: '#111'}}></div>
+                            <div className="billing-detail-price">{total} vnđ</div>
+                        </div>
+                        <div className="billing-detail-item flex">
+                            <div style={{width:'60px', height: '60px', lineHeight: '60px', fontSize: '18px'}}>SHIPPING</div>
+                            <div className="billing-detail-name"></div>
+                            <div className="billing-detail-count" style={{color: '#111'}}></div>
+                            <div className="billing-detail-shipping">
+                                <select onChange={(event)=>{
+                                    setShipping(event.target.value)
+                                }}>
+                                    <option value="0">FREESHIP - 0đ</option>
+                                    <option value="30000">FAST SHIPPING - 30000đ</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div className="billing-detail-item flex">
+                            <div style={{width:'60px', height: '60px', lineHeight: '60px', fontSize: '18px'}}>TOTAL</div>
+                            <div className="billing-detail-name"></div>
+                            <div className="billing-detail-count" style={{color: '#111'}}></div>
+                            <div className="billing-detail-price">{Number(total) + Number(shipping)} vnđ</div>
+                        </div>
+                        <div className="billing-detail-payment">
+                            <div style={{fontSize: '18px'}}>PAYMENT METHOD</div>
+                            <div className="payment-method-list">
+                                <div 
+                                    id="1"
+                                    className="flex payment-method-item" 
+                                    onClick={checkedPayMent}>
+                                    <div 
+                                        id="1"
+                                        className={methodPayment === 1 ? "size-check isChecked2" : "size-check"}
+                                        ></div>
+                                        <p
+                                            id="1"
+                                            >CASH ON DELIVERY</p>
+                                    </div>
+                                <div 
+                                    id="2"
+                                    className="flex payment-method-item"
+                                    onClick={checkedPayMent}>
+                                    <div 
+                                        id="2"
+                                        className={methodPayment === 2 ? "size-check isChecked2" : "size-check"} ></div>
+                                    <p
+                                        id="2">
+                                        DIRECT BANK TRANSFER
+                                    </p>
+                                </div>
+                                <div 
+                                    id="3"
+                                    className="flex payment-method-item"
+                                    onClick={checkedPayMent}>
+                                    <div 
+                                        id="3"
+                                        className={methodPayment === 3 ? "size-check isChecked2" : "size-check"} ></div>
+                                    <p
+                                        id="3"
+                                        >PAYPAL</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div className="order-btn btn" onClick={placeAnOrder}>
+                            PLACE AN ORDER
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
     )
