@@ -11,6 +11,7 @@ import DashboardProductEdit from './Modal/DashboardProductEdit';
 import DashboardProductCreate from './Modal/DashboardProductCreate';
 import Axios from 'axios';
 import DashboardNewsCreate from './Modal/DashboardNewsCreate';
+import DashboardUser from './User/DashboardUser';
 
 export default function DashboardBody(props) {
 
@@ -102,7 +103,13 @@ export default function DashboardBody(props) {
                 />
             }
             {
-                tabId === "6" && <div>tab 6</div>
+                tabId === "6" && 
+                <DashboardUser
+                    setOpenCreateFunc={props.setOpenCreateFunc}
+                    setOpenEditFunc={props.setOpenEditFunc}
+                    toast={toast}
+                    isChange={isChange}
+                />
             }
             {
                 tabId === "7" && <div>tab 7</div>
