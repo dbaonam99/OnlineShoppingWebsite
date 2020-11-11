@@ -17,7 +17,7 @@ function NewsBodySmall(props) {
             <div className="newsbody-small-container">
                 <img 
                     className="newsbody-small-img" 
-                    src={item.newImg} alt="z"
+                    src={item.newImg} alt=""
                     onClick={()=>{
                         window.scrollTo(0,0); 
                         props.history.push(`/news/category/${item.newCate}`)

@@ -9,7 +9,6 @@ export default function DashboardNewsCreate(props) {
     const createForm = useRef();
     const cateInput = useRef();
     const [inputValue, setInputValue] = useState([])
-    const [cateValue, setCateValue] = useState("")
     const [file, setFile] = useState([])
     const [cateList, setCateList] = useState([])
     const news = props.news;
@@ -24,19 +23,21 @@ export default function DashboardNewsCreate(props) {
     const [newsContent, setNewsContent] = useState("")
 
     useEffect(()=> {
-        setNewsTitle(news.newTitle)
-        setNewsImg([news.newImg])
-        setNewsCate(news.newCate)
-        setNewsContent(news.newContent)
-        axios.get(`http://localhost:4000/news`)
-            .then(res => {
-                const test = Object.values(res.data.reduce((a, {newCate}) => {
-                    a[newCate] = a[newCate] || {newCate};
-                    return a;
-                }, Object.create(null)));
-                setCateList(test)
-            }
-        )
+        if (news) {
+            setNewsTitle(news.newTitle)
+            setNewsImg([news.newImg])
+            setNewsCate(news.newCate)
+            setNewsContent(news.newContent)
+            axios.get(`http://localhost:4000/news`)
+                .then(res => {
+                    const test = Object.values(res.data.reduce((a, {newCate}) => {
+                        a[newCate] = a[newCate] || {newCate};
+                        return a;
+                    }, Object.create(null)));
+                    setCateList(test)
+                }
+            )
+        }
     },[news])
 
     const onSubmit = (event) => {
@@ -189,7 +190,7 @@ export default function DashboardNewsCreate(props) {
                     </div>
                     <div className="flex-center" style={{marginTop: '40px'}}>
                     <button className="create-box-btn btn">
-                        Edit product
+                        Edit news
                     </button>
                 </div>
                 </form>

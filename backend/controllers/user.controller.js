@@ -10,11 +10,16 @@ module.exports.list = async function(req, res) {
 	var users = await User.find();
 	res.json(users);
 };
+module.exports.listId = function(req, res) {
+	var id = req.params.id;
+	User.findById({ _id: id }).then(function(users) {
+		res.json(users);
+	})
+}
 module.exports.info = function(req, res) {
 	var id = req.params.id;
 	User.findById({ _id: id }).then(function(users) {
 		res.json(users);
-		console.log(users)
 	})
 }
 module.exports.postLogin = async function(req, res) {
@@ -36,13 +41,10 @@ module.exports.postLogin = async function(req, res) {
 	res.status(200).json({token: token, user: user});
 };
 module.exports.register = async function(req, res) {
-	var email = req.body.registerEmail;
-	var password = req.body.registerPassword;
-
-	var user = await User.findOne({ userEmail: email });
+	var password = req.body.userPassword;
+	var user = await User.findOne({ userEmail: req.body.userEmail });
 
 	if (user) {
-		console.log("check")
 		return res.status(400).send('Email already exists!');
 	}
 	
@@ -53,12 +55,14 @@ module.exports.register = async function(req, res) {
 
 	const data = {
 		userAvt: "https://scontent-sin6-1.xx.fbcdn.net/v/t1.0-9/73321413_146697059956770_7174055866474168320_n.jpg?_nc_cat=107&ccb=2&_nc_sid=09cbfe&_nc_ohc=ni-Cr2_KyP0AX-BfQkv&_nc_ht=scontent-sin6-1.xx&oh=9cbda6699093e8dbb061a92c5bb58c7e&oe=5FCB1CFC",
-		userName: req.body.registerName,
+		userName: req.body.userName,
 		userTinh: "",
 		userHuyen: "",
-		userFullName: "",
-		userEmail: email,
-		userPassword: req.body.password
+		userAddress: "",
+		userPhone: "",
+		userEmail: req.body.userEmail,
+		userPassword: req.body.password,
+		userRole: req.body.userRole
 	}
 
 	await User.create(data);
@@ -94,20 +98,31 @@ module.exports.updateUser = async function(req, res) {
 		)
 	}
 
-	const data = {
-		userName: req.body.userName,
-		userEmail: req.body.userEmail,
-		userTinh: req.body.userTinh,
-		userHuyen: req.body.userHuyen,
-		userPhone: req.body.userPhone,
-		userAddress: req.body.userAddress
-	}
-
-	await User.findByIdAndUpdate(
-		{_id: id}, data,
-		function (error) {
+	if (req.body.fromAdmin) {
+		await User.findByIdAndUpdate(
+			{_id: id}, {
+				userRole: req.body.userRole,
+				userName: req.body.userName,
+				userEmail: req.body.userEmail
+			},
+			function (error) {
+			}
+		)
+	} else {
+		const data = {
+			userName: req.body.userName,
+			userEmail: req.body.userEmail,
+			userTinh: req.body.userTinh,
+			userHuyen: req.body.userHuyen,
+			userPhone: req.body.userPhone,
+			userAddress: req.body.userAddress
 		}
-	)
+		await User.findByIdAndUpdate(
+			{_id: id}, data,
+			function (error) {
+			}
+		)
+	}
 
 	var user = await User.findOne({ _id: id });
 

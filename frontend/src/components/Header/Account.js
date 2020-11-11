@@ -47,9 +47,10 @@ function Account(props) {
             })
         } else {
             axios.post('http://localhost:4000/users/register', {
-                registerName: user.registerName,
-                registerEmail: user.registerEmail,
-                registerPassword: user.registerPassword
+                userName: user.registerName,
+                userEmail: user.registerEmail,
+                userPassword: user.registerPassword,
+                userRole: "user"
             })
             .then(res => {
                 setArrSuccess(arrSuccess=>[...arrSuccess, res.data])

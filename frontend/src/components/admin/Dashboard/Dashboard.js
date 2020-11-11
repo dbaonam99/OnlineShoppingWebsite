@@ -43,7 +43,7 @@ export default function Dashboard() {
             icon: faChartLine
         },
     ]
-    const [tabId, setTabId] = useState("5");
+    const [tabId, setTabId] = useState("6");
     const [openMenu, setOpenMenu] = useState(true);
     const [productId, setProductId] = useState("")
 

@@ -1342,11 +1342,13 @@
   position: relative;
 }
 .newsbody-small {
-  /* background-color: green; */
+  height: 246px;
   margin-top: 30px;
+  width: 100%;
 }
 .newsbody-small-container {
-  /* background-color: green; */
+  height: 100%;
+  width: 100%;
   display: flex;
   position: relative;
   align-items: center;

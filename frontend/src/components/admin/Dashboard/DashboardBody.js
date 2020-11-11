@@ -11,8 +11,10 @@ import DashboardProductEdit from './Modal/DashboardProductEdit';
 import DashboardProductCreate from './Modal/DashboardProductCreate';
 import Axios from 'axios';
 import DashboardNewsCreate from './Modal/DashboardNewsCreate';
-import DashboardUser from './User/DashboardUser';
 import DashboardNewsEdit from './Modal/DashboardNewsEdit';
+import DashboardUser from './User/DashboardUser';
+import DashboardUserCreate from './Modal/DashboardUserCreate';
+import DashboardUserEdit from './Modal/DashboardUserEdit';
 
 export default function DashboardBody(props) {
 
@@ -21,6 +23,7 @@ export default function DashboardBody(props) {
     const [isChange, setIsChange] = useState(false)
     const [product, setProduct] = useState({})
     const [news, setNews] = useState({})
+    const [user, setUser] = useState({})
 
     const setToastFunc = (bool) => {
         setIsChange(true)
@@ -42,6 +45,11 @@ export default function DashboardBody(props) {
         Axios.get(`http://localhost:4000/news/${props.productId}`)
             .then(res => {
                 setNews(res.data)
+            } 
+        )
+        Axios.get(`http://localhost:4000/users/list/${props.productId}`)
+            .then(res => {
+                setUser(res.data)
             } 
         )
     },[props.productId, props.openEdit])
@@ -75,6 +83,19 @@ export default function DashboardBody(props) {
                     setCloseEditFunc={props.setCloseEditFunc}
                     setToastFunc={setToastFunc}
                     news={news} 
+                />
+            }
+            { (props.openCreate && tabId === "6") &&
+                <DashboardUserCreate
+                    setCloseCreateFunc={props.setCloseCreateFunc}
+                    setToastFunc={setToastFunc}
+                />
+            }
+            { (props.openEdit && tabId === "6") &&
+                <DashboardUserEdit
+                    setCloseEditFunc={props.setCloseEditFunc}
+                    setToastFunc={setToastFunc}
+                    user={user} 
                 />
             }
             <DashboardHeader

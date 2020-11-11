@@ -8,6 +8,9 @@
     font-size: 40px;
     text-transform: capitalize;
 }
+.newscontent-title img {
+    height: 600px;
+}
 .newscontent-share {
     width: 100%;
     margin: 40px 0;

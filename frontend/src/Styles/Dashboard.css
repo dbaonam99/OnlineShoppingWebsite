@@ -826,6 +826,19 @@ select {
 .dashboard-right input:hover {
     border-bottom: 2px #777 solid;
 }
+.dashboard-right .input {
+    outline: none;
+    border: none;
+    padding: 5px 5px;
+    border-bottom: 2px #ddd solid;
+    height: 100%;
+    width: 100%;
+    font-family: sans-serif;
+}
+.dashboard-right .input:focus, 
+.dashboard-right .input:hover {
+    border-bottom: 2px #777 solid;
+}
 .dashboard-right label {
     font-size: 14px;
     font-family: sans-serif;

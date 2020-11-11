@@ -176,7 +176,7 @@ export default function DashboardNewsCreate(props) {
                     </div>
                     <div className="flex-center" style={{marginTop: '40px'}}>
                     <button className="create-box-btn btn">
-                        Add product
+                        Add news
                     </button>
                 </div>
                 </form>

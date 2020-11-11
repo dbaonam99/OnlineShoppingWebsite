@@ -14,7 +14,7 @@ function NewsBodyBig(props) {
         <div className="newsbody-big flex-center">
             <img 
                 className="newsbody-big-img" 
-                src={props.firstPost.newImg} alt="z"
+                src={props.firstPost.newImg} alt=""
                 onClick={()=>{
                     window.scrollTo(0,0); 
                     props.history.push(`/news/${props.firstPost._id}`)
