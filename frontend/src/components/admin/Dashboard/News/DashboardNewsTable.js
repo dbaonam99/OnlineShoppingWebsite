@@ -51,19 +51,51 @@ export default function DashboardNewsTable(props) {
 
     const pages = [];
 
-    if (currentPage === 2) {
-        pages.push(currentPage - 1, currentPage, currentPage + 1);
-    } else {
-        if (currentPage === 1) {
-            pages.push(currentPage, currentPage + 1, currentPage + 2 );
-        } else if (currentPage === 2) {
-            pages.push(currentPage - 1, currentPage, currentPage + 1);
-        } else if (currentPage > 2 && currentPage < pageNumbers.length - 1) {
-            pages.push(currentPage -1, currentPage, currentPage + 1);
-        } else if (currentPage === pageNumbers.length - 1) {
+    if (pageNumbers.length > 3) {
+        if (currentPage === 2) {
             pages.push(currentPage - 1, currentPage, currentPage + 1);
         } else {
-            pages.push(currentPage - 2, currentPage - 1, currentPage);
+            if (currentPage === 1) {
+                pages.push(currentPage, currentPage + 1, currentPage + 2 );
+            } else if (currentPage === 2) {
+                pages.push(currentPage - 1, currentPage, currentPage + 1);
+            } else if (currentPage > 2 && currentPage < pageNumbers.length - 1) {
+                pages.push(currentPage -1, currentPage, currentPage + 1);
+            } else if (currentPage === pageNumbers.length - 1) {
+                pages.push(currentPage - 1, currentPage, currentPage + 1);
+            } else {
+                pages.push(currentPage - 2, currentPage - 1, currentPage);
+            }
+        }
+    } else if (pageNumbers.length === 3) {
+        if (currentPage === 2) {
+            pages.push(currentPage - 1, currentPage, currentPage + 1);
+        } else {
+            if (currentPage === 1) {
+                pages.push(currentPage, currentPage + 1, currentPage + 2 );
+            } else if (currentPage === 2) {
+                pages.push(currentPage - 1, currentPage, currentPage + 1);
+            } else if (currentPage > 2 && currentPage < pageNumbers.length - 1) {
+                pages.push(currentPage -1, currentPage, currentPage + 1);
+            } else if (currentPage === pageNumbers.length - 1) {
+                pages.push(currentPage - 1, currentPage, currentPage + 1);
+            } else {
+                pages.push(currentPage - 2, currentPage - 1, currentPage);
+            }
+        }
+    } else if (pageNumbers.length === 2){
+        if (currentPage === 2) {
+            pages.push(currentPage - 1, currentPage);
+        } else {
+            if (currentPage === 1) {
+                pages.push(currentPage, currentPage + 1);
+            } else if (currentPage === 2) {
+                pages.push(currentPage - 1, currentPage);
+            }
+        }
+    } else {
+        if (currentPage === 1) {
+            pages.push(currentPage);
         }
     }
 
