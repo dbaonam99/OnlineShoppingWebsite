@@ -1,9 +1,10 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import '../../Styles/News.css';
 import '../../App.css'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faFacebookF, faInstagram, faTwitter } from '@fortawesome/free-brands-svg-icons';
 import { Link } from 'react-router-dom';
+import axios from 'axios'
 
 export default function NewsContent(props) {
 
@@ -18,6 +19,12 @@ export default function NewsContent(props) {
     const month = date.getMonth() + 1
     const year = date.getFullYear()
     const timeStr = day + '.' + month + '.' +year
+
+    if (news._id) {
+        axios.post(`http://localhost:4000/news/update/${news._id}`, {
+            id: news._id
+        })
+    }
     
     return(
         <div className="NewsContent opa2">

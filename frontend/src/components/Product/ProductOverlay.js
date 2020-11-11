@@ -4,6 +4,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faCartPlus, faCircle, faEye, faHeart } from "@fortawesome/free-solid-svg-icons";
 
 import { CartContext } from '../../contexts/Cart'
+import { withRouter } from 'react-router-dom';
 
 function ProductOverlay(props) {
 
@@ -30,11 +31,21 @@ function ProductOverlay(props) {
         }, 500)
     }
 
+    const redirect = (event) => {
+        if (event.target.id === "overlay") {
+            window.scrollTo(0,0);
+            props.history.push(`/products/${props.product._id}`);
+        }
+    }
+
     return (
         <div 
-            className="product-overlay">
+            className="product-overlay"
+            id="overlay"
+            onClick={redirect}
+        >
             <div className="product-icon-box flex-center icon-cart btn"
-                onClick={cartClick}
+                onClick={cartClick} 
             >
                 { loading === 1 && 
                     <div className="flex">
@@ -66,4 +77,4 @@ function ProductOverlay(props) {
         </div>
     )
 }
-export default ProductOverlay;
+export default withRouter(ProductOverlay);

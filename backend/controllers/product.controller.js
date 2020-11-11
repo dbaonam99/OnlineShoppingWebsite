@@ -80,6 +80,7 @@ module.exports.updateProduct = async function(req, res) {
 		function (error) {
 		}
 	)
+	
 	Product.findByIdAndUpdate(id, data, function(error) {
 		if (error) {
 			console.log(error);

@@ -7,7 +7,6 @@ module.exports.index = async function(req, res) {
 
 module.exports.news = function(req, res) {
 	var id = req.params.id;
-	console.log(id)
 	News.findById({ _id: id }).then(function(news) {
 		res.json(news);
 	});
@@ -39,3 +38,13 @@ module.exports.deleteNews = async function(req, res) {
 	await News.findByIdAndRemove({_id: req.body.productId})
 	res.status(200);
 }
+module.exports.updateNews = async function(req, res) {
+	var id = req.body.id
+
+	News.findByIdAndUpdate(id, { $inc: {newView: 1 }},
+		function (error) {
+		}
+	)
+
+	res.status(200);
+} 

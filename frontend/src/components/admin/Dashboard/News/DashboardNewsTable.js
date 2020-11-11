@@ -121,8 +121,8 @@ export default function DashboardNewsTable(props) {
             if (isSortByView) {
                 const sortByView = [...news]
                 sortByView.sort(function(a, b) {
-                    var ViewA = a.productView;
-                    var ViewB = b.productView; 
+                    var ViewA = a.newView;
+                    var ViewB = b.newView; 
                     if(ViewA === ViewB) return 0; 
                     return ViewA > ViewB ? 1 : -1;
                 })
@@ -131,8 +131,8 @@ export default function DashboardNewsTable(props) {
             } else {
                 const sortByView = [...news]
                 sortByView.sort(function(a, b) {
-                    var ViewA = a.productView;
-                    var ViewB = b.productView; 
+                    var ViewA = a.newView;
+                    var ViewB = b.newView; 
                     if(ViewA === ViewB) return 0; 
                     return ViewA < ViewB ? 1 : -1;
                 })
@@ -202,11 +202,10 @@ export default function DashboardNewsTable(props) {
                                             <td 
                                                 style={{
                                                     padding: '10px 10px',
+                                                    WebkitLineClamp: '3'
                                                 }}
+                                                dangerouslySetInnerHTML={{__html: item.newContent}}
                                             >
-                                                <p 
-                                                    dangerouslySetInnerHTML={{__html: item.newContent}}
-                                                ></p>
                                             </td>
                                             <td>
                                                 <p>{item.newCate}</p>
