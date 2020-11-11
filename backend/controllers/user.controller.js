@@ -6,6 +6,10 @@ module.exports.index = async function(req, res) {
 	var users = await User.find();
 	res.json(users);
 };
+module.exports.list = async function(req, res) {
+	var users = await User.find();
+	res.json(users);
+};
 module.exports.info = function(req, res) {
 	var id = req.params.id;
 	User.findById({ _id: id }).then(function(users) {
@@ -109,4 +113,9 @@ module.exports.updateUser = async function(req, res) {
 
 	const token = jwt.sign({user}, 'hahaha');
 	res.status(200).json({token: token, user: user});
+}
+
+module.exports.deleteUser = async function(req, res) {
+	await User.findByIdAndRemove({_id: req.body.id})
+	res.status(200);
 }

@@ -2,7 +2,6 @@ import React, { useEffect, useState } from 'react'
 import '../../../../App.css'
 import '../../../../Styles/Dashboard.css'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import ReactStars from "react-rating-stars-component";
 import { faPencilAlt, faTimes } from '@fortawesome/free-solid-svg-icons';
 import axios from 'axios';
 import classNames from 'classnames'

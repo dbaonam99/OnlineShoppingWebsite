@@ -699,11 +699,20 @@ display: none !important;
 .table-new-title:first-child {
     width: 250px;
 }
+.table-user-title:first-child {
+    width: 100px;
+}
 .table-title:last-child {
     width: 80px;
 }
 #Content {
     width: 250px;
+}
+#Address {
+    width: 300px;
+}
+#Name {
+    width: 200px;
 }
 .dashboard-table td p {
     width: 10px;

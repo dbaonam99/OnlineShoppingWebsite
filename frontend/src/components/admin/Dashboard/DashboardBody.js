@@ -12,6 +12,7 @@ import DashboardProductCreate from './Modal/DashboardProductCreate';
 import Axios from 'axios';
 import DashboardNewsCreate from './Modal/DashboardNewsCreate';
 import DashboardUser from './User/DashboardUser';
+import DashboardNewsEdit from './Modal/DashboardNewsEdit';
 
 export default function DashboardBody(props) {
 
@@ -19,6 +20,7 @@ export default function DashboardBody(props) {
     const [toast, setToast] = useState(false)
     const [isChange, setIsChange] = useState(false)
     const [product, setProduct] = useState({})
+    const [news, setNews] = useState({})
 
     const setToastFunc = (bool) => {
         setIsChange(true)
@@ -35,6 +37,11 @@ export default function DashboardBody(props) {
         Axios.get(`http://localhost:4000/products/${props.productId}`)
             .then(res => {
                 setProduct(res.data)
+            } 
+        )
+        Axios.get(`http://localhost:4000/news/${props.productId}`)
+            .then(res => {
+                setNews(res.data)
             } 
         )
     },[props.productId, props.openEdit])
@@ -63,13 +70,13 @@ export default function DashboardBody(props) {
                     setToastFunc={setToastFunc}
                 />
             }
-            {/* { (props.openEdit && tabId === "5") &&
-                <DashboardNewsE
+            { (props.openEdit && tabId === "5") &&
+                <DashboardNewsEdit
                     setCloseEditFunc={props.setCloseEditFunc}
                     setToastFunc={setToastFunc}
-                    product={product}
+                    news={news} 
                 />
-            } */}
+            }
             <DashboardHeader
                 itemName= {props.menuItems[tabId-1].name}
                 setOpenMenuOnClick = {props.setOpenMenuOnClick}

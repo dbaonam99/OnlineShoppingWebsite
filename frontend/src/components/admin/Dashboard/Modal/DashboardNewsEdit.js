@@ -11,25 +11,33 @@ export default function DashboardNewsCreate(props) {
     const [inputValue, setInputValue] = useState([])
     const [cateValue, setCateValue] = useState("")
     const [file, setFile] = useState([])
-    const [newsContent, setNewsContent] = useState("")
-    const [newsImg, setNewsImg] = useState([])
     const [cateList, setCateList] = useState([])
-
+    const news = props.news;
+    
     const handleOnChange = (event) => {
         setInputValue({...inputValue, [event.target.name]: event.target.value})
     }
-    
+
+    const [newsTitle, setNewsTitle] = useState("")
+    const [newsImg, setNewsImg] = useState([])
+    const [newsCate, setNewsCate] = useState("")
+    const [newsContent, setNewsContent] = useState("")
+
     useEffect(()=> {
+        setNewsTitle(news.newTitle)
+        setNewsImg([news.newImg])
+        setNewsCate(news.newCate)
+        setNewsContent(news.newContent)
         axios.get(`http://localhost:4000/news`)
-                .then(res => {
-                    const test = Object.values(res.data.reduce((a, {newCate}) => {
-                        a[newCate] = a[newCate] || {newCate};
-                        return a;
-                    }, Object.create(null)));
-                    setCateList(test)
-                }
-            )
-    },[])
+            .then(res => {
+                const test = Object.values(res.data.reduce((a, {newCate}) => {
+                    a[newCate] = a[newCate] || {newCate};
+                    return a;
+                }, Object.create(null)));
+                setCateList(test)
+            }
+        )
+    },[news])
 
     const onSubmit = (event) => {
         event.preventDefault()
@@ -40,18 +48,15 @@ export default function DashboardNewsCreate(props) {
         }
 
         const formData = new FormData();
-
         const imageArr = Array.from(file);
         imageArr.forEach(image => {
             formData.append('newImg', image);
         });
-        console.log(newsContent)
-        formData.append("newTime", new Date());
-        formData.append("newCate", cateValue);
-        formData.append("newTitle", inputValue.title);
+        formData.append("newCate", newsCate);
+        formData.append("newTitle", newsTitle);
         formData.append("newContent", newsContent);
-        axios.post('http://localhost:4000/news', formData, config)
-        props.setCloseCreateFunc(false);
+        axios.post(`http://localhost:4000/news/update/${news._id}`, formData, config)
+        props.setCloseEditFunc(false);
         props.setToastFunc(true);
     }
 
@@ -61,16 +66,18 @@ export default function DashboardNewsCreate(props) {
     }
 
     const deleteImg = (event) => {
+        const id = event.target.id
         const virutalFile = [...file]
-        virutalFile.splice(event.target.id, 1)
+        virutalFile.splice(id, 1)
         setFile(virutalFile)
 
         const items = [...newsImg]
-        items.splice(event.target.id, 1)
+        items.splice(id, 1)
         setNewsImg(items)
+        axios.post(`http://localhost:4000/news/update/${news._id}`, {
+            deleteImgId: id
+        })
     }
-
-    // console.log(cateValue)
 
     return (
         <div className="DashboardProductInfo">
@@ -82,7 +89,7 @@ export default function DashboardNewsCreate(props) {
                     <div  
                         className="create-box-title-close flex-center"
                         onClick={()=>{
-                            props.setCloseCreateFunc(false);
+                            props.setCloseEditFunc(false);
                         }}
                     >
                         <FontAwesomeIcon icon={faTimes}/>
@@ -92,7 +99,13 @@ export default function DashboardNewsCreate(props) {
                     <div className="create-box-row flex">
                         <div className="dashboard-left flex">Title</div>
                         <div className="dashboard-right">
-                            <input type="text" name="title" onChange={handleOnChange} required></input>
+                            <input 
+                                type="text" name="title" 
+                                value={newsTitle || ""}
+                                onChange={(event)=>{
+                                    setNewsTitle(event.target.value)
+                                }} required
+                                ></input>
                         </div>
                     </div>
                     <div className="create-box-row flex">
@@ -105,8 +118,7 @@ export default function DashboardNewsCreate(props) {
                                         setNewsImg(news=>[...news, URL.createObjectURL(files[i])])
                                     }
                                     const fileArr = Array.prototype.slice.call(files)
-                                    fileArr.forEach(item=>{
-                                        
+                                    fileArr.forEach(item=>{ 
                                         setFile(file=>[...file, item])
                                     })
                                 }}
@@ -142,12 +154,12 @@ export default function DashboardNewsCreate(props) {
                         <div className="dashboard-left flex">Category </div>
                         <div className="dashboard-right flex-center">
                             <select style={{ width: "350px"}} 
-                                onChange={(event) => {setCateValue(event.target.value)}}
-                                value={cateValue}>
+                                onChange={(event) => {setNewsCate(event.target.value)}}
+                                value={newsCate}
+                            >
                                 <option></option>
                                 { cateList.length > 0 &&
                                     cateList.map((item, index) => {
-                                        console.log(item.newCate)
                                         return(
                                             <option key={index}>{item.newCate}</option>
                                         )
@@ -171,12 +183,13 @@ export default function DashboardNewsCreate(props) {
                     </div>
                     <div style={{border: '1px #ddd solid'}}>
                         <DashboardEditor
+                            newsContent = {newsContent}
                             setNewsContent= {setNewsContent}
                         />
                     </div>
                     <div className="flex-center" style={{marginTop: '40px'}}>
                     <button className="create-box-btn btn">
-                        Add product
+                        Edit product
                     </button>
                 </div>
                 </form>

@@ -2,27 +2,26 @@ import React, { useEffect, useState } from 'react'
 import '../../../../App.css'
 import '../../../../Styles/Dashboard.css'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faPencilAlt, faSort, faTimes } from '@fortawesome/free-solid-svg-icons';
+import { faPencilAlt, faTimes } from '@fortawesome/free-solid-svg-icons';
 import axios from 'axios';
 import classNames from 'classnames'
 
 export default function DashboardUserTable(props) {
 
-    const [news, setNews] = useState([])
-    // const [searchInput, setSearchInput] = useState("")
-    // const [isSortByName, setIsSortByName] = useState(false)
-    const [isSortByTitle, setIsSortByTitle] = useState(false)
-    const [isSortByView, setIsSortByView] = useState(false)
-    const [constNews, setConstNews] = useState([])
+    const [user, setUser] = useState([])
+    const [isSortByName, setIsSortByName] = useState(false)
+    const [constUser, setConstUser] = useState([])
     
     useEffect(()=>{
-        axios.get(`http://localhost:4000/news`)
+        axios.get(`http://localhost:4000/users/list`)
             .then(res => {
-                setNews(res.data)
-                setConstNews(res.data)
+                setUser(res.data)
+                setConstUser(res.data)
             }
         )
     },[props.isChange]) 
+
+    // console.log(user)
 
     const [currentPage, setCurrentPage] = useState(1);
     const itemsPerPage = 5;
@@ -45,9 +44,9 @@ export default function DashboardUserTable(props) {
 
     const indexOfLast = currentPage * itemsPerPage;
     const indexOfFirst = indexOfLast - itemsPerPage;
-    const current = news.slice(indexOfFirst, indexOfLast);
+    const current = user.slice(indexOfFirst, indexOfLast);
     const pageNumbers = [];
-    for (let i = 1; i <= Math.ceil(news.length / itemsPerPage); i++) {
+    for (let i = 1; i <= Math.ceil(user.length / itemsPerPage); i++) {
         pageNumbers.push(i);
     }
 
@@ -70,10 +69,10 @@ export default function DashboardUserTable(props) {
     }
 
     const deleteOnClick = (event) => {
-        axios.post(`http://localhost:4000/news/delete/:${event.target.id}`, {
-            productId: event.target.id
+        axios.post(`http://localhost:4000/users/delete/:${event.target.id}`, {
+            id: event.target.id
         })
-        setNews(news.filter((item)=>{
+        setUser(user.filter((item)=>{
             return item._id !== event.target.id
         }))
     }
@@ -82,62 +81,38 @@ export default function DashboardUserTable(props) {
         event.preventDefault()
     }
     const searchOnChange = (event) => {
-        // setSearchInput(event.target.value)
         const searchInput = event.target.value
         const search = []
-        for (let i in constNews) {
-            if ((constNews[i].newTitle).toLowerCase().includes(searchInput)) {
-                search.push(constNews[i])
+        for (let i in constUser) {
+            if ((constUser[i].userName).toLowerCase().includes(searchInput)) {
+                search.push(constUser[i])
             }
         }
-        setNews(search)
+        setUser(search)
     }
 
     const sortTable = (event) => {
-        if (event.target.id === "Title") {
-            if (isSortByTitle) {
-                const sortByTitle = [...news]
-                sortByTitle.sort(function(a, b) {
-                    var titleA = a.newTitle.toLowerCase();
-                    var titleB = b.newTitle.toLowerCase(); 
-                    if(titleA === titleB) return 0; 
-                    return titleA > titleB ? 1 : -1;
+        if (event.target.id === "Name") {
+            if (isSortByName) {
+                const sortByName = [...user]
+                sortByName.sort(function(a, b) {
+                    var userA = a.userName.toLowerCase();
+                    var userB = b.userName.toLowerCase(); 
+                    if(userA === userB) return 0; 
+                    return userA > userB ? 1 : -1;
                 })
-                setIsSortByTitle(false)
-                setNews(sortByTitle)
+                setIsSortByName(false)
+                setUser(sortByName)
             } else {
-                const sortByTitle = [...news]
-                sortByTitle.sort(function(a, b) {
-                    var titleA = a.newTitle.toLowerCase();
-                    var titleB = b.newTitle.toLowerCase(); 
-                    if(titleA === titleB) return 0; 
-                    return titleA < titleB ? 1 : -1;
+                const sortByName = [...user]
+                sortByName.sort(function(a, b) {
+                    var userA = a.userName.toLowerCase();
+                    var userB = b.userName.toLowerCase(); 
+                    if(userA === userB) return 0; 
+                    return userA < userB ? 1 : -1;
                 })
-                setIsSortByTitle(true)
-                setNews(sortByTitle)
-            }
-        }
-        if (event.target.id === "Views") {
-            if (isSortByView) {
-                const sortByView = [...news]
-                sortByView.sort(function(a, b) {
-                    var ViewA = a.newView;
-                    var ViewB = b.newView; 
-                    if(ViewA === ViewB) return 0; 
-                    return ViewA > ViewB ? 1 : -1;
-                })
-                setIsSortByView(false)
-                setNews(sortByView)
-            } else {
-                const sortByView = [...news]
-                sortByView.sort(function(a, b) {
-                    var ViewA = a.newView;
-                    var ViewB = b.newView; 
-                    if(ViewA === ViewB) return 0; 
-                    return ViewA < ViewB ? 1 : -1;
-                })
-                setIsSortByView(true)
-                setNews(sortByView)
+                setIsSortByName(true)
+                setUser(sortByName)
             }
         }
     }
@@ -174,7 +149,7 @@ export default function DashboardUserTable(props) {
                                     props.table.map((item, index) => {
                                         return (
                                             <th 
-                                                key={index} className="table-new-title"
+                                                key={index} className="table-new-title table-user-title"
                                                 onClick={(event)=>{
                                                     sortTable(event)
                                                 }}
@@ -188,33 +163,27 @@ export default function DashboardUserTable(props) {
                             </tr>
                             {
                                 current.map((item, index) => {
-                                    const date = new Date(item.newTime)
-                                    const day = date.getDate();
-                                    const month = date.getMonth() + 1;
-                                    const year = date.getFullYear();
-                                    const shortedDate = day + '/' + month + '/' + year;
-
                                     return (
                                         <tr key={index}>
-                                            <td>
-                                                <p>{item.newTitle}</p>
-                                            </td>
-                                            <td 
-                                                style={{
-                                                    padding: '10px 10px',
-                                                    WebkitLineClamp: '3'
-                                                }}
-                                                dangerouslySetInnerHTML={{__html: item.newContent}}
-                                            >
+                                            <td style={{display: 'flex'}}>
+                                                <img 
+                                                    src={item.userAvt} 
+                                                    width="70px" height="80px"
+                                                    style={{padding: '5px 0', borderRadius: '50%'}}
+                                                    alt=""
+                                                />
                                             </td>
                                             <td>
-                                                <p>{item.newCate}</p>
+                                                <p>{item.userName}</p>
                                             </td>
                                             <td>
-                                                <p>{shortedDate}</p>
+                                                <p>{item.userEmail}</p>
                                             </td>
                                             <td>
-                                                <p>{item.newView}</p>
+                                                <p>{item.userPhone}</p>
+                                            </td>
+                                            <td>
+                                                <p>{item.userAddress}, {item.userHuyen}, {item.userTinh}</p>
                                             </td>
                                             <td>
                                                 <div className="action-table flex">

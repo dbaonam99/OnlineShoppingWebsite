@@ -1,4 +1,4 @@
-import { faPager, faUser } from '@fortawesome/free-solid-svg-icons'
+import { faUser } from '@fortawesome/free-solid-svg-icons'
 import React from 'react'
 import DashboardProductTable from './DashboardUserTable'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
@@ -7,11 +7,11 @@ import { faCheckCircle } from '@fortawesome/free-solid-svg-icons'
 export default function DashboardUser(props) {
 
     const table = [
-        "Title",
-        "Content",
-        "Category",
-        "Date",
-        "Views",
+        "Avatar",
+        "Name",
+        "Email",
+        "Phone",
+        "Address",
         "Action"
     ]
 

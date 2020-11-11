@@ -8,9 +8,11 @@ var middleware = require("../middlewares/token.middleware")
 var upload = multer({ dest: './public/images'})
 
 router.get("/",  middleware.verifyToken, controller.index);
+router.get("/list",  controller.list);
 router.get("/:id",  middleware.verifyToken, controller.info); 
 router.post("/login", controller.postLogin);
 router.post("/register", controller.register);
 router.post("/update/:id", upload.array("userAvt", 12), controller.updateUser);
+router.post("/delete/:id", controller.deleteUser);
 
 module.exports = router;

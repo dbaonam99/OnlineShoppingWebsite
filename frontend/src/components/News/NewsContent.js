@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import '../../Styles/News.css';
 import '../../App.css'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
@@ -22,7 +22,7 @@ export default function NewsContent(props) {
 
     if (news._id) {
         axios.post(`http://localhost:4000/news/update/${news._id}`, {
-            id: news._id
+            countId: news._id
         })
     }
     

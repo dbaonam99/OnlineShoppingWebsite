@@ -2,15 +2,13 @@ import React, { useEffect, useState } from 'react'
 import '../../../../App.css'
 import '../../../../Styles/Dashboard.css'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faPencilAlt, faSort, faTimes } from '@fortawesome/free-solid-svg-icons';
+import { faPencilAlt, faTimes } from '@fortawesome/free-solid-svg-icons';
 import axios from 'axios';
 import classNames from 'classnames'
 
 export default function DashboardNewsTable(props) {
 
     const [news, setNews] = useState([])
-    // const [searchInput, setSearchInput] = useState("")
-    // const [isSortByName, setIsSortByName] = useState(false)
     const [isSortByTitle, setIsSortByTitle] = useState(false)
     const [isSortByView, setIsSortByView] = useState(false)
     const [constNews, setConstNews] = useState([])
