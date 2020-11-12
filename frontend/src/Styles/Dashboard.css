@@ -819,7 +819,7 @@ select {
     justify-content: space-between;
 }
 .dashboard-left {
-    width: 20%;
+    width: 25%;
     text-align: left;
     font-size: 14px;
     font-family: sans-serif;

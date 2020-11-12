@@ -17,6 +17,7 @@ import DashboardUserCreate from './User/DashboardUserCreate';
 import DashboardUserEdit from './User/DashboardUserEdit';
 import DashboardOrder from './Order/DashboardOrder';
 import DashboardOrderEdit from './Order/DashboardOrderEdit';
+import DashboardOrderCreate from './Order/DashboardOrderCreate';
 
 export default function DashboardBody(props) {
 
@@ -60,7 +61,13 @@ export default function DashboardBody(props) {
         <div 
             className={classNames("DashboardBody", {
                 DashboardBody_small: !props.openMenu
-            })}>
+        })}>
+            { (props.openCreate && tabId === "3") &&
+                <DashboardOrderCreate
+                    setCloseCreateFunc={props.setCloseCreateFunc}
+                    setToastFunc={setToastFunc}
+                />
+            }
             { (props.openEdit && tabId === "3") &&
                 <DashboardOrderEdit
                     setCloseEditFunc={props.setCloseEditFunc}
@@ -121,10 +128,10 @@ export default function DashboardBody(props) {
             {
                 tabId === "3" && 
                 <DashboardOrder
-                    // setOpenCreateFunc={props.setOpenCreateFunc}
-                    // setOpenEditFunc={props.setOpenEditFunc}
-                    // toast={toast}
-                    // isChange={isChange}
+                    setOpenCreateFunc={props.setOpenCreateFunc}
+                    setOpenEditFunc={props.setOpenEditFunc}
+                    toast={toast}
+                    isChange={isChange}
                 />
             }
             {
