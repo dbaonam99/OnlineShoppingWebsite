@@ -116,7 +116,7 @@ export default function ProductQuickView(props) {
                             </p>
                         </Link>
                         <div className="product-info-price" style={{marginTop: '30px'}}>
-                            {product.productPrice} vnđ
+                            {product.productPrice} đ
                         </div>
                         <div className="product-info-cart flex">
                             <div className="count-cart noselect">

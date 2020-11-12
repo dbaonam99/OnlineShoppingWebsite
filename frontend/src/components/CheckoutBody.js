@@ -5415,15 +5415,15 @@ function CheckoutBody(props) {
     }
 
     const placeAnOrder = () => {
-        var orderPaymenntMethod = "";
+        var orderPaymentMethod = "";
         if (methodPayment === 1) {
-            orderPaymenntMethod = "cash on delivery"
+            orderPaymentMethod = "cash on delivery"
         } else if (methodPayment === 2) {
-            orderPaymenntMethod = "direct back transfer"
+            orderPaymentMethod = "direct back transfer"
         } else if (methodPayment === 3) {
-            orderPaymenntMethod = "paypal"
+            orderPaymentMethod = "paypal"
         } else {
-            orderPaymenntMethod = ""
+            orderPaymentMethod = ""
         }
         var cartId = []
         for (let i in cartList) {
@@ -5434,7 +5434,7 @@ function CheckoutBody(props) {
                 }
             )
         }
-        if (orderPaymenntMethod === "") {
+        if (orderPaymentMethod === "") {
             alert("Fill in all infomation please")
         } else {
             axios.post('http://localhost:4000/order', {
@@ -5446,7 +5446,8 @@ function CheckoutBody(props) {
                 orderHuyen: userHuyen,
                 orderList: cartId,
                 orderTotal: total,
-                orderPaymenntMethod: orderPaymenntMethod
+                orderPaymentMethod: orderPaymentMethod,
+                orderDate: new Date()
             })
             localStorage.removeItem('total')
             localStorage.removeItem('cart')
@@ -5588,7 +5589,7 @@ function CheckoutBody(props) {
                                             <p>x</p>
                                             {item.count}
                                         </div>
-                                        <div className="billing-detail-price">{item.productPrice * item.count} vnđ</div>
+                                        <div className="billing-detail-price">{item.productPrice * item.count} đ</div>
                                     </div>
                                 )
                             }) 
@@ -5597,7 +5598,7 @@ function CheckoutBody(props) {
                             <div style={{width:'60px', height: '60px', lineHeight: '60px', fontSize: '18px'}}>SUBTOTAL</div>
                             <div className="billing-detail-name"></div>
                             <div className="billing-detail-count" style={{color: '#111'}}></div>
-                            <div className="billing-detail-price">{subTotal} vnđ</div>
+                            <div className="billing-detail-price">{subTotal} đ</div>
                         </div>
                         <div className="billing-detail-item flex">
                             <div style={{width:'60px', height: '60px', lineHeight: '60px', fontSize: '18px'}}>SHIPPING</div>
@@ -5616,7 +5617,7 @@ function CheckoutBody(props) {
                             <div style={{width:'60px', height: '60px', lineHeight: '60px', fontSize: '18px'}}>TOTAL</div>
                             <div className="billing-detail-name"></div>
                             <div className="billing-detail-count" style={{color: '#111'}}></div>
-                            <div className="billing-detail-price">{Number(subTotal) + Number(shipping)} vnđ</div>
+                            <div className="billing-detail-price">{Number(subTotal) + Number(shipping)} đ</div>
                         </div>
                         <div className="billing-detail-payment">
                             <div style={{fontSize: '18px'}}>PAYMENT METHOD</div>

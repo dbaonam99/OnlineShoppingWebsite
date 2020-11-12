@@ -84,7 +84,7 @@ function Product(props) {
                 {product.productName}
             </div>
             <div className="product-price">
-                {product.productPrice} VNĐ
+                {product.productPrice} Đ
             </div>
         </div>
     )

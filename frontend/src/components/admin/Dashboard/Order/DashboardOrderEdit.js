@@ -2,9 +2,8 @@ import React, { useEffect, useRef, useState } from 'react'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faTimes } from '@fortawesome/free-solid-svg-icons'
 import axios from 'axios'
-import DashboardEditor from './DashboardEditor';
 
-export default function DashboardUserCreate(props) {
+export default function DashboardOrderCreate(props) {
 
     const createForm = useRef();
     
@@ -12,6 +11,16 @@ export default function DashboardUserCreate(props) {
     const [userEmail, setUserEmail] = useState("")
     const [userPassword, setUserPassword] = useState("")
     const [userRole, setUserRole] = useState("")
+
+    const user = props.user;
+
+    useEffect(()=> {
+        if (user) {    
+            setUserName(user.userName)
+            setUserRole(user.userRole)
+            setUserEmail(user.userEmail)
+        }
+    },[user])
 
     const onSubmit = (event) => {
         event.preventDefault()
@@ -21,14 +30,15 @@ export default function DashboardUserCreate(props) {
             }
         }
         const formData = new FormData();
-
         formData.append("userName", userName);
         formData.append("userEmail", userEmail);
         formData.append("userPassword", userPassword);
         formData.append("userRole", userRole);
-        
-        axios.post('http://localhost:4000/users/register', formData, config)
-        props.setCloseCreateFunc(false);
+        formData.append("fromAdmin", true)
+
+        axios.post(`http://localhost:4000/users/update/${user._id}`, formData, config)
+
+        props.setCloseEditFunc(false);
         props.setToastFunc(true);
     }
 
@@ -42,7 +52,7 @@ export default function DashboardUserCreate(props) {
                     <div  
                         className="create-box-title-close flex-center"
                         onClick={()=>{
-                            props.setCloseCreateFunc(false);
+                            props.setCloseEditFunc(false);
                         }}
                     >
                         <FontAwesomeIcon icon={faTimes}/>
@@ -106,7 +116,7 @@ export default function DashboardUserCreate(props) {
                     </div>
                     <div className="flex-center" style={{marginTop: '40px'}}>
                         <button className="create-box-btn btn">
-                            Create user
+                            Edit user
                         </button>
                     </div>
                 </form>

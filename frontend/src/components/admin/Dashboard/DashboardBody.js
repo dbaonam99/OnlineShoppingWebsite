@@ -7,14 +7,16 @@ import classNames from 'classnames'
 import DashboardInbox from './Inbox/DashboardInbox';
 import DashboardProduct from './Product/DashboardProduct';
 import DashboardNews from './News/DashboardNews';
-import DashboardProductEdit from './Modal/DashboardProductEdit';
-import DashboardProductCreate from './Modal/DashboardProductCreate';
+import DashboardProductEdit from './Product/DashboardProductEdit';
+import DashboardProductCreate from './Product/DashboardProductCreate';
 import Axios from 'axios';
-import DashboardNewsCreate from './Modal/DashboardNewsCreate';
-import DashboardNewsEdit from './Modal/DashboardNewsEdit';
+import DashboardNewsCreate from './News/DashboardNewsCreate';
+import DashboardNewsEdit from './News/DashboardNewsEdit';
 import DashboardUser from './User/DashboardUser';
-import DashboardUserCreate from './Modal/DashboardUserCreate';
-import DashboardUserEdit from './Modal/DashboardUserEdit';
+import DashboardUserCreate from './User/DashboardUserCreate';
+import DashboardUserEdit from './User/DashboardUserEdit';
+import DashboardOrder from './Order/DashboardOrder';
+import DashboardOrderEdit from './Order/DashboardOrderEdit';
 
 export default function DashboardBody(props) {
 
@@ -59,6 +61,13 @@ export default function DashboardBody(props) {
             className={classNames("DashboardBody", {
                 DashboardBody_small: !props.openMenu
             })}>
+            { (props.openEdit && tabId === "3") &&
+                <DashboardOrderEdit
+                    setCloseEditFunc={props.setCloseEditFunc}
+                    setToastFunc={setToastFunc}
+                    product={product}
+                />
+            }
             { (props.openCreate && tabId === "4") &&
                 <DashboardProductCreate
                     setCloseCreateFunc={props.setCloseCreateFunc}
@@ -110,7 +119,13 @@ export default function DashboardBody(props) {
                 tabId === "2" && <DashboardInbox/>
             }
             {
-                tabId === "3" && <div>tab 3</div>
+                tabId === "3" && 
+                <DashboardOrder
+                    // setOpenCreateFunc={props.setOpenCreateFunc}
+                    // setOpenEditFunc={props.setOpenEditFunc}
+                    // toast={toast}
+                    // isChange={isChange}
+                />
             }
             {
                 tabId === "4" && 

@@ -1,6 +1,7 @@
 const mongoose = require('mongoose');
 
 var orderSchema = new mongoose.Schema({
+	orderId: Number,
 	orderName: String,
 	orderEmail: String,
 	orderPhone: String,
@@ -9,7 +10,8 @@ var orderSchema = new mongoose.Schema({
 	orderHuyen: String,
 	orderList: Array,
 	orderTotal: Number,
-	orderPaymenntMethod: String
+	orderPaymentMethod: String,
+	orderDate: String
 	},
     {
     	versionKey: false

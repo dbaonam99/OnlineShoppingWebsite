@@ -702,8 +702,18 @@ display: none !important;
 .table-user-title:first-child {
     width: 100px;
 }
+.table-order-title:first-child {
+    width: 20% !important;
+}
 .table-title:last-child {
     width: 80px;
+}
+#Action {
+    padding: 0;
+    text-align: center;
+}
+.action-table {
+    justify-content: center;
 }
 #Content {
     width: 250px;
@@ -713,6 +723,12 @@ display: none !important;
 }
 #Name {
     width: 200px;
+}
+#ShippingInfo {
+    width: 20%;
+}
+#PaymentMethod {
+    width: 150px;
 }
 .dashboard-table td p {
     width: 10px;
