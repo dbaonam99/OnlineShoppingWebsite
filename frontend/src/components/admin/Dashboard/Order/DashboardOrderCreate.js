@@ -17,7 +17,6 @@ export default function DashboardOrderCreate(props) {
     const [orderProvince, setOrderProvince] = useState(null)
     const [orderDistric, setOrderDistric] = useState(null)
     const [orderPaymentMethod, setOrderPaymentMethod] = useState("")
-    const [orderList, setOrderList] = useState([])
     const [provinceId, setProvinceId] = useState("")
     const [product, setProduct] = useState([])
     const [productList, setProductList] = useState([])
@@ -25,28 +24,32 @@ export default function DashboardOrderCreate(props) {
 
     const onSubmit = (event) => {
         event.preventDefault()
-        const config = {
-            headers: {
-                'content-type': 'multipart/form-data'
+
+        var listOrder = []
+        var total = 0;
+        for(let i in productList) {
+            const data = {
+                id: productList[i]._id,
+                amount: productList[i].count,
             }
+            total += productList[i].productPrice * productList[i].count
+            listOrder.push(data)
         }
-        const formData = new FormData();
 
-        formData.append("orderName", orderName);
-        formData.append("orderEmail", orderEmail);
-        formData.append("orderPhone", orderPhone);
-        formData.append("orderAddress", orderAddress);
-        formData.append("orderTinh", orderProvince);
-        formData.append("orderHuyen", orderDistric);
-        formData.append("orderPaymentMethod", orderPaymentMethod);
-        formData.append("orderDate", new Date());
-        formData.append("orderList", orderList);
-        // formData.append("orderTotal", total);
-        
-        axios.post('http://localhost:4000/order', formData, config)
-
-        // props.setCloseCreateFunc(false);
-        // props.setToastFunc(true);
+        axios.post('http://localhost:4000/order', {
+            orderName: orderName,
+            orderEmail: orderEmail,
+            orderPhone: orderPhone,
+            orderAddress: orderAddress,
+            orderTinh: orderProvince,
+            orderHuyen: orderDistric,
+            orderList: listOrder,
+            orderTotal: total,
+            orderPaymentMethod: orderPaymentMethod,
+            orderDate: new Date()
+        })
+        props.setCloseCreateFunc(false);
+        props.setToastFunc(true);
     }
 
     const [userList, setUserList] = useState([])
@@ -100,6 +103,8 @@ export default function DashboardOrderCreate(props) {
         }
     },[user])
 
+    console.log(orderPaymentMethod)
+    
     return (
         <div className="DashboardProductInfo">
             <div className="create-box"> 
@@ -291,8 +296,42 @@ export default function DashboardOrderCreate(props) {
                                                 className="order-list-item"
                                             >
                                                 <img src={item.productImg[0]} alt=""></img>
-                                                <p style={{width: '70%'}}>{item.productName}</p>
-                                                <p>x{item.count}</p>
+                                                <p style={{width: '55%'}}>{item.productName}</p>
+                                                <div style={{display: 'flex', alignItems: 'center'}}>
+                                                    <p 
+                                                        id={index}
+                                                        className="count-btn flex-center"
+                                                        onClick={(event)=>{
+                                                            const arr = [...productList]
+                                                            const id = event.target.id;
+                                                            for (let i in arr) {
+                                                                if (id === i) {
+                                                                    if (arr[i].count === 0) {
+                                                                        return
+                                                                    } else {
+                                                                        arr[i].count -= 1
+                                                                    }
+                                                                }
+                                                            }
+                                                            setProductList(arr)
+                                                        }}
+                                                    >-</p>
+                                                    <p>{item.count}</p>
+                                                    <p 
+                                                        id={index}
+                                                        className="count-btn flex-center"
+                                                        onClick={(event)=>{
+                                                            const arr = [...productList]
+                                                            const id = event.target.id;
+                                                            for (let i in arr) {
+                                                                if (id === i) {
+                                                                    arr[i].count += 1
+                                                                }
+                                                            }
+                                                            setProductList(arr)
+                                                        }}
+                                                    >+</p>
+                                                </div>
                                                 <div 
                                                     id={index}
                                                     className="delete-order-item flex-center"
@@ -318,13 +357,19 @@ export default function DashboardOrderCreate(props) {
                     <div className="create-box-row flex">
                         <div className="dashboard-left flex">Payment method</div>
                         <div className="dashboard-right">
-                            <input 
-                                type="text" name="phone" 
+                            <select 
+                                className="input"
+                                type="text"
                                 value={orderPaymentMethod || ""}
                                 onChange={(event)=>{
                                     setOrderPaymentMethod(event.target.value)
                                 }} required
-                                ></input>
+                            >
+                                <option></option>
+                                <option value="cash on delivery">Cash On Delivery</option>
+                                <option value="direct back transfer">Direct Back Transfer</option>
+                                <option value="paypal">Paypal</option>
+                            </select>
                         </div>
                     </div>
                     <div className="flex-center" style={{marginTop: '40px'}}>

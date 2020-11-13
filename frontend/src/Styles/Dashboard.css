@@ -945,7 +945,6 @@ select {
     font-weight: 300;
 }
 .order-list-item img {
-    position: relative;
     width: 70px;
     height: 70px;
 }
@@ -960,6 +959,16 @@ select {
 .delete-order-item:hover {
     background: #ddd;
     color: #111;
+}
+.count-btn {
+    cursor: pointer;
+    font-size: 18px;
+    background-color: #ddd;
+    width: 17px;
+    height: 17px;
+}
+.count-btn:hover {
+    background-color: #aaa;
 }
 
 .DashboardEditor {

@@ -6,37 +6,83 @@ import axios from 'axios'
 export default function DashboardOrderCreate(props) {
 
     const createForm = useRef();
-    
-    const [userName, setUserName] = useState("")
-    const [userEmail, setUserEmail] = useState("")
-    const [userPassword, setUserPassword] = useState("")
-    const [userRole, setUserRole] = useState("")
 
-    const user = props.user;
+    const [tinh, setTinh] = useState([])
+    const [huyen, setHuyen] = useState([])
+
+    const [orderName, setOrderName] = useState("")
+    const [orderEmail, setOrderEmail] = useState("")
+    const [orderPhone, setOrderPhone] = useState("")
+    const [orderAddress, setOrderAddress] = useState("")
+    const [orderProvince, setOrderProvince] = useState(null)
+    const [orderDistric, setOrderDistric] = useState(null)
+    const [orderPaymentMethod, setOrderPaymentMethod] = useState("")
+    const [provinceId, setProvinceId] = useState("")
+    const [product, setProduct] = useState([])
+    const [productList, setProductList] = useState([])
+
+    const [userList, setUserList] = useState([])
+    const [user, setUser] = useState("")
+    
+    useEffect(()=>{
+        axios.get(`http://localhost:4000/users/list`)
+            .then(res => {
+                setUserList(res.data)
+                res.data.filter((item)=>{
+                    if (item.userEmail === user) {
+                        setOrderName(item.userName)
+                        setOrderEmail(item.userEmail)
+                        setOrderPhone(item.userPhone)
+                        setOrderProvince(item.userProvince)
+                        setOrderDistric(item.userDistric)
+                        setOrderAddress(item.userAddress)
+                        if (item.userTinh !== "") {
+                            tinh.filter((item2)=>{
+                                if (item.userTinh === item2.name) {
+                                    setProvinceId(item2.id)
+                                }
+                            })
+                            setOrderProvince(item.userTinh)
+                        }
+                        if (item.userHuyen !== "") {
+                            setOrderDistric(item.userHuyen)
+                        }
+                    }
+                })
+            }
+        )
+        axios.get(`http://localhost:4000/vietnam`)
+            .then(res => {
+                setTinh(res.data[0].tinh)
+                setHuyen(res.data[0].huyen)
+            }
+        )
+        axios.get(`http://localhost:4000/products`)
+            .then(res => {
+                setProduct(res.data)
+            }
+        )
+        if (user === "") {
+            setOrderName("")
+            setOrderEmail("")
+            setOrderPhone("")
+            setOrderAddress("")
+            setOrderProvince("")
+            setProvinceId("")
+        }
+    },[user])
 
     useEffect(()=> {
         if (user) {    
-            setUserName(user.userName)
-            setUserRole(user.userRole)
-            setUserEmail(user.userEmail)
+            // setUserName(user.userName)
+            // setUserRole(user.userRole)
+            // setUserEmail(user.userEmail)
         }
     },[user])
 
     const onSubmit = (event) => {
         event.preventDefault()
-        const config = {
-            headers: {
-                'content-type': 'multipart/form-data'
-            }
-        }
-        const formData = new FormData();
-        formData.append("userName", userName);
-        formData.append("userEmail", userEmail);
-        formData.append("userPassword", userPassword);
-        formData.append("userRole", userRole);
-        formData.append("fromAdmin", true)
-
-        axios.post(`http://localhost:4000/users/update/${user._id}`, formData, config)
+        
 
         props.setCloseEditFunc(false);
         props.setToastFunc(true);
@@ -47,7 +93,7 @@ export default function DashboardOrderCreate(props) {
             <div className="create-box"> 
                 <div className="create-box-title flex">
                     <div className="create-box-title-text">
-                        User infomation
+                        Order infomation
                     </div>
                     <div  
                         className="create-box-title-close flex-center"
@@ -60,15 +106,38 @@ export default function DashboardOrderCreate(props) {
                 </div>
                 <form onSubmit={onSubmit} encType="multipart/form-data" ref={createForm}>
                     <div className="create-box-row flex">
+                        <div className="dashboard-left flex">Already have an account?</div>
+                        <div className="dashboard-right">
+                            <select 
+                                className="input"
+                                onChange={(event)=>{
+                                    setUser(event.target.value)
+                                }}
+                            >
+                                <option></option>
+                                {
+                                    userList.map((item,index)=>{
+                                        return (
+                                            <option
+                                                key={index}
+                                                value={item.userEmail}
+                                            >{item.userEmail}</option>
+                                        )
+                                    })
+                                }
+                            </select>
+                        </div>
+                    </div>
+                    <div className="create-box-row flex">
                         <div className="dashboard-left flex">Name</div>
                         <div className="dashboard-right">
                             <input 
                                 type="text" name="name" 
-                                value={userName || ""}
+                                value={orderName || ""}
                                 onChange={(event)=>{
-                                    setUserName(event.target.value)
+                                    setOrderName(event.target.value)
                                 }} required
-                                ></input>
+                            ></input>
                         </div>
                     </div>
                     <div className="create-box-row flex">
@@ -76,47 +145,219 @@ export default function DashboardOrderCreate(props) {
                         <div className="dashboard-right">
                             <input 
                                 type="text" name="email" 
-                                value={userEmail || ""}
+                                value={orderEmail || ""}
                                 onChange={(event)=>{
-                                    setUserEmail(event.target.value)
+                                    setOrderEmail(event.target.value)
                                 }} required
                                 ></input>
                         </div>
                     </div>
                     <div className="create-box-row flex">
-                        <div className="dashboard-left flex">Role</div>
+                        <div className="dashboard-left flex">Phone</div>
+                        <div className="dashboard-right">
+                            <input 
+                                type="text" name="phone" 
+                                value={orderPhone || ""}
+                                onChange={(event)=>{
+                                    setOrderPhone(event.target.value)
+                                }} required
+                                ></input>
+                        </div>
+                    </div>
+                    <div className="create-box-row flex">
+                        <div className="dashboard-left flex">Province</div>
                         <div className="dashboard-right">
                             <select 
                                 className="input"
-                                value={userRole || ""}
+                                value={orderProvince}
                                 onChange={(event)=>{
-                                    setUserRole(event.target.value)
-                                }} required
-                            >
-                                <option></option>
-                                <option value="admin">Admin</option>
-                                <option value="user">User</option>
+                                    setProvinceId(event.target.selectedIndex)
+                                    setOrderProvince(event.target.value)
+                                }}
+                                >
+                                <option disabled selected value>select a province</option>
+                                {tinh.map((item, index) => {
+                                    return (
+                                        <option 
+                                            key={index}
+                                            value={item.name}
+                                        >{item.name}</option>
+                                    )
+                                })}
                             </select>
                         </div>
                     </div>
                     <div className="create-box-row flex">
-                        <div className="dashboard-left flex">Password</div>
+                        <div className="dashboard-left flex">District</div>
+                        <div className="dashboard-right">
+                            <select 
+                                className="input"
+                                value={"orderDistric"}
+                                onChange={(event)=>{
+                                    setOrderDistric(event.target.value)
+                                }}
+                            >
+                                <option disabled selected value>select a district</option>
+                                {huyen.map((item, index) => {
+                                    if (item.tinh_id === provinceId) {
+                                        return (
+                                            <option
+                                                key={index}
+                                                value={item.name}
+                                            >{item.name}</option>
+                                        )
+                                    }
+                                })}
+                            </select>
+                        </div>
+                    </div>
+            
+                    <div className="create-box-row flex">
+                        <div className="dashboard-left flex">Address</div>
                         <div className="dashboard-right">
                             <input 
-                                type="text"
-                                className="input"
-                                name="password" 
-                                value={userPassword}
+                                type="text" name="phone" 
+                                value={orderAddress || ""}
                                 onChange={(event)=>{
-                                    setUserPassword(event.target.value)
+                                    setOrderAddress(event.target.value)
+                                }} required
+                                ></input>
+                        </div>
+                    </div>
+                    <div className="create-box-row flex">
+                        <div className="dashboard-left flex">Items</div>
+                        <div className="dashboard-right">
+                            <select 
+                                className="input"
+                                style={{height: '25px', marginBottom: '10px'}}
+                                value={""}
+                                onChange={(event)=>{
+                                    const isExists = (cartItems = [], item = {}) => {
+                                        for (let cartItem of cartItems) {
+                                            if (cartItem._id === item._id) {
+                                                return cartItem;
+                                            }
+                                        }
+                                        return false;
+                                    }
+
+                                    const value = event.target.value
+                                    const virtualCart = [...productList] 
+                                    if (productList.length === 0) {
+                                        virtualCart.push({...JSON.parse(value), count: 1})
+                                    } else {
+                                        if (!isExists(productList, JSON.parse(value))) {
+                                            virtualCart.push({...JSON.parse(value), count: 1})
+                                        } else {
+                                            for (let i = 0; i < virtualCart.length; i++) {
+                                                if (virtualCart[i]._id === JSON.parse(value)._id) {
+                                                    virtualCart[i].count += 1
+                                                    break
+                                                }
+                                            }
+                                        }
+                                    }
+                                    setProductList(virtualCart)
                                 }}
-                                value={userPassword}
-                            ></input>
+                            >
+                                <option selected value>select a product</option>
+                                {product.map((item, index) => {
+                                    return (
+                                        <option
+                                            key={index}
+                                            value={JSON.stringify(item)}
+                                        >Name: {item.productName}, Price: {item.productPrice}</option>
+                                    )
+                                })}
+                            </select>
+                            <div className="" style={{ overflowY: 'hidden', flexWrap:'wrap'}}>
+                                { productList && 
+                                    productList.map((item, index) => {
+                                        return (
+                                            <div 
+                                                key={index}
+                                                className="order-list-item"
+                                            >
+                                                <img src={item.productImg[0]} alt=""></img>
+                                                <p style={{width: '55%'}}>{item.productName}</p>
+                                                <div style={{display: 'flex', alignItems: 'center'}}>
+                                                    <p 
+                                                        id={index}
+                                                        className="count-btn flex-center"
+                                                        onClick={(event)=>{
+                                                            const arr = [...productList]
+                                                            const id = event.target.id;
+                                                            for (let i in arr) {
+                                                                if (id === i) {
+                                                                    if (arr[i].count === 0) {
+                                                                        return
+                                                                    } else {
+                                                                        arr[i].count -= 1
+                                                                    }
+                                                                }
+                                                            }
+                                                            setProductList(arr)
+                                                        }}
+                                                    >-</p>
+                                                    <p>{item.count}</p>
+                                                    <p 
+                                                        id={index}
+                                                        className="count-btn flex-center"
+                                                        onClick={(event)=>{
+                                                            const arr = [...productList]
+                                                            const id = event.target.id;
+                                                            for (let i in arr) {
+                                                                if (id === i) {
+                                                                    arr[i].count += 1
+                                                                }
+                                                            }
+                                                            setProductList(arr)
+                                                        }}
+                                                    >+</p>
+                                                </div>
+                                                <div 
+                                                    id={index}
+                                                    className="delete-order-item flex-center"
+                                                    onClick={(event)=>{
+                                                        var arr = [];
+                                                        const id = event.target.id;
+                                                        for (let i in productList) {
+                                                            if (i !== id) {
+                                                                arr.push(productList[i])
+                                                            }
+                                                        }
+                                                        setProductList(arr)
+                                                    }}>
+                                                    <FontAwesomeIcon style={{pointerEvents: 'none'}} icon={faTimes}/>
+                                                </div>
+                                            </div>
+                                        )
+                                    })
+                                }
+                            </div>
+                        </div>
+                    </div>
+                    <div className="create-box-row flex">
+                        <div className="dashboard-left flex">Payment method</div>
+                        <div className="dashboard-right">
+                            <select 
+                                className="input"
+                                type="text"
+                                value={orderPaymentMethod || ""}
+                                onChange={(event)=>{
+                                    setOrderPaymentMethod(event.target.value)
+                                }} required
+                            >
+                                <option></option>
+                                <option value="cash on delivery">Cash On Delivery</option>
+                                <option value="direct back transfer">Direct Back Transfer</option>
+                                <option value="paypal">Paypal</option>
+                            </select>
                         </div>
                     </div>
                     <div className="flex-center" style={{marginTop: '40px'}}>
                         <button className="create-box-btn btn">
-                            Edit user
+                            Create order
                         </button>
                     </div>
                 </form>
