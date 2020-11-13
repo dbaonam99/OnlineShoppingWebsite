@@ -20,7 +20,6 @@ export default function DashboardOrderCreate(props) {
     const [orderList, setOrderList] = useState([])
     const [provinceId, setProvinceId] = useState("")
     const [product, setProduct] = useState([])
-    const [productValue, setProductValue] = useState(null)
     const [productList, setProductList] = useState([])
     
 
@@ -100,8 +99,6 @@ export default function DashboardOrderCreate(props) {
             setProvinceId("")
         }
     },[user])
-
-    console.log(productList)
 
     return (
         <div className="DashboardProductInfo">
@@ -244,14 +241,38 @@ export default function DashboardOrderCreate(props) {
                         <div className="dashboard-right">
                             <select 
                                 className="input"
-                                value={productValue}
+                                style={{height: '25px', marginBottom: '10px'}}
+                                value={""}
                                 onChange={(event)=>{
+                                    const isExists = (cartItems = [], item = {}) => {
+                                        for (let cartItem of cartItems) {
+                                            if (cartItem._id === item._id) {
+                                                return cartItem;
+                                            }
+                                        }
+                                        return false;
+                                    }
+
                                     const value = event.target.value
-                                    setProductValue(value)
-                                    setProductList(productList=>[...productList, JSON.parse(value)])
+                                    const virtualCart = [...productList] 
+                                    if (productList.length === 0) {
+                                        virtualCart.push({...JSON.parse(value), count: 1})
+                                    } else {
+                                        if (!isExists(productList, JSON.parse(value))) {
+                                            virtualCart.push({...JSON.parse(value), count: 1})
+                                        } else {
+                                            for (let i = 0; i < virtualCart.length; i++) {
+                                                if (virtualCart[i]._id === JSON.parse(value)._id) {
+                                                    virtualCart[i].count += 1
+                                                    break
+                                                }
+                                            }
+                                        }
+                                    }
+                                    setProductList(virtualCart)
                                 }}
                             >
-                                <option disabled selected value>select a product</option>
+                                <option selected value>select a product</option>
                                 {product.map((item, index) => {
                                     return (
                                         <option
@@ -261,19 +282,31 @@ export default function DashboardOrderCreate(props) {
                                     )
                                 })}
                             </select>
-                            <div className="flex" style={{ overflowY: 'hidden', flexWrap:'wrap'}}>
+                            <div className="" style={{ overflowY: 'hidden', flexWrap:'wrap'}}>
                                 { productList && 
                                     productList.map((item, index) => {
                                         return (
-                                            <div key={index} className="create-box-img">
-                                                <img src={item.productImg} alt=""></img>
+                                            <div 
+                                                key={index}
+                                                className="order-list-item"
+                                            >
+                                                <img src={item.productImg[0]} alt=""></img>
+                                                <p style={{width: '70%'}}>{item.productName}</p>
+                                                <p>x{item.count}</p>
                                                 <div 
-                                                    className="create-box-img-overlay"
-                                                >
-                                                    <p
-                                                        // onClick={deleteImg}
-                                                        className="icon">X
-                                                    </p>
+                                                    id={index}
+                                                    className="delete-order-item flex-center"
+                                                    onClick={(event)=>{
+                                                        var arr = [];
+                                                        const id = event.target.id;
+                                                        for (let i in productList) {
+                                                            if (i !== id) {
+                                                                arr.push(productList[i])
+                                                            }
+                                                        }
+                                                        setProductList(arr)
+                                                    }}>
+                                                    <FontAwesomeIcon style={{pointerEvents: 'none'}} icon={faTimes}/>
                                                 </div>
                                             </div>
                                         )

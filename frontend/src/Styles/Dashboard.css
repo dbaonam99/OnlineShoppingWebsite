@@ -929,6 +929,38 @@ select {
     color: #222;
 }
 
+.order-list-item {
+    align-items: center;
+    display: flex;
+    height: 70px;
+    position: relative;
+    margin-right: 10px;
+    margin-bottom: 10px;
+    justify-content: space-between;
+}
+.order-list-item p{
+    margin-left: 20px;
+    font-size: 14px;
+    font-family: sans-serif;
+    font-weight: 300;
+}
+.order-list-item img {
+    position: relative;
+    width: 70px;
+    height: 70px;
+}
+.delete-order-item {
+    background: #111;
+    color: #fff;
+    width: 17px;
+    height: 17px;
+    margin-left: 20px;
+    border-radius: 50%;
+}
+.delete-order-item:hover {
+    background: #ddd;
+    color: #111;
+}
 
 .DashboardEditor {
     height: 500px;
