@@ -68,21 +68,21 @@ export default function DashboardProductEdit(props) {
         setInputValue({...inputValue, [event.target.name]: event.target.value})
     }
     
-    useEffect(()=> {
-        setProductName(product.productName)
-        setProductImg(product.productImg)
-        setProductSale(product.productSale)
-        setProductPrice(product.productPrice)
-        setProductDes(product.productDes)
-        setProductCate(product.productCate)
-        setProductSex(product.productSex)
-        setProductSize(product.productSize)
-        axios.get(`http://localhost:4000/category`)
-            .then(res => {
-                setCate(res.data)
-            }
-        )
+    useEffect(()=> { 
         if (product) {
+            setProductName(product.productName)
+            setProductImg(product.productImg)
+            setProductSale(product.productSale)
+            setProductPrice(product.productPrice)
+            setProductDes(product.productDes)
+            setProductCate(product.productCate)
+            setProductSex(product.productSex)
+            setProductSize(product.productSize)
+            axios.get(`http://localhost:4000/category`)
+                .then(res => {
+                    setCate(res.data)
+                }
+            )
             if (product.productSize) {
                 for (let i of product.productSize) {
                     if(i === "Small") setIsCheckedSmall(true)

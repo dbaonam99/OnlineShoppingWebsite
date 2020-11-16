@@ -102,8 +102,6 @@ export default function DashboardOrderCreate(props) {
             setProvinceId("")
         }
     },[user])
-
-    console.log(orderPaymentMethod)
     
     return (
         <div className="DashboardProductInfo">

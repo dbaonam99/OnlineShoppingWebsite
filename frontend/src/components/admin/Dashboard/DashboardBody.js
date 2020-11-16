@@ -27,6 +27,7 @@ export default function DashboardBody(props) {
     const [product, setProduct] = useState({})
     const [news, setNews] = useState({})
     const [user, setUser] = useState({})
+    const [order, setOrder] = useState({})
 
     const setToastFunc = (bool) => {
         setIsChange(true)
@@ -55,6 +56,11 @@ export default function DashboardBody(props) {
                 setUser(res.data)
             } 
         )
+        Axios.get(`http://localhost:4000/order/${props.productId}`)
+            .then(res => {
+                setOrder(res.data)
+            } 
+        )
     },[props.productId, props.openEdit])
 
     return (
@@ -72,7 +78,7 @@ export default function DashboardBody(props) {
                 <DashboardOrderEdit
                     setCloseEditFunc={props.setCloseEditFunc}
                     setToastFunc={setToastFunc}
-                    product={product}
+                    order={order}
                 />
             }
             { (props.openCreate && tabId === "4") &&

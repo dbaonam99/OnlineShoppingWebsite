@@ -1,52 +1,24 @@
 import React, { useEffect, useState } from 'react'
 import '../../../../App.css'
 import '../../../../Styles/Dashboard.css'
-import { faFileInvoice, faMoneyBillWave, faStar, faTshirt, faUser } from '@fortawesome/free-solid-svg-icons'
+import { faFileInvoice, faMoneyBillWave, faStar, faTasks, faTshirt, faUser } from '@fortawesome/free-solid-svg-icons'
 import DashboardTotalCount from './DashboardTotalCount'
 import DashboardLocation from './DashboardLocation'
 import DashboardTopFive from './DashboardTopFive'
 import DashboardRecentReview from './DashboardRecentReview'
 import axios from 'axios'
-import DashboardRecentOrders from './DashboardRecentOrders'
 import DashboardChart from './DashboardChart'
+import DashboardTodoList from './DashboardTodoList'
 
 export default function DashboardMain() {
 
-    const totalCount = [
-        {
-            id: 1,
-            title: "Total orders",
-            count: "3200",
-            percent: 12,
-            color: "orange",
-            icon: faFileInvoice
-        },
-        {
-            id: 2,
-            title: "Total sales",
-            count: "$120 000",
-            percent: 20,
-            color: "pink",
-            icon: faTshirt
-        },
-        {
-            id: 3,
-            title: "Income",
-            count: "$30 000",
-            percent: 30,
-            color: "green",
-            icon: faMoneyBillWave
-        },
-        {
-            id: 4,
-            title: "Customers",
-            count: "1200",
-            percent: 5,
-            color: "lightblue",
-            icon: faUser
-        },
-    ]
     const [products, setProducts] = useState([]);
+    const [order, setOrder] = useState([]);
+    const [user, setUser] = useState([]);
+    const [topCustomer, setTopCusomer] = useState([]);
+    const [topProductSales, setTopProductSales] = useState([]);
+    const [totalIncome, setTotalIncome] = useState(0);
+    const [totalSale, setTotalSale] = useState(0);
 
     useEffect(()=>{
         axios.get(`http://localhost:4000/products`)
@@ -54,7 +26,90 @@ export default function DashboardMain() {
                 setProducts(res.data)
             }
         )
+        axios.get(`http://localhost:4000/users/list`)
+            .then(res => {
+                setUser(res.data)
+            }
+        )
+        axios.get(`http://localhost:4000/order`)
+            .then(res => {
+                setOrder(res.data)
+                const topCustomer2 = Object.values(res.data.reduce((a, {orderEmail, orderName, orderTotal, orderAvatar}) => {
+                    a[orderEmail] = a[orderEmail] || {orderEmail, orderName, orderAvatar, orderTotal, count: 0};
+                    a[orderEmail].count++;
+                    return a;
+                }, Object.create(null)));
+                topCustomer2.sort((a,b) =>  b.count - a.count)
+                setTopCusomer(topCustomer2)
+
+                var totalIncome = 0;
+                var totalSale = 0;
+                for(let i in res.data) {
+                    for(let j in res.data[i].orderList) {
+                        totalSale += res.data[i].orderList[j].amount
+                    }
+                    totalIncome += res.data[i].orderTotal
+                }
+                setTotalSale(totalSale)
+                setTotalIncome(totalIncome)
+            }
+        )
     }, [])
+    useEffect(()=>{
+        var allProductSales = []
+        for (let i in order) {
+            for (let j in order[i].orderList) {
+                for (let k in products) {
+                    if (products[k]._id === order[i].orderList[j].id) {
+                        allProductSales.push(products[k])
+                    }
+                }
+            }
+        }
+        const topProductSales2 = Object.values(allProductSales.reduce((a, {_id, productName, productImg}) => {
+            a[_id] = a[_id] || {_id, productName, productImg, count: 0};
+            a[_id].count++;
+            return a;
+        }, Object.create(null)));
+        
+        topProductSales2.sort((a,b) =>  b.count - a.count)
+        setTopProductSales(topProductSales2)
+    },[order, products])
+
+    const totalCount = [
+        {
+            id: 1,
+            title: "Total orders",
+            count: order.length,
+            percent: 12,
+            color: "orange",
+            icon: faFileInvoice
+        },
+        {
+            id: 2,
+            title: "Total sales",
+            count: `${totalSale}`,
+            percent: 20,
+            color: "pink",
+            icon: faTshirt
+        },
+        {
+            id: 3,
+            title: "Income",
+            count: `${totalIncome}đ`,
+            percent: 30,
+            color: "green",
+            icon: faMoneyBillWave
+        },
+        {
+            id: 4,
+            title: "Users",
+            count: user.length,
+            percent: 5,
+            color: "lightblue",
+            icon: faUser
+        },
+    ]
 
     const recentVote = [];
     if (products.length > 0) {
@@ -116,31 +171,50 @@ export default function DashboardMain() {
                     )
                 })}
             </div>
-            <DashboardLocation/>
+            <DashboardLocation
+                order={order}
+            />
             <div className="row flex">
                 <DashboardTopFive
                     icon = {faUser}
-                    title = "Top customers"
+                    title = "Top customers by orders"
                     color = "lightblue"
+                    data = {topCustomer}
+                    table = {[
+                        {
+                            title: 'User name'
+                        },
+                        {
+                            title: 'Total orders'
+                        },
+                    ]}
                 />
                 <DashboardTopFive
                     icon = {faTshirt}
-                    title = "Top selling products"
+                    title = "Top products by selling"
                     color = "pink"
+                    data = {topProductSales}
+                    table = {[
+                        {
+                            title: 'Product name'
+                        },
+                        {
+                            title: 'Total sales'
+                        },
+                    ]}
                 />
             </div>
             <div className="row flex">
                 <DashboardRecentReview
                     icon = {faStar}
-                    title = "Customer Review"
+                    title = "Recent Reviews"
                     color = "orange"
                     topRecentVote = {topRecentVote}
                 />
-                <DashboardRecentOrders // recent orders
-                    icon = {faFileInvoice}
-                    title = "Recent Order"
+                <DashboardTodoList // recent orders
+                    icon = {faTasks}
+                    title = "Todo list"
                     color = "green"
-                    topRecentVote = {topRecentVote}
                 />
             </div>
             <div className="row flex">

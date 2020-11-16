@@ -393,11 +393,24 @@
     /* padding-top: 10px; */
     width: 100%;
 }
+/* width */
+.topfive-list::-webkit-scrollbar {
+    display: none !important;
+  }
+/* Track */
+.topfive-list::-webkit-scrollbar-track {
+    display: none !important;
+}
+/* Handle */
+.topfive-list::-webkit-scrollbar-thumb {
+display: none !important;
+}
 .top-user-name {
     font-family: sans-serif;
     font-size: 14px;
     font-weight: 300;
     color: #777;
+    /* flex-grow: 1; */
 }
 .top-user {
     align-items: center;
@@ -409,17 +422,16 @@
     border-radius: 50%;
 }
 .topfive-div {
-    /* background-color: red; */
     align-items: center;
 }
-.recentreview {
-    /* flex-grow: 1 !important; */
+.topfive-header:last-child {
+    width: 80px;
 }
 
 .topfive-div {
     width: 100%;
     border-bottom: 0.5px #ddd solid;
-    padding: 15px 10px;
+    padding: 10px 10px;
     justify-content: space-between;
     cursor: pointer;
     transition: .3s;
@@ -466,6 +478,7 @@
 }
 .review-product-item {
     align-items: flex-end;
+    justify-content: space-between;
 }
 .review-product-item:first-child {
     margin-bottom: 7px;

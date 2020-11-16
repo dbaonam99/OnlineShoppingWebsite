@@ -5378,6 +5378,7 @@ function CheckoutBody(props) {
     } = useContext(UserContext);
 
     const [nameInput, setNameInput] = useState("")
+    const [userAvt, setUserAvt] = useState("")
     const [emailInput, setEmailInput] = useState("")
     const [phoneInput, setPhoneInput] = useState("")
     const [provinceId, setProvinceId] = useState("")
@@ -5390,6 +5391,7 @@ function CheckoutBody(props) {
     const total = Number(subTotal) + Number(shipping)
 
     useEffect(()=>{
+        setUserAvt(userInfo.userAvt)
         setNameInput(userInfo.userName)
         setEmailInput(userInfo.userEmail)
         setPhoneInput(userInfo.userPhone)
@@ -5439,6 +5441,7 @@ function CheckoutBody(props) {
         } else {
             axios.post('http://localhost:4000/order', {
                 orderName: nameInput,
+                orderAvatar: userAvt,
                 orderEmail: emailInput,
                 orderPhone: phoneInput,
                 orderAddress: addressInput,

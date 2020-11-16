@@ -35,12 +35,11 @@ export default function DashboardRecentReview(props) {
                                         className="topfive-div flex recent-padding"
                                     >
                                         <div style={{borderRadius: '50%'}}>
-                                            <img style={{borderRadius: '50%', width: "55px", height: "55px"}} src="https://upload.wikimedia.org/wikipedia/commons/thumb/c/ce/180819_블랙핑크_팬싸인회_코엑스_라이브프라자_리사.jpg/440px-180819_블랙핑크_팬싸인회_코엑스_라이브프라자_리사.jpg" className="" alt=""></img>
+                                            <img style={{borderRadius: '50%', width: "55px", height: "55px"}} src={item.ratingAvt} className="" alt=""></img>
                                         </div>
                                         <div className="review-product">
                                             <div className="review-product-item flex" style={{justifyContent: 'space-between'}}>
                                                 <div className="review-product-name flex">
-                                                    {/* <h5>Product: </h5> */}
                                                     <h5>{item.productName}</h5>
                                                 </div>
                                                 <div className="review-product-time">
@@ -60,13 +59,15 @@ export default function DashboardRecentReview(props) {
                                                 </div>
                                             </div>
                                             <div className="review-product-item bottom flex">
-                                                <p>{item.name}</p>
-                                                <p>:</p>
-                                                <p className="review-product-item-content">  {item.ratingText}</p>
+                                                <div className="flex">
+                                                    <p>{item.ratingName}</p>
+                                                    <p>:</p>
+                                                    <p className="review-product-item-content">  {item.ratingText}</p>
+                                                </div>
+                                                <div className="review-product-star">
+                                                    <ReactStars {...ratingStar} />
+                                                </div>
                                             </div>
-                                        </div>
-                                        <div className="review-product-star">
-                                            <ReactStars {...ratingStar} />
                                         </div>
                                     </div>
                                 )

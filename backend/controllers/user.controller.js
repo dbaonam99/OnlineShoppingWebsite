@@ -62,7 +62,8 @@ module.exports.register = async function(req, res) {
 		userPhone: "",
 		userEmail: req.body.userEmail,
 		userPassword: req.body.password,
-		userRole: req.body.userRole
+		userRole: req.body.userRole,
+		userCreateDay: new Date,
 	}
 
 	await User.create(data);

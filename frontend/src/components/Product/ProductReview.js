@@ -18,8 +18,11 @@ export default function ProductReview(props) {
     const [reviewInput, setReviewInput] = useState("")
     const [nameInput, setNameInput] = useState("")
     const [emailInput, setEmailInput] = useState("")
+    const [userAvt, setUserAvt] = useState("")
 
     useEffect(()=>{
+        // setUserAvt()
+        console.log(userInfo)
         setNameInput(userInfo.userName)
         setEmailInput(userInfo.userEmail)
     },[userInfo])
@@ -51,7 +54,7 @@ export default function ProductReview(props) {
             ratingText: reviewInput,
             ratingEmail: emailInput,
             ratingStar: ratingValue,
-            ratingAvt: userInfo.userAvt
+            ratingAvt: userInfo.userAvt || "https://scontent-sin6-1.xx.fbcdn.net/v/t1.0-9/73321413_146697059956770_7174055866474168320_n.jpg?_nc_cat=107&ccb=2&_nc_sid=09cbfe&_nc_ohc=ni-Cr2_KyP0AX-BfQkv&_nc_ht=scontent-sin6-1.xx&oh=9cbda6699093e8dbb061a92c5bb58c7e&oe=5FCB1CFC"
         })
     }
 

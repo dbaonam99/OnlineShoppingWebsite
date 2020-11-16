@@ -17,7 +17,7 @@ transporter.verify(function(error, success) {
         // console.log('Kết nối thành công!');
     }
 });
-
+ 
 
 module.exports.postEmail = async function(req, res) {
     var email = req.body.subscriber;

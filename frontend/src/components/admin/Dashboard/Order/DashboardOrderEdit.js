@@ -23,8 +23,56 @@ export default function DashboardOrderCreate(props) {
 
     const [userList, setUserList] = useState([])
     const [user, setUser] = useState("")
-    
+    const [chooseUser, setChooseUser] = useState(false)
+    const order = props.order
+
     useEffect(()=>{
+        if (chooseUser === false) {
+            axios.get(`http://localhost:4000/vietnam`)
+                .then(res => {
+                    setTinh(res.data[0].tinh)
+                    setHuyen(res.data[0].huyen)
+                    if (order) {
+                        setOrderName(order.orderName)
+                        setOrderEmail(order.orderEmail)
+                        setOrderPhone(order.orderPhone)
+                        setOrderAddress(order.orderAddress)
+                        setOrderProvince(order.orderTinh)
+                        setOrderDistric(order.orderHuyen)
+                        setOrderPaymentMethod(order.orderPaymentMethod)
+                        if(typeof order.orderList !== "undefined") {
+                            order.orderList.map((item)=>{
+                                axios.get(`http://localhost:4000/products/${item.id}`)
+                                    .then(res => {
+                                        res.data.count = item.amount
+                                        // console.log(res.data)
+                                        setProductList(productList => [...productList, res.data])
+                                    })
+
+                            })
+                            return
+                        }
+                        setOrderPaymentMethod(order.orderPaymentMethod)
+                        if (order.orderTinh !== "") {
+                            res.data[0].tinh.filter((item)=>{
+                                if (order.orderTinh === item.name) {
+                                    setProvinceId(item.id)
+                                }
+                            })
+                            setOrderProvince(order.orderTinh)
+                        }
+                        if (order.orderHuyen !== "") {
+                            setOrderDistric(order.orderHuyen)
+                        }
+                    }
+                }
+            )
+        } 
+        axios.get(`http://localhost:4000/products`)
+            .then(res => {
+                setProduct(res.data)
+            }
+        )
         axios.get(`http://localhost:4000/users/list`)
             .then(res => {
                 setUserList(res.data)
@@ -51,38 +99,32 @@ export default function DashboardOrderCreate(props) {
                 })
             }
         )
-        axios.get(`http://localhost:4000/vietnam`)
-            .then(res => {
-                setTinh(res.data[0].tinh)
-                setHuyen(res.data[0].huyen)
-            }
-        )
-        axios.get(`http://localhost:4000/products`)
-            .then(res => {
-                setProduct(res.data)
-            }
-        )
-        if (user === "") {
-            setOrderName("")
-            setOrderEmail("")
-            setOrderPhone("")
-            setOrderAddress("")
-            setOrderProvince("")
-            setProvinceId("")
-        }
-    },[user])
-
-    useEffect(()=> {
-        if (user) {    
-            // setUserName(user.userName)
-            // setUserRole(user.userRole)
-            // setUserEmail(user.userEmail)
-        }
-    },[user])
+    },[order, user])
 
     const onSubmit = (event) => {
         event.preventDefault()
-        
+        var listOrder = []
+        var total = 0;
+        for(let i in productList) {
+            const data = {
+                id: productList[i]._id,
+                amount: productList[i].count,
+            }
+            total += productList[i].productPrice * productList[i].count
+            listOrder.push(data)
+        }
+        axios.post(`http://localhost:4000/order/update/${order._id}`, {
+            orderName: orderName,
+            orderEmail: orderEmail,
+            orderPhone: orderPhone,
+            orderAddress: orderAddress,
+            orderTinh: orderProvince,
+            orderHuyen: orderDistric,
+            orderList: listOrder,
+            orderTotal: total,
+            orderPaymentMethod: orderPaymentMethod,
+            orderDate: new Date()
+        })
 
         props.setCloseEditFunc(false);
         props.setToastFunc(true);
@@ -112,6 +154,7 @@ export default function DashboardOrderCreate(props) {
                                 className="input"
                                 onChange={(event)=>{
                                     setUser(event.target.value)
+                                    setChooseUser(true)
                                 }}
                             >
                                 <option></option>
@@ -192,7 +235,7 @@ export default function DashboardOrderCreate(props) {
                         <div className="dashboard-right">
                             <select 
                                 className="input"
-                                value={"orderDistric"}
+                                value={orderDistric}
                                 onChange={(event)=>{
                                     setOrderDistric(event.target.value)
                                 }}

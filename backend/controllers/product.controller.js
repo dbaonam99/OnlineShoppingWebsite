@@ -1,4 +1,23 @@
 var Product = require("../models/product.model.js");
+var Email = require("../models/email.model");
+
+var nodemailer = require('nodemailer');
+
+// Login with admin email
+var transporter = nodemailer.createTransport({
+    service: 'gmail',
+    auth: {
+        user: '18521118@gm.uit.edu.vn',
+        pass: 'Dbnbl08081999'
+    }
+})
+transporter.verify(function(error, success) {
+    if (error) {
+        console.log(error);
+    } else { 
+        // console.log('Kết nối thành công!');
+    }
+});
 
 module.exports.index = async function(req, res) {
 	var products = await Product.find();
@@ -30,6 +49,26 @@ module.exports.postProduct = async function(req, res) {
 		productSold: 0,
 	}
 	await Product.create(data)
+
+	var emailList = await Email.find()
+
+	for (let i in emailList) {
+		var mailOptions = {
+		    from: '18521118@gm.uit.edu.vn',
+		    to: emailList[i].subscriberEmail,
+		    subject: 'Sản phẩm mới tại SOBER SHOP',
+		    text: 'Sản phẩm mới nè'
+		}
+	
+		transporter.sendMail(mailOptions, function(error, info){
+		    if (error) {
+		      console.log(error);
+		    } else {
+		      console.log('Email sent: ' + info.response);
+		    }
+		})
+	}
+
 	res.status(200);
 }
 
