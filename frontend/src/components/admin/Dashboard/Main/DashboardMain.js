@@ -130,8 +130,8 @@ export default function DashboardMain() {
                     productVote[j].ratingHours = hours;
                     productVote[j].ratingMinutes = minutes;
                 } else {
-                    let days = newRatingDate.getDay().toString();
-                    let months = newRatingDate.getMonth().toString();
+                    let days = newRatingDate.getDate().toString();
+                    let months = (newRatingDate.getMonth()+1).toString();
                     if (days < 10) {
                         days = "0" + days
                     }

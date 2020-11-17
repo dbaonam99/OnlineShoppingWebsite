@@ -18,6 +18,7 @@ var categoryRoutes = require('./routes/category');
 var collectionRoutes = require('./routes/collection');
 var orderRoutes = require('./routes/order');
 var vietnamRoutes = require('./routes/vietnam');
+var todosRoutes = require('./routes/todos');
 
 mongoose.connect('mongodb://localhost:27017/Shop', { useNewUrlParser: true , useUnifiedTopology: true});
 mongoose.set('useFindAndModify', false);
@@ -47,6 +48,7 @@ app.use("/collection", collectionRoutes);
 app.use("/category", categoryRoutes);
 app.use("/order", orderRoutes);
 app.use("/vietnam", vietnamRoutes);
+app.use("/todos", todosRoutes);
 app.use(cors());
 app.options('*', cors());
 
