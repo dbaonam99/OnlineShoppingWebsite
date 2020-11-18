@@ -8,8 +8,7 @@ import axios from 'axios'
 const ENDPOINT = "http://localhost:4000";
 
 export default function DashboardInbox(props) {
-    // const messageRef = useRef();
-    const inputRef = useRef();
+    
     const [allChatData, setAllChatData] = useState([])
     const [roomId, setRoomId] = useState(0);
     const [roomIndex, setRoomIndex] = useState(0)
@@ -25,13 +24,15 @@ export default function DashboardInbox(props) {
         socket.on('send-all-chat', (data)=>{
             setAllChatData(data)
             if (data.length > 0) setRoomId(data[0].sessionId)
-            // messageRef.current.scrollIntoView({behavior: "smooth"})
+            setTimeout(()=>{
+                if (messageRef.current) messageRef.current.scrollIntoView({ behavior: "smooth" })
+            }, 100)
         })
         socket.on("client-msg", function(data) {
             setAllChatData(data.allchat)
-            // setTimeout(()=>{
-            //     messageRef.current.scrollIntoView({ behavior: "smooth" })
-            // }, 100)
+            setTimeout(()=>{
+                if (messageRef.current) messageRef.current.scrollIntoView({ behavior: "smooth" })
+            }, 100)
         })
     },[])
 
@@ -54,11 +55,13 @@ export default function DashboardInbox(props) {
                 setAllChatData(res.data)
             }
         )
-        inputRef.current.value = "";
-        // setTimeout(()=>{
-        //     messageRef.current.scrollIntoView({behavior: "smooth"})
-        // }, 100)
+        setChatInput("")
+        setTimeout(()=>{
+            if (messageRef.current) messageRef.current.scrollIntoView({ behavior: "smooth" })
+        }, 100)
     }
+
+    const messageRef = useRef([]);
 
     return (
         <div className="boxchat-admin flex">
@@ -75,20 +78,20 @@ export default function DashboardInbox(props) {
                                 onClick={(event)=>{
                                     setRoomId(item.sessionId)
                                     setRoomIndex(index)
-
-                                    // console.log(messageRef.current)
-                                    // if (messageRef.current) {
-                                    //     messageRef.current.scrollIntoView()
-                                    // }
+                                    // console.log(messageRef.current.scrollHeight)
+                                    // messageRef.current.scrollTo(0,messageRef.current.scrollHeight)
+                                    setTimeout(()=>{
+                                        if (messageRef.current) messageRef.current.scrollIntoView({ behavior: "smooth" })
+                                    }, 10)
                                 }}
                             >
-                                <div className="boxchat-avt flex-center">
+                                <div className="boxchat-avt flex-center" style={{pointerEvents: 'none'}}>
                                     <img 
                                         src="https://cdn4.vectorstock.com/i/1000x1000/94/38/avatar-flat-icon-on-black-background-black-style-vector-25959438.jpg" 
                                         alt=""
                                     ></img>
                                 </div>
-                                <div className="flex-col">
+                                <div className="flex-col" style={{pointerEvents: 'none'}}>
                                     <p className="boxchat-name">{item.chatName}</p>
                                     <p className="boxchat-first">{item.chatContent[item.chatContent.length - 1].text}</p>
                                 </div>
@@ -116,13 +119,14 @@ export default function DashboardInbox(props) {
                         className="boxchat-contents"
                     >
                         { allChatData.length>0 &&
-                            <div className="flex-col chat-box-list">
+                            <div 
+                                className="flex-col chat-box-list">
                                 {
                                     allChatData[roomIndex].chatContent.map((item, index) => {
                                         return (
                                             <div 
-                                                key={index} 
-                                                // ref={messageRef} 
+                                                ref={messageRef}
+                                                key={index}
                                                 className="chat-list">
                                                 {
                                                     item.fromAdmin !== true && 
@@ -150,7 +154,8 @@ export default function DashboardInbox(props) {
                             type="text" 
                             onChange={handleOnChange} 
                             name="chatInput" 
-                            ref={inputRef}
+                            // ref={inputRef}
+                            value={chatInput}
                             placeholder="Type your message..."
                         ></input>
                         <button>Send</button>

@@ -410,7 +410,6 @@ display: none !important;
     font-size: 14px;
     font-weight: 300;
     color: #777;
-    /* flex-grow: 1; */
 }
 .top-user {
     align-items: center;

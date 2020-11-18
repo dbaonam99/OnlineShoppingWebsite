@@ -17,7 +17,11 @@ transporter.verify(function(error, success) {
         // console.log('Kết nối thành công!');
     }
 });
- 
+
+module.exports.index = async function(req, res) {
+    console.log("cc")
+    res.send('<img src="https://picsum.photos/200/300"/>')
+}
 
 module.exports.postEmail = async function(req, res) {
     var email = req.body.subscriber;

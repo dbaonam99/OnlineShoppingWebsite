@@ -100,6 +100,7 @@
     height: 100%;
     overflow-y: scroll;
     margin: 5px;
+    padding-top: 10px;
 }/* width */
 .chat-box-list::-webkit-scrollbar {
     display: none !important;

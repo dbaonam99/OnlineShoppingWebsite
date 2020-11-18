@@ -35,7 +35,7 @@ export default function DashboardTopFive(props) {
                                         key={index}
                                         className="top-location-div topfive-div flex"
                                     >
-                                        <div style={{width: '70%', textAlign: 'left'}} className="top-user flex">
+                                        <div style={{width: '80%', textAlign: 'left'}} className="top-user flex">
                                             <img src={item.orderAvatar || item.productImg[1]} className="top-user-avt" alt=""></img>
                                             <p className="top-user-name">{item.orderName || item.productName}</p>
                                         </div>
