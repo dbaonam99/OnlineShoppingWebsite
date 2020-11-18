@@ -4,7 +4,7 @@ export const UserContext = React.createContext();
 
 export function UserProvider(props) {
     
-    const [userInfo ,setUserInfo] = useState([])
+    const [userInfo ,setUserInfo] = useState(null)
 
     const setUserInfoFunc = (user) => {
         setUserInfo(Object.assign(user, userInfo));

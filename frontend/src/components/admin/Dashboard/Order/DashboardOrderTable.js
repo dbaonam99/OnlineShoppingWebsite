@@ -121,7 +121,6 @@ export default function DashboardUserTable(props) {
             else if ((constOrder[i].orderId).toString().includes((searchInput))) {
                 search.push(constOrder[i])
             }
-            console.log(constOrder[i].orderId)
         }
         setOrder(search)
     }

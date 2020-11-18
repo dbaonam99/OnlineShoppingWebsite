@@ -5483,7 +5483,9 @@ function AccountInfo(props) {
                         <div 
                            className={tabId === 3 ? "accountinfo-active accountinfo-menu-item flex" : "accountinfo-menu-item flex"}  
                            onClick={()=> {
+                              localStorage.removeItem('user-id')
                               localStorage.removeItem('token');
+                              sessionStorage.removeItem('chat-id')
                               window.location.reload(false);
                            }}
                            >Log out</div>
