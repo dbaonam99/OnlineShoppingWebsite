@@ -9,5 +9,6 @@ router.get("/", controller.index);
 router.get("/:id", controller.info)
 router.post("/delete/:id", controller.deleteCollection);
 router.post("/",  upload.array("collectionBanner", 12), controller.postCollection);
+router.post("/update/:id", upload.array("collectionBanner", 12), controller.updateCollection); 
 
 module.exports = router;

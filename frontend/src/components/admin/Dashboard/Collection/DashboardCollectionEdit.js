@@ -7,127 +7,58 @@ export default function DashboardCollectionEdit(props) {
 
     const createForm = useRef();
 
-    const [tinh, setTinh] = useState([])
-    const [huyen, setHuyen] = useState([])
-
-    const [orderName, setOrderName] = useState("")
-    const [orderEmail, setOrderEmail] = useState("")
-    const [orderPhone, setOrderPhone] = useState("")
-    const [orderAddress, setOrderAddress] = useState("")
-    const [orderProvince, setOrderProvince] = useState(null)
-    const [orderDistric, setOrderDistric] = useState(null)
-    const [orderPaymentMethod, setOrderPaymentMethod] = useState("")
-    const [provinceId, setProvinceId] = useState("")
+    const [collectionName, setCollectionName] = useState("")
+    const [collectionBanner, setCollectionBanner] = useState([])
     const [product, setProduct] = useState([])
     const [productList, setProductList] = useState([])
+    const [file, setFile] = useState([])
 
-    const [userList, setUserList] = useState([])
-    const [user, setUser] = useState("")
-    const [chooseUser, setChooseUser] = useState(false)
-    const order = props.order
+    const collection = props.collection
 
     useEffect(()=>{
-        if (chooseUser === false) {
-            axios.get(`http://localhost:4000/vietnam`)
-                .then(res => {
-                    setTinh(res.data[0].tinh)
-                    setHuyen(res.data[0].huyen)
-                    if (order) {
-                        setOrderName(order.orderName)
-                        setOrderEmail(order.orderEmail)
-                        setOrderPhone(order.orderPhone)
-                        setOrderAddress(order.orderAddress)
-                        setOrderProvince(order.orderTinh)
-                        setOrderDistric(order.orderHuyen)
-                        setOrderPaymentMethod(order.orderPaymentMethod)
-                        if(typeof order.orderList !== "undefined") {
-                            order.orderList.map((item)=>{
-                                axios.get(`http://localhost:4000/products/${item.id}`)
-                                    .then(res => {
-                                        res.data.count = item.amount
-                                        // console.log(res.data)
-                                        setProductList(productList => [...productList, res.data])
-                                    })
-
-                            })
-                            return
-                        }
-                        setOrderPaymentMethod(order.orderPaymentMethod)
-                        if (order.orderTinh !== "") {
-                            res.data[0].tinh.filter((item)=>{
-                                if (order.orderTinh === item.name) {
-                                    setProvinceId(item.id)
-                                }
-                            })
-                            setOrderProvince(order.orderTinh)
-                        }
-                        if (order.orderHuyen !== "") {
-                            setOrderDistric(order.orderHuyen)
-                        }
-                    }
-                }
-            )
-        } 
         axios.get(`http://localhost:4000/products`)
             .then(res => {
                 setProduct(res.data)
             }
         )
-        axios.get(`http://localhost:4000/users/list`)
-            .then(res => {
-                setUserList(res.data)
-                res.data.filter((item)=>{
-                    if (item.userEmail === user) {
-                        setOrderName(item.userName)
-                        setOrderEmail(item.userEmail)
-                        setOrderPhone(item.userPhone)
-                        setOrderProvince(item.userProvince)
-                        setOrderDistric(item.userDistric)
-                        setOrderAddress(item.userAddress)
-                        if (item.userTinh !== "") {
-                            tinh.filter((item2)=>{
-                                if (item.userTinh === item2.name) {
-                                    setProvinceId(item2.id)
-                                }
-                            })
-                            setOrderProvince(item.userTinh)
-                        }
-                        if (item.userHuyen !== "") {
-                            setOrderDistric(item.userHuyen)
-                        }
-                    }
-                })
-            }
-        )
-    },[order, user])
+        if (collection) {
+            setCollectionBanner([collection.collectionBanner])
+            setCollectionName(collection.collectionName)
+            setProductList(collection.collectionItems)
+        }
+    },[collection])
 
     const onSubmit = (event) => {
         event.preventDefault()
-        var listOrder = []
-        var total = 0;
-        for(let i in productList) {
-            const data = {
-                id: productList[i]._id,
-                amount: productList[i].count,
+
+        event.preventDefault()
+        const config = {
+            headers: {
+                'content-type': 'multipart/form-data'
             }
-            total += productList[i].productPrice * productList[i].count
-            listOrder.push(data)
         }
-        axios.post(`http://localhost:4000/order/update/${order._id}`, {
-            orderName: orderName,
-            orderEmail: orderEmail,
-            orderPhone: orderPhone,
-            orderAddress: orderAddress,
-            orderTinh: orderProvince,
-            orderHuyen: orderDistric,
-            orderList: listOrder,
-            orderTotal: total,
-            orderPaymentMethod: orderPaymentMethod,
-            orderDate: new Date()
+
+        const formData = new FormData();
+        const imageArr = Array.from(file);
+        imageArr.forEach(image => {
+            formData.append('collectionBanner', image);
         })
+        formData.append("productList", JSON.stringify(productList));
+        formData.append("collectionName", collectionName);
+        axios.post(`http://localhost:4000/collection/update/${collection._id}`, formData, config)
 
         props.setCloseEditFunc(false);
         props.setToastFunc(true);
+    }
+
+    const deleteImg = (event) => {
+        const virutalFile = [...file]
+        virutalFile.splice(event.target.id, 1)
+        setFile(virutalFile)
+
+        const items = [...collectionBanner]
+        items.splice(event.target.id, 1)
+        setCollectionBanner(items)
     }
 
     return (
@@ -148,123 +79,56 @@ export default function DashboardCollectionEdit(props) {
                 </div>
                 <form onSubmit={onSubmit} encType="multipart/form-data" ref={createForm}>
                     <div className="create-box-row flex">
-                        <div className="dashboard-left flex">Already have an account?</div>
-                        <div className="dashboard-right">
-                            <select 
-                                className="input"
-                                onChange={(event)=>{
-                                    setUser(event.target.value)
-                                    setChooseUser(true)
-                                }}
-                            >
-                                <option></option>
-                                {
-                                    userList.map((item,index)=>{
-                                        return (
-                                            <option
-                                                key={index}
-                                                value={item.userEmail}
-                                            >{item.userEmail}</option>
-                                        )
-                                    })
-                                }
-                            </select>
-                        </div>
-                    </div>
-                    <div className="create-box-row flex">
                         <div className="dashboard-left flex">Name</div>
                         <div className="dashboard-right">
                             <input 
                                 type="text" name="name" 
-                                value={orderName || ""}
+                                value={collectionName || ""}
                                 onChange={(event)=>{
-                                    setOrderName(event.target.value)
+                                    setCollectionName(event.target.value)
                                 }} required
                             ></input>
                         </div>
                     </div>
                     <div className="create-box-row flex">
-                        <div className="dashboard-left flex">Email</div>
+                        <div className="dashboard-left flex">Collection Banner </div>
                         <div className="dashboard-right">
                             <input 
-                                type="text" name="email" 
-                                value={orderEmail || ""}
-                                onChange={(event)=>{
-                                    setOrderEmail(event.target.value)
-                                }} required
-                                ></input>
-                        </div>
-                    </div>
-                    <div className="create-box-row flex">
-                        <div className="dashboard-left flex">Phone</div>
-                        <div className="dashboard-right">
-                            <input 
-                                type="text" name="phone" 
-                                value={orderPhone || ""}
-                                onChange={(event)=>{
-                                    setOrderPhone(event.target.value)
-                                }} required
-                                ></input>
-                        </div>
-                    </div>
-                    <div className="create-box-row flex">
-                        <div className="dashboard-left flex">Province</div>
-                        <div className="dashboard-right">
-                            <select 
-                                className="input"
-                                value={orderProvince}
-                                onChange={(event)=>{
-                                    setProvinceId(event.target.selectedIndex)
-                                    setOrderProvince(event.target.value)
-                                }}
-                                >
-                                <option disabled selected value>select a province</option>
-                                {tinh.map((item, index) => {
-                                    return (
-                                        <option 
-                                            key={index}
-                                            value={item.name}
-                                        >{item.name}</option>
-                                    )
-                                })}
-                            </select>
-                        </div>
-                    </div>
-                    <div className="create-box-row flex">
-                        <div className="dashboard-left flex">District</div>
-                        <div className="dashboard-right">
-                            <select 
-                                className="input"
-                                value={orderDistric}
-                                onChange={(event)=>{
-                                    setOrderDistric(event.target.value)
-                                }}
-                            >
-                                <option disabled selected value>select a district</option>
-                                {huyen.map((item, index) => {
-                                    if (item.tinh_id === provinceId) {
-                                        return (
-                                            <option
-                                                key={index}
-                                                value={item.name}
-                                            >{item.name}</option>
-                                        )
+                                onChange={(event) => {
+                                    const files = event.target.files;
+                                    for (let i = 0; i< files.length; i++) {
+                                        setCollectionBanner(news=>[...news, URL.createObjectURL(files[i])])
                                     }
-                                })}
-                            </select>
-                        </div>
-                    </div>
-            
-                    <div className="create-box-row flex">
-                        <div className="dashboard-left flex">Address</div>
-                        <div className="dashboard-right">
-                            <input 
-                                type="text" name="phone" 
-                                value={orderAddress || ""}
-                                onChange={(event)=>{
-                                    setOrderAddress(event.target.value)
-                                }} required
-                                ></input>
+                                    const fileArr = Array.prototype.slice.call(files)
+                                    fileArr.forEach(item=>{
+                                        setFile(file=>[...file, item])
+                                    })
+                                }}
+                                type="file"
+                                className="noborder"
+                                multiple="multiple"
+                                style={{height: '50px'}}
+                            ></input>
+                            <div className="flex" style={{ overflowY: 'hidden', flexWrap:'wrap'}}>
+                                { collectionBanner && 
+                                    collectionBanner.map((item, index) => {
+                                        return (
+                                            <div key={index} className="create-box-img" style={{width: '130px'}}>
+                                                <img key={index} src={item} alt=""></img>
+                                                <div 
+                                                    className="create-box-img-overlay"
+                                                >
+                                                    <p
+                                                        id={index}
+                                                        onClick={deleteImg}
+                                                        className="icon">X
+                                                    </p>
+                                                </div>
+                                            </div>
+                                        )
+                                    })
+                                }
+                            </div>
                         </div>
                     </div>
                     <div className="create-box-row flex">
@@ -323,41 +187,6 @@ export default function DashboardCollectionEdit(props) {
                                             >
                                                 <img src={item.productImg[0]} alt=""></img>
                                                 <p style={{width: '55%'}}>{item.productName}</p>
-                                                <div style={{display: 'flex', alignItems: 'center'}}>
-                                                    <p 
-                                                        id={index}
-                                                        className="count-btn flex-center"
-                                                        onClick={(event)=>{
-                                                            const arr = [...productList]
-                                                            const id = event.target.id;
-                                                            for (let i in arr) {
-                                                                if (id === i) {
-                                                                    if (arr[i].count === 0) {
-                                                                        return
-                                                                    } else {
-                                                                        arr[i].count -= 1
-                                                                    }
-                                                                }
-                                                            }
-                                                            setProductList(arr)
-                                                        }}
-                                                    >-</p>
-                                                    <p>{item.count}</p>
-                                                    <p 
-                                                        id={index}
-                                                        className="count-btn flex-center"
-                                                        onClick={(event)=>{
-                                                            const arr = [...productList]
-                                                            const id = event.target.id;
-                                                            for (let i in arr) {
-                                                                if (id === i) {
-                                                                    arr[i].count += 1
-                                                                }
-                                                            }
-                                                            setProductList(arr)
-                                                        }}
-                                                    >+</p>
-                                                </div>
                                                 <div 
                                                     id={index}
                                                     className="delete-order-item flex-center"
@@ -379,28 +208,10 @@ export default function DashboardCollectionEdit(props) {
                                 }
                             </div>
                         </div>
-                    </div>
-                    <div className="create-box-row flex">
-                        <div className="dashboard-left flex">Payment method</div>
-                        <div className="dashboard-right">
-                            <select 
-                                className="input"
-                                type="text"
-                                value={orderPaymentMethod || ""}
-                                onChange={(event)=>{
-                                    setOrderPaymentMethod(event.target.value)
-                                }} required
-                            >
-                                <option></option>
-                                <option value="cash on delivery">Cash On Delivery</option>
-                                <option value="direct back transfer">Direct Back Transfer</option>
-                                <option value="paypal">Paypal</option>
-                            </select>
-                        </div>
-                    </div>
+                    </div> 
                     <div className="flex-center" style={{marginTop: '40px'}}>
                         <button className="create-box-btn btn">
-                            Create order
+                            Update collection
                         </button>
                     </div>
                 </form>

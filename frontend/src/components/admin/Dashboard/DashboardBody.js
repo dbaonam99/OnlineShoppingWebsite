@@ -31,6 +31,7 @@ export default function DashboardBody(props) {
     const [news, setNews] = useState({})
     const [user, setUser] = useState({})
     const [order, setOrder] = useState({})
+    const [collection, setCollection] = useState({})
 
     const setToastFunc = (bool) => {
         setIsChange(true)
@@ -62,6 +63,11 @@ export default function DashboardBody(props) {
         Axios.get(`http://localhost:4000/order/${props.productId}`)
             .then(res => {
                 setOrder(res.data)
+            } 
+        )
+        Axios.get(`http://localhost:4000/collection/${props.productId}`)
+            .then(res => {
+                setCollection(res.data)
             } 
         )
     },[props.productId, props.openEdit])
@@ -134,7 +140,7 @@ export default function DashboardBody(props) {
                 <DashboardCollectionEdit
                     setCloseEditFunc={props.setCloseEditFunc}
                     setToastFunc={setToastFunc}
-                    user={user} 
+                    collection={collection} 
                 />
             }
             <DashboardHeader

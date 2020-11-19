@@ -41,13 +41,13 @@ export default function DashboardCollectionCreate(props) {
     }
 
     const deleteImg = (event) => {
-        // const virutalFile = [...file]
-        // virutalFile.splice(event.target.id, 1)
-        // setFile(virutalFile)
+        const virutalFile = [...file]
+        virutalFile.splice(event.target.id, 1)
+        setFile(virutalFile)
 
-        // const items = [...newsImg]
-        // items.splice(event.target.id, 1)
-        // setNewsImg(items)
+        const items = [...newsImg]
+        items.splice(event.target.id, 1)
+        setNewsImg(items)
     }
 
     useEffect(()=>{
@@ -186,41 +186,6 @@ export default function DashboardCollectionCreate(props) {
                                             >
                                                 <img src={item.productImg[0]} alt=""></img>
                                                 <p style={{width: '55%'}}>{item.productName}</p>
-                                                <div style={{display: 'flex', alignItems: 'center'}}>
-                                                    <p 
-                                                        id={index}
-                                                        className="count-btn flex-center"
-                                                        onClick={(event)=>{
-                                                            const arr = [...productList]
-                                                            const id = event.target.id;
-                                                            for (let i in arr) {
-                                                                if (id === i) {
-                                                                    if (arr[i].count === 0) {
-                                                                        return
-                                                                    } else {
-                                                                        arr[i].count -= 1
-                                                                    }
-                                                                }
-                                                            }
-                                                            setProductList(arr)
-                                                        }}
-                                                    >-</p>
-                                                    <p>{item.count}</p>
-                                                    <p 
-                                                        id={index}
-                                                        className="count-btn flex-center"
-                                                        onClick={(event)=>{
-                                                            const arr = [...productList]
-                                                            const id = event.target.id;
-                                                            for (let i in arr) {
-                                                                if (id === i) {
-                                                                    arr[i].count += 1
-                                                                }
-                                                            }
-                                                            setProductList(arr)
-                                                        }}
-                                                    >+</p>
-                                                </div>
                                                 <div 
                                                     id={index}
                                                     className="delete-order-item flex-center"
@@ -245,7 +210,7 @@ export default function DashboardCollectionCreate(props) {
                     </div> 
                     <div className="flex-center" style={{marginTop: '40px'}}>
                         <button className="create-box-btn btn">
-                            Create order
+                            Create collection
                         </button>
                     </div>
                 </form>
