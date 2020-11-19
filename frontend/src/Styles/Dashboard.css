@@ -568,13 +568,35 @@ display: none !important;
 .boxchat-name {
     font-size: 16px;
     text-transform: capitalize;
+    font-family: sans-serif;
 }
+
 .boxchat-first {
-    font-size: 12px;
+    width: 100%;
+}
+.boxchat-first p {
+    font-size: 14px;
     color: #777;
-    text-transform: capitalize;
+    font-family: sans-serif;
+    margin-bottom: 2px;
+}
+.boxchat-first p:first-child {
+    /* Add ... if text is full */
+    display: -webkit-box;
+    -webkit-line-clamp: 1;
+    -webkit-box-orient: vertical;
+    max-width: 120px;
+    overflow: hidden;
+    margin-right: 5px;
+}
+.boxchat-first p:last-child {
+    max-width: 50px;
+    text-align: right;
 }
 .boxchat-item:hover {
+    background-color: #eee;
+}
+.boxchat-item-active {
     background-color: #eee;
 }
 .boxchat-main {
@@ -596,7 +618,7 @@ display: none !important;
     height: 100%;
     margin-bottom: 20px;
     justify-content: flex-start;
-    margin-right: 20px;
+    margin-right: 10px;
 }
 .boxchat-box-avt img {
     border-radius: 50%;
@@ -609,7 +631,6 @@ display: none !important;
 .boxchat-contents-item {
     margin-top: 10px;
 }
-
 .boxchat-search {
     position: fixed;
     width: 20%;
@@ -655,6 +676,8 @@ display: none !important;
 .box-chat-clienttext {
     margin: 3px 0;
     clear: right;
+    position: relative;
+    width: max-content;
 }
 .box-chat-clienttext p {
     font-size: 14px;
@@ -670,6 +693,7 @@ display: none !important;
     text-align: right;
     float: right;
     clear: right;
+    position: relative;
 }
 .box-chat-admintext p {
     font-size: 14px;
@@ -678,6 +702,56 @@ display: none !important;
     text-align: right;
     width: max-content;
     background-color: #eeecec;
+}
+.time-tooltip {
+    background-color: #111;
+    color: #FFF;
+    border-radius: 2px;
+    padding: 0 20px;
+    position: absolute;
+    top: 0;
+    right: calc(100% + 10px);
+    width: max-content;
+    height: 100%;
+}
+.time-tooltip p {
+    font-size: 10px;
+    background-color: #111;
+}
+.time-tooltip::after {
+    content: " ";
+    position: absolute;
+    top: 35%;
+    right: -10px;
+    margin-left: -5px;
+    border-width: 5px;
+    border-style: solid;
+    border-color: transparent transparent transparent black;
+}
+.time-tooltip-client {
+    background-color: #111;
+    color: #FFF;
+    border-radius: 2px;
+    padding: 0 20px;
+    position: absolute;
+    top: 0;
+    left: calc(100% + 10px);
+    width: max-content;
+    height: 100%;
+}
+.time-tooltip-client p {
+    font-size: 10px;
+    background-color: #111;
+}
+.time-tooltip-client::after {
+    content: " ";
+    position: absolute;
+    top: 35%;
+    left: -5px;
+    margin-left: -5px;
+    border-width: 5px;
+    border-style: solid;
+    border-color: transparent black transparent transparent ;
 }
 
 .boxchat-contents {
@@ -750,7 +824,7 @@ display: none !important;
 .table-title:last-child {
     width: 80px;
 }
-#Action {
+#Action, #CollectionAction {
     padding: 0;
     text-align: center;
 }
@@ -771,6 +845,12 @@ display: none !important;
 }
 #PaymentMethod {
     width: 150px;
+}
+#CollectionBanner {
+    width: 20%;
+}
+#CollectionItems {
+    width: 30%;
 }
 .dashboard-table td p {
     width: 10px;
@@ -1092,4 +1172,17 @@ select {
     width: 15%;
     border: none;
     height: 25px;
+}
+.table-input {
+    outline: none;
+    border: none;
+    padding: 5px 5px;
+    border-bottom: 2px #ddd solid;
+    height: 100%;
+    width: 100%;
+    font-family: sans-serif;
+}
+.table-input:focus, 
+.table-input:hover {
+    border-bottom: 2px #777 solid;
 }

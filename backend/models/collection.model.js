@@ -3,11 +3,12 @@ const mongoose = require('mongoose')
 var collectionSchema = new mongoose.Schema({
     collectionName: String,
     collectionImg: String,
+    collectionTime: Date,
+    collectionBanner: String,
     collectionItems: [{
         type: mongoose.Schema.Types.ObjectId,
         ref: 'Product'
     }]
-    // collectionItems: Array,
 	},
     {
     	versionKey: false

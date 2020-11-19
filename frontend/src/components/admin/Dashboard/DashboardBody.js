@@ -18,6 +18,9 @@ import DashboardUserEdit from './User/DashboardUserEdit';
 import DashboardOrder from './Order/DashboardOrder';
 import DashboardOrderEdit from './Order/DashboardOrderEdit';
 import DashboardOrderCreate from './Order/DashboardOrderCreate';
+import DashboardCollectionCreate from './Collection/DashboardCollectionCreate';
+import DashboardCollectionEdit from './Collection/DashboardCollectionEdit';
+import DashboardCollection from './Collection/DashboardCollection';
 
 export default function DashboardBody(props) {
 
@@ -120,6 +123,20 @@ export default function DashboardBody(props) {
                     user={user} 
                 />
             }
+
+            { (props.openCreate && tabId === "7") &&
+                <DashboardCollectionCreate
+                    setCloseCreateFunc={props.setCloseCreateFunc}
+                    setToastFunc={setToastFunc}
+                />
+            }
+            { (props.openEdit && tabId === "7") &&
+                <DashboardCollectionEdit
+                    setCloseEditFunc={props.setCloseEditFunc}
+                    setToastFunc={setToastFunc}
+                    user={user} 
+                />
+            }
             <DashboardHeader
                 itemName= {props.menuItems[tabId-1].name}
                 setOpenMenuOnClick = {props.setOpenMenuOnClick}
@@ -168,7 +185,13 @@ export default function DashboardBody(props) {
                 />
             }
             {
-                tabId === "7" && <div>tab 7</div>
+                tabId === "7" && 
+                <DashboardCollection
+                    setOpenCreateFunc={props.setOpenCreateFunc}
+                    setOpenEditFunc={props.setOpenEditFunc}
+                    toast={toast}
+                    isChange={isChange}
+                />
             }
         </div>
     )

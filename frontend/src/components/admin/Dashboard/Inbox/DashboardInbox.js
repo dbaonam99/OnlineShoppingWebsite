@@ -44,6 +44,7 @@ export default function DashboardInbox(props) {
 
     const sendChatInput = (event) => {
         event.preventDefault();
+        setChatInput("")
         if (chatInput === "") {
             return
         }
@@ -61,7 +62,6 @@ export default function DashboardInbox(props) {
                 setConstAllChatData(res.data)
             }
         )
-        setChatInput("")
         setTimeout(()=>{
             if (messageRef.current) messageRef.current.scrollIntoView({ behavior: "smooth" })
         }, 100)
@@ -79,6 +79,18 @@ export default function DashboardInbox(props) {
         setAllChatData(search)
     }
 
+    const sortDateChat = [...allChatData]
+    // if (allChatData.length > 0) {
+
+    //     sortDateChat.sort((a,b) => {
+    //         var dateA = new Date(a.chatContent[a.chatContent.length - 1].time)
+    //         var dateB = new Date(b.chatContent[b.chatContent.length - 1].time)
+    //         return dateB - dateA
+    //     })
+    // }
+
+    const [openTimeTooltip, setOpenTimeTooltip] = useState("")
+
     return (
         <div className="boxchat-admin flex">
             <div className="boxchat-list">
@@ -94,13 +106,49 @@ export default function DashboardInbox(props) {
                     ></input>
                 </div>
                 <div style={{height: '50px'}}></div>
-                { allChatData.length > 0 && 
-                    allChatData.map((item,index)=>{
+                { sortDateChat.length > 0 && 
+                    sortDateChat.map((item,index)=>{
+                        const date = new Date(item.chatContent[item.chatContent.length - 1].time)
+                        const toDay = new Date()
+                        const day = date.getDay();
+                        const dayInMonth = date.getDate();
+                        const month = date.getMonth() + 1;
+                        const hour = date.getHours()
+                        const minute = date.getMinutes()
+                        var strTime = ""
+                        if (dayInMonth === toDay.getDate()) {
+                            if (hour < 10) {
+                                strTime += `- 0${hour}`
+                            } else {
+                                strTime += `- ${hour}`
+                            }
+                            if (minute < 10){
+                                strTime += `:0${minute}`
+                            } else {
+                                strTime += `:${minute}`
+                            }
+                        } 
+                        if (dayInMonth < toDay.getDate()) {
+                            strTime = `- T${day}`
+                        } 
+                        if ((toDay.getDate()- dayInMonth) > 6) {
+                            strTime = ""
+                            if (dayInMonth < 10) {
+                                strTime += `- 0${dayInMonth}`
+                            } else {
+                                strTime += `- ${dayInMonth}`
+                            }
+                            if (month < 10){
+                                strTime += `/0${month}`
+                            } else {
+                                strTime += `/${month}`
+                            }
+                        }
                         return (
                             <div 
                                 key={index}
-                                className="boxchat-item flex"
-                                onClick={(event)=>{
+                                className={roomIndex === index ? "boxchat-item flex boxchat-item-active" : "boxchat-item flex"}
+                                onClick={()=>{
                                     setRoomId(item.sessionId)
                                     setRoomIndex(index)
                                     setTimeout(()=>{
@@ -122,9 +170,19 @@ export default function DashboardInbox(props) {
                                         ></img>
                                     }
                                 </div>
-                                <div className="flex-col" style={{pointerEvents: 'none'}}>
+                                <div className="flex-col" style={{pointerEvents: 'none', width: '100%', justifyContent: 'space-between'}}>
                                     <p className="boxchat-name">{item.chatName}</p>
-                                    <p className="boxchat-first">{item.chatContent[item.chatContent.length - 1].text}</p>
+                                    <div className="boxchat-first flex">
+                                        {
+                                            item.chatContent[item.chatContent.length - 1].fromAdmin === true &&
+                                            <p>Bạn: {item.chatContent[item.chatContent.length - 1].text}</p>
+                                        }
+                                        {
+                                            !item.chatContent[item.chatContent.length - 1].fromAdmin &&
+                                            <p>{item.chatContent[item.chatContent.length - 1].text}</p>
+                                        }
+                                        <p>{strTime}</p>
+                                    </div>
                                 </div>
                             </div>
                         )
@@ -133,16 +191,16 @@ export default function DashboardInbox(props) {
             </div>
             <div className="boxchat-main">
                 <div className="boxchat-box">
-                    { allChatData.length>0 &&
+                    { sortDateChat.length>0 &&
                         <div className="boxchat-box-info">
                             <div className="boxchat-box-avt flex-center">
-                                { allChatData[Number(roomIndex)].userInfo && 
+                                { sortDateChat[Number(roomIndex)].userInfo && 
                                     <img 
-                                        src={allChatData[Number(roomIndex)].userInfo.userAvt}
+                                        src={sortDateChat[Number(roomIndex)].userInfo.userAvt}
                                         alt=""
                                     ></img>
                                 }
-                                { !allChatData[Number(roomIndex)].userInfo && 
+                                { !sortDateChat[Number(roomIndex)].userInfo && 
                                     <img 
                                         src={"https://scontent-sin6-1.xx.fbcdn.net/v/t1.0-9/73321413_146697059956770_7174055866474168320_n.jpg?_nc_cat=107&ccb=2&_nc_sid=09cbfe&_nc_ohc=ni-Cr2_KyP0AX-BfQkv&_nc_ht=scontent-sin6-1.xx&oh=9cbda6699093e8dbb061a92c5bb58c7e&oe=5FCB1CFC"}
                                         alt=""
@@ -150,13 +208,13 @@ export default function DashboardInbox(props) {
                                 }
                             </div>
                             <div className="flex-center">
-                                { allChatData[Number(roomIndex)].userInfo && 
+                                { sortDateChat[Number(roomIndex)].userInfo && 
                                     <p className="boxchat-name">{allChatData[Number(roomIndex)].chatName}</p>
                                 }
-                                { !allChatData[Number(roomIndex)].userInfo &&
+                                { !sortDateChat[Number(roomIndex)].userInfo &&
                                     <div className="flex" style={{alignItems: 'flex-end'}}>
                                         <p className="boxchat-name">{allChatData[Number(roomIndex)].chatName}</p>
-                                        <p style={{marginLeft: '12px', color: '#777', fontSize: '16px'}}>(anonymous)</p>
+                                        <p style={{marginLeft: '5px', color: '#777', fontSize: '16px', fontFamily: 'sans-serif'}}>(anonymous)</p>
                                     </div>
                                 }
                             </div>
@@ -165,11 +223,47 @@ export default function DashboardInbox(props) {
                     <div 
                         className="boxchat-contents"
                     >
-                        { allChatData.length>0 &&
+                        { sortDateChat.length>0 &&
                             <div 
                                 className="flex-col chat-box-list">
                                 {
-                                    allChatData[roomIndex].chatContent.map((item, index) => {
+                                    sortDateChat[roomIndex].chatContent.map((item, index) => {
+                                        const date = new Date(item.time)
+                                        const toDay = new Date()
+                                        const day = date.getDay();
+                                        const dayInMonth = date.getDate();
+                                        const month = date.getMonth() + 1;
+                                        const hour = date.getHours()
+                                        const minute = date.getMinutes()
+                                        let chatTime = ""
+                                        if (dayInMonth === toDay.getDate()) {
+                                            if (hour < 10) {
+                                                chatTime += `0${hour}`
+                                            } else {
+                                                chatTime += `${hour}`
+                                            }
+                                            if (minute < 10){
+                                                chatTime += `:0${minute}`
+                                            } else {
+                                                chatTime += `:${minute}`
+                                            }
+                                        } 
+                                        if (dayInMonth < toDay.getDate()) {
+                                            chatTime = `T${day}`
+                                        } 
+                                        if ((toDay.getDate()- dayInMonth) > 6) {
+                                            chatTime = ""
+                                            if (dayInMonth < 10) {
+                                                chatTime += `0${dayInMonth}`
+                                            } else {
+                                                chatTime += `${dayInMonth}`
+                                            }
+                                            if (month < 10){
+                                                chatTime += `/0${month}`
+                                            } else {
+                                                chatTime += `/${month}`
+                                            }
+                                        }
                                         return (
                                             <div 
                                                 ref={messageRef}
@@ -177,14 +271,38 @@ export default function DashboardInbox(props) {
                                                 className="chat-list">
                                                 {
                                                     item.fromAdmin !== true && 
-                                                    <div className="box-chat-clienttext">
+                                                    <div className="box-chat-clienttext"
+                                                        onMouseEnter={()=>{
+                                                            setOpenTimeTooltip(item.time)
+                                                        }}
+                                                        onMouseLeave={()=>{
+                                                            setOpenTimeTooltip("")
+                                                        }}
+                                                    >
                                                         <p>{item.text}</p>
+                                                        { openTimeTooltip === item.time &&
+                                                            <div className="time-tooltip-client flex-center">
+                                                                <p>{chatTime}</p>
+                                                            </div>
+                                                        }
                                                     </div>
                                                 }
                                                 {
                                                     item.fromAdmin === true && 
-                                                    <div className="box-chat-admintext">
-                                                        <p>{item.text}</p>
+                                                    <div className="box-chat-admintext"
+                                                        onMouseEnter={()=>{
+                                                            setOpenTimeTooltip(item.time)
+                                                        }}
+                                                        onMouseLeave={()=>{
+                                                            setOpenTimeTooltip("")
+                                                        }}
+                                                    >
+                                                        <p style={{pointerEvents: 'none'}}>{item.text}</p>
+                                                        { openTimeTooltip === item.time &&
+                                                            <div className="time-tooltip flex-center">
+                                                                <p>{chatTime}</p>
+                                                            </div>
+                                                        }
                                                     </div>
                                                 }
                                             </div>

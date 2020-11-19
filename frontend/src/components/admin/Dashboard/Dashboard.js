@@ -3,7 +3,7 @@ import '../../../App.css'
 import '../../../Styles/Dashboard.css'
 import DashboardBody from './DashboardBody'
 import DashboardMenu from './DashboardMenu'
-import { faChartLine, faFileInvoice, faHome, faInbox, faNewspaper, faTshirt, faUser } from '@fortawesome/free-solid-svg-icons'
+import { faFileInvoice, faHome, faInbox, faNewspaper, faShoppingBag, faTshirt, faUser } from '@fortawesome/free-solid-svg-icons'
 
 export default function Dashboard() {
     const menuItems = [
@@ -39,11 +39,11 @@ export default function Dashboard() {
         },
         {
             id: "7",
-            name: "Reports",
-            icon: faChartLine
+            name: "Collection",
+            icon: faShoppingBag
         },
     ]
-    const [tabId, setTabId] = useState("1");
+    const [tabId, setTabId] = useState("7");
     const [openMenu, setOpenMenu] = useState(true);
     const [productId, setProductId] = useState("")
 
