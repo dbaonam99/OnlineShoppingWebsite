@@ -45,7 +45,6 @@ export default function DashboardOrderCreate(props) {
                                 axios.get(`http://localhost:4000/products/${item.id}`)
                                     .then(res => {
                                         res.data.count = item.amount
-                                        // console.log(res.data)
                                         setProductList(productList => [...productList, res.data])
                                     })
 

@@ -1,11 +1,42 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import '../../../App.css'
 import '../../../Styles/Dashboard.css'
 import { faBell, faEllipsisV, faListUl, faSearch } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-
+import Axios from 'axios'
 
 export default function DashboardHeader(props) {
+
+    const [openNotice, setOpenNotice] = useState(null)
+    const [notice, setNotice] = useState(null)
+    const [unreadedNotice, setUnreadedNotice] = useState(0)
+
+    useEffect(()=>{
+        Axios.get(`http://localhost:4000/notice`)
+            .then(res => {
+                setNotice((res.data).reverse())
+                let count = 0;
+                for (let i in res.data) {
+                    if (res.data[i].isRead === 'false') {
+                        count++
+                    }
+                    setUnreadedNotice(count)
+                }
+            } 
+        )
+    },[props.orderNotice])
+
+    const readNotice = () => {
+        if (openNotice) {
+            setOpenNotice(false)
+        } else {
+            Axios.post(`http://localhost:4000/notice/update`, {
+                readAll: true
+            })
+            setUnreadedNotice(0)
+            setOpenNotice(true)
+        }
+    }
 
     return (
         <div className="dashboard-header flex">
@@ -24,8 +55,30 @@ export default function DashboardHeader(props) {
                         <FontAwesomeIcon icon={faSearch} className="icon"/>
                     </div>
                 </form>
-                <div className="menu-notice">
-                    <FontAwesomeIcon icon={faBell}/>
+                <div 
+                    className="menu-notice noselect"
+                    onClick={readNotice}
+                >
+                    <FontAwesomeIcon icon={faBell} style={{pointerEvents: 'none'}} className="icon"/>
+                    { unreadedNotice> 0 &&
+                        <div className="notice-count">{unreadedNotice}</div>
+                    }
+                    { openNotice && 
+                        <div className="notice-box">
+                            { notice && 
+                                notice.map((item, index) => {
+                                    return (
+                                        <div 
+                                            key={index}
+                                            className="notice-item"
+                                        >
+                                            {item.noticeContent}
+                                        </div>
+                                    )
+                                })
+                            }
+                        </div>
+                    }
                 </div>
             </div>
         </div>

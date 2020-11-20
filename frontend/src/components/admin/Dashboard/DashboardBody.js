@@ -147,6 +147,7 @@ export default function DashboardBody(props) {
                 itemName= {props.menuItems[tabId-1].name}
                 setOpenMenuOnClick = {props.setOpenMenuOnClick}
                 openMenu = {props.openMenu}
+                orderNotice = {props.orderNotice}
             />
             {
                 tabId === "1" && <DashboardMain/>

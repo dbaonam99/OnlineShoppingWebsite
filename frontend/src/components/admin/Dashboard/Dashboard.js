@@ -1,9 +1,12 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import '../../../App.css'
 import '../../../Styles/Dashboard.css'
 import DashboardBody from './DashboardBody'
 import DashboardMenu from './DashboardMenu'
 import { faFileInvoice, faHome, faInbox, faNewspaper, faShoppingBag, faTshirt, faUser } from '@fortawesome/free-solid-svg-icons'
+
+import socketIOClient from "socket.io-client"
+const ENDPOINT = "http://localhost:4000";
 
 export default function Dashboard() {
     const menuItems = [
@@ -43,9 +46,23 @@ export default function Dashboard() {
             icon: faShoppingBag
         },
     ]
-    const [tabId, setTabId] = useState("7");
+    const [tabId, setTabId] = useState("1");
     const [openMenu, setOpenMenu] = useState(true);
     const [productId, setProductId] = useState("")
+
+    const socket = socketIOClient(ENDPOINT);
+
+    const [orderNotice, setOrderNotice] = useState(null)
+
+    useEffect(()=>{
+        socket.emit('join', {
+            sessionId: 'admin',
+            isAdmin: true
+        })
+        socket.on("placeAnOrder-notice", function(data) {
+            setOrderNotice(data)
+        })
+    },[])
 
     const setTabIdOnClick = (id) => {
         setTabId(id);
@@ -103,6 +120,7 @@ export default function Dashboard() {
                 setOpenEditFunc={setOpenEditFunc}
                 setCloseEditFunc={setCloseEditFunc}
                 productId={productId}
+                orderNotice={orderNotice}
             />
         </div>
     )

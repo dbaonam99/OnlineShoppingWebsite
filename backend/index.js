@@ -8,6 +8,7 @@ const bodyParser = require("body-parser");
 var cookieParser = require("cookie-parser");
 
 var Chat = require("./models/chat.model");
+var Notice = require("./models/notice.model");
 
 var productRoutes = require('./routes/product');
 var newsRoutes = require('./routes/news');
@@ -19,12 +20,12 @@ var collectionRoutes = require('./routes/collection');
 var orderRoutes = require('./routes/order');
 var vietnamRoutes = require('./routes/vietnam');
 var todosRoutes = require('./routes/todos');
+var noticeRoutes = require('./routes/notice');
 
 mongoose.connect('mongodb://localhost:27017/Shop', { useNewUrlParser: true , useUnifiedTopology: true});
 mongoose.set('useFindAndModify', false);
 
 var cors = require('cors');
-const { create } = require('./models/chat.model');
 app.use(bodyParser.json());
 app.use(cookieParser('secret'));
 app.use(express.static('public'))
@@ -49,6 +50,7 @@ app.use("/category", categoryRoutes);
 app.use("/order", orderRoutes);
 app.use("/vietnam", vietnamRoutes);
 app.use("/todos", todosRoutes);
+app.use("/notice", noticeRoutes);
 app.use(cors());
 app.options('*', cors());
 
@@ -89,6 +91,24 @@ io.on('connection', async function (socket) {
         userChatInfo: userChatInfo,
         allchat: allchat
       })
+    }, 100)
+
+    const noticeData = {
+      noticeContent: `You have new message from ${userChatInfo[0].chatName}`,
+      isRead: false,
+      noticeTime: new Date()
+    }
+    await Notice.create(noticeData)
+    const notice = await Notice.find()
+    setTimeout(() => {
+      io.in('admin').emit('placeAnOrder-notice', notice)
+    }, 100)
+  })
+
+  socket.on('placeAnOrder', async function(data) {
+    const notice = await Notice.find()
+    setTimeout(() => {
+      io.in('admin').emit('placeAnOrder-notice', notice)
     }, 100)
   })
 

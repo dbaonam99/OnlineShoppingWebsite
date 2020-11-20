@@ -104,7 +104,6 @@ export default function DashboardProductCreate(props) {
         setProductImg(items)
     }
 
-    console.log(file)
     return (
         <div className="DashboardProductInfo">
             <div className="create-box"> 

@@ -176,7 +176,63 @@
 .menu-notice {
     color: #777;
     margin-left: 40px;
+    cursor: pointer;
+    position: relative;
 }
+.menu-notice:hover .icon {
+    color: #111;
+}
+.notice-box {
+    width: 250px;
+    background-color: #fff;
+    border: 1px #111 solid;
+    border-radius: 5px;
+    position: absolute;
+    top: 30px;
+    right: 0;
+    z-index: 1;
+    padding: 0 10px;
+    max-height: 375px;
+    overflow-y: scroll;
+}
+
+
+/* width */
+.notice-box::-webkit-scrollbar {
+    display: none !important;
+  }
+/* Track */
+.notice-box::-webkit-scrollbar-track {
+    display: none !important;
+}
+/* Handle */
+.notice-box::-webkit-scrollbar-thumb {
+display: none !important;
+}
+.notice-item {
+    color: #666;
+    font-size: 12px;
+    padding: 5px 0;
+    border-bottom: 1px #ddd solid;
+}
+.notice-item:last-child {
+    border-bottom: none;
+}
+.notice-count {
+    position: absolute;
+    color: #fff;
+    background-color: red;
+    width: 15px;
+    height: 15px;
+    border-radius: 50%;
+    font-size: 12px;
+    text-align: center;
+    line-height: 15px;
+    top: -5px;
+    right: -10px;
+}
+
+
 .menu-search div {
     background: #fff;
     width: 40px;

@@ -45,7 +45,6 @@ export default function DashboardNewsCreate(props) {
         imageArr.forEach(image => {
             formData.append('newImg', image);
         });
-        console.log(newsContent)
         formData.append("newTime", new Date());
         formData.append("newCate", cateValue);
         formData.append("newTitle", inputValue.title);
@@ -69,8 +68,6 @@ export default function DashboardNewsCreate(props) {
         items.splice(event.target.id, 1)
         setNewsImg(items)
     }
-
-    // console.log(cateValue)
 
     return (
         <div className="DashboardProductInfo">
@@ -147,7 +144,6 @@ export default function DashboardNewsCreate(props) {
                                 <option></option>
                                 { cateList.length > 0 &&
                                     cateList.map((item, index) => {
-                                        console.log(item.newCate)
                                         return(
                                             <option key={index}>{item.newCate}</option>
                                         )

@@ -19,14 +19,12 @@ module.exports.postCollection = async function(req, res) {
 	req.files.map((item)=>{
 		imgArr.push(`http://localhost:4000/${item.path.split("/").slice(1).join("/")}`)
     })
-    console.log(req.body.collectionItems.split(','))
 	const data = {
 		collectionBanner: imgArr[0],
         collectionName: req.body.collectionName,
         collectionTime: new Date(),
         collectionItems: req.body.collectionItems.split(',')
     }
-    console.log(data)
 	await Collection.create(data)
 	res.status(200);
 }
@@ -35,7 +33,6 @@ module.exports.updateCollection = function(req, res) {
 
     const imgArr = [];
 	if (req.files.length > 0) {
-        console.log(req.files)
 		req.files.map((item)=>{
 			imgArr.push(`http://localhost:4000/${item.path.split("/").slice(1).join("/")}`)
 		})

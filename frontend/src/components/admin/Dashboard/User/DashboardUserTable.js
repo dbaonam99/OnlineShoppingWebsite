@@ -21,8 +21,6 @@ export default function DashboardUserTable(props) {
         )
     },[props.isChange]) 
 
-    // console.log(user)
-
     const [currentPage, setCurrentPage] = useState(1);
     const itemsPerPage = 5;
 

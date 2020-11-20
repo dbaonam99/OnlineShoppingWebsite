@@ -21,8 +21,6 @@ export default function ProductReview(props) {
     const [userAvt, setUserAvt] = useState("")
 
     useEffect(()=>{
-        // setUserAvt()
-        console.log(userInfo)
         setNameInput(userInfo.userName)
         setEmailInput(userInfo.userEmail)
     },[userInfo])

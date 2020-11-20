@@ -1,4 +1,5 @@
 var Order = require("../models/order.model");
+var Notice = require("../models/notice.model");
 
 module.exports.index = async function(req, res) {
 	var order = await Order.find();
@@ -30,6 +31,12 @@ module.exports.postOrder = async function(req, res) {
 				orderDate: req.body.orderDate
 			}
 			await Order.create(data);
+			const notice = {
+				noticeContent: `You have new order from ${req.body.orderName}`,
+				isRead: false,
+				noticeTime: new Date()
+			}
+			await Notice.create(notice)
 			res.status(200);
 		});
 	} else {
@@ -55,7 +62,6 @@ module.exports.deleteOrder = async function(req, res) {
 	await Order.findByIdAndRemove({_id: req.body.id})
 	res.status(200);
 }
-
 
 module.exports.updateOrder = function(req, res) {
 	var id = req.params.id;
