@@ -21,8 +21,10 @@ export default function ProductReview(props) {
     const [userAvt, setUserAvt] = useState("")
 
     useEffect(()=>{
-        setNameInput(userInfo.userName)
-        setEmailInput(userInfo.userEmail)
+        if (userInfo) {
+            setNameInput(userInfo.userName)
+            setEmailInput(userInfo.userEmail)
+        }
     },[userInfo])
 
     const defaultStar = {
