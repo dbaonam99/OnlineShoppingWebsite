@@ -13,7 +13,7 @@ export default function DashboardTodoList(props) {
     const [editTodoText, setEditTodoText] = useState("")
 
     useEffect(()=>{
-        axios.get(`http://localhost:4000/todos`)
+        axios.get(`http://pe.heromc.net:4000/todos`)
             .then(res => {
                 setTodoList(res.data)
             }
@@ -36,7 +36,7 @@ export default function DashboardTodoList(props) {
             }
         }
         setTodoList(virtualTodo)
-        axios.post('http://localhost:4000/todos/update', {
+        axios.post('http://pe.heromc.net:4000/todos/update', {
             id: id,
             isDone: isDone
         })
@@ -52,13 +52,13 @@ export default function DashboardTodoList(props) {
         }
         virtualTodo.push(data)
         setTodoList(virtualTodo)
-        axios.post('http://localhost:4000/todos', data)
+        axios.post('http://pe.heromc.net:4000/todos', data)
         setOpenNewTodo(false)
     }
 
     const deleteTodo = (event) => {
         const id = event.target.id
-        axios.post('http://localhost:4000/todos', {
+        axios.post('http://pe.heromc.net:4000/todos', {
             delete: true,
             id: id
         })
@@ -82,7 +82,7 @@ export default function DashboardTodoList(props) {
             }
         }
         setTodoList(virtualTodo)
-        axios.post('http://localhost:4000/todos/update', {
+        axios.post('http://pe.heromc.net:4000/todos/update', {
             edit: true,
             id: id,
             todoContent: editTodoText

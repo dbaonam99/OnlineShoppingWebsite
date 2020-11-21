@@ -47,32 +47,32 @@ export default function DashboardBody(props) {
     }
     
     useEffect(()=> {
-        Axios.get(`http://localhost:4000/products/${props.productId}`)
+        Axios.get(`http://pe.heromc.net:4000/products/${props.productId}`)
             .then(res => {
                 setProduct(res.data)
             } 
         )
-        Axios.get(`http://localhost:4000/news/${props.productId}`)
+        Axios.get(`http://pe.heromc.net:4000/news/${props.productId}`)
             .then(res => {
                 setNews(res.data)
             } 
         )
-        Axios.get(`http://localhost:4000/users/list/${props.productId}`)
+        Axios.get(`http://pe.heromc.net:4000/users/list/${props.productId}`)
             .then(res => {
                 setUser(res.data)
             } 
         )
-        Axios.get(`http://localhost:4000/order/${props.productId}`)
+        Axios.get(`http://pe.heromc.net:4000/order/${props.productId}`)
             .then(res => {
                 setOrder(res.data)
             } 
         )
-        Axios.get(`http://localhost:4000/collection/${props.productId}`)
+        Axios.get(`http://pe.heromc.net:4000/collection/${props.productId}`)
             .then(res => {
                 setCollection(res.data)
             } 
         )
-        Axios.get(`http://localhost:4000/email`)
+        Axios.get(`http://pe.heromc.net:4000/email`)
             .then(res => {
                 setEmail(res.data)
             } 

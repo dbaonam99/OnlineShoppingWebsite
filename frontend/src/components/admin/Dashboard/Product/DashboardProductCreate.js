@@ -51,7 +51,7 @@ export default function DashboardProductCreate(props) {
     }
     
     useEffect(()=> {
-        axios.get(`http://localhost:4000/category`)
+        axios.get(`http://pe.heromc.net:4000/category`)
             .then(res => {
                 setCate(res.data)
             }) 
@@ -80,13 +80,13 @@ export default function DashboardProductCreate(props) {
         formData.append("productDes", inputValue.des);
         formData.append("productSex", sex);
         formData.append("productDate", new Date());
-        axios.post('http://localhost:4000/products', formData, config)
+        axios.post('http://pe.heromc.net:4000/products', formData, config)
         props.setCloseCreateFunc(false);
         props.setToastFunc(true);
     }
 
     const addNewCate = () => {
-        axios.post('http://localhost:4000/category', {
+        axios.post('http://pe.heromc.net:4000/category', {
             cateName: inputValue.cate
         })
         setCate(cate=>[...cate, {cateName: inputValue.cate}])

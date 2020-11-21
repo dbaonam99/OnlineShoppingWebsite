@@ -5436,7 +5436,7 @@ function AccountInfo(props) {
       formData.append("userHuyen", userHuyen);
       formData.append("userAddress", userAddress);
       localStorage.removeItem('token')
-      axios.post(`http://localhost:4000/users/update/${userInfo._id}`, formData, config)
+      axios.post(`http://pe.heromc.net:4000/users/update/${userInfo._id}`, formData, config)
             .then(res => {
                setUserInfoFunc(res.data.user);
                localStorage.setItem('token', res.data.token);

@@ -94,7 +94,7 @@ export default function ProductDetail(props) {
     }
 
     useEffect(() => {
-        axios.get(`http://localhost:4000/products/` + props.match.params.id)
+        axios.get(`http://pe.heromc.net:4000/products/` + props.match.params.id)
             .then(res => {
                 setProduct(res.data)
             }

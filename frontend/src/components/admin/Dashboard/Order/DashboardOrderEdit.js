@@ -28,7 +28,7 @@ export default function DashboardOrderCreate(props) {
 
     useEffect(()=>{
         if (chooseUser === false) {
-            axios.get(`http://localhost:4000/vietnam`)
+            axios.get(`http://pe.heromc.net:4000/vietnam`)
                 .then(res => {
                     setTinh(res.data[0].tinh)
                     setHuyen(res.data[0].huyen)
@@ -42,7 +42,7 @@ export default function DashboardOrderCreate(props) {
                         setOrderPaymentMethod(order.orderPaymentMethod)
                         if(typeof order.orderList !== "undefined") {
                             order.orderList.map((item)=>{
-                                axios.get(`http://localhost:4000/products/${item.id}`)
+                                axios.get(`http://pe.heromc.net:4000/products/${item.id}`)
                                     .then(res => {
                                         res.data.count = item.amount
                                         setProductList(productList => [...productList, res.data])
@@ -67,12 +67,12 @@ export default function DashboardOrderCreate(props) {
                 }
             )
         } 
-        axios.get(`http://localhost:4000/products`)
+        axios.get(`http://pe.heromc.net:4000/products`)
             .then(res => {
                 setProduct(res.data)
             }
         )
-        axios.get(`http://localhost:4000/users/list`)
+        axios.get(`http://pe.heromc.net:4000/users/list`)
             .then(res => {
                 setUserList(res.data)
                 res.data.filter((item)=>{
@@ -112,7 +112,7 @@ export default function DashboardOrderCreate(props) {
             total += productList[i].productPrice * productList[i].count
             listOrder.push(data)
         }
-        axios.post(`http://localhost:4000/order/update/${order._id}`, {
+        axios.post(`http://pe.heromc.net:4000/order/update/${order._id}`, {
             orderName: orderName,
             orderEmail: orderEmail,
             orderPhone: orderPhone,

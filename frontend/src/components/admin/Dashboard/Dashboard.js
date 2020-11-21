@@ -6,7 +6,7 @@ import DashboardMenu from './DashboardMenu'
 import { faEnvelope, faFileInvoice, faHome, faInbox, faNewspaper, faShoppingBag, faTshirt, faUser } from '@fortawesome/free-solid-svg-icons'
 
 import socketIOClient from "socket.io-client"
-const ENDPOINT = "http://localhost:4000";
+const ENDPOINT = "http://pe.heromc.net:4000";
 
 export default function Dashboard() {
     const menuItems = [

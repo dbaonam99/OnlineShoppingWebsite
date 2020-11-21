@@ -5,7 +5,7 @@ import { useEffect, useState } from 'react'
 import socketIOClient from "socket.io-client"
 import axios from 'axios'
 
-const ENDPOINT = "http://localhost:4000";
+const ENDPOINT = "http://pe.heromc.net:4000";
 
 export default function DashboardInbox(props) {
     
@@ -56,7 +56,7 @@ export default function DashboardInbox(props) {
         }
         socket.emit('messageSend-admin', data)
 
-        axios.get(`http://localhost:4000/chat`)
+        axios.get(`http://pe.heromc.net:4000/chat`)
             .then(res => {
                 setAllChatData(res.data)
                 setConstAllChatData(res.data)

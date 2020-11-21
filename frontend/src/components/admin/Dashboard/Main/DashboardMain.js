@@ -21,17 +21,17 @@ export default function DashboardMain() {
     const [totalSale, setTotalSale] = useState(0);
 
     useEffect(()=>{
-        axios.get(`http://localhost:4000/products`)
+        axios.get(`http://pe.heromc.net:4000/products`)
             .then(res => {
                 setProducts(res.data)
             }
         )
-        axios.get(`http://localhost:4000/users/list`)
+        axios.get(`http://pe.heromc.net:4000/users/list`)
             .then(res => {
                 setUser(res.data)
             }
         )
-        axios.get(`http://localhost:4000/order`)
+        axios.get(`http://pe.heromc.net:4000/order`)
             .then(res => {
                 setOrder(res.data)
                 const topCustomer2 = Object.values(res.data.reduce((a, {orderEmail, orderName, orderTotal, orderAvatar}) => {

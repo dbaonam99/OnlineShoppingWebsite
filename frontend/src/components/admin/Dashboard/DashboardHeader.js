@@ -12,7 +12,7 @@ export default function DashboardHeader(props) {
     const [unreadedNotice, setUnreadedNotice] = useState(0)
 
     useEffect(()=>{
-        Axios.get(`http://localhost:4000/notice`)
+        Axios.get(`http://pe.heromc.net:4000/notice`)
             .then(res => {
                 setNotice((res.data).reverse())
                 let count = 0;
@@ -30,7 +30,7 @@ export default function DashboardHeader(props) {
         if (openNotice) {
             setOpenNotice(false)
         } else {
-            Axios.post(`http://localhost:4000/notice/update`, {
+            Axios.post(`http://pe.heromc.net:4000/notice/update`, {
                 readAll: true
             })
             setUnreadedNotice(0)

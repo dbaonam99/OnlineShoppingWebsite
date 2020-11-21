@@ -75,7 +75,7 @@ module.exports.updateUser = async function(req, res) {
 	if (req.files.length > 0) {
 		const imgArr = [];
 		req.files.map((item)=>{
-			imgArr.push(`http://localhost:4000/${item.path.split("/").slice(1).join("/")}`)
+			imgArr.push(`http://pe.heromc.net:4000/${item.path.split("/").slice(1).join("/")}`)
 		})
 		const img = {
 			userAvt: imgArr[0]

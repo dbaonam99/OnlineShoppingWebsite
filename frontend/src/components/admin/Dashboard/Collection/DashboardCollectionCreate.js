@@ -35,7 +35,7 @@ export default function DashboardCollectionCreate(props) {
         });
         formData.append("collectionName", collectionName);
         formData.append('collectionItems', collectionItems);
-        axios.post('http://localhost:4000/collection', formData, config)
+        axios.post('http://pe.heromc.net:4000/collection', formData, config)
         props.setCloseCreateFunc(false);
         props.setToastFunc(true);
     }
@@ -51,7 +51,7 @@ export default function DashboardCollectionCreate(props) {
     }
 
     useEffect(()=>{
-        axios.get(`http://localhost:4000/products`)
+        axios.get(`http://pe.heromc.net:4000/products`)
             .then(res => {
                 setProduct(res.data)
             }

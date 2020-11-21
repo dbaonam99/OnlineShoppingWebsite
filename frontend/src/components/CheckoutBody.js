@@ -6,7 +6,7 @@ import {
     withRouter
 } from 'react-router-dom'
 import socketIOClient from "socket.io-client"
-const ENDPOINT = "http://localhost:4000";
+const ENDPOINT = "http://pe.heromc.net:4000";
 
 function CheckoutBody(props) {
     const tinh = [
@@ -5457,7 +5457,7 @@ function CheckoutBody(props) {
                 orderPaymentMethod: orderPaymentMethod,
                 orderDate: new Date()
             }
-            axios.post('http://localhost:4000/order', data)
+            axios.post('http://pe.heromc.net:4000/order', data)
             localStorage.removeItem('total')
             localStorage.removeItem('cart')
             props.history.push(`/men`);

@@ -46,7 +46,7 @@ export default function ProductReview(props) {
     
     const sendReview = (event) => {
         event.preventDefault()
-        axios.post(`http://localhost:4000/products/review/${product._id}`, {
+        axios.post(`http://pe.heromc.net:4000/products/review/${product._id}`, {
             ratingName: nameInput,
             ratingDate: new Date(),
             ratingText: reviewInput,
