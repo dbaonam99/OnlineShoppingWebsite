@@ -67,13 +67,18 @@ function Banner (props) {
                             </div>
                         </div>
                     }
-                    <div>
+                    { collection.length > 0 &&
                         <div>
-                            <div className={currentBanner === 2 ? "banner-link fadeInUp" :"banner-link"} style={{marginLeft: '190px'}}>
-                                Shop now
+                            <div>
+                                <div 
+                                    id={collection[2]._id}
+                                    onClick={redirect}
+                                    className={currentBanner === 2 ? "banner-link fadeInUp" :"banner-link"} style={{marginLeft: '190px'}}>
+                                    Shop now
+                                </div>
                             </div>
                         </div>
-                    </div>
+                    }
                 </div>
                 <div className={classNames('banner-third flex-center', {
                     hide: currentBanner !== 3
@@ -85,13 +90,18 @@ function Banner (props) {
                             </div>
                         </div>
                     }
-                    <div className="flex-center">
-                        <div>
-                            <div className={currentBanner === 3 ? "banner-link fadeInUp" :"banner-link"}>
-                                Shop now
+                    { collection.length > 0 &&
+                        <div className="flex-center">
+                            <div>
+                                <div 
+                                    id={collection[3]._id}
+                                    onClick={redirect}
+                                    className={currentBanner === 3 ? "banner-link fadeInUp" :"banner-link"}>
+                                    Shop now
+                                </div>
                             </div>
                         </div>
-                    </div>
+                    }
                 </div>
             </div>
             <div className="choose-slide flex-center">

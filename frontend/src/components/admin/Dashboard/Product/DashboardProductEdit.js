@@ -68,21 +68,21 @@ export default function DashboardProductEdit(props) {
         setInputValue({...inputValue, [event.target.name]: event.target.value})
     }
     
-    useEffect(()=> {
-        setProductName(product.productName)
-        setProductImg(product.productImg)
-        setProductSale(product.productSale)
-        setProductPrice(product.productPrice)
-        setProductDes(product.productDes)
-        setProductCate(product.productCate)
-        setProductSex(product.productSex)
-        setProductSize(product.productSize)
-        axios.get(`http://localhost:4000/category`)
-            .then(res => {
-                setCate(res.data)
-            }
-        )
+    useEffect(()=> { 
         if (product) {
+            setProductName(product.productName)
+            setProductImg(product.productImg)
+            setProductSale(product.productSale)
+            setProductPrice(product.productPrice)
+            setProductDes(product.productDes)
+            setProductCate(product.productCate)
+            setProductSex(product.productSex)
+            setProductSize(product.productSize)
+            axios.get(`http://pe.heromc.net:4000/category`)
+                .then(res => {
+                    setCate(res.data)
+                }
+            )
             if (product.productSize) {
                 for (let i of product.productSize) {
                     if(i === "Small") setIsCheckedSmall(true)
@@ -116,13 +116,13 @@ export default function DashboardProductEdit(props) {
         formData.append("productDes", productDes);
         formData.append("productSex", productSex);
         formData.append("productDate", new Date());
-        axios.post(`http://localhost:4000/products/update/${product._id}`, formData, config)
+        axios.post(`http://pe.heromc.net:4000/products/update/${product._id}`, formData, config)
         props.setCloseEditFunc(false);
         props.setToastFunc(true);
     }
 
     const addNewCate = () => {
-        axios.post('http://localhost:4000/category', {
+        axios.post('http://pe.heromc.net:4000/category', {
             cateName: inputValue.cate
         })
         setCate(cate=>[...cate, {cateName: inputValue.cate}])
@@ -139,7 +139,7 @@ export default function DashboardProductEdit(props) {
         const items = [...productImg]
         items.splice(id, 1)
         setProductImg(items)
-        axios.post(`http://localhost:4000/products/update/${product._id}`, {
+        axios.post(`http://pe.heromc.net:4000/products/update/${product._id}`, {
             deleteImgId: id
         })
     }

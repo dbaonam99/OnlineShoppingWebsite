@@ -5,6 +5,8 @@ import axios from 'axios'
 import {
     withRouter
 } from 'react-router-dom'
+import socketIOClient from "socket.io-client"
+const ENDPOINT = "http://pe.heromc.net:4000";
 
 function CheckoutBody(props) {
     const tinh = [
@@ -5376,8 +5378,10 @@ function CheckoutBody(props) {
     const { 
         userInfo
     } = useContext(UserContext);
+    const socket = socketIOClient(ENDPOINT)
 
     const [nameInput, setNameInput] = useState("")
+    const [userAvt, setUserAvt] = useState("")
     const [emailInput, setEmailInput] = useState("")
     const [phoneInput, setPhoneInput] = useState("")
     const [provinceId, setProvinceId] = useState("")
@@ -5390,22 +5394,25 @@ function CheckoutBody(props) {
     const total = Number(subTotal) + Number(shipping)
 
     useEffect(()=>{
-        setNameInput(userInfo.userName)
-        setEmailInput(userInfo.userEmail)
-        setPhoneInput(userInfo.userPhone)
-        setAddressInput(userInfo.userAddress)
-        if (userInfo.userTinh !== "") {
-              tinh.filter((item)=>{
-                 if (userInfo.userTinh === item.name) {
-                    setProvinceId(item.id)
-                 }
-              })
-              setUserTinh(userInfo.userTinh)
+        if (userInfo) {
+            setUserAvt(userInfo.userAvt)
+            setNameInput(userInfo.userName)
+            setEmailInput(userInfo.userEmail)
+            setPhoneInput(userInfo.userPhone)
+            setAddressInput(userInfo.userAddress)
+            if (userInfo.userTinh !== "") {
+                tinh.filter((item)=>{
+                    if (userInfo.userTinh === item.name) {
+                        setProvinceId(item.id)
+                    }
+                })
+                setUserTinh(userInfo.userTinh)
+            }
+            if (userInfo.userHuyen !== "") {
+                setUserHuyen(userInfo.userHuyen)
+            }
+            setCartList((JSON.parse(localStorage.getItem('cart'))))
         }
-        if (userInfo.userHuyen !== "") {
-              setUserHuyen(userInfo.userHuyen)
-        }
-        setCartList((JSON.parse(localStorage.getItem('cart'))))
     },[userInfo])
 
     const [methodPayment, setMethodPayMent] = useState(0)
@@ -5437,8 +5444,9 @@ function CheckoutBody(props) {
         if (orderPaymentMethod === "") {
             alert("Fill in all infomation please")
         } else {
-            axios.post('http://localhost:4000/order', {
+            const data = {
                 orderName: nameInput,
+                orderAvatar: userAvt,
                 orderEmail: emailInput,
                 orderPhone: phoneInput,
                 orderAddress: addressInput,
@@ -5448,11 +5456,13 @@ function CheckoutBody(props) {
                 orderTotal: total,
                 orderPaymentMethod: orderPaymentMethod,
                 orderDate: new Date()
-            })
+            }
+            axios.post('http://pe.heromc.net:4000/order', data)
             localStorage.removeItem('total')
             localStorage.removeItem('cart')
             props.history.push(`/men`);
             window.location.reload(false);
+            socket.emit('placeAnOrder', data)
         }
     }
 

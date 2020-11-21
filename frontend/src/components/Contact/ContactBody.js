@@ -16,7 +16,7 @@ export default class ContactBody extends Component {
                         <div className="contact-info-item">
                             <FontAwesomeIcon icon={faHome} className="contact-icon"/>
                             <p className="contact-info-title2">ADDRESS</p>
-                            <p>9606 North MoPac Expressway Suite 700 Austin, TX 78759</p>
+                            <p>Song Hanh, khu pho 6, Thu Duc, TP HCM</p>
                         </div>
                         <div className="contact-info-item">
                             <FontAwesomeIcon icon={faPhone} className="contact-icon"/>

@@ -1,4 +1,23 @@
 var Product = require("../models/product.model.js");
+var Email = require("../models/email.model");
+
+var nodemailer = require('nodemailer');
+
+// Login with admin email
+var transporter = nodemailer.createTransport({
+    service: 'gmail',
+    auth: {
+        user: '18521118@gm.uit.edu.vn',
+        pass: 'Dbnbl08081999'
+    }
+})
+transporter.verify(function(error, success) {
+    if (error) {
+        console.log(error);
+    } else { 
+        // console.log('Kết nối thành công!');
+    }
+});
 
 module.exports.index = async function(req, res) {
 	var products = await Product.find();
@@ -15,7 +34,7 @@ module.exports.product = function(req, res) {
 module.exports.postProduct = async function(req, res) {
 	const imgArr = [];
 	req.files.map((item)=>{
-		imgArr.push(`http://localhost:4000/${item.path.split("/").slice(1).join("/")}`)
+		imgArr.push(`http://pe.heromc.net:4000/${item.path.split("/").slice(1).join("/")}`)
 	})
 	const data = {
 		productName: req.body.productName,
@@ -30,6 +49,27 @@ module.exports.postProduct = async function(req, res) {
 		productSold: 0,
 	}
 	await Product.create(data)
+
+	var emailList = await Email.find()
+
+	for (let i in emailList) {
+		var mailOptions = {
+		    from: '18521118@gm.uit.edu.vn',
+		    to: emailList[i].subscriberEmail,
+		    subject: 'Sản phẩm mới tại SOBER SHOP',
+			html: '<p>Sản phẩm mới nè</p>' +
+			'<img src="https://codertokyo-bai27a.glitch.me/email/az.png" alt=""></img>'
+		}
+	
+		transporter.sendMail(mailOptions, function(error, info){
+		    if (error) {
+		      console.log(error);
+		    } else {
+		      console.log('Email sent: ' + info.response);
+		    }
+		})
+	}
+
 	res.status(200);
 }
 
@@ -58,7 +98,7 @@ module.exports.updateProduct = async function(req, res) {
 	const imgArr = [];
 	if (req.files) {
 		req.files.map((item)=>{
-			imgArr.push(`http://localhost:4000/${item.path.split("/").slice(1).join("/")}`)
+			imgArr.push(`http://pe.heromc.net:4000/${item.path.split("/").slice(1).join("/")}`)
 		})
 	}
 	const img = {

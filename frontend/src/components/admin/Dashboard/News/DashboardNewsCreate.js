@@ -20,7 +20,7 @@ export default function DashboardNewsCreate(props) {
     }
     
     useEffect(()=> {
-        axios.get(`http://localhost:4000/news`)
+        axios.get(`http://pe.heromc.net:4000/news`)
                 .then(res => {
                     const test = Object.values(res.data.reduce((a, {newCate}) => {
                         a[newCate] = a[newCate] || {newCate};
@@ -45,12 +45,11 @@ export default function DashboardNewsCreate(props) {
         imageArr.forEach(image => {
             formData.append('newImg', image);
         });
-        console.log(newsContent)
         formData.append("newTime", new Date());
         formData.append("newCate", cateValue);
         formData.append("newTitle", inputValue.title);
         formData.append("newContent", newsContent);
-        axios.post('http://localhost:4000/news', formData, config)
+        axios.post('http://pe.heromc.net:4000/news', formData, config)
         props.setCloseCreateFunc(false);
         props.setToastFunc(true);
     }
@@ -69,8 +68,6 @@ export default function DashboardNewsCreate(props) {
         items.splice(event.target.id, 1)
         setNewsImg(items)
     }
-
-    // console.log(cateValue)
 
     return (
         <div className="DashboardProductInfo">
@@ -147,7 +144,6 @@ export default function DashboardNewsCreate(props) {
                                 <option></option>
                                 { cateList.length > 0 &&
                                     cateList.map((item, index) => {
-                                        console.log(item.newCate)
                                         return(
                                             <option key={index}>{item.newCate}</option>
                                         )

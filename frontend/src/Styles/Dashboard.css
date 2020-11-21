@@ -176,7 +176,63 @@
 .menu-notice {
     color: #777;
     margin-left: 40px;
+    cursor: pointer;
+    position: relative;
 }
+.menu-notice:hover .icon {
+    color: #111;
+}
+.notice-box {
+    width: 250px;
+    background-color: #fff;
+    border: 1px #111 solid;
+    border-radius: 5px;
+    position: absolute;
+    top: 30px;
+    right: 0;
+    z-index: 1;
+    padding: 0 10px;
+    max-height: 375px;
+    overflow-y: scroll;
+}
+
+
+/* width */
+.notice-box::-webkit-scrollbar {
+    display: none !important;
+  }
+/* Track */
+.notice-box::-webkit-scrollbar-track {
+    display: none !important;
+}
+/* Handle */
+.notice-box::-webkit-scrollbar-thumb {
+display: none !important;
+}
+.notice-item {
+    color: #666;
+    font-size: 12px;
+    padding: 5px 0;
+    border-bottom: 1px #ddd solid;
+}
+.notice-item:last-child {
+    border-bottom: none;
+}
+.notice-count {
+    position: absolute;
+    color: #fff;
+    background-color: red;
+    width: 15px;
+    height: 15px;
+    border-radius: 50%;
+    font-size: 12px;
+    text-align: center;
+    line-height: 15px;
+    top: -5px;
+    right: -10px;
+}
+
+
 .menu-search div {
     background: #fff;
     width: 40px;
@@ -393,6 +449,18 @@
     /* padding-top: 10px; */
     width: 100%;
 }
+/* width */
+.todo-list::-webkit-scrollbar {
+    display: none !important;
+  }
+/* Track */
+.todo-list::-webkit-scrollbar-track {
+    display: none !important;
+}
+/* Handle */
+.todo-list::-webkit-scrollbar-thumb {
+display: none !important;
+}
 .top-user-name {
     font-family: sans-serif;
     font-size: 14px;
@@ -409,17 +477,17 @@
     border-radius: 50%;
 }
 .topfive-div {
-    /* background-color: red; */
     align-items: center;
+    transition: .5s;
 }
-.recentreview {
-    /* flex-grow: 1 !important; */
+.topfive-header:last-child {
+    width: 80px;
 }
 
 .topfive-div {
     width: 100%;
     border-bottom: 0.5px #ddd solid;
-    padding: 15px 10px;
+    padding: 10px 10px;
     justify-content: space-between;
     cursor: pointer;
     transition: .3s;
@@ -466,6 +534,7 @@
 }
 .review-product-item {
     align-items: flex-end;
+    justify-content: space-between;
 }
 .review-product-item:first-child {
     margin-bottom: 7px;
@@ -514,13 +583,36 @@
     width: 30%;
     background-color: #fff;
     padding-right: 20px;
+    height: 500px;
+    overflow-y: scroll;
+    position: relative;
 }
+/* width */
+.boxchat-list::-webkit-scrollbar {
+    display: none !important;
+    background-color: red;
+}
+/* Track */
+.boxchat-list::-webkit-scrollbar-track {
+    display: none !important;
+    background-color: red;
+}
+/* Handle */
+.boxchat-list::-webkit-scrollbar-thumb {
+    display: none !important;
+    background-color: red;
+}
+
 .boxchat-item {
     margin: 10px 0;
     height: 64px;
     border-radius: 10px;
     padding: 10px;
 }
+.boxchat-item:last-child {
+    margin-bottom: 0;
+}
+
 .boxchat-avt {
     margin-right: 10px;
 }
@@ -532,13 +624,35 @@
 .boxchat-name {
     font-size: 16px;
     text-transform: capitalize;
+    font-family: sans-serif;
 }
+
 .boxchat-first {
-    font-size: 12px;
+    width: 100%;
+}
+.boxchat-first p {
+    font-size: 14px;
     color: #777;
-    text-transform: capitalize;
+    font-family: sans-serif;
+    margin-bottom: 2px;
+}
+.boxchat-first p:first-child {
+    /* Add ... if text is full */
+    display: -webkit-box;
+    -webkit-line-clamp: 1;
+    -webkit-box-orient: vertical;
+    max-width: 120px;
+    overflow: hidden;
+    margin-right: 5px;
+}
+.boxchat-first p:last-child {
+    max-width: 50px;
+    text-align: right;
 }
 .boxchat-item:hover {
+    background-color: #eee;
+}
+.boxchat-item-active {
     background-color: #eee;
 }
 .boxchat-main {
@@ -560,7 +674,7 @@
     height: 100%;
     margin-bottom: 20px;
     justify-content: flex-start;
-    margin-right: 20px;
+    margin-right: 10px;
 }
 .boxchat-box-avt img {
     border-radius: 50%;
@@ -573,13 +687,16 @@
 .boxchat-contents-item {
     margin-top: 10px;
 }
+.boxchat-search {
+    position: fixed;
+    width: 20%;
+}
 .boxchat-search input {
     width: 100%;
     height: 36px;
     outline: none;
     border: 1px #ddd solid;
     border-radius: 10px;
-    margin-bottom: 10px;
     padding: 0 10px;
 }
 .boxchat-type {
@@ -606,17 +723,20 @@
     width: 10%;
     height: 70%;
     border: none;
-    border: 1px #ddd solid;
-    background-color: #fff;
+    background-color: #111;
     border-radius: 10px;
     cursor: pointer;
+    color: #FFF;
 }
 
 .box-chat-clienttext {
     margin: 3px 0;
     clear: right;
+    position: relative;
+    width: max-content;
 }
 .box-chat-clienttext p {
+    font-size: 14px;
     margin: 0;
     border-radius: 15px;
     padding: 5px 8px;
@@ -629,13 +749,65 @@
     text-align: right;
     float: right;
     clear: right;
+    position: relative;
 }
 .box-chat-admintext p {
+    font-size: 14px;
     border-radius: 15px;
     padding: 5px 8px;
     text-align: right;
     width: max-content;
     background-color: #eeecec;
+}
+.time-tooltip {
+    background-color: #111;
+    color: #FFF;
+    border-radius: 2px;
+    padding: 0 20px;
+    position: absolute;
+    top: 0;
+    right: calc(100% + 10px);
+    width: max-content;
+    height: 100%;
+}
+.time-tooltip p {
+    font-size: 10px;
+    background-color: #111;
+}
+.time-tooltip::after {
+    content: " ";
+    position: absolute;
+    top: 35%;
+    right: -10px;
+    margin-left: -5px;
+    border-width: 5px;
+    border-style: solid;
+    border-color: transparent transparent transparent black;
+}
+.time-tooltip-client {
+    background-color: #111;
+    color: #FFF;
+    border-radius: 2px;
+    padding: 0 20px;
+    position: absolute;
+    top: 0;
+    left: calc(100% + 10px);
+    width: max-content;
+    height: 100%;
+}
+.time-tooltip-client p {
+    font-size: 10px;
+    background-color: #111;
+}
+.time-tooltip-client::after {
+    content: " ";
+    position: absolute;
+    top: 35%;
+    left: -5px;
+    margin-left: -5px;
+    border-width: 5px;
+    border-style: solid;
+    border-color: transparent black transparent transparent ;
 }
 
 .boxchat-contents {
@@ -708,7 +880,7 @@ display: none !important;
 .table-title:last-child {
     width: 80px;
 }
-#Action {
+#Action, #CollectionAction {
     padding: 0;
     text-align: center;
 }
@@ -729,6 +901,12 @@ display: none !important;
 }
 #PaymentMethod {
     width: 150px;
+}
+#CollectionBanner {
+    width: 20%;
+}
+#CollectionItems {
+    width: 30%;
 }
 .dashboard-table td p {
     width: 10px;
@@ -974,4 +1152,93 @@ select {
 .DashboardEditor {
     height: 500px;
     border: 1px solid #eee;
+}
+.todo-list {
+    width: 100%;
+    padding-top: 10px !important;
+    padding-bottom: 10px !important;
+}
+.topfive-div:hover .blue{
+    color: #23bfea;
+}
+.topfive-div:hover .red{
+    color: red !important;
+}
+.todo-text {
+    font-family: sans-serif;
+    font-size: 14px;
+    font-weight: 300;
+    width: 75%;
+}
+.todo-check {
+    width: 15px;
+    height: 15px;
+    border: 1px #ddd solid;
+    border-radius: 2px;
+    cursor: pointer;
+}
+.todo-check-done {
+    width: 15px;
+    height: 15px;
+    border: 1px #23bfea solid;
+    border-radius: 2px;
+    cursor: pointer;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.todo-action {
+    width: 10%;
+    align-items: center;
+    justify-content: center;
+}
+.todo-action .icon{
+    color: #b8fcf9;
+    width: 100%;
+    font-size: 10px;
+    transition: .4s;
+}
+.todo-title {
+    margin-left: 10px;
+    margin-bottom: 10px;
+    color: #777;
+    font-size: 10px;
+    text-transform: uppercase;
+    letter-spacing: 3px;
+    font-family: sans-serif;
+}
+.newtodo-input {
+    margin-bottom: 10px;
+    align-items: center;
+}
+.newtodo-input input {
+    margin: 0 10px;
+    padding: 10px 0;
+    outline: none;
+    border: none;
+    width: 85%;
+    height: 100%;
+    border-bottom: 1px #777 solid;
+    font-family: sans-serif;
+}
+.closeNewTodo {
+    display: none;
+}
+.newtodo-btn {
+    width: 15%;
+    border: none;
+    height: 25px;
+}
+.table-input {
+    outline: none;
+    border: none;
+    padding: 5px 5px;
+    border-bottom: 2px #ddd solid;
+    height: 100%;
+    width: 100%;
+    font-family: sans-serif;
+}
+.table-input:focus, 
+.table-input:hover {
+    border-bottom: 2px #777 solid;
 }

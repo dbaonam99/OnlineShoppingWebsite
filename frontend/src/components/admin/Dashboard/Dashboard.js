@@ -1,9 +1,12 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import '../../../App.css'
 import '../../../Styles/Dashboard.css'
 import DashboardBody from './DashboardBody'
 import DashboardMenu from './DashboardMenu'
-import { faChartLine, faFileInvoice, faHome, faInbox, faNewspaper, faTshirt, faUser } from '@fortawesome/free-solid-svg-icons'
+import { faEnvelope, faFileInvoice, faHome, faInbox, faNewspaper, faShoppingBag, faTshirt, faUser } from '@fortawesome/free-solid-svg-icons'
+
+import socketIOClient from "socket.io-client"
+const ENDPOINT = "http://pe.heromc.net:4000";
 
 export default function Dashboard() {
     const menuItems = [
@@ -14,9 +17,14 @@ export default function Dashboard() {
         },
         {
             id: "2",
-            name: "Messages",
+            name: "Live Chat",
             icon: faInbox
         },
+        // {
+        //     id: "3",
+        //     name: "Email",
+        //     icon: faEnvelope
+        // },
         {
             id: "3",
             name: "Orders",
@@ -39,13 +47,27 @@ export default function Dashboard() {
         },
         {
             id: "7",
-            name: "Reports",
-            icon: faChartLine
+            name: "Collection",
+            icon: faShoppingBag
         },
     ]
-    const [tabId, setTabId] = useState("3");
+    const [tabId, setTabId] = useState("1");
     const [openMenu, setOpenMenu] = useState(true);
     const [productId, setProductId] = useState("")
+
+    const socket = socketIOClient(ENDPOINT);
+
+    const [orderNotice, setOrderNotice] = useState(null)
+
+    useEffect(()=>{
+        socket.emit('join', {
+            sessionId: 'admin',
+            isAdmin: true
+        })
+        socket.on("placeAnOrder-notice", function(data) {
+            setOrderNotice(data)
+        })
+    },[])
 
     const setTabIdOnClick = (id) => {
         setTabId(id);
@@ -103,6 +125,7 @@ export default function Dashboard() {
                 setOpenEditFunc={setOpenEditFunc}
                 setCloseEditFunc={setCloseEditFunc}
                 productId={productId}
+                orderNotice={orderNotice}
             />
         </div>
     )

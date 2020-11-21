@@ -1,6 +1,7 @@
 const mongoose = require('mongoose');
 
 var userSchema = new mongoose.Schema({
+	userCreateDay: Date,
 	userName: String,
 	userEmail: String,
 	userPassword: String,

@@ -14,7 +14,7 @@ export default function DashboardUserTable(props) {
     const [constOrder, setConstOrder] = useState([])
     
     useEffect(()=>{
-        axios.get(`http://localhost:4000/order`)
+        axios.get(`http://pe.heromc.net:4000/order`)
             .then(res => {
                 setOrder(res.data)
                 setConstOrder(res.data)
@@ -100,7 +100,7 @@ export default function DashboardUserTable(props) {
     }
 
     const deleteOnClick = (event) => {
-        axios.post(`http://localhost:4000/order/delete/:${event.target.id}`, {
+        axios.post(`http://pe.heromc.net:4000/order/delete/:${event.target.id}`, {
             id: event.target.id
         })
         setOrder(order.filter((item)=>{
@@ -121,7 +121,6 @@ export default function DashboardUserTable(props) {
             else if ((constOrder[i].orderId).toString().includes((searchInput))) {
                 search.push(constOrder[i])
             }
-            console.log(constOrder[i].orderId)
         }
         setOrder(search)
     }

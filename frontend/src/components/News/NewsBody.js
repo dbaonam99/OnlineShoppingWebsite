@@ -23,13 +23,13 @@ function NewsBody(props) {
 
     useEffect(() => {
         if (props.history.location.pathname === "/news") {
-            axios.get(`http://localhost:4000/news`)
+            axios.get(`http://pe.heromc.net:4000/news`)
                 .then(res => {
                     setNews(res.data)
                 }
             )
         } else {
-            axios.get(`http://localhost:4000/news/category/${props.match.params.cate}`)
+            axios.get(`http://pe.heromc.net:4000/news/category/${props.match.params.cate}`)
                 .then(res => {
                     setNews(res.data)
                 }
