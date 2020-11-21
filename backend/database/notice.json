@@ -1,0 +1,15 @@
+{ "_id" : { "$oid" : "5fb73f8e578c3b80b86c024b" }, "noticeContent" : "You have new order from Dương Bảo Nam", "isRead" : "true", "noticeTime" : { "$date" : "2020-11-20T04:01:18.040+0000" } }
+{ "_id" : { "$oid" : "5fb740ba578c3b80b86c024d" }, "noticeContent" : "You have new order from Dương Bảo Nam", "isRead" : "true", "noticeTime" : { "$date" : "2020-11-20T04:06:18.801+0000" } }
+{ "_id" : { "$oid" : "5fb74f3df7b37c8c50f7b4c5" }, "noticeContent" : "You have new order from Dương Bảo Nam", "isRead" : "true", "noticeTime" : { "$date" : "2020-11-20T05:08:13.843+0000" } }
+{ "_id" : { "$oid" : "5fb750467aa3568caf566dcb" }, "noticeContent" : "You have new order from Dương Bảo Nam", "isRead" : "true", "noticeTime" : { "$date" : "2020-11-20T05:12:38.522+0000" } }
+{ "_id" : { "$oid" : "5fb750b27aa3568caf566dcd" }, "noticeContent" : "You have new order from Dương Bảo Nam", "isRead" : "true", "noticeTime" : { "$date" : "2020-11-20T05:14:26.477+0000" } }
+{ "_id" : { "$oid" : "5fb750ca7aa3568caf566dcf" }, "noticeContent" : "You have new order from Dương Bảo Nam", "isRead" : "true", "noticeTime" : { "$date" : "2020-11-20T05:14:50.931+0000" } }
+{ "_id" : { "$oid" : "5fb750fb7aa3568caf566dd1" }, "noticeContent" : "You have new order from Dương Bảo Nam", "isRead" : "true", "noticeTime" : { "$date" : "2020-11-20T05:15:39.903+0000" } }
+{ "_id" : { "$oid" : "5fb752f171b15d8db4f9f9cd" }, "noticeContent" : "You have new order from Dương Bảo Nam", "isRead" : "true", "noticeTime" : { "$date" : "2020-11-20T05:24:01.030+0000" } }
+{ "_id" : { "$oid" : "5fb7540f18bd088dd9c02585" }, "noticeContent" : "You have new order from Dương Bảo Nam", "isRead" : "true", "noticeTime" : { "$date" : "2020-11-20T05:28:47.093+0000" } }
+{ "_id" : { "$oid" : "5fb7561c257df38f47477827" }, "noticeContent" : "You have new message from undefined", "isRead" : "true", "noticeTime" : { "$date" : "2020-11-20T05:37:32.959+0000" } }
+{ "_id" : { "$oid" : "5fb75620257df38f47477828" }, "noticeContent" : "You have new message from undefined", "isRead" : "true", "noticeTime" : { "$date" : "2020-11-20T05:37:36.454+0000" } }
+{ "_id" : { "$oid" : "5fb756e2f531af8f9ac02e54" }, "noticeContent" : "You have new message from undefined", "isRead" : "true", "noticeTime" : { "$date" : "2020-11-20T05:40:50.482+0000" } }
+{ "_id" : { "$oid" : "5fb756f5e12f558fac46eb32" }, "noticeContent" : "You have new message from Dương Bảo Nam", "isRead" : "true", "noticeTime" : { "$date" : "2020-11-20T05:41:09.700+0000" } }
+{ "_id" : { "$oid" : "5fb790c43891b68fbbc9b1bf" }, "noticeContent" : "You have new message from Dương Bảo Nam", "isRead" : "true", "noticeTime" : { "$date" : "2020-11-20T09:47:48.792+0000" } }
+{ "_id" : { "$oid" : "5fb790d03891b68fbbc9b1c0" }, "noticeContent" : "You have new message from Dương Bảo Nam", "isRead" : "true", "noticeTime" : { "$date" : "2020-11-20T09:48:00.580+0000" } }

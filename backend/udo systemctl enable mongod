@@ -1,0 +1,11 @@
+[0;1;31m●[0m mongod.service - MongoDB Database Server
+   Loaded: loaded (/lib/systemd/system/mongod.service; enabled; vendor preset: enabled)
+   Active: [0;1;31mfailed[0m (Result: exit-code) since Sat 2020-11-21 17:02:56 UTC; 7s ago
+     Docs: https://docs.mongodb.org/manual
+  Process: 6844 ExecStart=/usr/bin/mongod --config /etc/mongod.conf [0;1;31m(code=exited, status=1/FAILURE)[0m
+ Main PID: 6844 (code=exited, status=1/FAILURE)
+
+Nov 21 17:02:56 HeroMC systemd[1]: Started MongoDB Database Server.
+Nov 21 17:02:56 HeroMC mongod[6844]: 2020-11-21T17:02:56.598+0000 F  CONTROL  [main] Failed global initialization: BadValue: security.authorization expects either 'enabled' or 'disabled'
+Nov 21 17:02:56 HeroMC systemd[1]: [0;1;39m[0;1;31m[0;1;39mmongod.service: Main process exited, code=exited, status=1/FAILURE[0m
+Nov 21 17:02:56 HeroMC systemd[1]: [0;1;39m[0;1;31m[0;1;39mmongod.service: Failed with result 'exit-code'.[0m

@@ -1,0 +1,9 @@
+{ "_id" : { "$oid" : "5f92edad624444cc7d780d42" }, "cateName" : "jacket" }
+{ "_id" : { "$oid" : "5f93d69468e7681c510a39b9" }, "cateName" : "accessories" }
+{ "_id" : { "$oid" : "5f93d76e68e7681c510a39bd" }, "cateName" : "bags" }
+{ "_id" : { "$oid" : "5f9438ea3ac4a834abce965d" }, "cateName" : "new" }
+{ "_id" : { "$oid" : "5f97c6ddccc0ee707904256d" }, "cateName" : "Bodysuit" }
+{ "_id" : { "$oid" : "5f97c8c5ccc0ee7079042573" }, "cateName" : "bikini" }
+{ "_id" : { "$oid" : "5f97c9e7ccc0ee7079042576" }, "cateName" : "dress" }
+{ "_id" : { "$oid" : "5f97cd81ccc0ee707904257a" }, "cateName" : "paints" }
+{ "_id" : { "$oid" : "5f995bc34b47d798c727f52f" }, "cateName" : "Tops & shirts" }

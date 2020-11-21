@@ -1,0 +1,5 @@
+{ "_id" : { "$oid" : "5fb38c6d20825a325c71b4a7" }, "todoContent" : "Đi học", "isDone" : false, "todoDate" : { "$date" : "2020-11-17T08:40:13.770+0000" } }
+{ "_id" : { "$oid" : "5fb38c7120825a325c71b4a8" }, "todoContent" : "Học bài", "isDone" : false, "todoDate" : { "$date" : "2020-11-17T08:40:17.388+0000" } }
+{ "_id" : { "$oid" : "5fb38c7420825a325c71b4a9" }, "todoContent" : "Ăn cơm", "isDone" : false, "todoDate" : { "$date" : "2020-11-17T08:40:20.441+0000" } }
+{ "_id" : { "$oid" : "5fb38c7920825a325c71b4aa" }, "todoContent" : "Tập thể dục", "isDone" : true, "todoDate" : { "$date" : "2020-11-17T08:40:25.097+0000" } }
+{ "_id" : { "$oid" : "5fb392b489bbe134cd1be674" }, "todoContent" : "hehe", "isDone" : true, "todoDate" : { "$date" : "2020-11-17T09:07:00.639+0000" } }
