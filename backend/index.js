@@ -22,7 +22,7 @@ var vietnamRoutes = require('./routes/vietnam');
 var todosRoutes = require('./routes/todos');
 var noticeRoutes = require('./routes/notice');
 
-mongoose.connect('mongodb://localhost:27017/Shop', { useNewUrlParser: true , useUnifiedTopology: true});
+mongoose.connect('mongodb://localhost:27017/Shop', { useNewUrlParser: true , useUnifiedTopology: true, rejectUnauthorized: false});
 mongoose.set('useFindAndModify', false);
 
 var cors = require('cors');
@@ -53,7 +53,7 @@ app.use("/todos", todosRoutes);
 app.use("/notice", noticeRoutes);
 app.use(cors());
 app.options('*', cors());
-
+ 
 
 io.on('connection', async function (socket) {
   socket.on('join', async function (data) {
