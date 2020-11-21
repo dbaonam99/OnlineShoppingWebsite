@@ -3,7 +3,7 @@ import '../../../App.css'
 import '../../../Styles/Dashboard.css'
 import DashboardBody from './DashboardBody'
 import DashboardMenu from './DashboardMenu'
-import { faFileInvoice, faHome, faInbox, faNewspaper, faShoppingBag, faTshirt, faUser } from '@fortawesome/free-solid-svg-icons'
+import { faEnvelope, faFileInvoice, faHome, faInbox, faNewspaper, faShoppingBag, faTshirt, faUser } from '@fortawesome/free-solid-svg-icons'
 
 import socketIOClient from "socket.io-client"
 const ENDPOINT = "http://localhost:4000";
@@ -17,9 +17,14 @@ export default function Dashboard() {
         },
         {
             id: "2",
-            name: "Messages",
+            name: "Live Chat",
             icon: faInbox
         },
+        // {
+        //     id: "3",
+        //     name: "Email",
+        //     icon: faEnvelope
+        // },
         {
             id: "3",
             name: "Orders",

@@ -23,7 +23,9 @@ export default function DashboardTopFive(props) {
                                 props.table &&
                                 props.table.map((item, index)=>{
                                     return (
-                                        <div className="topfive-header">{item.title}</div>
+                                        <div 
+                                            key={index}
+                                            className="topfive-header">{item.title}</div>
                                     )
                                 })
                             }
