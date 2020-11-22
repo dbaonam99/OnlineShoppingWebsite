@@ -1,7 +1,8 @@
 const mongoose = require('mongoose');
 
 var emailSchema = new mongoose.Schema({
-	subscriberEmail: String
+	subscriberEmail: String,
+	sendedEmail: Array,
 	},
     {
     	versionKey: false
