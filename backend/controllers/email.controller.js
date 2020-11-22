@@ -52,10 +52,11 @@ module.exports.info = function(req, res) {
 };
 module.exports.updateEmail = function(req, res) {
     var id = req.params.id;
-    console.log(req.body.subscriberEmail)
-	// Email.findById({ _id: id }).then(function(email) {
-	// 	res.json(email);
-	// });
+    Email.findByIdAndUpdate(id, req.body, function(error) {
+        if (error) {
+            console.log(error);
+        }
+    })
 };
 
 module.exports.postEmail = async function(req, res) {
