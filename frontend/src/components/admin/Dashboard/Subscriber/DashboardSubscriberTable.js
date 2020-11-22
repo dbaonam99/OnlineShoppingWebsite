@@ -21,6 +21,8 @@ export default function DashboardSubscriberTable(props) {
         )
     },[props.isChange]) 
 
+    console.log(email)
+
     const [currentPage, setCurrentPage] = useState(1);
     const itemsPerPage = 5;
 
