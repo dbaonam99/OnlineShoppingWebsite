@@ -3,7 +3,7 @@ import { useEffect, useState } from 'react'
 var parse = require('html-react-parser');
 
 
-export default function DashboardEmail(props) {
+export default function DashboardEmailManager(props) {
 
     const [emailList, setEmailList] = useState([])
     useEffect(() => {

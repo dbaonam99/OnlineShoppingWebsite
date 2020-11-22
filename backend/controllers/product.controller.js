@@ -66,7 +66,7 @@ module.exports.postProduct = async function(req, res) {
 
 
 		var emailInfo = await Email.findById(emailList[i]._id)
-
+		
 		var mailOptions = {
 			from: '18521118@gm.uit.edu.vn',
 			to: emailList[i].subscriberEmail,

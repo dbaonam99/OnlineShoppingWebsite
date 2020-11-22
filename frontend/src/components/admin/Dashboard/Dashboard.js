@@ -50,6 +50,11 @@ export default function Dashboard() {
             name: "Collection",
             icon: faShoppingBag
         },
+        {
+            id: "8",
+            name: "Subscribers",
+            icon: faEnvelope
+        },
     ]
     const [tabId, setTabId] = useState("1");
     const [openMenu, setOpenMenu] = useState(true);

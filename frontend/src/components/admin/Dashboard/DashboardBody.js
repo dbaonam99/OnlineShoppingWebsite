@@ -21,7 +21,9 @@ import DashboardOrderCreate from './Order/DashboardOrderCreate';
 import DashboardCollectionCreate from './Collection/DashboardCollectionCreate';
 import DashboardCollectionEdit from './Collection/DashboardCollectionEdit';
 import DashboardCollection from './Collection/DashboardCollection';
-import DashboardEmail from './Email/DashboardEmail';
+import DashboardSubscriberCreate from './Subscriber/DashboardSubscriberCreate';
+import DashboardSubscriberEdit from './Subscriber/DashboardSubscriberEdit';
+import DashboardSubscriber from './Subscriber/DashboardSubscriber';
 
 export default function DashboardBody(props) {
 
@@ -150,6 +152,20 @@ export default function DashboardBody(props) {
                     collection={collection} 
                 />
             }
+
+            { (props.openCreate && tabId === "8") &&
+                <DashboardSubscriberCreate
+                    setCloseCreateFunc={props.setCloseCreateFunc}
+                    setToastFunc={setToastFunc}
+                />
+            }
+            { (props.openEdit && tabId === "8") &&
+                <DashboardSubscriberEdit
+                    setCloseEditFunc={props.setCloseEditFunc}
+                    setToastFunc={setToastFunc}
+                    collection={collection} 
+                />
+            }
             <DashboardHeader
                 itemName= {props.menuItems[tabId-1].name}
                 setOpenMenuOnClick = {props.setOpenMenuOnClick}
@@ -207,6 +223,15 @@ export default function DashboardBody(props) {
             {
                 tabId === "7" && 
                 <DashboardCollection
+                    setOpenCreateFunc={props.setOpenCreateFunc}
+                    setOpenEditFunc={props.setOpenEditFunc}
+                    toast={toast}
+                    isChange={isChange}
+                />
+            }
+            {
+                tabId === "8" && 
+                <DashboardSubscriber
                     setOpenCreateFunc={props.setOpenCreateFunc}
                     setOpenEditFunc={props.setOpenEditFunc}
                     toast={toast}
