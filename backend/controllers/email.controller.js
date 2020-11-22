@@ -44,6 +44,12 @@ module.exports.list = async function(req, res) {
 	var email = await Email.find();
 	res.json(email);
 }
+module.exports.info = function(req, res) {
+	var id = req.params.id;
+	Email.findById({ _id: id }).then(function(email) {
+		res.json(email);
+	});
+};
 module.exports.postEmail = async function(req, res) {
     var email = req.body.subscriber;
     console.log(email)

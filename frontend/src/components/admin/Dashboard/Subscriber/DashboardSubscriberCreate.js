@@ -11,16 +11,9 @@ export default function DashboardSubscriberCreate(props) {
 
     const onSubmit = (event) => {
         event.preventDefault()
-        const config = {
-            headers: {
-                'content-type': 'multipart/form-data'
-            }
-        }
-        const formData = new FormData();
-
-        formData.append("subscriber", subscriberEmail);
-        
-        axios.post('http://pe.heromc.net:4000/emails', formData, config)
+        axios.post('http://pe.heromc.net:4000/email', {
+            subscriber: subscriberEmail
+        })
         props.setCloseCreateFunc(false);
         props.setToastFunc(true);
     }
