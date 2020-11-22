@@ -163,7 +163,7 @@ export default function DashboardBody(props) {
                 <DashboardSubscriberEdit
                     setCloseEditFunc={props.setCloseEditFunc}
                     setToastFunc={setToastFunc}
-                    collection={collection} 
+                    email={email} 
                 />
             }
             <DashboardHeader
