@@ -896,6 +896,9 @@ display: none !important;
 #Name {
     width: 200px;
 }
+#Email {
+    width: 40%;
+}
 #ShippingInfo {
     width: 20%;
 }

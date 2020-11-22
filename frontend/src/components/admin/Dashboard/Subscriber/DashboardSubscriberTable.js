@@ -13,7 +13,7 @@ export default function DashboardSubscriberTable(props) {
     const [constEmail, setConstEmail] = useState([])
     
     useEffect(()=>{
-        axios.get(`http://pe.heromc.net:4000/email/list`)
+        axios.get(`http://pe.heromc.net:4000/email`)
             .then(res => {
                 setEmail(res.data)
                 setConstEmail(res.data)
@@ -99,7 +99,7 @@ export default function DashboardSubscriberTable(props) {
     }
 
     const deleteOnClick = (event) => {
-        axios.post(`http://pe.heromc.net:4000/users/delete/:${event.target.id}`, {
+        axios.post(`http://pe.heromc.net:4000/email/delete/:${event.target.id}`, {
             id: event.target.id
         })
         setEmail(email.filter((item)=>{
@@ -114,7 +114,7 @@ export default function DashboardSubscriberTable(props) {
         const searchInput = event.target.value
         const search = []
         for (let i in constEmail) {
-            if ((constEmail[i].userName).toLowerCase().includes(searchInput)) {
+            if ((constEmail[i].subscriberEmail).toLowerCase().includes(searchInput)) {
                 search.push(constEmail[i])
             }
         }
@@ -122,12 +122,12 @@ export default function DashboardSubscriberTable(props) {
     }
 
     const sortTable = (event) => {
-        if (event.target.id === "Name") {
+        if (event.target.id === "Email") {
             if (isSortByName) {
                 const sortByName = [...email]
                 sortByName.sort(function(a, b) {
-                    var userA = a.userName.toLowerCase();
-                    var userB = b.userName.toLowerCase(); 
+                    var userA = a.subscriberEmail.toLowerCase();
+                    var userB = b.subscriberEmail.toLowerCase(); 
                     if(userA === userB) return 0; 
                     return userA > userB ? 1 : -1;
                 })
@@ -136,8 +136,8 @@ export default function DashboardSubscriberTable(props) {
             } else {
                 const sortByName = [...email]
                 sortByName.sort(function(a, b) {
-                    var userA = a.userName.toLowerCase();
-                    var userB = b.userName.toLowerCase(); 
+                    var userA = a.subscriberEmail.toLowerCase();
+                    var userB = b.subscriberEmail.toLowerCase(); 
                     if(userA === userB) return 0; 
                     return userA < userB ? 1 : -1;
                 })
@@ -193,16 +193,22 @@ export default function DashboardSubscriberTable(props) {
                             </tr>
                             {
                                 current.map((item, index) => {
+                                    let count = 0;
+                                    for (let i in item.sendedEmail) {
+                                        if (item.sendedEmail[i].isSeen === true) {
+                                            count++
+                                        }
+                                    }
                                     return (
                                         <tr key={index}>
                                             <td>
                                                 <p>{item.subscriberEmail}</p>
                                             </td>
                                             <td>
-                                                <p>{item.userEmail}</p>
+                                                <p>{item.sendedEmail.length}</p>
                                             </td>
                                             <td>
-                                                <p>{item.userPhone}</p>
+                                                <p>{count}</p>
                                             </td>
                                             <td>
                                                 <div className="action-table flex">
