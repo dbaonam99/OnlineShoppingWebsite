@@ -67,16 +67,14 @@ module.exports.postProduct = async function(req, res) {
 
 		var emailInfo = await Email.findById(emailList[i]._id)
 
-		console.log(emailInfo.sendedEmail[emailInfo.length - 1])
-
 		var mailOptions = {
 			from: '18521118@gm.uit.edu.vn',
 			to: emailList[i].subscriberEmail,
 			subject: 'Sản phẩm mới tại SOBER SHOP',
 			html: '<p>Sản phẩm mới nè</p>' +
-			`<img src="http://pe.heromc.net:4000/email/${emailList[i]._id}/${emailInfo.sendedEmail[emailInfo.length - 1]}" alt=""></img>`
+			`<img src="http://pe.heromc.net:4000/email/${emailList[i]._id}/${emailInfo.sendedEmail[emailInfo.sendedEmail.length - 1]}" alt=""></img>`
 		}
-		
+
 		transporter.sendMail(mailOptions, function(error, info){
 		    if (error) {
 		      console.log(error);
