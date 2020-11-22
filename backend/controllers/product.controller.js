@@ -58,8 +58,8 @@ module.exports.postProduct = async function(req, res) {
 		    to: emailList[i].subscriberEmail,
 		    subject: 'Sản phẩm mới tại SOBER SHOP',
 			html: '<p>Sản phẩm mới nè</p>' +
-			'<img src="https://codertokyo-bai27a.glitch.me/email/az.png" alt=""></img>'
-		}
+			'<img src="https://pe.heromc.net/email/az.png" alt=""></img>'
+		} 
 	
 		transporter.sendMail(mailOptions, function(error, info){
 		    if (error) {
