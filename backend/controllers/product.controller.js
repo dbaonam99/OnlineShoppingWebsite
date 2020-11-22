@@ -61,9 +61,8 @@ module.exports.postProduct = async function(req, res) {
 			'<img src="http://pe.heromc.net:4000/email/12.png" alt=""></img>'
 		}
 	
-
 		Email.findOne({ _id: emailList[i]._id })
-			.updateOne({$push: { sendedEmail: {_id: new ObjectId(), isSeen: false} }})
+			.updateOne({$push: { sendedEmail: {isSeen: false} }})
 			.exec()
 
 		transporter.sendMail(mailOptions, function(error, info){
