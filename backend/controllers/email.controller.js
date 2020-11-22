@@ -26,14 +26,13 @@ module.exports.index = async function(req, res) {
         { "_id": req.params.idUser, "sendedEmail._id": req.params.idEmail },
         { 
             "$set": {
-                "sendedEmail.isSeen": true
+                "sendedEmail.$.isSeen": true
             }
         },
         function(err,doc) {
-    
+            console.log(err)
         }
     );
-
 
     var emailList = await Email.find()
     
