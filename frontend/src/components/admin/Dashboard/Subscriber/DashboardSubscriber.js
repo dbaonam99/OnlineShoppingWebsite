@@ -21,7 +21,7 @@ export default function DashboardSubscriber(props) {
             </div>
             <DashboardProductTable
                 icon = {faEnvelope}
-                title = "User"
+                title = "Subscriber"
                 color = "lightblue"
                 table = {table}
                 setOpenCreateFunc = {props.setOpenCreateFunc}

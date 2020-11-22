@@ -69,6 +69,10 @@ module.exports.postEmail = async function(req, res) {
 
 	res.status(200).send('Subscriber for news successful!');
 }
+module.exports.deleteSubscriber = async function(req, res) {
+	await Email.findByIdAndRemove({_id: req.body.id})
+	res.status(200);
+}
 
 // module.exports.getAllEmail = async function(req, res) {
 //     var imaps = require('imap-simple');
