@@ -11,7 +11,6 @@ export default function DashboardSubscriberCreate(props) {
 
     const email = props.email;
  
-    console.log(email)
     useEffect(()=> {
         if (email) {    
             setSubscriberEmail(email.subscriberEmail)
@@ -22,7 +21,7 @@ export default function DashboardSubscriberCreate(props) {
         event.preventDefault()
 
         axios.post(`http://pe.heromc.net:4000/email/update/${email._id}`, {
-            
+            subscriberEmail: subscriberEmail
         })
 
         props.setCloseEditFunc(false);
