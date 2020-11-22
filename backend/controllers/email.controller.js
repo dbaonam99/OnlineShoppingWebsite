@@ -19,8 +19,9 @@ transporter.verify(function(error, success) {
 });
 
 module.exports.index = async function(req, res) {
-	console.log(req.params.idUser)
-	console.log(req.params.idEmail)
+    
+	var emailList = await Email.find()
+    console.log(emailList)
     res.send('<img src="https://picsum.photos/200/300"/>')
 }
 
