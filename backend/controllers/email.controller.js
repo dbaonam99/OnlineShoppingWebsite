@@ -20,14 +20,19 @@ transporter.verify(function(error, success) {
 
 module.exports.index = async function(req, res) {
 
+    console.log("check")
+     
     Email.findOneAndUpdate(
-        { "_id": req.params.idUser, "sendedEmail._id": req.params.idEmail },
+        { _id: req.params.idUser, "sendedEmail._id": req.params.idEmail},
         { 
-            "$set": {
+            $set: {
                 "sendedEmail.$.isSeen": true
             }
         },
-        function(err,doc) {
+        function(error) {
+            if (error) {
+                console.log(error);
+            }
         }
     );
 
@@ -35,7 +40,10 @@ module.exports.index = async function(req, res) {
     
     res.send(emailList)
 }
-
+module.exports.list = async function(req, res) {
+	var email = await Email.find();
+	res.json(email);
+}
 module.exports.postEmail = async function(req, res) {
     var email = req.body.subscriber;
 	var emailData = await Email.findOne({ subscriberEmail: email });
@@ -62,47 +70,47 @@ module.exports.postEmail = async function(req, res) {
 	res.status(200).send('Subscriber for news successful!');
 }
 
-module.exports.getAllEmail = async function(req, res) {
-    var imaps = require('imap-simple');
-    const _ = require('lodash');
+// module.exports.getAllEmail = async function(req, res) {
+//     var imaps = require('imap-simple');
+//     const _ = require('lodash');
     
-    var config = {
-        imap: {
-            user: '18521118@gm.uit.edu.vn',
-            password: 'Dbnbl08081999',
-            host: 'imap.gmail.com',
-            port: 993,
-            tls: true,
-            authTimeout: 3000
-        }
-    };
+//     var config = {
+//         imap: {
+//             user: '18521118@gm.uit.edu.vn',
+//             password: 'Dbnbl08081999',
+//             host: 'imap.gmail.com',
+//             port: 993,
+//             tls: true,
+//             authTimeout: 3000
+//         }
+//     };
     
-    imaps.connect(config).then(function (connection) {
-        return connection.openBox('INBOX').then(function () {
-            var delay = 720 * 3600 * 1000;
-            var yesterday = new Date();
-            yesterday.setTime(Date.now() - delay);
-            yesterday = yesterday.toISOString();
-            var searchCriteria = ['ALL', ['SINCE', yesterday]];
-            var fetchOptions = {
-                bodies: ['HEADER.FIELDS (FROM TO SUBJECT DATE)', 'TEXT', ''],
-            };
+//     imaps.connect(config).then(function (connection) {
+//         return connection.openBox('INBOX').then(function () {
+//             var delay = 720 * 3600 * 1000;
+//             var yesterday = new Date();
+//             yesterday.setTime(Date.now() - delay);
+//             yesterday = yesterday.toISOString();
+//             var searchCriteria = ['ALL', ['SINCE', yesterday]];
+//             var fetchOptions = {
+//                 bodies: ['HEADER.FIELDS (FROM TO SUBJECT DATE)', 'TEXT', ''],
+//             };
 
-            return connection.search(searchCriteria, fetchOptions).then(function (messages) {
-                let htmlEmail = []
-                messages.forEach(function (item) {
-                    var all = _.find(item.parts, { "which": "" })
-                    var id = item.attributes.uid;
-                    var idHeader = "Imap-Id: "+id+"\r\n";
-                    simpleParser(idHeader+all.body, (err, mail) => {
-                        // console.log(mail.subject)
-                        htmlEmail.push(mail.html)
-                    });
-                });
-                setTimeout(()=>{
-                    res.send(htmlEmail)
-                }, 500)
-            });
-        });
-    });
-}
+//             return connection.search(searchCriteria, fetchOptions).then(function (messages) {
+//                 let htmlEmail = []
+//                 messages.forEach(function (item) {
+//                     var all = _.find(item.parts, { "which": "" })
+//                     var id = item.attributes.uid;
+//                     var idHeader = "Imap-Id: "+id+"\r\n";
+//                     simpleParser(idHeader+all.body, (err, mail) => {
+//                         // console.log(mail.subject)
+//                         htmlEmail.push(mail.html)
+//                     });
+//                 });
+//                 setTimeout(()=>{
+//                     res.send(htmlEmail)
+//                 }, 500)
+//             });
+//         });
+//     });
+// }
