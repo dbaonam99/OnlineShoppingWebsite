@@ -36,9 +36,8 @@ module.exports.index = async function(req, res) {
 
     var emailList = await Email.find()
     
-    console.log(emailList[0].sendedEmail)
+    res.send(emailList[0].sendedEmail)
 
-    res.status(200)
 }
 
 module.exports.postEmail = async function(req, res) {
