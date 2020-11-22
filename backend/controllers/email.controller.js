@@ -22,6 +22,11 @@ module.exports.index = async function(req, res) {
     
 	var emailList = await Email.find()
     console.log(emailList[0].sendedEmail)
+
+
+	console.log(req.params.idUser)
+    console.log(req.params.idEmail)
+    
     res.send('<img src="https://picsum.photos/200/300"/>')
 }
 
