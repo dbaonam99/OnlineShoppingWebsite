@@ -50,6 +50,14 @@ module.exports.info = function(req, res) {
 		res.json(email);
 	});
 };
+module.exports.updateEmail = function(req, res) {
+    var id = req.params.id;
+    console.log(req.body.subscriberEmail)
+	// Email.findById({ _id: id }).then(function(email) {
+	// 	res.json(email);
+	// });
+};
+
 module.exports.postEmail = async function(req, res) {
     var email = req.body.subscriber;
     console.log(email)

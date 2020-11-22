@@ -74,7 +74,7 @@ export default function DashboardBody(props) {
                 setCollection(res.data)
             } 
         )
-        Axios.get(`http://pe.heromc.net:4000/email`)
+        Axios.get(`http://pe.heromc.net:4000/email/${props.productId}`)
             .then(res => {
                 setEmail(res.data)
             } 
