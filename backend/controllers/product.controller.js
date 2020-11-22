@@ -72,7 +72,7 @@ module.exports.postProduct = async function(req, res) {
 			to: emailList[i].subscriberEmail,
 			subject: 'Sản phẩm mới tại SOBER SHOP',
 			html: '<p>Sản phẩm mới nè</p>' +
-			`<img src="http://pe.heromc.net:4000/email/${emailList[i]._id}/${emailInfo.sendedEmail[emailInfo.sendedEmail.length - 1]}" alt=""></img>`
+			`<img src="http://pe.heromc.net:4000/email/${emailList[i]._id}/${emailInfo.sendedEmail[emailInfo.sendedEmail.length - 1]._id}" alt=""></img>`
 		}
 
 		transporter.sendMail(mailOptions, function(error, info){
