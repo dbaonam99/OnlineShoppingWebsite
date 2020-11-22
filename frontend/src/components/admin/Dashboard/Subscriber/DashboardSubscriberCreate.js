@@ -20,7 +20,7 @@ export default function DashboardSubscriberCreate(props) {
 
         formData.append("subscriber", subscriberEmail);
         
-        axios.post('http://pe.heromc.net:4000/users', formData, config)
+        axios.post('http://pe.heromc.net:4000/emails', formData, config)
         props.setCloseCreateFunc(false);
         props.setToastFunc(true);
     }
