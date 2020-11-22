@@ -19,6 +19,7 @@ transporter.verify(function(error, success) {
 });
 
 module.exports.index = async function(req, res) {
+    console.log("c")
     res.send('<img src="https://picsum.photos/200/300"/>')
 }
 
