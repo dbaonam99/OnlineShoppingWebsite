@@ -19,15 +19,27 @@ transporter.verify(function(error, success) {
 });
 
 module.exports.index = async function(req, res) {
-    
-	var emailList = await Email.find()
-    console.log(emailList[0].sendedEmail)
-
 
 	console.log(req.params.idUser)
     console.log(req.params.idEmail)
+    Email.findOneAndUpdate(
+        { "_id": req.params.idUser, "sendedEmail._id": req.params.idEmail },
+        { 
+            "$set": {
+                "sendedEmail.isSeen": true
+            }
+        },
+        function(err,doc) {
     
-    res.send('<img src="https://picsum.photos/200/300"/>')
+        }
+    );
+
+
+    var emailList = await Email.find()
+    
+    console.log(emailList[0].sendedEmail)
+
+    res.status(200)
 }
 
 module.exports.postEmail = async function(req, res) {
