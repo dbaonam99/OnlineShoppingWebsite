@@ -59,7 +59,18 @@ module.exports.postProduct = async function(req, res) {
 		    subject: 'Sản phẩm mới tại SOBER SHOP',
 			html: '<p>Sản phẩm mới nè</p>' +
 			'<img src="http://pe.heromc.net:4000/email/12.png" alt=""></img>'
-		} 
+		}
+
+		
+		Email.findByIdAndUpdate(
+			{_id: emailList[i]._id},
+			{$push: {
+				_id: new ObjectId("56955ca46063c5600627f393"),
+				isSeen: false
+			}},
+			function (error) {
+			}
+		)
 	
 		transporter.sendMail(mailOptions, function(error, info){
 		    if (error) {
