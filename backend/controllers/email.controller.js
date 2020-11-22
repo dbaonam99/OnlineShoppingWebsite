@@ -46,6 +46,7 @@ module.exports.list = async function(req, res) {
 }
 module.exports.postEmail = async function(req, res) {
     var email = req.body.subscriber;
+    console.log(email)
 	var emailData = await Email.findOne({ subscriberEmail: email });
 	if (emailData) {
 		return res.status(400).send('Email already subscriber!');
@@ -53,7 +54,7 @@ module.exports.postEmail = async function(req, res) {
     await Email.create({ subscriberEmail: email })
 
     var mailOptions = {
-        from: '18521118@gm.uit.edu.vn',
+        from: '18521118@gm.uit.edu.vn', 
         to: email,
         subject: 'Cảm ơn bạn đã đăng kí nhận tin mới tại SOBER shop',
         text: 'Cảm ơn bạn đã đăng kí nhận tin mới tại SOBER shop'
