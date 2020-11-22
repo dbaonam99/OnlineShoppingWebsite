@@ -81,7 +81,7 @@ module.exports.postProduct = async function(req, res) {
 		})
 	}
 
-	console.log(Email.find())
+	console.log(await Email.find())
 
 	res.status(200);
 }
