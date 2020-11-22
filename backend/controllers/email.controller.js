@@ -20,8 +20,6 @@ transporter.verify(function(error, success) {
 
 module.exports.index = async function(req, res) {
 
-	console.log(req.params.idUser)
-    console.log(req.params.idEmail)
     Email.findOneAndUpdate(
         { "_id": req.params.idUser, "sendedEmail._id": req.params.idEmail },
         { 
@@ -30,14 +28,12 @@ module.exports.index = async function(req, res) {
             }
         },
         function(err,doc) {
-            console.log(err)
         }
     );
 
     var emailList = await Email.find()
     
-    res.send(emailList[0].sendedEmail)
-
+    res.send(emailList)
 }
 
 module.exports.postEmail = async function(req, res) {
