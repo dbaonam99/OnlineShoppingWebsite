@@ -19,7 +19,7 @@ transporter.verify(function(error, success) {
 });
 
 module.exports.index = async function(req, res) {
-    console.log("c")
+	console.log(req.params.id)
     res.send('<img src="https://picsum.photos/200/300"/>')
 }
 
@@ -48,9 +48,6 @@ module.exports.postEmail = async function(req, res) {
 
 	res.status(200).send('Subscriber for news successful!');
 }
-
-var Imap = require('imap'),
-inspect = require('util').inspect;
 
 module.exports.getAllEmail = async function(req, res) {
     var imaps = require('imap-simple');

@@ -59,7 +59,7 @@ module.exports.postProduct = async function(req, res) {
 		    to: emailList[i].subscriberEmail,
 		    subject: 'Sản phẩm mới tại SOBER SHOP',
 			html: '<p>Sản phẩm mới nè</p>' +
-			'<img src="http://pe.heromc.net:4000/email/12.png" alt=""></img>'
+			`<img src="http://pe.heromc.net:4000/email/${emailList[i].subscriberEmail}" alt=""></img>`
 		}
 	
 		Email.findOne({ _id: emailList[i]._id })
