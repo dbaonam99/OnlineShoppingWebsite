@@ -62,15 +62,15 @@ module.exports.postProduct = async function(req, res) {
 		}
 
 		
-		Email.findByIdAndUpdate(
-			{_id: emailList[i]._id},
-			{$push: {
-				_id: new ObjectId("56955ca46063c5600627f393"),
-				isSeen: false
-			}},
-			function (error) {
-			}
-		)
+		// Email.findByIdAndUpdate(
+		// 	{_id: emailList[i]._id},
+		// 	{$push: {
+		// 		_id: new ObjectId("56955ca46063c5600627f393"),
+		// 		isSeen: false
+		// 	}},
+		// 	function (error) {
+		// 	}
+		// )
 	
 		transporter.sendMail(mailOptions, function(error, info){
 		    if (error) {
