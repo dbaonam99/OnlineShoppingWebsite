@@ -7,7 +7,7 @@
     align-items: center;
     z-index: 999999999;
     position: fixed;
-    transition: 1.5s;
+    transition: opacity 1.5s;
 }
 .disable-loading {
     opacity: 0;
@@ -22,7 +22,7 @@
     text-transform: uppercase;
     font-size: 20px;
     opacity: 0;
-    transition: 1s;
+    transition: opacity 1s;
     font-family: fmain;
     line-height: normal;
     color: #000;
