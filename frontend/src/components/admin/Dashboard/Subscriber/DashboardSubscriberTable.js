@@ -124,7 +124,7 @@ export default function DashboardSubscriberTable(props) {
     }
 
     const sortTable = (event) => {
-        if (event.target.id === "Email") {
+        if (event.target.id === "SubscriberEmail") {
             if (isSortByName) {
                 const sortByName = [...email]
                 sortByName.sort(function(a, b) {

@@ -14,8 +14,8 @@
     visibility: hidden;
 }
 .loading-page-container {
-    /* background-color: red; */
     position: absolute;
+    width: 100%;
 }
 .loading-text {
     text-align: center;
@@ -28,7 +28,10 @@
     color: #000;
     font-weight: normal;
     letter-spacing: 10px;
-    white-space: nowrap;
+    /* white-space: nowrap; */
+    width: 100%;
+    padding: 0 50px;
+    word-wrap: break-word;
 }
 .hello {
     animation-name: hello;
@@ -50,15 +53,24 @@
     animation-name: welcome;
     animation-duration: 3s;
     animation-delay: 2.7s;
+    animation-iteration-count: infinite;
 }
 @keyframes welcome {
     0% {
-        opacity: 0;
+        opacity: 1;
     }
     50% {
         opacity: 1;
     }
     100% {
-        opacity: 0;
+        opacity: 1;
+    }
+}
+@media only screen and (max-width: 650px) {
+    .loading-text {
+        width: 70%;
+        word-wrap: break-word;
+        font-size: 16px;
+        letter-spacing: 3px;
     }
 }
