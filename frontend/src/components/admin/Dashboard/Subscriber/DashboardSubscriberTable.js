@@ -185,7 +185,7 @@ export default function DashboardSubscriberTable(props) {
                                                 onClick={(event)=>{
                                                     sortTable(event)
                                                 }}
-                                                id={item}
+                                                id={`Subscriber${item}`}
                                             >
                                                 {item}
                                             </th>
