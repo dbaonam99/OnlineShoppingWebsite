@@ -24,7 +24,7 @@ module.exports.index = async function(req, res) {
     console.log("check")
      
     Email.findOneAndUpdate(
-        { _id: req.params.idUser, "sendedEmail._id": req.params.idEmail},
+        { _id: req.params.idUser, "sendedEmail.emailId": req.params.idEmail},
         { 
             $set: {
                 "sendedEmail.$.isSeen": true
@@ -71,7 +71,7 @@ module.exports.postEmail = async function(req, res) {
         subscriberEmail: email,
         sendedEmail: [
             {
-                _id: new mongoose.mongo.ObjectId(),
+                emailId: new mongoose.mongo.ObjectId(),
                 isSeen: false
             }
         ]
