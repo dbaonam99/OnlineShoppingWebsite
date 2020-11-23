@@ -6,8 +6,7 @@ export default function LoadingPage(props) {
 
     return(
         <Div100vh 
-            className={props.loading ? "loading-page" : "loading-page disable-loading"} 
-            // style={{height: `${window.screen.availHeight}px`}}
+            className={props.loading ? "loading-page" : "loading-page disable-loading"}
         >
             <div className="loading-page-container flex-center">
                 <p className="loading-text hello">Hello!</p>
