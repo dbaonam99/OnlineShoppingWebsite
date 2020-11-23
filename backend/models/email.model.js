@@ -9,6 +9,6 @@ var emailSchema = new mongoose.Schema({
     }
 )
 
-var Email = mongoose.model('Email', emailSchema, 'emails');
+var Email = mongoose.model('Email', emailSchema);
 
 module.exports = Email;
