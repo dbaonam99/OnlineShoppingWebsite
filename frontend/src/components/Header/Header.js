@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useState } from 'react';
+import React, { useContext, useEffect, useRef, useState } from 'react';
 import '../../App.css';
 import {
     Link,
@@ -12,6 +12,7 @@ import Account from './Account.js';
 import Cart from './Cart.js';
 import MenuItemDropdown from './MenuItemDropdown';
 import { CartContext } from '../../contexts/Cart';
+import Div100vh from 'react-div-100vh';
 
 function Header(props) {
 
@@ -26,6 +27,8 @@ function Header(props) {
     const [totalCart, setTotalCart] = useState(0)
 
     const location = props.history.location.pathname;
+
+    const unFocus = useRef()
 
     function clickToClose() {
         document.body.style.overflow = 'unset';
@@ -218,6 +221,8 @@ function Header(props) {
     const [openMobileMenu, setOpenMobileMenu] = useState(false)
 
     const openMobileMenuFunc = () => {
+        unFocus.current.focus()
+
         setOpenMobileMenu(true)
         document.body.style.overflow = 'hidden';
     }
@@ -275,7 +280,10 @@ function Header(props) {
                                 <input className="input" placeholder="Search" style={{fontSize: '16px', height: '50px'}}></input>
                                 <FontAwesomeIcon icon={faSearch} style={{marginLeft: '10px', color: '#777'}}/>
                             </div>
-                            <div className="menu-mobile-list">
+                            <Div100vh 
+                                className="menu-mobile-list"
+                                ref={unFocus}
+                            >
                                 {
                                     navBar.map((item, index)=> {
                                         let home = ""
@@ -293,7 +301,7 @@ function Header(props) {
                                         )
                                     })
                                 }
-                            </div>
+                            </Div100vh>
                             <div className="menu-mobile-login flex">
                                 <FontAwesomeIcon icon={faUser} className="icon"/>
                                 <p>LOGIN</p>
