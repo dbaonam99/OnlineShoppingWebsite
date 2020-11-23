@@ -2,7 +2,7 @@ import React, { useRef } from 'react';
 import '../Styles/LoadingPage.css'
 export default function LoadingPage(props) {
 
-    const rootElement = document.querySelector(".root-element")
+    const loading = useRef()
     const viewPortH = loading.getBoundingClientRect().height;
     const windowH = window.innerHeight;
     const browserUiBarsH = viewPortH - windowH; 
