@@ -1,18 +1,13 @@
 import React, { useRef } from 'react';
 import '../Styles/LoadingPage.css'
+import Div100vh from 'react-div-100vh';
+
 export default function LoadingPage(props) {
 
-    const loading = useRef()
-    // const viewPortH = loading.getBoundingClientRect().height;
-    const windowH = window.innerHeight;
-    // const browserUiBarsH = viewPortH - windowH; 
-    console.log(windowH)
-
     return(
-        <div 
+        <Div100vh 
             className={props.loading ? "loading-page" : "loading-page disable-loading"} 
-            ref={loading} 
-            style={{height: `${windowH}px)`}}
+            // style={{height: `${window.screen.availHeight}px`}}
         >
             <div className="loading-page-container flex-center">
                 <p className="loading-text hello">Hello!</p>
@@ -20,6 +15,6 @@ export default function LoadingPage(props) {
             <div className="loading-page-container flex-center">
                 <p className="loading-text welcome">Welcome to SOBER shop</p>
             </div> 
-        </div>
+        </Div100vh>
     )
 }
