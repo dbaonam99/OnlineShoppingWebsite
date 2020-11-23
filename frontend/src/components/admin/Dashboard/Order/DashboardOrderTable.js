@@ -237,17 +237,12 @@ export default function DashboardUserTable(props) {
                                                     </li>
                                                 </ul>    
                                             </td>
-
-                                            <td>
-                                                <ul style={{margin: '10px 0'}}>
-                                                    <li>
-                                                        <div className="flex" style={{alignItems: 'center'}}>
-                                                            <p 
-                                                                style={{wordWrap: 'break-word', WebkitLineClamp: '3'}}
-                                                            >{item.orderAddress}, {item.orderHuyen}, {item.orderTinh}</p>
-                                                        </div>
-                                                    </li>
-                                                </ul>    
+                                            <td> 
+                                                <div className="flex" style={{alignItems: 'center',margin: '10px 0'}}>
+                                                    <p 
+                                                        style={{wordWrap: 'break-word', WebkitLineClamp: '3'}}
+                                                    >{item.orderAddress}, {item.orderHuyen}, {item.orderTinh}</p>
+                                                </div> 
                                             </td>
                                             <td>
                                                 <p>{day}-{month}-{year}</p>

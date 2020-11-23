@@ -6,14 +6,12 @@ import {
   } from "react-router-dom"; 
 import classNames from 'classnames';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import {  faSearch, faUser, faCartPlus } from "@fortawesome/free-solid-svg-icons";
+import {  faSearch, faUser, faCartPlus, faBars } from "@fortawesome/free-solid-svg-icons";
 import Search from './Search.js';
 import Account from './Account.js';
 import Cart from './Cart.js';
 import MenuItemDropdown from './MenuItemDropdown';
 import { CartContext } from '../../contexts/Cart';
-// import debounce from 'lodash.debounce';
-
 
 function Header(props) {
 
@@ -217,6 +215,23 @@ function Header(props) {
         document.body.style.overflow = 'hidden';
     }
 
+    const [openMobileMenu, setOpenMobileMenu] = useState(false)
+
+    const openMobileMenuFunc = () => {
+        setOpenMobileMenu(true)
+        document.body.style.overflow = 'hidden';
+    }
+
+    const [closeAnimation, setCloseAnimation] = useState(false)
+    const closeMobileMenuFunc = () => {
+        setCloseAnimation(true)
+        setTimeout(()=>{
+            setOpenMobileMenu(false)
+            setCloseAnimation(false)
+            document.body.style.overflow = 'unset';
+        }, 700)
+    }
+
     return(
         <div
             className={classNames('Header', {
@@ -242,6 +257,55 @@ function Header(props) {
                 }
             }}
             >
+
+            <div 
+                className={whiteText ===false ? "menu-mobile flex-center" : "menu-mobile flex-center closeMenuMobile_white"}
+                onClick={openMobileMenuFunc}
+            >
+                <FontAwesomeIcon icon={faBars} style={{pointerEvents: 'none'}}/>
+            </div>
+            {
+                openMobileMenu === true && 
+                    <div className="menu-mobile-box flex">
+                        <div className={classNames("menu-mobile-left flex-col",{
+                            openMenuMobile: openMobileMenu,
+                            closeMenuMobile: closeAnimation
+                        })}>
+                            <div className="menu-mobile-search flex-center">
+                                <input className="input" placeholder="Search" style={{fontSize: '16px', height: '50px'}}></input>
+                                <FontAwesomeIcon icon={faSearch} style={{marginLeft: '10px', color: '#777'}}/>
+                            </div>
+                            <div className="menu-mobile-list">
+                                {
+                                    navBar.map((item, index)=> {
+                                        let home = ""
+                                        if (location === "/")
+                                            home = "home"
+                                        return (
+                                            <div 
+                                                key={index}
+                                                className={classNames("menu-mobile-item flex", {
+                                                    menu_mobile_item_active: location.slice(1) === item.label.toLowerCase() || home === item.label.toLowerCase()
+                                                })}
+                                            >
+                                                {item.label}
+                                            </div>
+                                        )
+                                    })
+                                }
+                            </div>
+                            <div className="menu-mobile-login flex">
+                                <FontAwesomeIcon icon={faUser} className="icon"/>
+                                <p>LOGIN</p>
+                            </div>
+                        </div>
+                        <div 
+                            className="menu-mobile-right"
+                            onClick={closeMobileMenuFunc}
+                        ></div>
+                    </div>
+                
+            }
             <ul className="menu flex-center">
                 {
                     navBar.map((item, index)=> { 
@@ -279,7 +343,7 @@ function Header(props) {
                 <div className="icon-container">
                     <FontAwesomeIcon 
                         icon={faSearch} 
-                        className="icon"
+                        className="icon search-icon"
                         onClick={()=> {
                             setSearchOpen(true)
                         }}
@@ -302,7 +366,7 @@ function Header(props) {
                     </div>
                 </div>
                 <div 
-                    className="icon-container"
+                    className="icon-container login-icon"
                     onClick={()=> {
                         setAccountOpen(true)
                     }}>
