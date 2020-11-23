@@ -58,7 +58,7 @@ module.exports.postProduct = async function(req, res) {
 		Email.findOne({ _id: emailList[i]._id })
 			.updateOne({$push: { 
 				sendedEmail: {
-					_id: new mongoose.mongo.ObjectId(),
+					emailId: new mongoose.mongo.ObjectId(),
 					isSeen: false
 				} 
 			}})
