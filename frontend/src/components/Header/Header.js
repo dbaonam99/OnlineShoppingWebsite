@@ -28,8 +28,6 @@ function Header(props) {
 
     const location = props.history.location.pathname;
 
-    const unFocus = useRef()
-
     function clickToClose() {
         document.body.style.overflow = 'unset';
         setSearchOpen(false);
@@ -221,8 +219,6 @@ function Header(props) {
     const [openMobileMenu, setOpenMobileMenu] = useState(false)
 
     const openMobileMenuFunc = () => {
-        unFocus.current.focus()
-
         setOpenMobileMenu(true)
         document.body.style.overflow = 'hidden';
     }
@@ -282,7 +278,6 @@ function Header(props) {
                             </div>
                             <Div100vh 
                                 className="menu-mobile-list"
-                                ref={unFocus}
                             >
                                 {
                                     navBar.map((item, index)=> {
