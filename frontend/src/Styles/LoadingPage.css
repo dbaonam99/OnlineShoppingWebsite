@@ -57,20 +57,37 @@
 }
 @keyframes welcome {
     0% {
-        opacity: 1;
+        opacity: 0;
     }
     50% {
         opacity: 1;
     }
     100% {
-        opacity: 1;
+        opacity: 0;
     }
 }
 @media only screen and (max-width: 650px) {
     .loading-text {
-        width: 70%;
-        word-wrap: break-word;
         font-size: 16px;
         letter-spacing: 3px;
+    }
+}
+@media only screen and (max-width: 550px) {
+    .loading-text {
+        font-size: 15px;
+        letter-spacing: 3px;
+    }
+}
+@media only screen and (max-width: 370px) {
+    .loading-text {
+        font-size: 12px;
+        letter-spacing: 3px;
+    }
+}
+@media only screen and (max-width: 315px) {
+    .loading-text {
+        font-size: 11px;
+        letter-spacing: 3px;
+        padding: 0;
     }
 }
