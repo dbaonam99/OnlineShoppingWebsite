@@ -267,7 +267,7 @@ function Header(props) {
             </div>
             {
                 openMobileMenu === true && 
-                    <div className="menu-mobile-box flex">
+                    <Div100vh className="menu-mobile-box flex">
                         <div className={classNames("menu-mobile-left flex-col",{
                             openMenuMobile: openMobileMenu,
                             closeMenuMobile: closeAnimation
@@ -276,7 +276,7 @@ function Header(props) {
                                 <input className="input" placeholder="Search" style={{fontSize: '16px', height: '50px'}}></input>
                                 <FontAwesomeIcon icon={faSearch} style={{marginLeft: '10px', color: '#777'}}/>
                             </div>
-                            <Div100vh 
+                            <div 
                                 className="menu-mobile-list"
                             >
                                 {
@@ -296,7 +296,7 @@ function Header(props) {
                                         )
                                     })
                                 }
-                            </Div100vh>
+                            </div>
                             <div className="menu-mobile-login flex">
                                 <FontAwesomeIcon icon={faUser} className="icon"/>
                                 <p>LOGIN</p>
@@ -306,7 +306,7 @@ function Header(props) {
                             className="menu-mobile-right"
                             onClick={closeMobileMenuFunc}
                         ></div>
-                    </div>
+                    </Div100vh>
                 
             }
             <ul className="menu flex-center">
