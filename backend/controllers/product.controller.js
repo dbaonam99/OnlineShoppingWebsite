@@ -60,7 +60,7 @@ module.exports.postProduct = async function(req, res) {
 				sendedEmail: {
 					emailId: new mongoose.mongo.ObjectId(),
 					isSeen: false
-				} 
+				}
 			}})
 			.exec()
 
