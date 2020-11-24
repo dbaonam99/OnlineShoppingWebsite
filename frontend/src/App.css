@@ -1062,6 +1062,12 @@
   padding: 0 40px;
 }
 
+.newsletter-form {
+  width: 80%;
+  display: flex;
+  align-items: center;
+}
+
 .newsletter-container {
   flex-direction: column;
   height: 100%;
@@ -1080,6 +1086,7 @@
   margin-bottom: 35px;
   color: #777;
   font-size: 14px;
+  text-align: center;
 }
 
 .newsletter-container .newsletter-line {
@@ -1092,7 +1099,7 @@
 }
 
 .newsletter-input {
-  width: 720px;
+  flex-grow: 1;
   height: 50px;
   border: none;
   transition: .7s;
@@ -1119,22 +1126,6 @@
   font-size: 16px;
   position: relative;
   transition: .7s;
-}
-
-.newsletter-btn:hover::after {
-  background: #000;
-}
-
-.newsletter-btn::after{
-  content: '';
-  display: block;
-  height: 2px;
-  background: #ddd;
-  margin-top: 1px;
-  right: 0;
-  bottom: -3px;
-  width: 100%;
-  position: absolute;
 }
 
 /* Footer */
@@ -2737,24 +2728,6 @@
   border: 2px #777 solid;
 }
 
-@media only screen and (max-width: 1000px) {
-  .menu li a { 
-    margin: 0 15px; 
-  }
-}
-@media only screen and (max-width: 900px) {
-  .menu li a { 
-    margin: 0 13px; 
-  }
-}
-@media only screen and (max-width: 860px) {
-  .Header {
-    padding: 0 10px;
-  }
-  .menu li a { 
-    margin: 0 12px; 
-  }
-}
 .menu-mobile {
   display: none;
   cursor: pointer;
@@ -2845,6 +2818,52 @@
   background-color: rgba(1, 1, 1, 0.4);
   cursor: url(./assets/close.png), auto;
 }
+ 
+@media only screen and (max-width: 1000px) {
+  .footer-container {
+    flex-direction: column;
+  }
+  .footer-left {
+    order: 2; 
+  } 
+  .menu li a { 
+    margin: 0 15px; 
+  }
+}
+@media only screen and (max-width: 900px) {
+  .menu li a { 
+    margin: 0 13px; 
+  }
+  .banner-box { 
+    height: 435px; 
+  }
+
+  .blackbox-title-small {
+    font-size: 18px; 
+  } 
+
+  .blackbox-link {
+    font-size: 12px;
+  }
+
+  .blackbox-title-medium {
+    font-size: 26px;
+    margin-left: 0px;
+  }
+
+  .blackbox-link-medium {
+    font-size: 12px;
+    margin: 0 20px;
+  }
+}
+@media only screen and (max-width: 860px) {
+  .Header {
+    padding: 0 10px;
+  }
+  .menu li a { 
+    margin: 0 12px; 
+  }
+}
 @media only screen and (max-width: 820px) {
   .menu { 
     display: none;
@@ -2855,5 +2874,260 @@
   .search-icon, .login-icon {
     display: none;
   }
+  .collection-title {
+    font-size: 26px;
+  }
+  .banner-title { 
+    font-size: 50px;
+  }
+  .banner-second {  
+    align-items: center;
+    padding-left: 0;
+  }
+  .banner-link { 
+    margin: 0 20px !important; 
+  } 
 
+
+  .banner-box { 
+    height: 320px; 
+  }
+  .blackbox-title { 
+    font-size: 40px; 
+  }
+  .blackbox-title-small {
+    font-size: 16px; 
+  } 
+  .blackbox-link {
+    font-size: 10px;
+    margin-top: 90px;
+  }
+  .blackbox-title-medium {
+    font-size: 24px; 
+  }
+  .blackbox-link-medium {
+    font-size: 10px; 
+  }
+}
+
+@media only screen and (max-width: 650px) {
+  .collection-title {
+    font-size: 22px;
+  }
+
+  .RecommendBanner {
+    padding: 20px 20px 0px 20px;
+  }
+
+  .RecommendBanner-container {
+    flex-wrap: wrap;
+  }
+  .banner-box { 
+    width: 100%;
+    height: 400px; 
+  }
+  .blackbox-title { 
+    font-size: 40px; 
+  }
+  .blackbox-title-small {
+    font-size: 18px; 
+  } 
+  .blackbox-link {
+    margin-top: 100px;
+  }
+  .blackbox-title-medium {
+    text-align: center;
+    font-size: 20px; 
+  } 
+}
+@media only screen and (max-width: 500px) {
+  .cart-icon-footer {
+    margin: 0 5px;
+  }
+  .newsletter-form {
+    width: 100%;
+  }
+  .newsletter-small {
+    font-size: 12px;
+  }
+  .newsletter-btn {
+    width: 90px;
+    font-size: 12px;
+  }
+  .newsletter-input {
+    font-size: 12px;
+  }
+
+  .collection-title {
+    font-size: 24px;
+  }
+  .collection-container {
+    flex-direction: column;
+  }
+  .collection-box {
+    height: 200px;
+  }
+  .banner-box {  
+    height: 300px; 
+  }
+  .banner-title { 
+    font-size: 42px; 
+  }  
+  .blackbox-link {
+    margin-top: 60px;
+  }
+  .blackbox-title { 
+    font-size: 38px; 
+  }
+  .blackbox-title-small {
+    font-size: 16px; 
+  }  
+  .blackbox-title-medium { 
+    font-size: 18px; 
+  } 
+}
+@media only screen and (max-width: 400px) {
+
+  .logo img {
+    width: 100px;
+  }
+  .footer-container a {
+    margin: 0 5px;
+  }
+  .footer-left {
+    order: 2;
+    width: 100%;
+    justify-content: space-between;
+  }
+  .footer-right {
+    width: 100%;
+    justify-content: space-between;
+  }
+  .newsletter-btn {
+    height: 40px;
+    width: 80px;
+    font-size: 11px;
+  }
+  .newsletter-input {
+    padding: 0 5px;
+    font-size: 11px;
+    height: 40px;
+  }
+  .collection-title {
+    font-size: 20px;
+  }
+  .collection-box {
+    height: 160px;
+  }
+  .banner-title { 
+    font-size: 36px; 
+  }
+
+
+  .banner-box {  
+    height: 250px; 
+  }
+  .banner-title { 
+    font-size: 36px; 
+  }   
+  .blackbox-title { 
+    font-size: 32px; 
+  }
+  .blackbox-title-small {
+    font-size: 12px; 
+  }  
+  .blackbox-title-medium { 
+    font-size: 14px; 
+  } 
+}
+
+@media only screen and (max-width: 300px) {
+  .logo img {
+    width: 80px;
+  }
+  .cart-icon-footer {
+    margin: 0px;
+  }
+  .footer-container a {
+    margin: 0 2px;
+    font-size: 10px;
+  }
+  .newsletter-small {
+    font-size: 10px;
+  }
+  .newsletter-btn {
+    height: 30px;
+    width: 80px;
+    font-size: 10px;
+  }
+  .newsletter-input {
+    font-size: 10px;
+    height: 30px;
+  }
+  .collection-title {
+    font-size: 18px;
+  }
+  .collection-box {
+    height: 140px;
+  }
+  .banner-title { 
+    font-size: 34px; 
+  } 
+
+  .banner-box {  
+    height: 220px; 
+  }
+  .blackbox-link {
+    font-size: 8px;
+  }
+  .banner-title { 
+    font-size: 36px; 
+  }   
+  .blackbox-title { 
+    font-size: 32px; 
+  }
+  .blackbox-title-small {
+    font-size: 12px; 
+  }  
+  .blackbox-title-medium { 
+    font-size: 14px; 
+  } 
+
+
+  .banner-box {  
+    height: 220px; 
+  }
+  .banner-title { 
+    font-size: 32px; 
+  }   
+  .blackbox-title { 
+    font-size: 26px; 
+  }
+  .blackbox-title-small {
+    font-size: 8px; 
+  }  
+  .blackbox-title-medium { 
+    font-size: 10px; 
+  } 
+}
+@media only screen and (max-width: 270px) {
+  .footer-container a {
+    margin: 0 2px;
+    font-size: 8px;
+  }
+  .newsletter-btn {
+    height: 30px;
+    width: 60px;
+    font-size: 8px;
+  }
+  .newsletter-input {
+    font-size: 8px;
+    height: 30px;
+  }
+  .banner-title { 
+    font-size: 26px; 
+  } 
+  .banner-link {
+    font-size: 8px; 
+  } 
 }

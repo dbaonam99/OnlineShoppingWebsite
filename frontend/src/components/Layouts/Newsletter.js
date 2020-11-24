@@ -37,7 +37,7 @@ export default function Newsletter () {
                         onChange={handleOnChange}
                         ref={inputEmailRef}
                     ></input>
-                    <button className="newsletter-btn">Subcribe</button>
+                    <button className="newsletter-btn btn">Subcribe</button>
                 </form>
                 <div className="newsletter-line"></div>
             </div>

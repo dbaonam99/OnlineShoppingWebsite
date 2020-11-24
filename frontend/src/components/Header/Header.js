@@ -225,11 +225,11 @@ function Header(props) {
 
     const [closeAnimation, setCloseAnimation] = useState(false)
     const closeMobileMenuFunc = () => {
+        document.body.style.overflow = 'unset';
         setCloseAnimation(true)
         setTimeout(()=>{
             setOpenMobileMenu(false)
             setCloseAnimation(false)
-            document.body.style.overflow = 'unset';
         }, 700)
     }
 
@@ -261,9 +261,11 @@ function Header(props) {
 
             <div 
                 className={whiteText ===false ? "menu-mobile flex-center" : "menu-mobile flex-center closeMenuMobile_white"}
-                onClick={openMobileMenuFunc}
             >
-                <FontAwesomeIcon icon={faBars} style={{pointerEvents: 'none'}}/>
+                <FontAwesomeIcon 
+                    icon={faBars}
+                    onClick={openMobileMenuFunc} 
+                    style={{fontSize: '20px'}}/>
             </div>
             {
                 openMobileMenu === true && 
