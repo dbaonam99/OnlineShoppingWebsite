@@ -101,7 +101,7 @@
     transition: height .4s;
     height: 0;
     overflow: hidden;
-}
+} 
 .closeOpt {
     height: 125px;
 }

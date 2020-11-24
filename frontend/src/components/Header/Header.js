@@ -6,7 +6,7 @@ import {
   } from "react-router-dom"; 
 import classNames from 'classnames';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import {  faSearch, faUser, faCartPlus, faBars } from "@fortawesome/free-solid-svg-icons";
+import {  faSearch, faUser, faCartPlus, faBars, faAngleDown } from "@fortawesome/free-solid-svg-icons";
 import Search from './Search.js';
 import Account from './Account.js';
 import Cart from './Cart.js';
@@ -25,8 +25,11 @@ function Header(props) {
     const [disableBox, setDisableBox] = useState(false);
     const [dropdownHover, setDropdownHover] = useState(false)
     const [totalCart, setTotalCart] = useState(0)
+    const [openSubMenu, setOpenSubMenu] = useState(null)
 
     const location = props.history.location.pathname;
+
+    const subHeight = useRef()
 
     function clickToClose() {
         document.body.style.overflow = 'unset';
@@ -289,11 +292,62 @@ function Header(props) {
                                         return (
                                             <div 
                                                 key={index}
-                                                className={classNames("menu-mobile-item flex", {
-                                                    menu_mobile_item_active: location.slice(1) === item.label.toLowerCase() || home === item.label.toLowerCase()
+                                                style={{color: '#111', maxHeight: openSubMenu === item.id ? `1000px` : '40px'}}
+                                                className={classNames("menu-mobile-item a", {
+                                                    menu_mobile_item_active: location.slice(1) === item.label.toLowerCase() || home === item.label.toLowerCase(),
                                                 })}
+                                                onClick={()=>{
+                                                    if (!item.dropdownContent.length > 0) {
+                                                        props.history.push(item.url);
+                                                    } else {
+                                                        if (!openSubMenu) {
+                                                            setOpenSubMenu(item.id)
+                                                        } else {
+                                                            if (openSubMenu === item.id) {
+                                                                setOpenSubMenu(null)
+                                                            } else {
+                                                                setOpenSubMenu(item.id)
+                                                            }
+                                                        }
+                                                    }
+                                                }}
                                             >
-                                                {item.label}
+                                                <div className="flex" style={{justifyContent: 'space-between'}}>
+                                                    <p>{item.label}</p>
+                                                    { item.dropdownContent.length > 0 && 
+                                                        <div>
+                                                            <FontAwesomeIcon icon={faAngleDown}/>
+                                                        </div>
+                                                    }
+                                                </div>
+                                                <div 
+                                                    className="menu-mobile-sub"
+                                                    ref={subHeight}
+                                                >
+                                                    { item.dropdownContent.map((item, index)=>{ 
+                                                        return (
+                                                            <div
+                                                                key={index}
+                                                                className="menu-item-sub-item"
+                                                            >
+                                                                {item.dropdownTitle}
+                                                                {
+                                                                    item.dropdownList.map((item,index)=>{
+                                                                        return (
+                                                                            <div
+                                                                                className="menu-item-sub-item2"
+                                                                                key={index}
+                                                                            >
+                                                                                {item}
+                                                                            </div>
+                                                                        )
+                                                                    })
+                                                                }
+                                                            </div>
+                                                        )
+                                                        })
+                                                    }
+                                                </div>
                                             </div>
                                         )
                                     })
