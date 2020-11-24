@@ -2772,20 +2772,41 @@
 .menu-mobile-login p {
   margin-top: 1px;
   margin-left: 20px;
-  font-weight: bold;
-  font-size: 14px;
+  font-weight: 400;
+  font-size: 16px;
 }
 .menu-mobile-list {
   flex-grow: 1;
+  overflow-y: scroll;
 }
 .menu-mobile-item {
-  height: 40px;
+  /* height: 40px; */
   font-weight: bold;
-  font-size: 14px;
+  font-size: 16px;
+  font-weight: 400;
   padding: 10px 20px;
   margin: 10px 0;
   align-items: center;
   border-left: 3px #fff solid;
+  justify-content: space-between;
+  overflow: hidden;
+  transition: 1s;
+}
+.menu-mobile-sub {
+  
+}
+.menu-item-sub-item { 
+  font-size: 14px;
+  font-weight: 400;
+  color: #777; 
+  margin: 15px 0 15px 20px;
+}
+.menu-item-sub-item:last-child, 
+.menu-item-sub-item2:last-child {
+  margin-bottom: 0;
+}
+.menu-item-sub-item2 { 
+  margin: 10px 0 10px 20px;
 }
 .menu_mobile_item_active {
   border-left: 3px #000 solid;
@@ -2826,7 +2847,6 @@
   background-color: rgba(1, 1, 1, 0.4);
   cursor: url(./assets/close.png), auto;
 }
-
 @media only screen and (max-width: 1632px) {
   .product-img {
     height: 300px;
