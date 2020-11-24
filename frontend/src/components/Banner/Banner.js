@@ -3,6 +3,7 @@ import '../../App.css';
 import '../../Styles/Animation.css';
 import classNames from 'classnames';
 import { withRouter } from 'react-router-dom';
+import Div100vh from 'react-div-100vh';
 
 function Banner (props) {
     const [currentBanner, setCurrentBanner] = useState(1);
@@ -27,7 +28,7 @@ function Banner (props) {
 
     return(
         <div className="Banner flex-center">
-            <div className="banner-container">
+            <Div100vh className="banner-container">
                 <div className={classNames('banner-first flex-center', {
                     hide: currentBanner !== 1
                 })}>
@@ -103,7 +104,7 @@ function Banner (props) {
                         </div>
                     }
                 </div>
-            </div>
+            </Div100vh>
             <div className="choose-slide flex-center">
                 <div 
                     className={classNames('choose-line', {
