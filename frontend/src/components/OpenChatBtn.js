@@ -123,7 +123,7 @@ function OpenChatBtn(props) {
                     }
                 }}
                 >
-                <FontAwesomeIcon icon={faComment}/>
+                <FontAwesomeIcon icon={faComment} className="icon"/>
                 <p>Live Chat</p>
             </div>
             <div className={openChat ? "chat-box hide_chat_box" : "chat-box"}>
