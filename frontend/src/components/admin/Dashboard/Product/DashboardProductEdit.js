@@ -150,8 +150,6 @@ export default function DashboardProductEdit(props) {
         groupCateInput.current.value = ""
     } 
 
-    console.log(productGroupCateList)
-
     const deleteImg = (event) => {
         const id = event.target.id
         const virutalFile = [...file]
@@ -276,11 +274,14 @@ export default function DashboardProductEdit(props) {
                                     onChange={(event) => {setProductGroupCate(event.target.value)}}
                                     value={productGroupCate}
                                 >
+                                    <option></option>
                                     { productGroupCateList.length > 0 &&
                                         productGroupCateList.map((item, index) => {
-                                            return(
-                                                <option key={index}>{item.productGroupCate}</option>
-                                            )
+                                            if (item.productGroupCate) {
+                                                return(
+                                                    <option key={index}>{item.productGroupCate}</option>
+                                                )
+                                            }
                                         })
                                     }
                                 </select>
