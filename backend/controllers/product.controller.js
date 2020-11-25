@@ -41,6 +41,7 @@ module.exports.postProduct = async function(req, res) {
 		productName: req.body.productName,
 		productSale: req.body.productSale,
 		productPrice: req.body.productPrice,
+		productGroupCate: req.body.productGroupCate,
 		productCate: req.body.productCate,
 		productSize: req.body.productSize.split(","),
 		productSex: req.body.productSex,
@@ -99,6 +100,7 @@ module.exports.updateProduct = async function(req, res) {
 			productSale: product.productSale,
 			productPrice: product.productPrice,
 			productCate: product.productCate,
+			productGroupCate: product.productGroupCate,
 			productSize: product.productSize,
 			productSex: product.productSex,
 			productDate: product.productDate,
@@ -123,6 +125,7 @@ module.exports.updateProduct = async function(req, res) {
 		productSale: req.body.productSale,
 		productPrice: req.body.productPrice,
 		productCate: req.body.productCate,
+		productGroupCate: req.body.productGroupCate,
 		productSize: req.body.productSize.split(","),
 		productSex: req.body.productSex,
 		productDes: req.body.productDes
