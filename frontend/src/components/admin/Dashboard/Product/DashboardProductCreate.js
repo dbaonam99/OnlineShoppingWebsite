@@ -54,6 +54,15 @@ export default function DashboardProductCreate(props) {
     }
     
     useEffect(()=> {
+        axios.get(`http://pe.heromc.net:4000/products`)
+            .then(res => {
+                const test = Object.values(res.data.reduce((a, {productGroupCate}) => {
+                    a[productGroupCate] = a[productGroupCate] || {productGroupCate};
+                    return a;
+                }, Object.create(null)));
+                setProductGroupCateList(test)
+            }
+        )
         axios.get(`http://pe.heromc.net:4000/category`)
             .then(res => {
                 setCate(res.data)
