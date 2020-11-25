@@ -1,5 +1,6 @@
 var Order = require("../models/order.model");
 var Notice = require("../models/notice.model");
+var Product = require("../models/product.model");
 
 module.exports.index = async function(req, res) {
 	var order = await Order.find();
@@ -33,6 +34,15 @@ module.exports.postOrder = async function(req, res) {
 			const orderList = req.body.orderList;
 			for (let i in orderList) {
 				console.log(orderList[i])
+				await Product.findByIdAndUpdate(orderList[i].id, 
+				{
+					$inc: { productSold: orderList[i].amount/2 }
+				}, function(error) {
+					if (error) {
+						console.log(error);
+					}
+				})
+				console.log(await Product.findById(orderList[i].id))
 			}
 			await Order.create(data);
 			const notice = {

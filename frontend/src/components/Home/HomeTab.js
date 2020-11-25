@@ -45,7 +45,10 @@ export default function HomeTab() {
         }
     }
 
-    console.log(products)
+    if (products.length > 0)
+        for (let i in products)
+            if (products[i].productSold > 0)
+                console.log(products[i])
 
     return(
         <div className="HomeTab">

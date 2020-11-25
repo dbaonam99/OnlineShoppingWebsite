@@ -24,6 +24,17 @@ export default function DashboardMain() {
         axios.get(`http://pe.heromc.net:4000/products`)
             .then(res => {
                 setProducts(res.data)
+                let virtualProducts = [...res.data]
+                virtualProducts.sort((a,b) =>  b.productSold - a.productSold)
+                let virtualProducts2 = []
+                for (let i in virtualProducts) {
+                    let data = {
+                        ...virtualProducts[i],
+                        count: virtualProducts[i].productSold
+                    }
+                    virtualProducts2.push(data)
+                }
+                setTopProductSales(virtualProducts2)
             }
         )
         axios.get(`http://pe.heromc.net:4000/users/list`)
@@ -55,26 +66,27 @@ export default function DashboardMain() {
             }
         )
     }, [])
-    useEffect(()=>{
-        var allProductSales = []
-        for (let i in order) {
-            for (let j in order[i].orderList) {
-                for (let k in products) {
-                    if (products[k]._id === order[i].orderList[j].id) {
-                        allProductSales.push(products[k])
-                    }
-                }
-            }
-        }
-        const topProductSales2 = Object.values(allProductSales.reduce((a, {_id, productName, productImg}) => {
-            a[_id] = a[_id] || {_id, productName, productImg, count: 0};
-            a[_id].count++;
-            return a;
-        }, Object.create(null)));
+    // useEffect(()=>{
+    //     var allProductSales = []
+    //     for (let i in order) {
+    //         for (let j in order[i].orderList) {
+    //             for (let k in products) {
+    //                 if (products[k]._id === order[i].orderList[j].id) {
+    //                     allProductSales.push(products[k])
+    //                 }
+    //             }
+    //         }
+    //     }
+    //     const topProductSales2 = Object.values(allProductSales.reduce((a, {_id, productName, productImg}) => {
+    //         a[_id] = a[_id] || {_id, productName, productImg, count: 0};
+    //         a[_id].count++;
+    //         return a;
+    //     }, Object.create(null)));
         
-        topProductSales2.sort((a,b) =>  b.count - a.count)
-        setTopProductSales(topProductSales2)
-    },[order, products])
+    //     topProductSales2.sort((a,b) =>  b.count - a.count)
+    //     setTopProductSales(topProductSales2)
+    // // },[order, products])
+    // console.log(topProductSales)
 
     const totalCount = [
         {
