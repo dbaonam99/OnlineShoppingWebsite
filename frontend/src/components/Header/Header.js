@@ -261,7 +261,6 @@ function Header(props) {
                 }
             }}
             >
-
             <div 
                 className={whiteText ===false ? "menu-mobile flex-center" : "menu-mobile flex-center closeMenuMobile_white"}
             >

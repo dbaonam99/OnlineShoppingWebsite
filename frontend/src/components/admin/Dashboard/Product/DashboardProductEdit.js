@@ -7,6 +7,7 @@ export default function DashboardProductEdit(props) {
 
     const createForm = useRef();
     const cateInput = useRef();
+    const groupCateInput = useRef();
     const [isCheckedSmall, setIsCheckedSmall] = useState(false);
     const [isCheckedMedium, setIsCheckedMedium] = useState(false);
     const [isCheckedLarge, setIsCheckedLarge] = useState(false);
@@ -22,6 +23,8 @@ export default function DashboardProductEdit(props) {
     const [productPrice, setProductPrice] = useState(0)
     const [productDes, setProductDes] = useState("")
     const [productCate, setProductCate] = useState("")
+    const [productGroupCate, setProductGroupCate] = useState("")
+    const [productGroupCateList, setProductGroupCateList] = useState([])
     const [productSize, setProductSize] = useState([])
     const [productSex, setProductSex] = useState([])
 
@@ -78,9 +81,19 @@ export default function DashboardProductEdit(props) {
             setProductCate(product.productCate)
             setProductSex(product.productSex)
             setProductSize(product.productSize)
+            setProductGroupCate(product.productGroupCate)
             axios.get(`http://pe.heromc.net:4000/category`)
                 .then(res => {
                     setCate(res.data)
+                }
+            )
+            axios.get(`http://pe.heromc.net:4000/products`)
+                .then(res => {
+                    const test = Object.values(res.data.reduce((a, {productGroupCate}) => {
+                        a[productGroupCate] = a[productGroupCate] || {productGroupCate};
+                        return a;
+                    }, Object.create(null)));
+                    setProductGroupCateList(test)
                 }
             )
             if (product.productSize) {
@@ -112,6 +125,7 @@ export default function DashboardProductEdit(props) {
         formData.append("productSale", productSale);
         formData.append("productPrice", productPrice);
         formData.append("productCate", productCate);
+        formData.append("productGroupCate", productGroupCate);
         formData.append("productSize", productSize);
         formData.append("productDes", productDes);
         formData.append("productSex", productSex);
@@ -129,6 +143,14 @@ export default function DashboardProductEdit(props) {
         setProductCate(inputValue.cate)
         cateInput.current.value = ""
     }
+ 
+    const addNewGroupCate = () => {
+        setProductGroupCate(inputValue.groupCate)
+        setProductGroupCateList(productGroupCateList => [...productGroupCateList, {productGroupCate: inputValue.groupCate}])
+        groupCateInput.current.value = ""
+    } 
+
+    console.log(productGroupCateList)
 
     const deleteImg = (event) => {
         const id = event.target.id
@@ -230,7 +252,7 @@ export default function DashboardProductEdit(props) {
                             </div>
                         </div>
                         <div className="create-box-row flex">
-                            <div className="dashboard-left flex">Sale </div>
+                            <div className="dashboard-left flex">Sale off </div>
                             <div className="dashboard-right flex-center">
                                 <input 
                                     type="number" placeholder="%" 
@@ -245,6 +267,36 @@ export default function DashboardProductEdit(props) {
                                 <input type="date"  name="fromdate" onChange={handleOnChange} placeholder="dd/mm/yyyy" pattern="(^(((0[1-9]|1[0-9]|2[0-8])[\/](0[1-9]|1[012]))|((29|30|31)[\/](0[13578]|1[02]))|((29|30)[\/](0[4,6,9]|11)))[\/](19|[2-9][0-9])\d\d$)|(^29[\/]02[\/](19|[2-9][0-9])(00|04|08|12|16|20|24|28|32|36|40|44|48|52|56|60|64|68|72|76|80|84|88|92|96)$)"/>
                                 <label>To: </label>
                                 <input type="date"  name="todate" onChange={handleOnChange} placeholder="dd/mm/yyyy" pattern="(^(((0[1-9]|1[0-9]|2[0-8])[\/](0[1-9]|1[012]))|((29|30|31)[\/](0[13578]|1[02]))|((29|30)[\/](0[4,6,9]|11)))[\/](19|[2-9][0-9])\d\d$)|(^29[\/]02[\/](19|[2-9][0-9])(00|04|08|12|16|20|24|28|32|36|40|44|48|52|56|60|64|68|72|76|80|84|88|92|96)$)"/>
+                            </div>
+                        </div>
+                        <div className="create-box-row flex">
+                            <div className="dashboard-left flex">Category group</div>
+                            <div className="dashboard-right flex-center">
+                                <select style={{ width: "350px"}} 
+                                    onChange={(event) => {setProductGroupCate(event.target.value)}}
+                                    value={productGroupCate}
+                                >
+                                    { productGroupCateList.length > 0 &&
+                                        productGroupCateList.map((item, index) => {
+                                            return(
+                                                <option key={index}>{item.productGroupCate}</option>
+                                            )
+                                        })
+                                    }
+                                </select>
+                                <input type="text" name="groupCate" placeholder="New category group?" style={{  margin:'0 10px'}} onChange={handleOnChange} ref={groupCateInput}></input>
+                                <div className="btn" style={{
+                                    fontSize: '14px',
+                                    fontFamily: 'sans-serif',
+                                    fontWeight: '300',
+                                    padding: '0 10px',
+                                    cursor: 'pointer',
+                                    width: '350px',
+                                    height: '30px'
+                                }}
+                                onClick={addNewGroupCate}>
+                                    Add category group
+                                </div>
                             </div>
                         </div>
                         <div className="create-box-row flex">
@@ -274,7 +326,7 @@ export default function DashboardProductEdit(props) {
                                     height: '30px'
                                 }}
                                 onClick={addNewCate}>
-                                    Add new category
+                                    Add category
                                 </div>
                             </div>
                         </div>
