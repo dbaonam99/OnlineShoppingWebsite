@@ -30,6 +30,10 @@ module.exports.postOrder = async function(req, res) {
 				orderPaymentMethod: req.body.orderPaymentMethod,
 				orderDate: req.body.orderDate
 			}
+			const orderList = req.body.orderList;
+			for (let i in orderList) {
+				console.log(orderList[i])
+			}
 			await Order.create(data);
 			const notice = {
 				noticeContent: `You have new order from ${req.body.orderName}`,
