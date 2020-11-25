@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import '../../App.css';
 import Product from '../Product/Product.js'
 import RangeSlider from './RangeSlider.js'
@@ -11,6 +11,10 @@ export default function ShopBody(props) {
     const [gridTab, setGridTab] = useState(3);
     const [currentTab, setCurrentTab] = useState(1);
 
+    useEffect(()=>{
+
+    },[])
+    
     //Get all category
     const cate = Object.values(product.reduce((a, {productCate}) => {
         a[productCate] = a[productCate] || {productCate, count: 0};

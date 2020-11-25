@@ -29,6 +29,7 @@ function MenuItemDropdown(props) {
                     dropdownContent={props.dropdownContent}
                     label={props.label}
                     scrolled={props.scrolled}
+                    handleLeaveHover = {props.handleLeaveHover}
                 /> 
             }
         </li>

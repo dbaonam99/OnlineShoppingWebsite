@@ -13,6 +13,7 @@ import Cart from './Cart.js';
 import MenuItemDropdown from './MenuItemDropdown';
 import { CartContext } from '../../contexts/Cart';
 import Div100vh from 'react-div-100vh';
+import axios from 'axios'
 
 function Header(props) {
 
@@ -49,104 +50,110 @@ function Header(props) {
     }
 
     const { cartItems, clickedCart } = useContext(CartContext)
-
-    const navBar = [
-        {
-            id: "1",
-            label: "Home",
-            url: "/",
-            dropdownContent: []
-        },
-        {
-            id: "2",
-            label: "Women",
-            url: "/women",
-            dropdownContent: [
-                {
-                    dropdownTitle: "Accessories",
-                    dropdownList: [
-                        "Sunglasses",
-                        "Jewelry",
-                        "watches",
-                    ]
-                },
-                {
-                    dropdownTitle: "Ready-to-wear",
-                    dropdownList: [
-                        'Shop by look',
-                        'Dresses',
-                        'Denim & pants',
-                        'Tops & shirts ',
-                        'Blazers',
-                        'Skirts',
-                        'Activewear',
-                    ]
-                },
-                {
-                    dropdownTitle: "Shoes",
-                    dropdownList: [
-                        'Sneakers',
-                        'Boots',
-                        'Pumps',
-                    ]
-                },
-                {
-                    dropdownTitle: "Bags",
-                    dropdownList: [
-                        'Shoulder bags',
-                        'Travels bags',
-                        'Tote bags',
-                    ]
-                }
-            ]
-        },
-        {
-            id: "3",
-            label: "Men",
-            url: "/men",
-            dropdownContent: [
-                {
-                    dropdownTitle: "Ready-to-wear",
-                    dropdownList: [
-                        "Shop by look", 
-                        "Shirts & T-shirts", 
-                        "Denim", "Pants", 
-                        "Blazers & jackets"
-                    ]
-                },
-                {
-                    dropdownTitle: "Shoes",
-                    dropdownList: [
-                        "Sneakers",
-                        "Sandals",
-                        "Loafers"
-                    ]
-                },
-                {
-                    dropdownTitle: "Bags",
-                    dropdownList: [
-                        "Business bags",
-                        "Travels bags"                        
-                    ]
-                }
-            ]
-        },
-        {
-            id: "4",
-            label: "News",
-            url: "/news",
-            dropdownContent: [
-            ]
-        },
-        {
-            id: "5",
-            label: "Contact",
-            url: "/contact",
-            dropdownContent: []
-        },
-    ]
+    const [navBar, setNavBar] = useState(
+        [
+            {
+                id: "1",
+                label: "Home",
+                url: "/",
+                dropdownContent: []
+            },
+            {
+                id: "2",
+                label: "Women",
+                url: "/women",
+                dropdownContent: []
+            },
+            {
+                id: "3",
+                label: "Men",
+                url: "/men",
+                dropdownContent: []
+            },
+            {
+                id: "4",
+                label: "News",
+                url: "/news",
+                dropdownContent: [
+                ]
+            },
+            {
+                id: "5",
+                label: "Contact",
+                url: "/contact",
+                dropdownContent: []
+            },
+        ]
+    )
 
     useEffect(() => {
+        axios.get(`http://pe.heromc.net:4000/products`)
+            .then(res => {
+                let virtualNavBar = [...navBar]
+                const menProduct = []
+                const womenProduct = []
+                for (let i in res.data) {
+                    if (res.data[i].productSex === "Man") {
+                        menProduct.push(res.data[i].productGroupCate)
+                    }
+                    if (res.data[i].productSex === "Woman") {
+                        womenProduct.push(res.data[i].productGroupCate)
+                    }
+                }
+                let groupCateMen = menProduct.filter(function(elem, index, self) {
+                    return index === self.indexOf(elem);
+                })
+                let groupCateWomen = womenProduct.filter(function(elem, index, self) {
+                    return index === self.indexOf(elem);
+                })
+                const menDropdownContent = []
+                for (let i in groupCateMen) {
+                    let menData = {}
+                    let cateList = []
+                    for (let j in res.data) {
+                        if (res.data[j].productGroupCate === groupCateMen[i] && res.data[j].productSex === "Man") {
+                            cateList.push(res.data[j].productCate)
+                        }
+                    }
+                    let cateList2 = cateList.filter(function(elem, index, self) {
+                        return index === self.indexOf(elem);
+                    })
+                    // console.log(cateList)
+                    menData = {
+                        dropdownTitle: groupCateMen[i],
+                        dropdownList: cateList2
+                    }
+                    menDropdownContent.push(menData)
+                }
+                const womenDropdownContent = []
+                for (let i in groupCateWomen) {
+                    let womenData = {}
+                    let cateList = []
+                    for (let j in res.data) {
+                        if (res.data[j].productGroupCate === groupCateWomen[i] && res.data[j].productSex === "Woman") {
+                            cateList.push(res.data[j].productCate)
+                        }
+                    }
+                    let cateList2 = cateList.filter(function(elem, index, self) {
+                        return index === self.indexOf(elem);
+                    })
+                    womenData = {
+                        dropdownTitle: groupCateWomen[i],
+                        dropdownList: cateList2
+                    }
+                    womenDropdownContent.push(womenData)
+                }
+                for (let i in virtualNavBar) {
+                    if (virtualNavBar[i].label === "Men") {
+                        virtualNavBar[i].dropdownContent = menDropdownContent
+                    }
+                    if (virtualNavBar[i].label === "Women") {
+                        virtualNavBar[i].dropdownContent = womenDropdownContent
+                    }
+                }
+                setNavBar(virtualNavBar)
+            }
+        )
         if (location === "/news" || location === `/news/category/${props.match.params.cate}`) {
             setWhiteText(true);
             setDisableBox(true);
@@ -207,8 +214,6 @@ function Header(props) {
             totalCartVirtual += cartItems[i].count
         }
         setTotalCart(totalCartVirtual)
-
-        // window.addEventListener("scroll", debounce(onScroll, 50));
         window.addEventListener("scroll", onScroll);
         return() => {
             window.removeEventListener("scroll", onScroll);
@@ -374,7 +379,7 @@ function Header(props) {
                                 handleLeaveHover={handleLeaveHover}
                                 dropdownHover={dropdownHover}
                                 scrolled={scrolled}
-                                location={location}
+                                location={location} 
                                 key={index}
                                 whiteText={whiteText}
                                 label={item.label}

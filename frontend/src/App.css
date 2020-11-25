@@ -367,6 +367,11 @@
   font-size: 12px;
   font-weight: bold;
   text-transform: uppercase;
+  cursor: pointer;
+}
+.dropdown-title:hover,
+.dropdown-item div:hover {
+  text-decoration: underline;
 }
 .dropdown-item {
   font-size: 11px;
