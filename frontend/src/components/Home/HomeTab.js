@@ -45,6 +45,8 @@ export default function HomeTab() {
         }
     }
 
+    console.log(products)
+
     return(
         <div className="HomeTab">
             <div className="home-tab flex-center">

@@ -1,5 +1,6 @@
 var Product = require("../models/product.model.js");
 var Email = require("../models/email.model");
+var Order = require("../models/order.model");
 var mongoose = require('mongoose');
 
 var nodemailer = require('nodemailer');
@@ -21,7 +22,11 @@ transporter.verify(function(error, success) {
 });
 
 module.exports.index = async function(req, res) {
-	var products = await Product.find();
+	const order = await Order.find()
+	const products = await Product.find();
+	for (let i in order) {
+		console.log(order[i].orderList)
+	}
 	res.json(products);
 }
 

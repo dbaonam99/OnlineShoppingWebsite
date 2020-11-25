@@ -141,7 +141,6 @@ function Header(props) {
                         dropdownTitle: groupCateWomen[i],
                         dropdownList: cateList2
                     }
-                    console.log(womenData)
                     womenDropdownContent.push(womenData)
                 }
                 for (let i in virtualNavBar) {
