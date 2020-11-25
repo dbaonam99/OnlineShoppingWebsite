@@ -5457,7 +5457,6 @@ function CheckoutBody(props) {
                 orderPaymentMethod: orderPaymentMethod,
                 orderDate: new Date()
             }
-            console.log(data)
             axios.post('http://pe.heromc.net:4000/order', data)
             setTimeout(()=>{
                 localStorage.removeItem('total')
