@@ -7,8 +7,7 @@ import {
 } from "react-router-dom"; 
 import Home from './pages/Home.js'
 import News from './pages/News.js'
-import Men from './pages/Men.js'
-import Women from './pages/Women.js'
+import Shop from './pages/Shop.js'
 import Contact from './pages/Contact.js'
 import ProductDetail from './pages/ProductDetail.js'
 import Collection from './pages/Collection';
@@ -56,8 +55,10 @@ function App(props) {
             <Toast/>
             <Route path="/" exact component={Home}></Route>
             <Route path="/news" exact component={News}></Route>
-            <Route path="/men" exact component={Men}></Route>
-            <Route path="/women" exact component={Women}></Route>
+            <Route path="/men" exact component={Shop}></Route>
+            <Route path="/men/:cate" exact component={Shop}></Route>
+            <Route path="/women" exact component={Shop}></Route>
+            <Route path="/women/:cate" exact component={Shop}></Route>
             <Route path="/contact" exact component={Contact}></Route>
             <Route path="/collection/:id" exact component={Collection}></Route>
             <Route path="/products/:id" exact component={ProductDetail}></Route>

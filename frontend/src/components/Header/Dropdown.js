@@ -1,7 +1,9 @@
 import React from 'react';
 import '../../App.css';
 import DropdownSlider from './DropdownSlider.js'
-
+import {
+    withRouter
+} from 'react-router-dom'
 import womenImg from '../../assets/women-dropdown.jpg'
 import womenImg2 from '../../assets/women-dropdown2.jpg'
 import womenImg3 from '../../assets/women-dropdown3.jpg'
@@ -9,7 +11,15 @@ import menImg from '../../assets/men-dropdown.jpg'
 import menImg2 from '../../assets/men-dropdown2.jpg'
 import menImg3 from '../../assets/men-dropdown3.jpg'
 
-export default function Dropdown(props) {
+function Dropdown(props) {
+
+    const redirect = (event) => {
+        props.history.push(`/${event.target.id}`)
+        props.handleLeaveHover()
+    }
+
+    const sex = props.label.toLowerCase()
+
     return(
         <div className="Dropdown">
             <div className="dropdown-container flex">
@@ -20,16 +30,23 @@ export default function Dropdown(props) {
                             key={index}
                         >
                             <div>
-                                <div 
-                                    className="dropdown-title">{item.dropdownTitle}
-                                </div>
+                                {item.dropdownTitle &&
+                                    <div 
+                                        id = {`${sex}/${item.dropdownTitle.replace(/\s+/g, '')}`}
+                                        onClick={redirect}
+                                        className="dropdown-title">{item.dropdownTitle}
+                                    </div>
+                                }
                                 <div 
                                     className="dropdown-item flex-col">
                                     {
                                         item.dropdownList.map((item, index) => {
                                             return (
                                                 <div
+                                                    id = {`${sex}/${item.toLowerCase().replace(/\s+/g, '-')}`}
+                                                    onClick={redirect}
                                                     key={index}
+                                                    style={{textTransform: 'capitalize', cursor: 'pointer'}}
                                                 >
                                                     {item}
                                                 </div>
@@ -68,3 +85,5 @@ export default function Dropdown(props) {
         </div>
     )
 }
+
+export default withRouter(Dropdown)
