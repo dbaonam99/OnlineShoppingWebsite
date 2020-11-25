@@ -33,7 +33,6 @@ module.exports.postOrder = async function(req, res) {
 			}
 			const orderList = req.body.orderList;
 			for (let i in orderList) {
-				console.log(orderList[i])
 				await Product.findByIdAndUpdate(orderList[i].id, 
 				{
 					$inc: { productSold: orderList[i].amount/2 }
@@ -42,7 +41,6 @@ module.exports.postOrder = async function(req, res) {
 						console.log(error);
 					}
 				})
-				console.log(await Product.findById(orderList[i].id))
 			}
 			await Order.create(data);
 			const notice = {
@@ -66,6 +64,17 @@ module.exports.postOrder = async function(req, res) {
 			orderTotal: req.body.orderTotal,
 			orderPaymentMethod: req.body.orderPaymentMethod,
 			orderDate: req.body.orderDate
+		}
+		const orderList = req.body.orderList;
+		for (let i in orderList) {
+			await Product.findByIdAndUpdate(orderList[i].id, 
+			{
+				$inc: { productSold: orderList[i].amount/2 }
+			}, function(error) {
+				if (error) {
+					console.log(error);
+				}
+			})
 		}
 		await Order.create(data);
 		res.status(200);
