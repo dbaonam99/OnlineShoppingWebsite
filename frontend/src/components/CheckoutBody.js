@@ -5458,11 +5458,13 @@ function CheckoutBody(props) {
                 orderDate: new Date()
             }
             axios.post('http://pe.heromc.net:4000/order', data)
-            localStorage.removeItem('total')
-            localStorage.removeItem('cart')
-            props.history.push(`/men`);
-            window.location.reload(false);
-            socket.emit('placeAnOrder', data)
+            setTimeout(()=>{
+                localStorage.removeItem('total')
+                localStorage.removeItem('cart')
+                socket.emit('placeAnOrder', data)
+                props.history.push(`/men`);
+                window.location.reload(false);
+            }, 1000)
         }
     }
 
