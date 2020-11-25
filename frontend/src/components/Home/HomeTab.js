@@ -25,11 +25,17 @@ export default function HomeTab() {
         }
     }
 
-    const dateProduct = [...products];
-    if (dateProduct) {
-        dateProduct.sort(function(a,b){
-            return new Date(b.productDate) - new Date(a.productDate);
-        });
+    const dateProductVirtual = [...products];
+    const dateProduct = [];
+    if (dateProductVirtual) {
+        dateProductVirtual.sort((a,b)=> new Date(b.productDate) - new Date(a.productDate));
+        for (let i in dateProductVirtual) {
+            const today = new Date();
+            const productDate = new Date(dateProductVirtual[i].productDate);
+            if (((today - productDate)/(1000 * 3600 * 24)) < 10) {
+                dateProduct.push(dateProductVirtual[i])
+            }
+        }
     }
 
     // Get product selling
@@ -45,11 +51,6 @@ export default function HomeTab() {
         }
     }
 
-    if (products.length > 0)
-        for (let i in products)
-            if (products[i].productSold > 0)
-                console.log(products[i])
-
     return(
         <div className="HomeTab">
             <div className="home-tab flex-center">
@@ -64,6 +65,17 @@ export default function HomeTab() {
                         products={products}
                         height={height} 
                     />
+                }
+                {
+                    dateProduct.length === 0 &&
+                    <div style={{
+                        textAlign: 'center',
+                        width: '100%',
+                        textTransform: 'capitalize',
+                        marginTop: '150px'
+                    }}>
+                        there's nothing here yet
+                    </div>
                 }
                 { // new product
                     currentTab === 2 && 
