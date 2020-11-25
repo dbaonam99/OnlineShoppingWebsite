@@ -27,6 +27,9 @@ function Product(props) {
         props.history.push(`/products/${product._id}`);
     }
 
+    let productDate = new Date(product.productDate) 
+    let today = new Date()
+
     return(
         <div 
             className={`Product opa ${classWidth}`}
@@ -60,7 +63,7 @@ function Product(props) {
                         </div>
                     }
                     {
-                        product.productSale > 0 && <div className="product-tag-item new">
+                        (today - productDate)/ (1000 * 3600 * 24) < 10 && <div className="product-tag-item new">
                             NEW
                         </div>
                     }

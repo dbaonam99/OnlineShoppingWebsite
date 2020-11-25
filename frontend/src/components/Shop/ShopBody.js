@@ -82,11 +82,17 @@ export default function ShopBody(props) {
     if (soldProduct.length > 0) { 
         soldProduct.sort((a,b) => b.productSold - a.productSold)
     }
-    const dateProduct = [...product];
-    if (dateProduct.length > 0) {
-        dateProduct.sort(function(a,b){
-            return new Date(b.productDate) - new Date(a.productDate);
-        });
+    const dateProductVirtual = [...product];
+    const dateProduct = [];
+    if (dateProductVirtual) {
+        dateProductVirtual.sort((a,b)=> new Date(b.productDate) - new Date(a.productDate));
+        for (let i in dateProductVirtual) {
+            const today = new Date();
+            const productDate = new Date(dateProductVirtual[i].productDate);
+            if (((today - productDate)/(1000 * 3600 * 24)) < 10) {
+                dateProduct.push(dateProductVirtual[i])
+            }
+        }
     }
     const sellingProduct = [];
     if (product.length > 0) {
@@ -252,6 +258,17 @@ export default function ShopBody(props) {
                     }
                     { currentTab === 3 &&
                         <div className="shopbody-products">
+                            {
+                                dateProduct.length === 0 &&
+                                <div style={{
+                                    textAlign: 'center',
+                                    width: '100%',
+                                    textTransform: 'capitalize',
+                                    marginTop: '150px'
+                                }}>
+                                    there's nothing here yet
+                                </div>
+                            }
                             {dateProduct.map(function(item, index) {
                                 return (
                                     <Product
