@@ -87,7 +87,7 @@ function Product(props) {
                 {product.productName}
             </div>
             <div className="product-price">
-                {product.productPrice} Đ
+                {product.productPrice.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".")} Đ
             </div>
         </div>
     )

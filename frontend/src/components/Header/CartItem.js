@@ -66,8 +66,8 @@ export default function CartItem(props) {
                                         </div>
                                     </div>
                                 </div>
-                                <div className="cart-product-price flex" style={{alignItems: 'center', justifyContent: 'center'}}>{item.productPrice}</div>
-                                <div className="cart-product-totalprice flex" style={{alignItems: 'center', justifyContent: 'center'}}>{item.productPrice * item.count}</div>
+                                <div className="cart-product-price flex" style={{alignItems: 'center', justifyContent: 'center'}}>{item.productPrice.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".")} đ</div>
+                                <div className="cart-product-totalprice flex" style={{alignItems: 'center', justifyContent: 'center'}}>{(item.productPrice * item.count).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".")} đ</div>
                                 <div className="cart-product-delete"
                                     onClick={removeFromCart}
                                     id={item._id}>

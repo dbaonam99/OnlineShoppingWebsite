@@ -34,7 +34,7 @@ export default function WishListItem(props) {
                                     <img src={item.productImg[0]} width="80px" height="100%" alt=""></img>
                                 </div>
                                 <div className="cart-product-name flex-center">{item.productName}</div>
-                                <div className="cart-product-price flex-center">{item.productPrice}</div>
+                                <div className="cart-product-price flex-center">{item.productPrice.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".")} đ</div>
                                 
                                 <div className="product-info-addtocart flex-center btn"
                                     onClick={(event)=> {

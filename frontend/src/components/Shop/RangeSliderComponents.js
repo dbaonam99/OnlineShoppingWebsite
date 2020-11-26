@@ -143,5 +143,5 @@ MuiTrackComponent.propTypes = {
     classes: PropTypes.object.isRequired,
     getTrackProps: PropTypes.func.isRequired
 };
-
+ 
 export const MuiTrack = withStyles(muiTrackStyle)(MuiTrackComponent);

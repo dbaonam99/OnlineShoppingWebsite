@@ -293,7 +293,7 @@ export default function DashboardProductTable(props) {
                                                 />
                                             </td>
                                             <td>
-                                                <p>{item.productPrice}</p>
+                                                <p>{item.productPrice.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".")} đ</p>
                                             </td>
                                             { item.productSale > 0 &&
                                                 <td>

@@ -35,7 +35,6 @@ export default function ProductBody(props) {
     const [countCart, setCountCart] = useState(1);
     const [hover, setHover] = useState(false);
     const [zoom, setZoom] = useState(`0% 0%`);
-    const width = 500;
     const productSmall = useRef(null);
 
     useEffect(() => {
@@ -93,6 +92,10 @@ export default function ProductBody(props) {
             isHalf: true
         }
     }
+    let productDate = new Date(product.productDate) 
+    let today = new Date()
+
+    const sliderWidth = useRef(null)
 
     return(
         <div className="ProductBody">
@@ -128,6 +131,7 @@ export default function ProductBody(props) {
                     <div
                         className="product-slider flex"
                         onMouseMove={handleMouseMove}
+                        ref={sliderWidth}
                         >
                         <div className="product-tag">
                             {
@@ -141,12 +145,13 @@ export default function ProductBody(props) {
                                 </div>
                             }
                             {
-                                product.productSale > 0 && <div className="product-tag-item new">
-                                    NEW
+                                (today - productDate)/ (1000 * 3600 * 24) < 10 && <div className="product-tag-item new">
+                                    NEW 
                                 </div>
                             }
                         </div>
                         {product.productImg && product.productImg.map((item, index) => {
+                            const width = sliderWidth.current.offsetWidth;
                             return (
                                 <div
                                     key={index}
@@ -196,14 +201,19 @@ export default function ProductBody(props) {
                         className="product-info-vote"
                         onClick={props.scrollOnLick}
                         >
-                        {Object.keys(ratingStar).length !== 0 && <ReactStars {...ratingStar} />}
+                        <div style={{height: '40px'}}>
+                            {Object.keys(ratingStar).length !== 0 && <ReactStars {...ratingStar} />}
+                        </div>
                         <p>
                             ({ratingList.length} customer reviews)
                         </p>
                     </div>
-                    <div className="product-info-price">
-                        {product.productPrice}
-                    </div>
+                    {
+                        product.productPrice &&
+                        <div className="product-info-price">
+                            {(product.productPrice).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".")} Đ
+                        </div>
+                    }
                     <div className="product-info-cart flex">
                         <div className="count-cart noselect">
                             <div className="count-cart-item left flex-center"

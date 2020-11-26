@@ -173,7 +173,7 @@ export default function DashboardCollectionEdit(props) {
                                         <option
                                             key={index}
                                             value={JSON.stringify(item)}
-                                        >Name: {item.productName}, Price: {item.productPrice}</option>
+                                        >Name: {item.productName}, Price: {item.productPrice.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".")}</option>
                                     )
                                 })}
                             </select>

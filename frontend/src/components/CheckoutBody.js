@@ -5601,7 +5601,7 @@ function CheckoutBody(props) {
                                             <p>x</p>
                                             {item.count}
                                         </div>
-                                        <div className="billing-detail-price">{item.productPrice * item.count} đ</div>
+                                        <div className="billing-detail-price">{(item.productPrice * item.count).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".")} đ</div>
                                     </div>
                                 )
                             }) 
@@ -5610,7 +5610,7 @@ function CheckoutBody(props) {
                             <div style={{width:'60px', height: '60px', lineHeight: '60px', fontSize: '18px'}}>SUBTOTAL</div>
                             <div className="billing-detail-name"></div>
                             <div className="billing-detail-count" style={{color: '#111'}}></div>
-                            <div className="billing-detail-price">{subTotal} đ</div>
+                            <div className="billing-detail-price">{subTotal.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".")} đ</div>
                         </div>
                         <div className="billing-detail-item flex">
                             <div style={{width:'60px', height: '60px', lineHeight: '60px', fontSize: '18px'}}>SHIPPING</div>
@@ -5629,7 +5629,7 @@ function CheckoutBody(props) {
                             <div style={{width:'60px', height: '60px', lineHeight: '60px', fontSize: '18px'}}>TOTAL</div>
                             <div className="billing-detail-name"></div>
                             <div className="billing-detail-count" style={{color: '#111'}}></div>
-                            <div className="billing-detail-price">{Number(subTotal) + Number(shipping)} đ</div>
+                            <div className="billing-detail-price">{(Number(subTotal) + Number(shipping)).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".")} đ</div>
                         </div>
                         <div className="billing-detail-payment">
                             <div style={{fontSize: '18px'}}>PAYMENT METHOD</div>
