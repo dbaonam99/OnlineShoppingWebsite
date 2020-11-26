@@ -19,8 +19,7 @@ function Product(props) {
     }
     if(view){
         document.body.style.overflow = 'hidden';
-    }
-    const classWidth = props.classWidth;
+    } 
 
     const redirect = (target) => {
         window.scrollTo(0,0);
@@ -32,11 +31,9 @@ function Product(props) {
 
     return(
         <div 
-            className={`Product opa ${classWidth}`}
+            className={`Product opa`}
             style={{ 
-                width: `${props.width}px`,
-                marginLeft: `${props.marginLeft}px`,
-                marginRight: `${props.marginRight}px`
+                width: `calc(${props.width} - 30px)`
             }}
         >
             <ProductQuickView 
