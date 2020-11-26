@@ -56,7 +56,9 @@ function Account(props) {
                 <div className="cart-checkout-box flex-center">
                     <div className="cart-checkout-text flex">
                         <p>Total: </p>
-                        <p> {total.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".")} đ</p>
+                        {total &&
+                            <p> {total.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".")} đ</p>
+                        }
                     </div>
                     <div 
                         className="cart-checkout-btn btn"
