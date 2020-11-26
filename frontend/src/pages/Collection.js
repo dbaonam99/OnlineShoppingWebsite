@@ -11,7 +11,7 @@ import { withRouter } from "react-router-dom";
 
 function Collection(props) {
 
-    const [collection, setCollection] = useState({});
+    const [collection, setCollection] = useState(null);
     const path = props.history.location.pathname.slice(12);
 
     useEffect(()=>{
@@ -25,9 +25,12 @@ function Collection(props) {
     return (
         <div className="Collection">
             <HeaderV3/>
-            <BannerV3 
-                bannerImage={collection.collectionBanner} collectionTitle={collection.collectionName}
-            />
+            { collection &&
+                <BannerV3 
+                    bannerImage={collection.collectionBanner} 
+                    collectionTitle={collection.collectionName}
+                />
+            }
             <CollectionList
                 collection={collection}
             />

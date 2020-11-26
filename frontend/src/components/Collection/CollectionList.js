@@ -1,6 +1,5 @@
-// import Axios from 'axios';
 import React from 'react'
-// import CollectionItem from './CollectionItem'
+import CollectionItem from './CollectionItem'
 
 export default function CollectionList(props) {
     // const collectionItems = [
@@ -43,28 +42,20 @@ export default function CollectionList(props) {
     // ]
 
 
-    // const collection = props.collection;
-    // const collectionItems = collection.collectionItems;
-    // if (collection) {
-    //     collectionItems.map((item)=>{
-    //         console.log(item)
-    //     })
-    // }
+    const collection = props.collection;
+
     return (
         <div className="CollectionList flex">
-            {/* { collection && 
-                collectionItems.map((item, index) => {
+            { collection && 
+                collection.collectionItems.map((item, index) => {
                     return (
                         <CollectionItem
                             key={index}
-                            name={item.name}
-                            des={item.des}
-                            price={item.price}
-                            img={item.img}
+                            product={item}
                         />
                     )
                 })
-            } */}
+            }
             <div className="product-info-line" style={{margin: `40px 20px`}}></div>
         </div>
     )

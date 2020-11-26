@@ -608,15 +608,16 @@
 
 .blackbox-title-medium {
   font-size: 28px;
-  margin-left: -120px;
-  width: 200px;
+  /* margin-left: -120px; */
+  width: 100%;
   word-wrap: break;
   font-weight: 350;
+  display: flex;
+  justify-content: center;
 }
 
 .blackbox-link-medium {
   font-size: 14px;
-  margin-left: -250px;
 }
 
 
@@ -2646,9 +2647,6 @@
 
 /* Collection */
 
-.Collection {
-  /* padding: 5px; */
-}
 .CollectionList {
   margin-top: 5px;
   width: 100%;
@@ -2657,7 +2655,7 @@
 }
 .CollectionItem {
   width: 49.8%;
-  height: 552px;
+  height: 80vh;
   margin-bottom: 5px;
   transition: transform .3s;
   position: relative;
@@ -2669,60 +2667,82 @@
 .CollectionItem:hover {
   transform: scale(0.97);
 }
-.CollectionItem:hover .collectionitem-price div p,
-.CollectionItem:hover .collectionitem-price div div {
-  transform: translateY(-50px)
+.collection-overlay-container:hover .collectionitem-overlay{
+  width: 80%;
+  height: 80%;
+  opacity: 1;
 }
-
-.collectionitem-overlay {
+.collection-overlay-container:hover .collectionitem-title,
+.collection-overlay-container:hover .collectionitem-des {
+  opacity: 1;
+}
+.collection-overlay-container {
   width: 100%;
   height: 100%;
   position: absolute;
   top: 0;
   left: 0;
+}
+.collectionitem-overlay {
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: flex-end;
-  background: rgba(204, 204, 204, 0);
+  justify-content: center;
   color: #fff;
+  background-color: rgba(1, 1, 1, 0.4);
+  opacity: 0;
+  transition: 4s;
+  width: 10%;
+  height: 10%;
 }
 .collectionitem-title {
-  font-size: 38px;
+  font-size: 3vw;
   font-weight: 200;
-  margin-top: 300px;
   margin-bottom: 20px;
   font-family: sans-serif;
+  text-align: center;
+  width: 400px;
+  opacity: 0;
 }
 .collectionitem-des {
   font-size: 16px;
   font-weight: 300;
   text-align: center;
-  margin-bottom: 30px;
-  width: 80%;
+  margin-bottom: 40px;
+  width: 400px;
+  opacity: 0;
+  /* Add ... if text is full */
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
 }
 .collectionitem-price {
   font-size: 28px;
   font-weight: 500;
-  margin-bottom: 50px;
   line-height: 50px;
   height: 50px;
   text-align: center;
   overflow: hidden;
 }
-.collectionitem-price div, .collectionitem-price p  {
+.price-transform {
+  transform: translateY(-50px);
+}
+.collectionitem-price div, .collectionitem-price p {
   transition: .5s;
   height: 50px;
 }
 .addtocart-btn-collection {
   font-size: 14px;
-  border: 2px #fff solid;
   padding: 0 20px;
   cursor: pointer;
+  color: #fff;
 }
-.addtocart-btn-collection:hover {
-  border: 2px #777 solid;
+.addtocart-btn-collectio-hover {
+  border: 2px #fff solid;
 }
+
+/* Mobie */
 
 .menu-mobile {
   display: none;
