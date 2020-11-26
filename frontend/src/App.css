@@ -2835,6 +2835,11 @@
   background-color: rgba(1, 1, 1, 0.4);
   cursor: url(./assets/close.png), auto;
 }
+@media only screen and (max-width: 2480px) {
+  .banner-box {
+    height: 70vh;
+  }
+}
 @media only screen and (max-width: 1632px) {
   .product-img {
     height: 300px;
