@@ -2691,7 +2691,7 @@
   color: #fff;
   background-color: rgba(1, 1, 1, 0.4);
   opacity: 0;
-  transition: 4s;
+  transition: .4s;
   width: 10%;
   height: 10%;
 }
