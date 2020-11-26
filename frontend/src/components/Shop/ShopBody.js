@@ -4,57 +4,22 @@ import Product from '../Product/Product.js'
 import RangeSlider from './RangeSlider.js'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faCircle, faFilter, faTh, faThLarge } from "@fortawesome/free-solid-svg-icons";
+import { withRouter } from 'react-router-dom';
 
-export default function ShopBody(props) {
+function ShopBody(props) {
 
-    const product = props.products;
+    const [product, setProduct] = useState([]);
+    const [constProduct, setConstProduct] = useState([]);
     const [gridTab, setGridTab] = useState(3);
     const [currentTab, setCurrentTab] = useState(1);
+    const location = props.location.pathname.split('/')[1];
+    const sortedCate = props.sortedCate
+    const [sortPriceValue, setSortPriceValue] = useState([])
 
     useEffect(()=>{
-
-    },[])
-    
-    //Get all category
-    const cate = Object.values(product.reduce((a, {productCate}) => {
-        a[productCate] = a[productCate] || {productCate, count: 0};
-        a[productCate].count++;
-        return a;
-    }, Object.create(null)));
-    //Sort and splice category by product count
-    cate.sort((a,b) =>  b.count - a.count)
-    const splicedCate = cate.splice(0,5);
-    splicedCate.sort((a, b) => b.count - a.count);
-    const sortedCate = [];
-    for (let i = 0; i < splicedCate.length; i++) {
-        sortedCate.push(splicedCate[i].productCate);
-    }
-    //Get all color
-    const color = Object.values(product.reduce((a, {productColor}) => {
-        a[productColor] = a[productColor] || {productColor, count: 0};
-        a[productColor].count++;
-        return a;
-    }, Object.create(null)));
-    //Sort and splice COLOR by product count
-    color.sort((a,b) =>  b.count - a.count)
-    const splicedColor = color.splice(0,3);
-    splicedColor.sort((a, b) => b.count - a.count);
-    const sortedColor = [];
-    for (let i = 0; i < splicedColor.length; i++) {
-        sortedColor.push(splicedColor[i].productColor);
-    }
-
-    //Get all Size
-    const size = Object.values(product.reduce((a, {productSize}) => {
-        a[productSize] = a[productSize] || {productSize, count: 0};
-        a[productSize].count++;
-        return a;
-    }, Object.create(null)));
-    //Sort and splice COLOR by product count
-    const sortedSize = [];
-    for (let i = 0; i < size.length; i++) {
-        sortedSize.push(size[i].productSize);
-    }
+        setProduct(props.products)
+        setConstProduct(props.products)
+    }, [props.products])
 
     let width, height, marginLeft, marginRight, classWidth = "";
     if (gridTab === 1) {
@@ -103,6 +68,33 @@ export default function ShopBody(props) {
         }
     }
 
+    const chooseCateLink = (event) => {
+        props.history.push(`/${location}/${(event.target.id).toLowerCase().split(' ').join('-')}`)
+    }
+
+    const chooseSize = (event) => {
+        const virtualProduct = []
+        const id = event.target.id
+        for (let i in constProduct) {
+            for (let j in constProduct[i].productSize) {
+                if (constProduct[i].productSize[j].toLowerCase() === id) {
+                    virtualProduct.push(constProduct[i])
+                }
+            }
+        }
+        setProduct(virtualProduct)
+    }
+
+    const choosePrice = () => {
+        const virtualProduct = []
+        for (let i in constProduct) {
+            console.log(sortPriceValue[1])
+            if (constProduct[i].productPrice >= sortPriceValue[0] && constProduct[i].productPrice <= sortPriceValue[1]) {
+                virtualProduct.push(constProduct[i])
+            }
+        }
+        setProduct(virtualProduct)
+    }
 
     return(
         <div className="ShopBody">
@@ -113,24 +105,12 @@ export default function ShopBody(props) {
                         <div className="shopbody-filter-catelist">
                             {sortedCate.map((item, index) => 
                                 <div 
-                                    className="" 
+                                    className="shopbody-filter-catelink" 
                                     key={index}
+                                    id={item.productCate}
+                                    onClick={chooseCateLink}
                                 >
-                                    {item}
-                                </div>
-                            )}
-                        </div>
-                        <div className="filter-line"></div>
-                    </div>
-                    <div className="shopbody-filter-color">
-                        <div className="shopbody-filter-title">Color</div>
-                        <div className="shopbody-filter-catelist">
-                            {sortedColor.map((item, index) => 
-                                <div 
-                                    className="" 
-                                    key={index}
-                                >
-                                    {item}
+                                    {item.productCate}
                                 </div>
                             )}
                         </div>
@@ -139,22 +119,40 @@ export default function ShopBody(props) {
                     <div className="shopbody-filter-size">
                         <div className="shopbody-filter-title">Size</div>
                         <div className="shopbody-filter-catelist">
-                            {sortedSize.map((item, index) => 
-                                <div 
-                                    className="" 
-                                    key={index}
-                                >
-                                    {item}
-                                </div>
-                            )}
+                            <div 
+                                className="shopbody-filter-catelink" 
+                                id="small"
+                                onClick={chooseSize}
+                            >
+                                Small
+                            </div>
+                            <div 
+                                className="shopbody-filter-catelink" 
+                                id="medium"
+                                onClick={chooseSize}
+                            >
+                                Medium
+                            </div>
+                            <div 
+                                className="shopbody-filter-catelink" 
+                                id="large"
+                                onClick={chooseSize}
+                            >
+                                Large
+                            </div>
                         </div>
                         <div className="filter-line"></div>
                     </div>
                     <div className="shopbody-filter-price">
                         <div className="shopbody-filter-title">Price</div>
-                        <RangeSlider/>
+                        <RangeSlider
+                            setSortPriceValue={setSortPriceValue}
+                        />
                     </div>
-                    <div className="shopbody-filter-submit btn">
+                    <div 
+                        className="shopbody-filter-submit btn"
+                        onClick={choosePrice}
+                    >
                         <p>Filter</p>
                     </div>
                 </div>
@@ -183,7 +181,7 @@ export default function ShopBody(props) {
                                 onClick={() => {setCurrentTab(4)}}
                                 className={currentTab === 4 ? "shopbody-tab-item active" : "shopbody-tab-item"}
                                 >
-                                Sale Products
+                                Sales Products
                             </div>
                         </div>
 
@@ -309,3 +307,4 @@ export default function ShopBody(props) {
         </div>
     )
 }
+export default withRouter(ShopBody)

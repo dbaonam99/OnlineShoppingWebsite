@@ -11,7 +11,7 @@ export default function CollectionItem(props) {
                 <div className="collectionitem-des">{props.des}</div>
                 <div className="collectionitem-price">
                     <div>
-                        <p>${props.price}</p>
+                        <p>${props.price.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".")}</p>
                             <div className="addtocart-btn-collection">
                                 ADD TO CART
                             </div>

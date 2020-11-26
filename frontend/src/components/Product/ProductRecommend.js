@@ -21,13 +21,23 @@ export default function ProductRecommend(props) {
 
     const recommendProducts = [];
     products.filter((item) => {
-        if (item.productCate === productInfo.productCate) {
-            recommendProducts.unshift(item)
-        }
-        if (item.productSex === productInfo.productSex) {
-            recommendProducts.unshift(item)
+        if (item._id !== productInfo._id) {
+            if (item.productSex === productInfo.productSex) { 
+                if (item.productCate === productInfo.productCate &&
+                    item.productGroupCate === productInfo.productGroupCate) {
+                    recommendProducts.push(item)
+                } else if (item.productGroupCate === productInfo.productGroupCate) {
+                    recommendProducts.push(item)
+                } else {
+                    recommendProducts.push(item)
+                }
+            }
         }
         return true;
+    })
+
+    let recommendProducts2 = recommendProducts.filter(function(elem, index, self) {
+        return index === self.indexOf(elem);
     })
 
     return(
@@ -35,7 +45,7 @@ export default function ProductRecommend(props) {
             <div className="newsletter-container flex-center">
                 <div className="newsletter-title">Related products</div>
                 <div className="RecommendProduct">
-                    {recommendProducts.slice(0,5).map(function(item, index) {
+                    {recommendProducts2.slice(0,5).map(function(item, index) {
                         return (
                             <Product 
                                 key={index}

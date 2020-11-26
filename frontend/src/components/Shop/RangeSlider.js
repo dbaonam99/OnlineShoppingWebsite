@@ -7,9 +7,9 @@ import { MuiRail, MuiHandle, MuiTrack } from "./RangeSliderComponents";
 export default class RangeSlider extends Component {
     constructor(props) {
         super(props);
-        const initialValues = [0, 300];
+        const initialValues = [0, 5000000];
         this.state = {
-            domain: [0, 300],
+            domain: [0, 5000000],
             values: [...initialValues],
             update: [...initialValues]
         };
@@ -23,13 +23,14 @@ export default class RangeSlider extends Component {
 
     render() {
         const { domain, values, update } = this.state;
+        this.props.setSortPriceValue(update)
         return (
             <Grid container>
                 <Grid item xs={12} style={{ margin: "30px 0"}}>
                     <div style={{ marginBottom: "40px"}}>
                         <Slider
                             mode={2}
-                            step={1}
+                            step={100000}
                             domain={domain}
                             rootStyle={{
                                 position: "relative",
@@ -72,7 +73,11 @@ export default class RangeSlider extends Component {
                             </Tracks>
                         </Slider>
                     </div>
-                    <Typography className="filter-price">{update.join(" — ")}</Typography>
+                    <Typography className="filter-price flex">
+                        <p>{update[0].toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".")}</p>
+                        <p>-</p>
+                        <p>{update[1].toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".")}</p>
+                    </Typography>
                 </Grid>
             </Grid>
         );

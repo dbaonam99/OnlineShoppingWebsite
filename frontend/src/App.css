@@ -1738,6 +1738,13 @@
 .shopbody-filter-catelist div {
   margin: 10px 0;
 }
+.shopbody-filter-catelink {
+  cursor: pointer;
+  text-transform: capitalize;
+}
+.shopbody-filter-catelink:hover {
+  text-decoration: underline;
+}
 
 .filter-line {
   height: 1px;
@@ -1763,6 +1770,11 @@
   color: #777;
   text-align: center;
   font-size: 14px !important;
+  justify-content: center;
+}
+.filter-price p {
+  font-family: sans-serif;
+  margin: 0 5px;
 }
 
 .shopbody-filter-submit {
