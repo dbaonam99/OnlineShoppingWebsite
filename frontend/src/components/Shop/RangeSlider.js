@@ -18,7 +18,7 @@ export default class RangeSlider extends Component {
     onUpdate = (update) => {
         this.setState({ 
             update 
-        });
+        })
     };
 
     render() {

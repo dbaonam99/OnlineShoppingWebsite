@@ -1713,6 +1713,7 @@
 
 .ShopBody {
   padding: 40px 40px;
+  padding-right: 25px;
 }
 
 .shopbody-container {
@@ -1755,7 +1756,7 @@
 
 .shopbody-main {
   width: 80%;
-  margin-left: 15px;
+  /* margin-left: 15px; */
 }
 
 .filter-price::before {
@@ -1793,7 +1794,7 @@
 .shopbody-first {
   display: flex;
   justify-content: space-between;
-  margin-bottom: 30px;
+  margin: 0 15px 30px 15px;
 }
 .shopbody-tab {
   font-size: 15px;
@@ -1857,6 +1858,7 @@
 .shopbody-products {
   display: flex;
   flex-wrap: wrap;
+  width: 100%;
 }
 
 .shopbody-products-six {
@@ -1865,43 +1867,12 @@
 }
 
 .shopbody-line {
-  margin: 20px 0;
+  margin: 20px 16px;
   background-color: #eee;
   height: 1px;
-  width: 100%;
+  width: calc(100% - 32px);
   bottom: 0;
 }
-/* Four component */
-.fix_width_four:first-child {
-  margin-left: 0 !important;
-}
-.fix_width_four:nth-child(4n+1){
-  margin-left: 0 !important;
-}
-.fix_width_four:nth-child(4n){
-  margin-right: 0 !important;
-}
-/* Five component */
-.fix_width_five:first-child {
-  margin-left: 0 !important;
-}
-.fix_width_five:nth-child(5n+1){
-  margin-left: 0 !important;
-}
-.fix_width_five:nth-child(5n){
-  margin-right: 0 !important;
-}
-/* Six component */
-.fix_width_six:first-child {
-  margin-left: 0 !important;
-}
-.fix_width_six:nth-child(6n+1){
-  margin-left: 0 !important;
-}
-.fix_width_six:nth-child(6n){
-  margin-right: 0 !important;
-}
-
 /* Contact */
 
 .ContactBody {

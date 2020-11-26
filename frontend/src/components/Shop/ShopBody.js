@@ -10,7 +10,7 @@ function ShopBody(props) {
 
     const [product, setProduct] = useState([]);
     const [constProduct, setConstProduct] = useState([]);
-    const [gridTab, setGridTab] = useState(3);
+    const [gridTab, setGridTab] = useState(2);
     const [currentTab, setCurrentTab] = useState(1);
     const location = props.location.pathname.split('/')[1];
     const sortedCate = props.sortedCate
@@ -23,25 +23,15 @@ function ShopBody(props) {
 
     let width, height, marginLeft, marginRight, classWidth = "";
     if (gridTab === 1) {
-        width = '128'; // six
+        width = `${100/6}%`; // six
         height = '153';
-        marginLeft = '16';
-        marginRight = '16';
-        classWidth = 'fix_width_six'
     } else if (gridTab === 2) {
-        width = '160'; // five
-        height = '190';
-        marginLeft = '16';
-        marginRight = '16';
-        classWidth = 'fix_width_five'
-    }else if (gridTab === 3) {
-        width = '208'; // four
-        height = '247';
-        marginLeft = '16';
-        marginRight = '16';
-        classWidth = 'fix_width_four'
+        width = '20%'; // five
+        height = '190'; 
+    } else if (gridTab === 3) {
+        width = '25%'; // four
+        height = '247'; 
     }
-
 
     const soldProduct = [...product];
     if (soldProduct.length > 0) { 
