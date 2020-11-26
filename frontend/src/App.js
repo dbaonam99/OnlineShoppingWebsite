@@ -34,7 +34,7 @@ function App(props) {
     if (window.location.href.split('/')[3] === "") {
       setTimeout(()=>{
         setLoading(false)
-      }, 5500)
+      }, 3500)
     } else {
       setLoading(false)
     }

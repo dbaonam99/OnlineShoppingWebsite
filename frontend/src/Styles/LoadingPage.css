@@ -35,35 +35,41 @@
 }
 .hello {
     animation-name: hello;
-    animation-duration: 3s;
+    animation-duration: 2s;
     animation-iteration-count: initial;
 }
 @keyframes hello {
     0% {
         opacity: 0;
+        color: #ddd;
     }
     50% {
         opacity: 1;
+        color: #000;
     }
     100% {
         opacity: 0;
+        color: #ddd;
     }
 }
 .welcome {
     animation-name: welcome;
-    animation-duration: 3s;
-    animation-delay: 2.7s;
+    animation-duration: 2s;
+    animation-delay: 1.7s;
     animation-iteration-count: infinite;
 }
 @keyframes welcome {
     0% {
         opacity: 0;
+        color: #ddd;
     }
     50% {
         opacity: 1;
+        color: #000;
     }
     100% {
         opacity: 0;
+        color: #ddd;
     }
 }
 
