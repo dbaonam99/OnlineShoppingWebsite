@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useRef } from 'react';
 import '../../App.css';
 import {
     withRouter
@@ -12,8 +12,16 @@ function BannerV4(props) {
     const location = props.history.location.pathname
     const locationText = location.slice(1);
 
+    const bannerRef = useRef()
+    useEffect(()=>{
+        const coordinate = bannerRef.current.getBoundingClientRect()
+        if (coordinate.y !== 0) {
+            window.scrollTo(0,0);
+        }
+    }, [])
+
     return(
-        <div className="BannerV4">
+        <div className="BannerV4" ref={bannerRef}>
             <div className="bannerv4-title">
                 {props.collectionTitle}
             </div> 

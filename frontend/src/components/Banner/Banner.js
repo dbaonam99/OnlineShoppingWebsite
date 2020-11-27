@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import '../../App.css';
 import '../../Styles/Animation.css';
 import classNames from 'classnames';
@@ -8,7 +8,13 @@ import Div100vh from 'react-div-100vh';
 function Banner (props) {
     const [currentBanner, setCurrentBanner] = useState(1);
     const collection = props.collection;
+    const bannerRef = useRef()
+
     useEffect(()=>{
+        const coordinate = bannerRef.current.getBoundingClientRect()
+        if (coordinate.y !== 0) {
+            window.scrollTo(0,0);
+        }
         const slide = setInterval(() => {
             setCurrentBanner(currentBanner + 1)
         }, 5000);
@@ -27,7 +33,7 @@ function Banner (props) {
     }
 
     return(
-        <div className="Banner flex-center">
+        <div className="Banner flex-center" ref={bannerRef}>
             <Div100vh className="banner-container">
                 <div className={classNames('banner-first flex-center', {
                     hide: currentBanner !== 1

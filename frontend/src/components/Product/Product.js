@@ -28,8 +28,7 @@ function Product(props) {
 
     let productDate = new Date(product.productDate) 
     let today = new Date()
-
-    console.log(props.parentHeight)
+ 
     return(
         <div 
             className={`Product opa`}

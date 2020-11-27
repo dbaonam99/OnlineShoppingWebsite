@@ -1,4 +1,4 @@
-import React, { Component, useEffect } from 'react';
+import React, { Component, useEffect, useRef } from 'react';
 import '../../App.css';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import {  faAngleRight } from "@fortawesome/free-solid-svg-icons";
@@ -18,8 +18,16 @@ function BannerV2(props) {
         locationText = location
     }
 
+    const bannerRef = useRef()
+    useEffect(()=>{
+        const coordinate = bannerRef.current.getBoundingClientRect()
+        if (coordinate.y !== 0) {
+            window.scrollTo(0,0);
+        }
+    }, [])
+
     return(
-        <div className="BannerV2">
+        <div className="BannerV2" ref={bannerRef}>
             <div 
                 className="newsbanner-container another-banner" 
                 style={{ 
