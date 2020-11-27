@@ -21,16 +21,19 @@ function ShopBody(props) {
         setConstProduct(props.products)
     }, [props.products])
 
-    let width, height, marginLeft, marginRight, classWidth = "";
+    let width, height, parentHeight, marginLeft, marginRight, classWidth = "";
     if (gridTab === 1) {
         width = `${100/6}%`; // six
-        height = '153';
+        parentHeight = `${100/6}vw`;
+        height = `calc(${parentHeight} - 68px)`;
     } else if (gridTab === 2) {
-        width = '20%'; // five
-        height = '190'; 
+        width = '20%'; // five;
+        parentHeight = '20vw';
+        height = `calc(${parentHeight} - 68px)`;
     } else if (gridTab === 3) {
         width = '25%'; // four
-        height = '247'; 
+        parentHeight = '25vw';
+        height = `calc(${parentHeight} - 68px)`;
     }
 
     const soldProduct = [...product];
@@ -148,6 +151,7 @@ function ShopBody(props) {
                 </div>
                 <div className="shopbody-main">
                     <div className="shopbody-first flex">
+                        <div className="shopbody-countproduct">{product.length} products</div>
                         <div className="shopbody-tab flex">
                             <div 
                                 onClick={() => {setCurrentTab(1)}}
@@ -217,6 +221,7 @@ function ShopBody(props) {
                                         product={item}
                                         width={width}
                                         height={height}
+                                        parentHeight={parentHeight}
                                         marginLeft={marginLeft}
                                         marginRight={marginRight}
                                         gridTab={gridTab}
@@ -235,6 +240,7 @@ function ShopBody(props) {
                                         product={item}
                                         width={width}
                                         height={height}
+                                        parentHeight={parentHeight}
                                         marginLeft={marginLeft}
                                         marginRight={marginRight}
                                         gridTab={gridTab}
@@ -264,6 +270,7 @@ function ShopBody(props) {
                                         product={item}
                                         width={width}
                                         height={height}
+                                        parentHeight={parentHeight}
                                         marginLeft={marginLeft}
                                         marginRight={marginRight}
                                         gridTab={gridTab}
@@ -282,6 +289,7 @@ function ShopBody(props) {
                                         product={item}
                                         width={width}
                                         height={height}
+                                        parentHeight={parentHeight}
                                         marginLeft={marginLeft}
                                         marginRight={marginRight}
                                         gridTab={gridTab}

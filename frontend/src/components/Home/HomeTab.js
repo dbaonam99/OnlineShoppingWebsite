@@ -17,11 +17,11 @@ export default function HomeTab() {
     },[])
     
     //Get product sold
-    let height = 750;
+    let height = 550;
     if (products.length) {
         products.sort((a,b) =>  b.productSold - a.productSold);
         if (products.length <= 5) {
-            height = 360;
+            height = 260;
         }
     }
 

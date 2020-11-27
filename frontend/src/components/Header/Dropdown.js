@@ -14,6 +14,7 @@ import menImg3 from '../../assets/men-dropdown3.jpg'
 function Dropdown(props) {
 
     const redirect = (event) => {
+        window.scrollTo(0,0);
         props.history.push(`/${event.target.id}`)
         props.handleLeaveHover()
     }

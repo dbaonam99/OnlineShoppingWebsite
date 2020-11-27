@@ -1,14 +1,25 @@
 import React, { useState } from 'react'
-
-export default function CollectionItem(props) {
+import {
+    withRouter
+} from 'react-router-dom'
+function CollectionItem(props) {
 
     const [hoverPrice, setHoverPrice] = useState(false)
+
+    const redirect = () => {
+        window.scrollTo(0,0);
+        props.history.push(`/products/${props.product._id}`)
+    }
+
     return (
         <div className="CollectionItem">
             <img src={props.product.productImg[0]} alt=""></img>
             <div className="collection-overlay-container flex-center">
                 <div className="collectionitem-overlay">
-                    <div className="collectionitem-title">{props.product.productName}</div>
+                    <div 
+                        className="collectionitem-title"
+                        onClick={redirect}
+                    >{props.product.productName}</div>
                     <div className="collectionitem-des">{props.product.productDes}</div>
                     <div 
                         className="collectionitem-price"
@@ -37,3 +48,4 @@ export default function CollectionItem(props) {
         </div>
     )
 }
+export default withRouter(CollectionItem)

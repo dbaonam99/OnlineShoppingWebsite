@@ -21,14 +21,15 @@ function NewsBanner(props) {
         }
     }
     const redirect = (event) => {
+        window.scrollTo(0,0);
         if (event.target.textContent === 'news') {
             props.history.push(`/news`)
         }
     }
 
-    return(
+    return( 
         <div className="NewsBanner">
-            <div className="newsbanner-container">
+            <div className="newsbanner-container another-banner">
                 <div className="newsbanner-overlay flex-center">
                     { locationArr[1] &&
                         <div className="newsbanner-title">

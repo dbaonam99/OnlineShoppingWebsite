@@ -29,11 +29,13 @@ function Product(props) {
     let productDate = new Date(product.productDate) 
     let today = new Date()
 
+    console.log(props.parentHeight)
     return(
         <div 
             className={`Product opa`}
             style={{ 
-                width: `calc(${props.width} - 30px)`
+                width: `calc(${props.width} - 30px)`,
+                height: `${props.parentHeight}`,
             }}
         >
             <ProductQuickView 
@@ -43,7 +45,7 @@ function Product(props) {
             />
             <div className="product-img"
                 style={{ 
-                    height: `${props.height}px`,
+                    height: `${props.height}`,
                 }}
                 onMouseOver={()=> {setHover(true)}}
                 onMouseOut={()=> {setHover(false)}}

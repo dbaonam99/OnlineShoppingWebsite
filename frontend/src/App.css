@@ -737,10 +737,10 @@
   width: calc(20% - 30px);
   margin: 15px 15px 20px 15px;
   text-align: center;
+  height: calc(25vw);
 }
-
 .product-img {
-  height: 257px;
+  height: calc(25vw - 68px);
   position: relative;
 }
 .product-tag {
@@ -787,6 +787,12 @@
   margin-top: 20px;
   font-size: 14px;
   font-family: Poppins-Medium;
+  /* Add ... if text is full */
+  display: -webkit-box;
+  -webkit-line-clamp: 1;
+  -webkit-box-orient: vertical;
+  max-width: 100%;
+  overflow: hidden;
 }
 
 .product-price {
@@ -846,6 +852,7 @@
   overflow: hidden;
   height: 100%;
   position: relative;
+  width: 50%;
 }
 
 .collection-box img {
@@ -1238,7 +1245,7 @@
 }
 
 .NewsBanner {
-  height: 500px;
+  /* height: 500px; */
 }
 
 .newsbanner-container {
@@ -1281,7 +1288,7 @@
 }
 
 .newsbanner-title {
-  font-size: 6rem;
+  font-size: 6vw;
   font-weight: 300;
   font-family: sans-serif;
   /* margin-top: -40px; */
@@ -1364,6 +1371,9 @@
   height: 246px;
   margin-top: 30px;
   width: 100%;
+}
+.newsbody-small:last-child {
+  background-color: red;
 }
 .newsbody-small-container {
   height: 100%;
@@ -1796,6 +1806,13 @@
   display: flex;
   justify-content: space-between;
   margin: 0 15px 30px 15px;
+}
+.shopbody-countproduct {
+  font-size: 12px;
+  color: #888;
+  line-height: 25px;
+  display: none;
+  font-weight: bold;
 }
 .shopbody-tab {
   font-size: 15px;
@@ -2648,15 +2665,15 @@
 /* Collection */
 
 .CollectionList {
-  margin-top: 5px;
+  margin-top: 10px;
   width: 100%;
   justify-content: space-between;
   flex-wrap: wrap;
 }
 .CollectionItem {
-  width: 49.8%;
+  width: calc(50% - 5px);
   height: 80vh;
-  margin-bottom: 5px;
+  margin-bottom: 10px;
   transition: transform .3s;
   position: relative;
 }
@@ -2703,6 +2720,15 @@
   text-align: center;
   width: 400px;
   opacity: 0;
+  cursor: pointer;
+  /* Add ... if text is full */
+  display: -webkit-box;
+  -webkit-line-clamp: 1;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+.collectionitem-title:hover {
+  text-decoration: underline;
 }
 .collectionitem-des {
   font-size: 16px;
@@ -2740,6 +2766,14 @@
 }
 .addtocart-btn-collectio-hover {
   border: 2px #fff solid;
+  animation: hoverCart 1s; 
+}
+@keyframes hoverCart {
+  from {
+    border: 2px #000 solid;
+  } to {
+    border: 2px #fff solid;
+  }
 }
 
 /* Mobie */
@@ -2859,66 +2893,66 @@
   .banner-box {
     height: 80vh;
   }
-  .product-img {
-    height: 45vh;
-  }
   .News .news-img { 
     height: 45vh; 
   }
+  .home-tab p {
+    font-size: 20px;
+  }
 }
 @media only screen and (max-width: 2000px) {
-  .product-img {
-    height: 40vh;
-  }
   .News .news-img { 
     height: 40vh; 
   }
 }
 @media only screen and (max-width: 1800px) {
-  .product-img {
-    height: 38vh;
-  }
   .News .news-img { 
     height: 38vh; 
   }
 }
 @media only screen and (max-width: 1632px) {
-  .product-img {
-    height: 35vh;
-  }
   .News .news-img { 
     height: 35vh; 
   }
+  .home-tab p {
+    font-size: 16px;
+  }
 }
 @media only screen and (max-width: 1440px) {
-  .product-img {
-    height: 280px;
-  }
   .News .news-img { 
     height: 30vh; 
   }
 }
 @media only screen and (max-width: 1248px) {
-  .product-img {
-    height: 237px;
-  }
   .News .news-img { 
     height: 28vh; 
   }
 }
 @media only screen and (max-width: 1152px) {
   .Product {
-    width: calc(25% - 30px);
-    margin: 15px 15px 20px 15px;
+    width: calc(25% - 30px) !important;
+    height: calc(30vw) !important;
   }
   .product-img {
-    height: 257px;
+    height: calc(30vw - 68px) !important;
   }
   .News .news-img { 
     height: 25vh; 
   }
+  .shopbody-option-grid {
+    display: none !important;
+  }
+  .shopbody-countproduct {
+    display: block;
+  }
+  .shopbody-tab {
+    display: none !important;
+  }
 }
 @media only screen and (max-width: 1000px) {
+  .another-banner {
+    height: 70vh !important;
+  }
   .footer-container {
     flex-direction: column;
   }
@@ -2928,18 +2962,20 @@
   .menu li a { 
     margin: 0 15px; 
   }
-  .Product {
-    width: calc(33.33333% - 30px);
-    margin: 15px 15px 20px 15px;
-  }
-  .product-img {
-    height: 297px;
-  }
   .News .news-img { 
     height: 200px; 
   }
   .news-title-box {
     font-size: 16px;
+  }
+  .shopbody-filter {
+    display: none;
+  }
+  .shopbody-main {
+    width: 100%;
+  }
+  .ShopBody {
+    padding: 20px 20px;
   }
 }
 @media only screen and (max-width: 900px) {
@@ -2967,14 +3003,31 @@
     font-size: 12px;
     margin: 0 20px;
   }
-  .Product {
-    width: calc(50% - 30px);
-  }
-  .product-img {
-    height: 357px;
-  }
   .News .news-img { 
     height: 190px; 
+  }
+  .newsbody-container { 
+    flex-direction: column;
+  }
+  .newsbody-post {
+    width: 100%;
+  }
+  .newsbody-widget {
+    width: 100%;
+    margin-top: 50px;
+  }
+  .widget-form {
+    display: flex;
+  }
+  .widget-form input {
+    flex-grow: 1;
+  }
+  .widget-post-info {
+    width: 90%;
+  }
+  .newsbody-small-left {
+    height: 100%;
+    padding: 0px 0 0px 20px;
   }
 }
 @media only screen and (max-width: 860px) {
@@ -2989,6 +3042,13 @@
   }
 }
 @media only screen and (max-width: 820px) {
+  .Product {
+    width: calc(33.3333333333333% - 30px) !important;
+    height: calc(38vw) !important;
+  }
+  .product-img {
+    height: calc(38vw - 68px) !important;
+  }
   .menu { 
     display: none;
   }
@@ -2998,11 +3058,15 @@
   .search-icon, .login-icon {
     display: none;
   }
+  .collection-container {
+    flex-direction: column;
+  }
   .collection-title {
     font-size: 26px;
   }
   .collection-box {
     height: 230px;
+    width: 100%;
   }
   .banner-title { 
     font-size: 50px;
@@ -3071,10 +3135,33 @@
   .news-link {
     justify-content: flex-start;
   }
+  .another-banner {
+    height: 60vh !important;
+  }
+  .newsbanner-nav {
+    display: none;
+  }
+  .NewsBody {
+    padding-top: 50px;
+  }
 }
 @media only screen and (max-width: 700px) {
+  .Product {
+    width: calc(50% - 30px) !important;
+    height: calc(55vw) !important;
+  }
   .product-img {
-    height: 337px;
+    height: calc(55vw - 68px) !important;
+  }
+  .newsbanner-container {
+    padding: 0px 0;
+  }
+  .another-banner {
+    height: 45vh !important;
+  }
+  .newsbanner-title {
+    margin-bottom: 10px;
+    font-size: 30px;
   }
 }
 
@@ -3092,6 +3179,10 @@
   .HomeTab {
     padding: 0 5px;
   }
+  .ShopBody {
+    padding: 10px;
+    padding-top: 20px;
+  }
   .FashionNews, .Service {
     padding: 0 20px;
   }  
@@ -3105,11 +3196,9 @@
   .collection-title {
     font-size: 32px;
   }
-  .collection-container {
-    flex-direction: column;
-  }
   .collection-box {
     height: 270px;
+    width: 100% !important;
   }
   .blackbox-title { 
     font-size: 40px; 
@@ -3129,17 +3218,11 @@
   .blackbox-center {
     width: 80%;
   }
-  .product-img {
-    height: 280px;
-  }
   .news-title-box {
     font-size: 20px;
   }
 }
 @media only screen and (max-width: 550px) {
-  .product-img {
-    height: 230px;
-  }
   .News {
     flex-direction: column;
   }
@@ -3156,6 +3239,13 @@
   }
 }
 @media only screen and (max-width: 500px) {
+  .Product {
+    width: calc(100% - 30px) !important;
+    height: calc(105vw) !important;
+  }
+  .product-img {
+    height: calc(105vw - 68px) !important;
+  } 
   .cart-icon-footer {
     margin: 0 5px;
   }
@@ -3197,16 +3287,13 @@
   .blackbox-title-medium { 
     font-size: 20px; 
   } 
-  .product-img {
-    height: 200px;
-  }
-
   .home-tab p {
     font-size: 15px;
     margin: 0 15px;
   }
 }
 @media only screen and (max-width: 400px) {
+
 
   .logo img {
     width: 100px;
@@ -3262,22 +3349,18 @@
   .blackbox-title-medium { 
     font-size: 18px; 
   } 
-  .product-img {
-    height: 170px;
-  }
-
   .home-tab p {
     font-size: 13px;
     margin: 0 10px;
   }
+  .Header {
+    height: 70px;
+  }
+  .newsbanner-overlay {
+    height: calc(100% - 70px);
+  }
 }
 @media only screen and (max-width: 350px) {
-  .Product {
-    width: calc(100% - 30px);
-  }
-  .product-img {
-    height: 337px;
-  }
   .home-tab p {
     font-size: 12px;
     margin: 0 10px;
@@ -3357,10 +3440,7 @@
   }  
   .blackbox-title-medium { 
     font-size: 10px; 
-  } 
-  .product-img {
-    height: 307px;
-  }
+  }  
   .home-tab p {
     font-size: 10px;
     margin: 0 5px;
@@ -3385,8 +3465,5 @@
   } 
   .banner-link {
     font-size: 8px; 
-  } 
-  .product-img {
-    height: 270px;
   }
 }
