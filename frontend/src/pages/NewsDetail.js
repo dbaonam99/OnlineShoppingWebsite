@@ -17,6 +17,11 @@ export default function ProductDetail(props) {
             }
         )
     },[props.match.params.id])
+    
+    useEffect(()=>{
+        window.scrollTo(0,0);
+        document.body.style.overflow = 'unset';
+    },[])
 
     return (
         <div className="ProductDetail">

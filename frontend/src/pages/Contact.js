@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import React, { Component, useEffect } from "react";
 import "../App.css";
 import Newsletter from "../components/Layouts/Newsletter.js"
 import Footer from "../components/Layouts/Footer.js"
@@ -8,18 +8,22 @@ import bg from '../assets/contact.jpg'
 import ContactBody from '../components/Contact/ContactBody.js'
 import GetInTouch from "../components/Contact/GetInTouch";
 
-class Contact extends Component {
-    render() {
-        return (
-            <div className="Contact">
-                <Header/>
-                <BannerV2 bannerImage={bg} position={'-70px'}/>
-                <ContactBody/>
-                <GetInTouch/>
-                <Newsletter/>
-                <Footer/>
-            </div>
-        );
-    }
+function Contact() {
+
+    useEffect(()=>{
+        window.scrollTo(0,0);
+        document.body.style.overflow = 'unset';
+    },[])
+    
+    return (
+        <div className="Contact">
+            <Header/>
+            <BannerV2 bannerImage={bg} position={'0px'}/>
+            <ContactBody/>
+            <GetInTouch/>
+            <Newsletter/>
+            <Footer/>
+        </div>
+    );
 }
 export default Contact;

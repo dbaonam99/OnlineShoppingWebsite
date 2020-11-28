@@ -21,6 +21,11 @@ function Collection(props) {
             }
         )
     },[path])
+
+    useEffect(()=>{
+        window.scrollTo(0,0);
+        document.body.style.overflow = 'unset';
+    },[])
     
     return (
         <div className="Collection">

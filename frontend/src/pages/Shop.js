@@ -16,6 +16,10 @@ function Shop(props) {
     let sex = props.location.pathname.split('/')[1]
     let cate = props.location.pathname.split('/')[2]
 
+    useEffect(()=>{
+        window.scrollTo(0,0);
+        document.body.style.overflow = 'unset';
+    },[])
     useEffect(() => {
         sex.toLowerCase() === "men" ? sex = "man" : sex = "woman"
         axios.get(`http://pe.heromc.net:4000/products`)

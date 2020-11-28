@@ -13,7 +13,7 @@ function NewsBodySmall(props) {
     const timeStr = day + '.' + month + '.' +year
 
     return(
-        <div className="newsbody-small"> 
+        <div className="newsbody-small flex-col"> 
             <div className="newsbody-small-container">
                 <img 
                     className="newsbody-small-img" 
@@ -50,7 +50,7 @@ function NewsBodySmall(props) {
                         }}
                     >Read More</div>
                 </div>
-            </div>
+            </div> 
             <div className="newsbody-smaill-line"></div>
         </div>
     )
