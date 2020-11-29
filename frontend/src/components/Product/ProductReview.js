@@ -138,7 +138,7 @@ export default function ProductReview(props) {
                             })} 
                             <div className="productreview-review">
                                 <div>Add A Review</div>
-                                <div style={{ color: "#888", textAlign: 'center', fontSize: '12px', marginBottom: '20px'}}>Your email address will not be published. Required fields are marked *</div>
+                                <div style={{ color: "#888", textAlign: 'left', fontSize: '12px', marginBottom: '20px'}}>Your email address will not be published. Required fields are marked *</div>
                                 <div style={{ color: "#888", fontSize: '14px', marginBottom: '10px'}}>Your rating *</div>
                                 <ReactStars {...defaultStar}/>
                                 <form className="review-form" onSubmit={sendReview}>

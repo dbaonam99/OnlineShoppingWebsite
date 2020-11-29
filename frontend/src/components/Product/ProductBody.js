@@ -38,14 +38,14 @@ export default function ProductBody(props) {
     const productSmall = useRef(null);
 
     useEffect(() => {
-        if (hover === false) {
-            var interval = setInterval(() => {
-                setImgIndex(imgIndex => imgIndex + 1);
-            }, 5000);
-        }
-        return() => {
-            clearInterval(interval);
-        }
+        // if (hover === false) {
+        //     var interval = setInterval(() => {
+        //         setImgIndex(imgIndex => imgIndex + 1);
+        //     }, 5000);
+        // }
+        // return() => {
+        //     clearInterval(interval);
+        // }
     },[hover])
 
     let slugSex = "";
@@ -60,23 +60,45 @@ export default function ProductBody(props) {
             setImgIndex(0);
         }
 
-        if (product.productImg.length > 4) {
-            if (imgIndex === 1 || imgIndex === 2) {
-                productSmall.current.style.transform= `translateY(0px)`
-            } else if (imgIndex === product.productImg.length - 1) {
-                productSmall.current.style.transform= `translateY(-${(imgIndex-5) * 110 + 50}px)`
-            } else if (imgIndex === product.productImg.length - 2) {
-                productSmall.current.style.transform= `translateY(-${(imgIndex-4) * 110 + 50}px)`
-            } else if (imgIndex === product.productImg.length - 3) {
-                productSmall.current.style.transform= `translateY(-${(imgIndex-3) * 110 + 50}px)`
-            } else if (imgIndex > 2) {
-                productSmall.current.style.transform= `translateY(-${(imgIndex-2) * 110}px)`
-            } else {
-                if (productSmall.current) {
+        if (window.innerWidth > 900) {
+            if (product.productImg.length > 4) {
+                if (imgIndex === 1 || imgIndex === 2) {
                     productSmall.current.style.transform= `translateY(0px)`
+                } else if (imgIndex === product.productImg.length - 1) {
+                    productSmall.current.style.transform= `translateY(-${(imgIndex-5) * 110 + 50}px)`
+                } else if (imgIndex === product.productImg.length - 2) {
+                    productSmall.current.style.transform= `translateY(-${(imgIndex-4) * 110 + 50}px)`
+                } else if (imgIndex === product.productImg.length - 3) {
+                    productSmall.current.style.transform= `translateY(-${(imgIndex-3) * 110 + 50}px)`
+                } else if (imgIndex > 2) {
+                    productSmall.current.style.transform= `translateY(-${(imgIndex-2) * 110}px)`
+                } else {
+                    if (productSmall.current) {
+                        productSmall.current.style.transform= `translateY(0px)`
+                    }
+                }
+            }
+        } else {
+            if (product.productImg.length > 4) {
+                console.log(imgIndex)
+                if (imgIndex === 1 || imgIndex === 2) {
+                    productSmall.current.style.transform= `translateX(0px)`
+                } else if (imgIndex === product.productImg.length - 1) {
+                    productSmall.current.style.transform= `translateX(-${(imgIndex-5) * 85 + 105}px)`
+                } else if (imgIndex === product.productImg.length - 2) {
+                    productSmall.current.style.transform= `translateX(-${(imgIndex-4) * 85 + 105}px)`
+                } else if (imgIndex === product.productImg.length - 3) {
+                    productSmall.current.style.transform= `translateX(-${(imgIndex-3) * 85 + 105}px)`
+                } else if (imgIndex > 2) {
+                    productSmall.current.style.transform= `translateX(-${(imgIndex-2) * 85}px)`
+                } else {
+                    if (productSmall.current) {
+                        productSmall.current.style.transform= `translateX(0px)`
+                    }
                 }
             }
         }
+
 
         //Counting star vote
         ratingList = product.productVote.map(a => a.ratingStar); // get all rating
@@ -256,7 +278,7 @@ export default function ProductBody(props) {
                     <div className="product-info-line"></div>
                 </div>
             </div>
-            <div className="product-info-line"></div>
+            <div className="product-info-line mobile-disable-line"></div>
         </div>
     )
 }
