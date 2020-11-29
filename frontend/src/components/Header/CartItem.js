@@ -20,12 +20,14 @@ export default function CartItem(props) {
                     cartItems.length > 0 && 
                     <div className="cart-item flex" style={{border: 'none'}}>
                         <div className="cart-product-img flex" style={{alignItems: 'center', justifyContent: 'flex-start'}}>Image</div>
-                        <div className="cart-product-name flex-center" style={{alignItems: 'center', justifyContent: 'flex-start'}}>Name</div>
-                        <div className="cart-product-amount flex-center" style={{alignItems: 'center', justifyContent: 'center'}}>Amount</div>
-                        <div className="cart-product-price flex" style={{alignItems: 'center', justifyContent: 'center'}}>Price</div>
-                        <div className="cart-product-totalprice flex" style={{alignItems: 'center', justifyContent: 'center'}}>Total price</div>
-                        <div className="cart-product-delete" style={{visibility: "hidden"}}>
-                            <FontAwesomeIcon style={{pointerEvents: 'none'}} icon={faTimes}/>
+                        <div className="cart-product-mobile flex">
+                            <div className="cart-product-name flex-center" style={{alignItems: 'center', justifyContent: 'flex-start'}}>Name</div>
+                            <div className="cart-product-amount flex-center" style={{alignItems: 'center', justifyContent: 'center'}}>Amount</div>
+                            <div className="cart-product-price flex" style={{alignItems: 'center', justifyContent: 'center'}}>Price</div>
+                            <div className="cart-product-totalprice flex" style={{alignItems: 'center', justifyContent: 'center'}}>Total price</div>
+                            <div className="cart-product-delete" style={{visibility: "hidden"}}>
+                                <FontAwesomeIcon style={{pointerEvents: 'none'}} icon={faTimes}/>
+                            </div>
                         </div>
                     </div>
                 }
@@ -36,42 +38,44 @@ export default function CartItem(props) {
                                 <div className="cart-product-img">
                                     <img src={item.productImg[0]} width="80px" height="100%" alt=""></img>
                                 </div>
-                                <div className="cart-product-name flex" style={{alignItems: 'center', justifyContent: 'flex-start'}}>{item.productName}</div>
-                                <div className="cart-product-amount flex-center">
-                                    <div className="count-cart noselect">
-                                        <div 
-                                            className="count-cart-item left flex-center"
-                                            id={item._id}
-                                            onClick={minusCount}
-                                            >
-                                            <FontAwesomeIcon  style={{pointerEvents: 'none'}} icon={faMinus}/>
-                                        </div> 
-                                        <div className="count-cart-item text flex-center">
-                                            <form style={{width: '100%', margin: '0', height: '30px'}}>
-                                                <input 
-                                                    style={{width: '100%', margin: '0', height: '30px'}}
-                                                    type="text" 
-                                                    value={item.count}
-                                                    id={item._id}
-                                                    onChange={updateCount}
-                                                />
-                                            </form>
-                                        </div>
-                                        <div 
-                                            className="count-cart-item right flex-center"
-                                            id={item._id}
-                                            onClick={plusCount}
-                                            >
-                                            <FontAwesomeIcon  style={{pointerEvents: 'none'}} icon={faPlus}/>
+                                <div className="cart-product-mobile flex">
+                                    <div className="cart-product-name flex" style={{alignItems: 'center', justifyContent: 'flex-start'}}>{item.productName}</div>
+                                    <div className="cart-product-amount flex-center">
+                                        <div className="count-cart noselect">
+                                            <div 
+                                                className="count-cart-item left flex-center"
+                                                id={item._id}
+                                                onClick={minusCount}
+                                                >
+                                                <FontAwesomeIcon  style={{pointerEvents: 'none'}} icon={faMinus}/>
+                                            </div> 
+                                            <div className="count-cart-item text flex-center">
+                                                <form style={{width: '100%', margin: '0', height: '30px'}}>
+                                                    <input 
+                                                        style={{width: '100%', margin: '0', height: '30px'}}
+                                                        type="text" 
+                                                        value={item.count}
+                                                        id={item._id}
+                                                        onChange={updateCount}
+                                                    />
+                                                </form>
+                                            </div>
+                                            <div 
+                                                className="count-cart-item right flex-center"
+                                                id={item._id}
+                                                onClick={plusCount}
+                                                >
+                                                <FontAwesomeIcon  style={{pointerEvents: 'none'}} icon={faPlus}/>
+                                            </div>
                                         </div>
                                     </div>
-                                </div>
-                                <div className="cart-product-price flex" style={{alignItems: 'center', justifyContent: 'center'}}>{item.productPrice.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".")} đ</div>
-                                <div className="cart-product-totalprice flex" style={{alignItems: 'center', justifyContent: 'center'}}>{(item.productPrice * item.count).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".")} đ</div>
-                                <div className="cart-product-delete"
+                                    <div className="cart-product-price flex" style={{alignItems: 'center', justifyContent: 'center'}}>{item.productPrice.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".")} đ</div>
+                                    <div className="cart-product-totalprice flex" style={{alignItems: 'center', justifyContent: 'center'}}>{(item.productPrice * item.count).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".")} đ</div>
+                                    <div className="cart-product-delete"
                                     onClick={removeFromCart}
                                     id={item._id}>
                                     <FontAwesomeIcon style={{pointerEvents: 'none'}} icon={faTimes}/>
+                                </div>
                                 </div>
                             </div>
                         )

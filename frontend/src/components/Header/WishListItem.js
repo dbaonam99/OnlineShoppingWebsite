@@ -33,23 +33,25 @@ export default function WishListItem(props) {
                                 <div className="cart-product-img">
                                     <img src={item.productImg[0]} width="80px" height="100%" alt=""></img>
                                 </div>
-                                <div className="cart-product-name flex-center">{item.productName}</div>
-                                <div className="cart-product-price flex-center">{item.productPrice.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".")} đ</div>
-                                
-                                <div className="product-info-addtocart flex-center btn"
-                                    onClick={(event)=> {
-                                        cartClick(event)
-                                        removeFromWishList(event)
-                                    }}
-                                    id={item._id}
-                                >
-                                    <FontAwesomeIcon style={{pointerEvents: 'none'}} icon={faCartPlus}/>
-                                    <p style={{pointerEvents: 'none'}}>Add to cart</p>
-                                </div>
-                                <div className="cart-product-delete"
-                                    onClick={removeFromWishList}
-                                    id={item._id}>
-                                    <FontAwesomeIcon style={{pointerEvents: 'none'}} icon={faTimes}/>
+                                <div className="cart-product-mobile flex">
+                                    <div className="cart-product-name flex" style={{alignItems: 'center', justifyContent: 'flex-start'}}>{item.productName}</div>
+                                    <div className="cart-product-price wl-mb-price flex" style={{alignItems: 'center', justifyContent: 'flex-start'}}>{item.productPrice.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".")} đ</div>
+                                    
+                                    <div className="product-info-addtocart wl-mb-addtocart flex-center btn"
+                                        onClick={(event)=> {
+                                            cartClick(event)
+                                            removeFromWishList(event)
+                                        }}
+                                        id={item._id}
+                                    >
+                                        <FontAwesomeIcon style={{pointerEvents: 'none'}} icon={faCartPlus}/>
+                                        <p style={{pointerEvents: 'none'}}>Add to cart</p>
+                                    </div>
+                                    <div className="cart-product-delete wl-mb-delete"
+                                        onClick={removeFromWishList}
+                                        id={item._id}>
+                                        <FontAwesomeIcon style={{pointerEvents: 'none'}} icon={faTimes}/>
+                                    </div>
                                 </div>
                             </div>
                         )

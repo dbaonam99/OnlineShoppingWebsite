@@ -1,7 +1,7 @@
 .NewsContent {
     margin-top: 100px;
     padding: 25px 70px;
-}
+} 
 .newscontent-title {
     margin-top: 20px;
     font-weight: 400;
@@ -9,7 +9,7 @@
     text-transform: capitalize;
 }
 .newscontent-title img {
-    height: 600px;
+    height: 60vw;
 }
 .newscontent-share {
     width: 100%;
@@ -35,4 +35,28 @@
 .newscontent-pag-container {
     width: 80%;
     background-color: red;
+}
+@media only screen and (max-width: 820px) { 
+    .NewsContent { 
+        padding: 10px 50px;
+    } 
+}
+@media only screen and (max-width: 820px) { 
+    .NewsContent { 
+        padding: 10px 50px;
+    }
+}
+@media only screen and (max-width: 650px) { 
+    .NewsContent { 
+        padding: 10px 30px;
+    }
+}
+@media only screen and (max-width: 400px) { 
+    .NewsContent { 
+        margin-top: 70px;
+        padding: 10px 15px;
+    }
+    .newscontent-title {
+        font-size: 22px;
+    }
 }

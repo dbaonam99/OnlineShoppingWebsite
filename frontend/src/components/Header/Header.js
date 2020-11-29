@@ -29,6 +29,7 @@ function Header(props) {
     const [openSubMenu, setOpenSubMenu] = useState(null)
 
     const location = props.history.location.pathname;
+    const path = props.history.location.pathname.slice(12);
 
     const subHeight = useRef()
 
@@ -154,7 +155,8 @@ function Header(props) {
                 setNavBar(virtualNavBar)
             }
         )
-        if (location === "/news" || location === `/news/category/${props.match.params.cate}`) {
+        if (location === "/news" || location === `/news/category/${props.match.params.cate}` ||
+            location === "/collection" || location === `/collection/${path}`) {
             setWhiteText(true);
             setDisableBox(true);
         } else {
@@ -167,7 +169,8 @@ function Header(props) {
         }
         
         function onScroll() {
-            if (location === "/news" || location === `/news/category/${props.match.params.cate}`) {
+            if (location === "/news" || location === `/news/category/${props.match.params.cate}` ||
+                location === "/collection" || location === `/collection/${path}`) {
                 if(window.pageYOffset < 50) { // top
                     if (dropdownHover === true) {
                         setWhiteBox(true)
@@ -218,7 +221,7 @@ function Header(props) {
         return() => {
             window.removeEventListener("scroll", onScroll);
         }
-    }, [clickedCart, location, dropdownHover, props.match.params.cate, cartItems]);
+    }, [clickedCart, location, dropdownHover, props.match.params.cate, path, cartItems]);
 
     if(searchOpen || accountOpen || cartOpen){
         document.body.style.overflow = 'hidden';
@@ -241,6 +244,8 @@ function Header(props) {
         }, 700)
     }
 
+    console.log(navBar)
+
     return(
         <div
             className={classNames('Header', {
@@ -249,19 +254,22 @@ function Header(props) {
                 white_disable: disableBox === true
             })}
             onMouseEnter={() => { 
-                if (location === "/news" || location === `/news/category/${props.match.params.cate}`)  {
+                if (location === "/news" || location === `/news/category/${props.match.params.cate}` ||
+                    location === "/collection" || location === `/collection/${path}`)  {
                     setWhiteText(false); 
                     setDisableBox(false);
                 }
             }}
             onMouseOver={() => { 
-                if (location === "/news" || location === `/news/category/${props.match.params.cate}`)  {
+                if (location === "/news" || location === `/news/category/${props.match.params.cate}` ||
+                    location === "/collection" || location === `/collection/${path}`)  {
                     setWhiteText(false); 
                     setDisableBox(false);
                 }
             }}
             onMouseLeave={() => { 
-                if ((location === "/news" && window.pageYOffset < 50) || (location === `/news/category/${props.match.params.cate}` && window.pageYOffset < 50)) {
+                if ((location === "/news" && window.pageYOffset < 50) || (location === `/news/category/${props.match.params.cate}` && window.pageYOffset < 50) ||
+                    (location === "/collection" && window.pageYOffset < 50) || (location === `/collection/${path}` && window.pageYOffset < 50)) {
                     setWhiteText(true);
                 }
             }}

@@ -4,6 +4,7 @@ import Newsletter from "../components/Layouts/Newsletter.js"
 import Footer from "../components/Layouts/Footer.js"
 import BannerV3 from '../components/Banner/BannerV3.js'
 import HeaderV3 from '../components/Header/HeaderV3.js'
+import Header from '../components/Header/Header.js'
 // import bg from '../assets/collection2.jpg'
 import CollectionList from '../components/Collection/CollectionList.js'
 import Axios from "axios";
@@ -29,7 +30,12 @@ function Collection(props) {
     
     return (
         <div className="Collection">
-            <HeaderV3/>
+            {
+                window.innerWidth > 900 && <HeaderV3/>
+            }
+            {
+                window.innerWidth <= 900 && <Header/>
+            }
             { collection &&
                 <BannerV3 
                     bannerImage={collection.collectionBanner} 
