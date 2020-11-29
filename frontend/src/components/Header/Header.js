@@ -242,9 +242,7 @@ function Header(props) {
             setOpenMobileMenu(false)
             setCloseAnimation(false)
         }, 700)
-    }
-
-    console.log(navBar)
+    } 
 
     return(
         <div

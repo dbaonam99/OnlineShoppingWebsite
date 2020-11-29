@@ -5411,8 +5411,8 @@ function CheckoutBody(props) {
             if (userInfo.userHuyen !== "") {
                 setUserHuyen(userInfo.userHuyen)
             }
-            setCartList((JSON.parse(localStorage.getItem('cart'))))
         }
+        setCartList((JSON.parse(localStorage.getItem('cart'))))
     },[userInfo])
 
     const [methodPayment, setMethodPayMent] = useState(0)
@@ -5596,26 +5596,31 @@ function CheckoutBody(props) {
                                         className="billing-detail-item"
                                     >
                                         <img src={item.productImg[0]} alt="" width="60px" height="60px"></img>
-                                        <div className="billing-detail-name">{item.productName}</div>
-                                        <div className="billing-detail-count">
-                                            <p>x</p>
-                                            {item.count}
+                                        <div className="billing-detail-mobile">
+                                            <div className="billing-detail-name">{item.productName}</div>
+                                            <div className="billing-detail-count">
+                                                <p>x</p>
+                                                {item.count}
+                                            </div>
+                                            <div className="billing-detail-price">{(item.productPrice * item.count).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".")} đ</div>
                                         </div>
-                                        <div className="billing-detail-price">{(item.productPrice * item.count).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".")} đ</div>
                                     </div>
                                 )
                             }) 
                         }
                         <div className="billing-detail-item flex">
                             <div style={{width:'60px', height: '60px', lineHeight: '60px', fontSize: '18px'}}>SUBTOTAL</div>
-                            <div className="billing-detail-name"></div>
-                            <div className="billing-detail-count" style={{color: '#111'}}></div>
-                            <div className="billing-detail-price">{subTotal.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".")} đ</div>
+                            <div className="billing-detail-mobile">
+                                <div className="billing-detail-name"></div>
+                                <div className="billing-detail-count" style={{color: '#111'}}></div>
+                                <div className="billing-detail-price">{subTotal.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".")} đ</div>
+                            </div>
                         </div>
-                        <div className="billing-detail-item flex">
+                        <div 
+                            className="billing-detail-item flex"
+                            style={{justifyContent: 'space-between'}}
+                        >
                             <div style={{width:'60px', height: '60px', lineHeight: '60px', fontSize: '18px'}}>SHIPPING</div>
-                            <div className="billing-detail-name"></div>
-                            <div className="billing-detail-count" style={{color: '#111'}}></div>
                             <div className="billing-detail-shipping">
                                 <select onChange={(event)=>{
                                     setShipping(event.target.value)
@@ -5627,47 +5632,51 @@ function CheckoutBody(props) {
                         </div>
                         <div className="billing-detail-item flex">
                             <div style={{width:'60px', height: '60px', lineHeight: '60px', fontSize: '18px'}}>TOTAL</div>
-                            <div className="billing-detail-name"></div>
-                            <div className="billing-detail-count" style={{color: '#111'}}></div>
-                            <div className="billing-detail-price">{(Number(subTotal) + Number(shipping)).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".")} đ</div>
+                            <div className="billing-detail-mobile">
+                                <div className="billing-detail-name"></div>
+                                <div className="billing-detail-count" style={{color: '#111'}}></div>
+                                <div className="billing-detail-price">{(Number(subTotal) + Number(shipping)).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".")} đ</div>
+                            </div>
                         </div>
                         <div className="billing-detail-payment">
                             <div style={{fontSize: '18px'}}>PAYMENT METHOD</div>
-                            <div className="payment-method-list">
-                                <div 
-                                    id="1"
-                                    className="flex payment-method-item" 
-                                    onClick={checkedPayMent}>
+                            <div className="billing-detail-mobile">
+                                <div className="payment-method-list">
                                     <div 
                                         id="1"
-                                        className={methodPayment === 1 ? "size-check isChecked2" : "size-check"}
-                                        ></div>
-                                        <p
+                                        className="flex payment-method-item" 
+                                        onClick={checkedPayMent}>
+                                        <div 
                                             id="1"
-                                            >CASH ON DELIVERY</p>
-                                    </div>
-                                <div 
-                                    id="2"
-                                    className="flex payment-method-item"
-                                    onClick={checkedPayMent}>
+                                            className={methodPayment === 1 ? "size-check isChecked2" : "size-check"}
+                                            ></div>
+                                            <p
+                                                id="1"
+                                                >CASH ON DELIVERY</p>
+                                        </div>
                                     <div 
                                         id="2"
-                                        className={methodPayment === 2 ? "size-check isChecked2" : "size-check"} ></div>
-                                    <p
-                                        id="2">
-                                        DIRECT BANK TRANSFER
-                                    </p>
-                                </div>
-                                <div 
-                                    id="3"
-                                    className="flex payment-method-item"
-                                    onClick={checkedPayMent}>
+                                        className="flex payment-method-item"
+                                        onClick={checkedPayMent}>
+                                        <div 
+                                            id="2"
+                                            className={methodPayment === 2 ? "size-check isChecked2" : "size-check"} ></div>
+                                        <p
+                                            id="2">
+                                            DIRECT BANK TRANSFER
+                                        </p>
+                                    </div>
                                     <div 
                                         id="3"
-                                        className={methodPayment === 3 ? "size-check isChecked2" : "size-check"} ></div>
-                                    <p
-                                        id="3"
-                                        >PAYPAL</p>
+                                        className="flex payment-method-item"
+                                        onClick={checkedPayMent}>
+                                        <div 
+                                            id="3"
+                                            className={methodPayment === 3 ? "size-check isChecked2" : "size-check"} ></div>
+                                        <p
+                                            id="3"
+                                            >PAYPAL</p>
+                                    </div>
                                 </div>
                             </div>
                         </div>

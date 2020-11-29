@@ -48,7 +48,7 @@
     padding-bottom: 5px;
     font-size: 14px !important;
     color: #666;
-    font-family: sans-serif;
+    font-family: sans-serif; 
 }
 .billing-detail-table input:focus {
     outline: none !important;
@@ -77,7 +77,7 @@
     width: 20%;
 }
 .billing-detail-shipping {
-    width: 30%;
+    width: calc(100% - 180px - 45%);
 }
 .billing-detail-shipping select {
     width: 100%;
@@ -111,4 +111,110 @@
     margin-top: 20px;
     height: 50px;
     cursor: pointer;
+}
+.billing-detail-mobile {
+    display: flex;
+    width: 100%;
+}
+@media only screen and (max-width: 1000px) { 
+    .billing-detail-name {
+        width: 30%;
+    }
+    .billing-detail-shipping {
+        width: calc(100% - 190px - 35%);
+    }
+}
+@media only screen and (max-width: 780px) { 
+    .billing-detail-form {
+      padding: 30px 30px !important; 
+    }
+    .billing-detail-name {
+        width: 40%;
+    }
+    .billing-detail-shipping {
+        width: calc(100% - 120px - 45%);
+    }
+    .billing-detail-count { 
+        margin: 0 20px;
+    }
+}
+
+@media only screen and (max-width: 700px) { 
+    .billing-detail-form {
+      padding: 10px 20px !important;
+    }
+    .billing-detail-form {
+      width: 100%;
+    }
+    .CheckoutBody {
+      padding: 20px !important;
+    }
+    .billing-detail-table td:first-child {
+      width: 130px !important;
+    }
+    .billing-detail-table .input {
+      flex-grow: 1;
+    }
+}  
+@media only screen and (max-width: 650px) {  
+    .billing-detail-name {
+        width: 60%;
+        margin-left: 20px;
+    }
+    .billing-detail-shipping {
+        width: 40%;
+    }
+    .billing-detail-count { 
+        margin: 0 10px;
+    }
+    .billing-detail-price {
+        flex-grow: 1;
+        text-align: right;
+    }
+}
+@media only screen and (max-width: 550px) { 
+    .billing-detail-mobile {
+        flex-wrap: wrap;
+        height: 60px;
+        justify-content: space-between;
+    }
+    .billing-detail-name {
+        width: calc(80% - 40px);
+        margin: 0 20px;        
+        line-height: 30px;
+        /* Add ... if text is full */
+        display: -webkit-box;
+        -webkit-line-clamp: 1;
+        -webkit-box-orient: vertical;
+        max-width: 100%;
+        overflow: hidden;
+    }
+    .billing-detail-count {
+        width: 20%;
+        margin: 0;
+        justify-content: flex-end;
+        line-height: 30px;
+    }
+    .billing-detail-price {
+        line-height: 30px;
+    }
+    .billing-detail-payment {
+        height: 180px;
+    }
+}
+@media only screen and (max-width: 450px) { 
+    .billing-detail-shipping {
+        width: 60%;
+    }
+    .billing-detail-count { 
+        margin: 0 5px;
+    }
+    .billing-detail-name { 
+        margin-left: 10px;
+    }
+}
+@media only screen and (max-width: 400px) { 
+    .billing-detail-table td:first-child {
+      width: 100px !important;
+    }
 }

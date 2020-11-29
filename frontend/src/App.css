@@ -3155,6 +3155,9 @@
   .product-info-vote p {
     margin-bottom: 10px;
   }
+  .login-form form, .login-err div {
+    width: 40%;
+  }
 }
 @media only screen and (max-width: 900px) {
   .menu li a { 
@@ -3305,6 +3308,9 @@
   }
   .product-info-addtocart p {
     font-size: 12px;
+  }
+  .login-form form, .login-err div {
+    width: 400px;
   }
 }
 @media only screen and (max-width: 860px) {
@@ -3465,7 +3471,7 @@
   }
   .cart-checkout-box {
     padding: 0 40px;
-  }
+  } 
 }
 @media only screen and (max-width: 700px) {
   .Product {
@@ -3632,7 +3638,7 @@
   }
   .search-form, .login-form {
     padding: 0;
-  }
+  } 
 }
 @media only screen and (max-width: 550px) {
   .News {
@@ -3826,6 +3832,12 @@
   .product-detail {
     height: 900px;
   }
+  .login-form form, .login-err div {
+    width: 90%;
+  }
+  .login-err {
+    padding: 0 0px; 
+  }
 }
 @media only screen and (max-width: 400px) {
   .logo img {
@@ -3907,6 +3919,12 @@
   }
   .cart-checkout-text {
     margin-right: 20px; 
+  } 
+  .search-tab {
+    margin-bottom: 30px;
+  }
+  .search-form form input { 
+    margin-bottom: 20px;
   }
 }
 @media only screen and (max-width: 350px) {
@@ -3941,15 +3959,18 @@
   } 
   .getintouch-form input {
     width: 85%;
-  }
-  .Search, .Account, .Cart {
-    padding: 5px;
-  }
+  } 
   .cart-checkout-btn { 
     font-size: 12px;
   }
   .cart-checkout-box {
     padding: 0 5px;
+  }
+  .search-tab {
+    margin-bottom: 20px;
+  }
+  .search-form form input { 
+    margin-bottom: 15px;
   }
 }
 
