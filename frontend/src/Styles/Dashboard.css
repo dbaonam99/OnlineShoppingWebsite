@@ -1356,7 +1356,6 @@ select {
     position: fixed;
     transition: .5s;
     transform: translateX(0) !important;
-    /* width: 20000px; */
 } 
 .DashboardBody-closemenu {
     position: absolute;
@@ -1464,4 +1463,9 @@ select {
         margin: 0;
         margin: 10px 0 !important;
     } 
+}
+@media only screen and (max-width: 500px) {  
+    .menu-search-container {
+        display: none;
+    }
 }
