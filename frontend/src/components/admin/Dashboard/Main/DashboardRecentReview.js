@@ -59,10 +59,8 @@ export default function DashboardRecentReview(props) {
                                                 </div>
                                             </div>
                                             <div className="review-product-item bottom flex">
-                                                <div className="flex">
-                                                    <p>{item.ratingName}</p>
-                                                    <p>:</p>
-                                                    <p className="review-product-item-content">  {item.ratingText}</p>
+                                                <div className="review-product-content flex"> 
+                                                    <p className="review-product-item-content">{item.ratingName}: {item.ratingText}</p>
                                                 </div>
                                                 <div className="review-product-star">
                                                     <ReactStars {...ratingStar} />

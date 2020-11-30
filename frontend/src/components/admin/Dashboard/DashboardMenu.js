@@ -93,6 +93,7 @@ export default function DashboardMenu(props) {
                                         props.setTabIdOnClick(item.id);
                                         props.setCloseCreateFunc(false);
                                         props.setCloseEditFunc(false);
+                                        props.setOpenMenuOnClick()
                                     }}
                                 >
                                     <FontAwesomeIcon icon={item.icon} style={{fontSize: '18px'}} className="icon"/>

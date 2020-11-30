@@ -549,9 +549,15 @@ display: none !important;
     font-family: sans-serif !important;
 }
 .review-product-name h5 {
-    font-size: 14px;
+    font-size: 14px; 
     font-family: sans-serif !important;
     color: #333;
+    /* Add ... if text is full */
+    display: -webkit-box;
+    -webkit-line-clamp: 1;
+    -webkit-box-orient: vertical; 
+    overflow: hidden;
+    margin-right: 5px;
 }
 .review-product-time p {
     font-size: 12px;
@@ -565,8 +571,7 @@ display: none !important;
     -webkit-box-orient: vertical;
     max-width: 100%;
     overflow: hidden;
-    height: 20px;
-    margin-left: 10px;
+    height: 20px; 
 }
 .bottom p {
     height: 18px;
@@ -1452,7 +1457,7 @@ select {
     }
     .top-location-map {
         margin: 0;
-        margin-bottom: 10px;
+        margin-top: 10px;
         height: 300px;
         width: 100%;
     }
@@ -1467,5 +1472,21 @@ select {
 @media only screen and (max-width: 500px) {  
     .menu-search-container {
         display: none;
+    }
+    .top-location-container {
+        padding: 20px 5px;
+    } 
+    .bottom {
+        align-items: flex-start;
+        flex-direction: column;
+    } 
+    .review-product-content {
+        order: 1;
+    }
+    .review-product-item:first-child {
+        margin: 0;
+    } 
+    .total-count-header {
+        margin-left: 60px;
     }
 }
