@@ -5398,6 +5398,7 @@ function AccountInfo(props) {
    
 
    useEffect(()=>{
+      console.log(userInfo)
       setUserName(userInfo.userName)
       setUserEmail(userInfo.userEmail)
       setUserPhone(userInfo.userPhone)

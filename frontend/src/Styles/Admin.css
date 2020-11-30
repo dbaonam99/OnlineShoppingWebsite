@@ -48,6 +48,7 @@
     font-size: 14px;
     text-transform: uppercase;
     margin: 20px 0;
+    margin-bottom: 15px;
     color: #777;
 }
 .admin-login-form {
@@ -61,6 +62,7 @@
     margin: 15px 0;
     border-bottom: 2px #ddd solid;
     transition: .5s;
+    margin-top: 5px;
 }
 .admin-login-form input:focus {
     border-bottom: 2px #111 solid;

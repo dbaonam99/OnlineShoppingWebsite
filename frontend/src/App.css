@@ -2093,11 +2093,13 @@
 .search-tab-active {
   color: #000 !important;
 }
-.search-form, .login-form {
+.login-form {
   padding: 0 30px;
 }
 .search-form {
+  padding: 0;
   margin-top: 0px;
+  margin-bottom: 20px;
 }
 .search-form form {
   align-items: center;

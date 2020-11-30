@@ -62,7 +62,16 @@ export default function DashboardMenu(props) {
                             <FontAwesomeIcon icon={faIdCard} style={{fontSize: '18px'}} className="icon"/>
                             <p className="db-menu-name">profile</p>
                         </div>
-                        <div className="db-menu-item flex-center" style={{margin: '0'}}>
+                        <div 
+                            className="db-menu-item flex-center"
+                            style={{margin: '0'}}
+                            onClick={()=> {
+                                localStorage.removeItem('user-id')
+                                localStorage.removeItem('token');
+                                sessionStorage.removeItem('chat-id')
+                                window.location.reload(false);
+                            }}
+                        >
                             <FontAwesomeIcon icon={faSignOutAlt} style={{fontSize: '18px'}} className="icon"/>
                             <p className="db-menu-name">Log out</p>
                         </div>

@@ -32,7 +32,7 @@ function Account(props) {
             axios.post('http://pe.heromc.net:4000/users/login', {
                 loginEmail: user.loginEmail,
                 loginPassword: user.loginPassword
-            })
+            }) 
             .then(res => {
                 setArrSuccess(arrSuccess=>[...arrSuccess, "Login success!"])
                 setTimeout(()=> {
