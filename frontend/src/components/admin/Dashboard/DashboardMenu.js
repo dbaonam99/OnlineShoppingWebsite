@@ -16,17 +16,19 @@ export default function DashboardMenu(props) {
 
     const menuItems = props.menuItems;
     const openMenu = props.openMenu;
+    const openMenuMobile = props.openMenuMobile;
     useEffect(()=> {
         setTimeout(()=>{
             if (openMenu === false) setHideText(true)
         }, 480)
         if (openMenu === true) setHideText(false)
-    }, [setHideText, openMenu])
+    }, [setHideText, openMenu]) 
 
     return (
         <div 
-            className={classNames("DashboardMenu", {
-                DashboardMenu_small: !openMenu
+            className={classNames("DashboardMenu flex", {
+                DashboardMenu_small: !openMenu,
+                DashboardMenu_mobile: !openMenuMobile
             })}>
             <div className="db-menu-overlay"></div>
             <div className="db-menu">

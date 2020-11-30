@@ -60,7 +60,8 @@ function Dashboard(props) {
         },
     ]
     const [tabId, setTabId] = useState("1");
-    const [openMenu, setOpenMenu] = useState(true);
+    const [openMenu, setOpenMenu] = useState(true); 
+    const [openMenuMobile, setOpenMenuMobile] = useState(true); 
     const [productId, setProductId] = useState("")
 
     const socket = socketIOClient(ENDPOINT);
@@ -98,9 +99,16 @@ function Dashboard(props) {
     const setTabIdOnClick = (id) => {
         setTabId(id);
     }
-    const setOpenMenuOnClick = (id) => {
-        if (openMenu) setOpenMenu(false);
-        else setOpenMenu(true);
+
+    const setOpenMenuOnClick = () => {
+        if (window.innerWidth <= 1110) {
+            setOpenMenu(true);
+            if (openMenuMobile) setOpenMenuMobile(false);
+            else setOpenMenuMobile(true);
+        } else {
+            if (openMenu) setOpenMenu(false);
+            else setOpenMenu(true);
+        }
     }
 
     const [openCreate, setOpenCreate] = useState(false)
@@ -136,6 +144,7 @@ function Dashboard(props) {
                 tabId = {tabId}
                 menuItems = {menuItems}
                 openMenu = {openMenu} 
+                openMenuMobile = {openMenuMobile}
                 setCloseCreateFunc={setCloseCreateFunc}
                 setCloseEditFunc={setCloseEditFunc}
             />
@@ -143,6 +152,7 @@ function Dashboard(props) {
                 tabId = {tabId}
                 menuItems = {menuItems}
                 openMenu = {openMenu}
+                openMenuMobile = {openMenuMobile}
                 openCreate = {openCreate}
                 openEdit = {openEdit}
                 setOpenMenuOnClick = {setOpenMenuOnClick}

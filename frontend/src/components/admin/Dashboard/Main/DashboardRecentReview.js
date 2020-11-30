@@ -8,7 +8,7 @@ export default function DashboardRecentReview(props) {
     const topRecentVote = props.topRecentVote;
 
     return (
-        <div className="topfive flex-col" style={{width: '60%'}}>
+        <div className="topfive flex-col topfive-rv" style={{width: '60%'}}>
             <div className={`headerbox flex-center ${props.color}`}>
                 <FontAwesomeIcon icon={props.icon} className="icon"/>
             </div>
@@ -16,7 +16,7 @@ export default function DashboardRecentReview(props) {
                 <div className="headerbox-header">
                     <p>{props.title}</p>
                 </div>
-                <div className="topfive-content flex">
+                <div className="topfive-content topfive-content-rv flex">
                     <div className="topfive-list">
                         {
                             topRecentVote.map((item, index)=>{

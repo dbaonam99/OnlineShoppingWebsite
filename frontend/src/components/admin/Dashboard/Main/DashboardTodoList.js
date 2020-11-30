@@ -91,7 +91,7 @@ export default function DashboardTodoList(props) {
     }
 
     return (
-        <div className="topfive flex-col" style={{width: '40%'}}>
+        <div className="topfive topfive-rv flex-col" style={{width: '40%'}}>
             <div className={`headerbox flex-center ${props.color}`}>
                 <FontAwesomeIcon icon={props.icon} className="icon"/>
             </div>

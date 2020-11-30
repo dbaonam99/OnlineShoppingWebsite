@@ -80,12 +80,20 @@ export default function DashboardBody(props) {
             } 
         )
     },[props.productId, props.openEdit])
+    const openMenuMobile = props.openMenuMobile;
 
     return (
         <div 
             className={classNames("DashboardBody", {
                 DashboardBody_small: !props.openMenu
-        })}>
+        })}>          
+            {
+                !openMenuMobile && 
+                <div 
+                    className="DashboardBody-closemenu"
+                    onClick={props.setOpenMenuOnClick}
+                >zxcasjk hdhsjdakjs</div>
+            }
             { (props.openCreate && tabId === "3") &&
                 <DashboardOrderCreate
                     setCloseCreateFunc={props.setCloseCreateFunc}

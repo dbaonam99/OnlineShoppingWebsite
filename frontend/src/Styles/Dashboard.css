@@ -15,7 +15,7 @@
     margin: 15px 0;
 }
 .DashboardMenu {
-    width: 20%;
+    width: 260px;
     height: 100vh;
     background-color: blue;
     background-image: url(https://images.unsplash.com/photo-1524504388940-b1c1722653e1?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=900&q=60);
@@ -45,7 +45,7 @@
     z-index: -10;
 }
 .db-menu {
-    width: 100%;
+    width: 260px;
     height: 100%;
     color: #fff;
     padding: 15px;
@@ -141,7 +141,7 @@
     padding: 20px 30px;
     background-color: #eaeaea;
     flex-grow: 1;
-    margin-left: 20%;
+    margin-left: 260px;
     transition: .5s;
     min-height: 100vh;
 }
@@ -361,8 +361,8 @@ display: none !important;
 .total-count-item {
     padding-top: 20px;
     position: relative;
-    margin-right: 30px;
-    flex-grow: 1;
+    margin-right: 30px; 
+    width: 25%;
 }
 .total-count-item-container {
     width: 100%;
@@ -578,6 +578,7 @@ display: none !important;
 .boxchat-admin {
     background-color: #fff;
     width: 100%;
+    height: calc(100vh - 119px) ;
     border-radius: 5px;
     padding: 20px;
     overflow: hidden;
@@ -586,7 +587,7 @@ display: none !important;
     width: 30%;
     background-color: #fff;
     padding-right: 20px;
-    height: 500px;
+    height: 100%;
     overflow-y: scroll;
     position: relative;
 }
@@ -660,7 +661,7 @@ display: none !important;
 }
 .boxchat-main {
     width: 70%;
-    height: 500px;
+    height: 100%;
     border-left: 1px #ddd solid;
 }
 .boxchat-box {
@@ -1247,4 +1248,220 @@ select {
 .table-input:focus, 
 .table-input:hover {
     border-bottom: 2px #777 solid;
+}
+.menu-header-mobile {
+    display: none;
+}
+@media only screen and (min-width: 1500px) {
+    .headerbox {
+        width: 85px;
+        height: 85px;
+    }
+    .dashboard-count p {
+        height: 80px;
+        line-height: 80px;
+        font-size: 28px;
+    }
+    .count-status {
+        height: 30px;
+        font-size: 16px;
+    }
+    .total-count-header p, .headerbox-header p {
+        font-size: 20px;
+    }
+    .top-location, .topfive {
+        height: max-content;
+    }
+    .top-location-div {
+        height: 60px;
+    }
+    .top-location-div div, .top-user-name {
+        font-size: 16px;
+    }
+    .topfive-header:last-child {
+        width: max-content;
+    }
+    .topfive-rv {
+        height: 500px;
+    } 
+    .topfive {
+        height: max-content;
+    }
+    .topfive-content-rv {
+        margin-top: 10px;
+    } 
+}
+@media only screen and (min-width: 1800px) { 
+    .dashboard-count p {
+        height: 100px;
+        line-height: 100px;
+        font-size: 30px;
+    }
+    .count-status {
+        height: 40px;
+        font-size: 18px;
+    }
+    .total-count-header p, .headerbox-header p {
+        font-size: 24px;
+    }
+    .top-location, .topfive {
+        height: max-content;
+    }
+    .top-location-div {
+        height: 73px;
+    }
+    .top-location-div div:first-child, .top-user-name:first-child {
+        font-size: 18px;
+        display: flex;
+        justify-content: start;
+        align-items: center;
+    }
+    .top-location-div div, .top-user-name {
+        font-size: 18px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+    .topfive-header:last-child {
+        width: max-content;
+    }
+    .topfive-rv {
+        height: 510px;
+    }
+    .topfive-content-rv {
+        margin-top: 30px;
+    } 
+    .review-product-name h5, .topfive-div p {
+        font-size: 16px;
+    }
+    .todo-title {
+        font-size: 14px;
+    }
+}
+@media only screen and (min-width: 2100px) { 
+    .dashboard-count p {
+        height: 120px;
+        line-height: 120px;
+        font-size: 40px;
+    }
+    .count-status {
+        height: 50px;
+        font-size: 22px;
+    }
+    .total-count-header p, .headerbox-header p {
+        font-size: 28px;
+    }
+}
+.DashboardMenu_mobile {
+    position: fixed;
+    transition: .5s;
+    transform: translateX(0) !important;
+    /* width: 20000px; */
+} 
+.DashboardBody-closemenu {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    right: 0;
+    background-color: rgba(1, 1, 1, 0.5);
+    z-index: 10;
+    cursor: url(../assets/close.png), auto; 
+}
+@media only screen and (max-width: 1110px) { 
+    .total-count-header {
+        margin-left: 60px;
+    }  
+    .dashboard-count p {
+        font-size: 20px;
+    }
+    .count-status {
+        font-size: 12px;
+    }
+    .count, .headerbox {
+        width: 50px;
+        height: 50px;
+    }
+    .DashboardBody {
+        margin-left: 0;
+        padding: 20px 20px;
+    }
+    .DashboardMenu {  
+        transition: .5s; 
+        transform: translateX(-260px);
+    }
+}
+@media only screen and (max-width: 1000px) {  
+    .dashboard-count p {
+        font-size: 22px;
+    } 
+    .total-count-item {
+        margin-right: 20px;
+    } 
+}  
+@media only screen and (max-width: 850px) {       
+    .total-count-header {
+        justify-content: flex-start;
+    }
+    .total-count-header p {
+        font-size: 18px;  
+    }
+    .dashboard-count p {
+        font-size: 24px;
+    }
+    .count-status {
+        font-size: 14px;
+    }
+    .count, .headerbox {
+        width: 55px;
+        height: 55px;
+    } 
+    .total-count-header {
+        margin-left: 110px;
+    }
+    .total-count-item { 
+        width: calc(50% - 10px);
+        margin: 0;
+        margin: 10px 0 !important;
+    }
+    .row {
+        flex-wrap: wrap;
+        margin-bottom: 10px;
+    }
+    .top-location {
+        margin: 0;
+        margin-bottom: 20px;
+    }
+    .topfive {
+        width: 100%;
+        margin: 0;
+        margin-bottom: 20px;
+    }
+    .topfive-rv {
+        margin-top: 10px;
+        width: 100% !important;
+    }
+    .top-location {
+        height: max-content;
+    }
+    .top-location-content {
+        flex-direction: column;
+    }
+    .top-location-list {
+        width: 100%;
+        margin: 0; 
+    }
+    .top-location-map {
+        margin: 0;
+        margin-bottom: 10px;
+        height: 300px;
+        width: 100%;
+    }
+} 
+@media only screen and (max-width: 600px) {  
+    .total-count-item { 
+        width: 100%;
+        margin: 0;
+        margin: 10px 0 !important;
+    } 
 }

@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import '../../../App.css'
 import '../../../Styles/Dashboard.css'
-import { faBell, faEllipsisV, faListUl, faSearch } from '@fortawesome/free-solid-svg-icons'
+import { faBars, faBell, faEllipsisV, faListUl, faSearch } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import Axios from 'axios'
 
@@ -36,21 +36,24 @@ export default function DashboardHeader(props) {
             setUnreadedNotice(0)
             setOpenNotice(true)
         }
+    } 
+    const openMenuOnClick = () => {
+        props.setOpenMenuOnClick()
     }
-
+    
     return (
         <div className="dashboard-header flex">
             <div className="flex-center">
                 <div className="menu-opt flex-center"
-                    onClick={props.setOpenMenuOnClick}>
+                    onClick={openMenuOnClick}>
                     { props.openMenu && <FontAwesomeIcon icon={faEllipsisV}/>}
                     { props.openMenu === false && <FontAwesomeIcon icon={faListUl}/>}
                 </div>
                 <p>{props.itemName}</p>
-            </div>
-            <div className="flex-center">
+            </div> 
+            <div className="flex-center menu-search-container">
                 <form className="menu-search flex">
-                    <input type="text" placeholder="Search..."></input>
+                    <input type="text" placeholder="Search..." className="menu-search-input"></input>
                     <div className="flex-center">
                         <FontAwesomeIcon icon={faSearch} className="icon"/>
                     </div>

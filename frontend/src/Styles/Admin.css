@@ -1,5 +1,4 @@
 .Login {
-    height: 100vh;
     background-color: #777;
     overflow: hidden;
 }
@@ -17,7 +16,7 @@
 }
 .login-box {
     background-color: #fff;
-    width: 70%;
+    width: 800px;
     height: 500px;
     border-radius: 5px;
     padding: 5px;
@@ -77,4 +76,115 @@
     outline: none;
     border: none;
     font-size: 14px;
+}
+
+
+@media only screen and (max-width: 1200px) {
+    .login-bg { 
+        bottom: 400px;
+    }
+}
+@media only screen and (max-width: 1100px) {
+    .login-bg { 
+        height: 100%; 
+        bottom: 0;
+    }
+} 
+@media only screen and (max-width: 850px) { 
+    .login-box {  
+        height: 60vw; 
+        margin: 0 40px;
+    }
+} 
+@media only screen and (max-width: 750px) { 
+    .login-box {  
+        margin: 0 40px;
+    }
+    .admin-login-form button {
+        margin-top: 20px;
+    }
+    .admin-login-form input {
+        height: 30px;
+        font-size: 12px;
+    }
+    .login-arr-admin {
+        /* height: 30px !important; */
+        font-size: 12px !important;
+    }
+} 
+@media only screen and (max-height: 500px) { 
+    .login-box {  
+        height: 90vh;
+    }
+    .admin-login-form input {
+        height: 30px;
+        font-size: 12px;
+    }
+    .login-arr-admin {
+        /* height: 30px !important; */
+        font-size: 12px !important;
+    }
+    .admin-login-form button {
+        margin-top: 20px;
+    }
+}
+@media only screen and (max-width: 650px) { 
+    .login-title {
+        font-size: 12px;
+        margin: 10px 0;
+    }
+    .admin-login-form input {
+        margin-bottom: 5px;
+    }
+    .login-arr-admin {
+        font-size: 10px !important;
+    }
+    .login-box {
+        height: 50vw;
+    }
+}
+@media only screen and (max-width: 550px) { 
+    .login-box {
+        margin: 0 20px;
+        width: 70%;
+        height: 80vw;
+    }
+    .login-title {
+        margin: 20px 0;
+        font-size: 16px; 
+    }
+    .admin-login-form {
+        width: 90%;
+        align-items: center;
+    }
+    .login-arr-admin {
+        width: 90% !important;
+    }
+    .admin-login-form input {
+        width: 100%;
+        height: 50px;
+        margin: 10px 0;
+    }
+    .admin-login-form button {
+        margin-top: 20px; 
+        width: 100%;
+        height: 40px;
+    }
+    .login-left {
+        width: 100%;
+    }
+    .login-right {
+        display: none;
+    }
+}
+@media only screen and (max-width: 450px) {  
+    .login-box { 
+        width: 90%;
+        height: 100vw;
+    }
+} 
+@media only screen and (max-width: 350px) {  
+    .admin-login-form input {
+        height: 30px;
+    } 
 }
