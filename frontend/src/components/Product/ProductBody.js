@@ -127,11 +127,8 @@ export default function ProductBody(props) {
     const cartClick = () => { 
         setLoading(1)
         setTimeout(()=>{
-            setLoading(0)
-            for (let i = 0; i < countCart; i++) { 
-                console.log("Add")
-                addToCart(product)
-            }
+            setLoading(0) 
+            addToCart(product, countCart) 
         }, 500)
         setCountCart(1)
     }

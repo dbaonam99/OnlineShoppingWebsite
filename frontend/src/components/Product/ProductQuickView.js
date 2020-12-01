@@ -42,7 +42,7 @@ export default function ProductQuickView(props) {
     } = useContext(CartContext);
 
     const cartClick = () => {
-        addToCart(props.product)
+        addToCart(props.product, countCart)
         setToast(true)
         setTimeout(()=>{
             setToast(false)
@@ -128,7 +128,11 @@ export default function ProductQuickView(props) {
                                     <FontAwesomeIcon icon={faMinus}/>
                                 </div> 
                                 <div className="count-cart-item text flex-center">
-                                    <form>
+                                    <form 
+                                        onSubmit={(event)=>{
+                                            event.preventDefault()
+                                        }}
+                                    >
                                         <input 
                                             type="text" 
                                             value={countCart}

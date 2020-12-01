@@ -43,27 +43,48 @@ export function CartProvider(props) {
         setWishListItems(virtualCart)
     }
 
-    const addToCart = (product = {}) => {
-        setClickedCart(clickedCart + 1) // scroll on click to cart
-        const virtualCart = [...cartItems] 
-
-        if (cartItems.length === 0) {
-            virtualCart.push({...product, count: 1})
-        } else {
-            if (!isExists(cartItems, product)) {
-                virtualCart.push({...product, count: 1})
+    const addToCart = (product = {}, count) => {
+        if (count) {
+            setClickedCart(clickedCart + count) // scroll on click to cart
+            const virtualCart = [...cartItems] 
+            if (cartItems.length === 0) {
+                virtualCart.push({...product, count: count})
             } else {
-                for (let i = 0; i < virtualCart.length; i++) {
-                    if (virtualCart[i]._id === product._id) {
-                        virtualCart[i].count += 1
-                        break
+                if (!isExists(cartItems, product)) {
+                    virtualCart.push({...product, count: count})
+                } else {
+                    for (let i = 0; i < virtualCart.length; i++) {
+                        if (virtualCart[i]._id === product._id) {
+                            virtualCart[i].count += count
+                            break
+                        }
                     }
                 }
             }
+            localStorage.setItem('cart', JSON.stringify(virtualCart))
+            setCartItems(virtualCart)
+            getTotal(virtualCart)
+        } else {
+            setClickedCart(clickedCart + 1) // scroll on click to cart
+            const virtualCart = [...cartItems] 
+            if (cartItems.length === 0) {
+                virtualCart.push({...product, count: 1})
+            } else {
+                if (!isExists(cartItems, product)) {
+                    virtualCart.push({...product, count: 1})
+                } else {
+                    for (let i = 0; i < virtualCart.length; i++) {
+                        if (virtualCart[i]._id === product._id) {
+                            virtualCart[i].count += 1
+                            break
+                        }
+                    }
+                }
+            }
+            localStorage.setItem('cart', JSON.stringify(virtualCart))
+            setCartItems(virtualCart)
+            getTotal(virtualCart)
         }
-        localStorage.setItem('cart', JSON.stringify(virtualCart))
-        setCartItems(virtualCart)
-        getTotal(virtualCart)
     }
 
     const removeFromCart = (event) => {
