@@ -22,16 +22,20 @@ function Shop(props) {
     },[])
 
     useEffect(() => {
-        if (sex === "shop") {
+        if (sex === "shop") { 
             axios.get(`http://pe.heromc.net:4000/products`)
                 .then(res => {   
-                    const search = []
-                    for (let i in res.data) {
-                        if ((res.data[i].productName).toLowerCase().includes(cate)) {
-                            search.push(res.data[i])
+                    if (cate) {
+                        const search = []
+                        for (let i in res.data) {
+                            if ((res.data[i].productName).toLowerCase().includes(cate)) {
+                                search.push(res.data[i])
+                            }
                         }
+                        setProducts(search) 
+                    } else {
+                        setProducts(res.data) 
                     }
-                    setProducts(search) 
                 })
         } else {
             sex.toLowerCase() === "men" ? sex = "man" : sex = "woman"
@@ -79,7 +83,7 @@ function Shop(props) {
                 }
             )
         }
-    },[sex, cate])
+    },[sex, cate]) 
     
     return (
         <div className="Men">
