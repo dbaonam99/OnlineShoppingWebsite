@@ -242,6 +242,7 @@ function HeaderV3(props) {
         }, 700)
     }
 
+    const [searchMobile, setSearchMobile] = useState("")
     return(
         <div
             className={classNames('Header HeaderV3', {
@@ -283,8 +284,18 @@ function HeaderV3(props) {
                             closeMenuMobile: closeAnimation
                         })}>
                             <div className="menu-mobile-search flex-center">
-                                <input className="input" placeholder="Search" style={{fontSize: '16px', height: '50px'}}></input>
-                                <FontAwesomeIcon icon={faSearch} style={{marginLeft: '10px', color: '#777'}}/>
+                                <input 
+                                    onChange={(e)=>{
+                                        setSearchMobile(e.target.value)
+                                    }} 
+                                    value={searchMobile}
+                                    className="input" placeholder="Search" style={{fontSize: '16px', height: '50px'}}
+                                ></input>
+                                <div onClick={(event)=>{
+                                    props.history.push(`/shop/${searchMobile}`)
+                                }}>
+                                    <FontAwesomeIcon icon={faSearch} style={{marginLeft: '10px', color: '#777'}}/>
+                                </div>
                             </div>
                             <div 
                                 className="menu-mobile-list"
