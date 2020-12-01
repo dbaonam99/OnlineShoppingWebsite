@@ -223,8 +223,7 @@ display: none !important;
 }
 .notice-count {
     position: absolute;
-    color: #fff;
-    background-color: red;
+    color: #fff; 
     width: 15px;
     height: 15px;
     border-radius: 50%;
@@ -603,18 +602,15 @@ display: none !important;
 }
 /* width */
 .boxchat-list::-webkit-scrollbar {
-    display: none !important;
-    background-color: red;
+    display: none !important; 
 }
 /* Track */
 .boxchat-list::-webkit-scrollbar-track {
-    display: none !important;
-    background-color: red;
+    display: none !important; 
 }
 /* Handle */
 .boxchat-list::-webkit-scrollbar-thumb {
-    display: none !important;
-    background-color: red;
+    display: none !important; 
 }
 
 .boxchat-item {

@@ -274,7 +274,9 @@ export default function ProductBody(props) {
                                     <input 
                                         type="text" 
                                         value={countCart}
-                                        onChange={e => setCountCart(Number(e.target.value))}
+                                        onChange={(e) => { 
+                                            setCountCart(Number(e.target.value)) 
+                                        }}
                                     />
                                 </form>
                             </div>
