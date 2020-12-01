@@ -298,6 +298,7 @@ function Header(props) {
                                 <input 
                                     onChange={(e)=>{
                                         setSearchMobile(e.target.value)
+                                        closeMobileMenuFunc() 
                                     }} 
                                     value={searchMobile}
                                     className="input" placeholder="Search" style={{fontSize: '16px', height: '50px'}}
