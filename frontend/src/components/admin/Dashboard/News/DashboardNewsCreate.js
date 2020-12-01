@@ -161,7 +161,7 @@ export default function DashboardNewsCreate(props) {
                                 height: '30px'
                             }}
                             onClick={addNewCate}>
-                                Add new category
+                                Add
                             </div>
                         </div>
                     </div>

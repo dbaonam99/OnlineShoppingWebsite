@@ -203,14 +203,14 @@ export default function DashboardUserTable(props) {
                         <tbody>
                             <tr className="dashboard-order">
                                 {
-                                    props.table.map((item, index) => {
+                                    props.table.map((item, index) => { 
                                         return (
                                             <th 
                                                 key={index} className="table-new-title table-order-title"
                                                 onClick={(event)=>{
                                                     sortTable(event)
-                                                }}
-                                                id={item}
+                                                }} 
+                                                id={`Order${item.split(" ").join("")}`}
                                             >
                                                 {item}
                                             </th>
@@ -229,15 +229,16 @@ export default function DashboardUserTable(props) {
                                         totalItem += item.orderList[i].amount
                                     }
                                     return (
-                                        <tr key={index}>
-                                            <td>
+                                        <tr key={index} className="mobile-table">
+                                            <td className="mobile-table-orderinfo">
                                                 <ul style={{margin: '10px 0'}}>
                                                     <li className="flex">
-                                                        <p style={{marginRight: '5px', fontWeight: 'bold'}}>#{item.orderId}</p> <p>by {item.orderName}</p>
+                                                        <p style={{marginRight: '5px', fontWeight: 'bold'}}>#{item.orderId}</p> 
+                                                        <p className="mobile-table-name">by {item.orderName}</p>
                                                     </li>
                                                 </ul>    
                                             </td>
-                                            <td> 
+                                            <td className="mobile-table-shippinginfo"> 
                                                 <div className="flex" style={{alignItems: 'center',margin: '10px 0'}}>
                                                     <p 
                                                         style={{wordWrap: 'break-word', WebkitLineClamp: '3'}}
@@ -247,18 +248,18 @@ export default function DashboardUserTable(props) {
                                             <td>
                                                 <p>{day}-{month}-{year}</p>
                                             </td>
-                                            <td>
+                                            <td className="mobile-table-paymentmethod">
                                                 <p style={{textTransform: 'capitalize'}}>{item.orderPaymentMethod}</p>
                                             </td>
                                             <td>
                                                 {   typeof(totalItem) === 'number' &&
-                                                            <div key={index} className="flex" style={{justifyContent: 'space-between'}}>
-                                                                {/* <p style={{margin: '10px 0', width: '100%', WebkitLineClamp: '2'}}>{virtualArr.productName}</p> */}
-                                                                <p style={{margin: '10px 0', width: '50px', marginLeft: '20px'}}>{totalItem}</p>
-                                                            </div>
+                                                        <div key={index} className="flex" style={{justifyContent: 'space-between'}}>
+                                                            {/* <p style={{margin: '10px 0', width: '100%', WebkitLineClamp: '2'}}>{virtualArr.productName}</p> */}
+                                                            <p style={{margin: '10px 0', width: '50px', marginLeft: '20px'}}>{totalItem}</p>
+                                                        </div>
                                                 }
                                             </td>
-                                            <td>
+                                            <td className="mobile-table-totalmoney">
                                                 <p>{item.orderTotal} đ</p>
                                             </td>
                                             <td>

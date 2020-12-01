@@ -203,13 +203,13 @@ export default function DashboardSubscriberTable(props) {
                                     }
                                     return (
                                         <tr key={index}>
-                                            <td>
+                                            <td className="table-mobile-subscribername">
                                                 <p>{item.subscriberEmail}</p>
                                             </td>
-                                            <td>
+                                            <td className="table-mobile-subscribersent">
                                                 <p>{item.sendedEmail.length}</p>
                                             </td>
-                                            <td>
+                                            <td className="table-mobile-subscriberread">
                                                 <p>{count}</p>
                                             </td>
                                             <td>

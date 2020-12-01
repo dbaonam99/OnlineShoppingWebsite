@@ -206,7 +206,9 @@ export default function DashboardCollectionTable(props) {
                                             <td className="table-name">
                                                 <p>{item.collectionName}</p>
                                             </td>
-                                            <td style={{display: 'flex'}}>
+                                            <td 
+                                                style={{display: 'flex'}}
+                                                className="table-mobile-collectionbanner">
                                                 <img 
                                                     src={item.collectionBanner} 
                                                     width="120px" height="80px"
@@ -230,7 +232,7 @@ export default function DashboardCollectionTable(props) {
                                                     } 
                                                 </select>
                                             </td>
-                                            <td>
+                                            <td className="table-mobile-collectiondate">
                                                 <p>{day}-{month}-{year}</p>
                                             </td>
                                             <td>

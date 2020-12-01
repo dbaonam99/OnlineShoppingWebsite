@@ -1,19 +1,63 @@
 import { faCheckCircle, faUser } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import DashboardProductTable from './DashboardOrderTable'
 
 export default function DashboardOrder(props) {
 
-    const table = [
-        "Order Info",
-        "ShippingInfo",
-        "Date",
-        "PaymentMethod",
-        "Items",
-        "Total Money",
-        "Action"
-    ]
+    const [table, setTable] = useState([])
+
+    useEffect(()=>{ 
+        if (window.innerWidth <= 600) {
+            setTable([
+                "ID",
+                "ShippingInfo",
+                "Date",
+                "PaymentMethod",
+                "Items",
+                "Total Money",
+                "Action"
+            ])
+        } else {
+            setTable([
+                "Order Info",
+                "ShippingInfo",
+                "Date",
+                "PaymentMethod",
+                "Items",
+                "Total Money",
+                "Action"
+            ])
+        }
+        function handleResize() {
+            if (window.innerWidth <= 600) {
+                setTable([
+                    "ID",
+                    "ShippingInfo",
+                    "Date",
+                    "PaymentMethod",
+                    "Items",
+                    "Total Money",
+                    "Action"
+                ])
+            } else {
+                setTable([
+                    "Order Info",
+                    "ShippingInfo",
+                    "Date",
+                    "PaymentMethod",
+                    "Items",
+                    "Total Money",
+                    "Action"
+                ])
+            }
+        }
+        window.addEventListener("resize", handleResize);
+        return (()=>{
+            window.removeEventListener("resize", handleResize);
+        })
+    }, [window.innerWidth])
+    
 
     return (
         <div className="dashboard-product">

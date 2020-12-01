@@ -231,7 +231,7 @@ export default function DashboardProductCreate(props) {
                                 height: '30px'
                             }}
                             onClick={addNewGroupCate}>
-                                Add category group
+                                Add
                             </div>
                         </div>
                     </div>
@@ -261,7 +261,7 @@ export default function DashboardProductCreate(props) {
                                 height: '30px'
                             }}
                             onClick={addNewCate}>
-                                Add category
+                                Add
                             </div>
                         </div>
                     </div>

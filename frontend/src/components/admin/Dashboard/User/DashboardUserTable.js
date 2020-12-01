@@ -183,7 +183,7 @@ export default function DashboardUserTable(props) {
                                                 onClick={(event)=>{
                                                     sortTable(event)
                                                 }}
-                                                id={item}
+                                                id={`User${item}`}
                                             >
                                                 {item}
                                             </th>
@@ -197,6 +197,7 @@ export default function DashboardUserTable(props) {
                                         <tr key={index}>
                                             <td style={{display: 'flex'}}>
                                                 <img 
+                                                    className="table-mobile-useravt"
                                                     src={item.userAvt} 
                                                     width="70px" height="80px"
                                                     style={{padding: '5px 0', borderRadius: '50%'}}
@@ -206,13 +207,13 @@ export default function DashboardUserTable(props) {
                                             <td>
                                                 <p>{item.userName}</p>
                                             </td>
-                                            <td>
+                                            <td className="table-mobile-useremail">
                                                 <p>{item.userEmail}</p>
                                             </td>
-                                            <td>
+                                            <td className="table-mobile-userphone">
                                                 <p>{item.userPhone}</p>
                                             </td>
-                                            <td>
+                                            <td className="table-mobile-useraddress">
                                                 <p>{item.userAddress}, {item.userHuyen}, {item.userTinh}</p>
                                             </td>
                                             <td>

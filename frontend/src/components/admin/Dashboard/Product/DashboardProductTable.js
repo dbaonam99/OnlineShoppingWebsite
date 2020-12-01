@@ -252,7 +252,7 @@ export default function DashboardProductTable(props) {
                                                 onClick={(event)=>{
                                                     sortTable(event)
                                                 }}
-                                                id={item}
+                                                id={`Product${item}`}
                                             >
                                                 {item}
                                             </th>
@@ -281,10 +281,10 @@ export default function DashboardProductTable(props) {
 
                                     return (
                                         <tr key={index}>
-                                            <td className="table-name">
+                                            <td className="table-name table-mobile-productname">
                                                 <p>{item.productName}</p>
                                             </td>
-                                            <td style={{display: 'flex'}}>
+                                            <td className="table-mobile-productimages" style={{display: 'flex'}}>
                                                 <img 
                                                     src={item.productImg[0]} 
                                                     width="70px" height="80px"
@@ -296,19 +296,19 @@ export default function DashboardProductTable(props) {
                                                 <p>{item.productPrice.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".")} đ</p>
                                             </td>
                                             { item.productSale > 0 &&
-                                                <td>
+                                                <td className="table-mobile-productsale">
                                                     <p style={{color: 'green'}}>{item.productSale}%</p>
                                                 </td>
                                             }
                                             { item.productSale === 0 &&
-                                                <td>
+                                                <td className="table-mobile-productsale">
                                                     <p style={{color: 'red'}}>No sale</p>
                                                 </td>
                                             }
-                                            <td>
+                                            <td className="table-mobile-productsold">
                                                 <p>{item.productSold}</p>
                                             </td>
-                                            <td>
+                                            <td className="table-mobile-productdate">
                                                 <p>{shortedDate}</p>
                                             </td>
                                             <td className="star-rating">

@@ -228,8 +228,8 @@ export default function DashboardNewsTable(props) {
                                         <tr key={index}>
                                             <td>
                                                 <p>{item.newTitle}</p>
-                                            </td>
-                                            <td 
+                                            </td> 
+                                            <td className="table-mobile-newscontent"
                                                 style={{
                                                     padding: '10px 10px',
                                                     WebkitLineClamp: '3'
@@ -237,13 +237,13 @@ export default function DashboardNewsTable(props) {
                                                 dangerouslySetInnerHTML={{__html: item.newContent}}
                                             >
                                             </td>
-                                            <td>
+                                            <td className="table-mobile-newscate">
                                                 <p>{item.newCate}</p>
                                             </td>
-                                            <td>
+                                            <td className="table-mobile-newsdate">
                                                 <p>{shortedDate}</p>
                                             </td>
-                                            <td>
+                                            <td className="table-mobile-newsview">
                                                 <p>{item.newView}</p>
                                             </td>
                                             <td>

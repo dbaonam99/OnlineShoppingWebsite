@@ -92,7 +92,7 @@ export default function DashboardBody(props) {
                 <div 
                     className="DashboardBody-closemenu"
                     onClick={props.setOpenMenuOnClick}
-                >zxcasjk hdhsjdakjs</div>
+                ></div>
             }
             { (props.openCreate && tabId === "3") &&
                 <DashboardOrderCreate
