@@ -2799,7 +2799,7 @@
   width: 900px;
   /* Add ... if text is full */
   display: -webkit-box;
-  -webkit-line-clamp: 3;
+  -webkit-line-clamp: 2;
   -webkit-box-orient: vertical;
   overflow: hidden;  
 }
@@ -2820,7 +2820,7 @@
   height: 50px;
 }
 .addtocart-btn-collection {
-  font-size: 1vw;
+  font-size: 12px;
   padding: 0 20px;
   cursor: pointer;
   color: #fff;
@@ -3526,6 +3526,16 @@
   }
   .filter-box-main .input {
     height: 50px;
+  }
+  .collectionitem-price { 
+    height: 30px; 
+  }
+  .collectionitem-price div, .collectionitem-price p {
+    height: 30px;
+    line-height: 25px;
+  }
+  .price-transform {
+    transform: translateY(-30px);
   }
 }
 @media only screen and (max-width: 700px) {

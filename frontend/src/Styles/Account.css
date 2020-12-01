@@ -2,8 +2,13 @@
     height: 100%;
     width: 100%;
 }
+.account-container {
+    display: flex;
+    flex-direction: column;
+    height: calc(100vh - 80px); 
+}
 .accountinfo-container {
-    
+    height: 100%;
 }
 .accountinfo-menu {
     width: 20%;
@@ -15,6 +20,7 @@
     border-left: 1px #ddd solid;
     padding: 20px;
     padding-top: 0;
+    height: 20%;
 }
 .accountinfo-avt {
     height: 69px;
@@ -120,4 +126,12 @@
     border: none;
     outline: none;
     margin-top: 10px;
+}
+.accountinfo-orderitem {
+    margin: 10px 0;
+    background-color: red;
+}
+.dashboard-table-orderlist { 
+    height: calc(100% - 209px) !important;
+    overflow-y: hidden;
 }

@@ -187,7 +187,7 @@ export default function ProductReview(props) {
                                         <div className="w-100 ml-2">
                                             <p className="review-form-title">Email *</p>
                                             <input 
-                                                type="text" 
+                                                type="email" 
                                                 className="w-100 no-outline" 
                                                 name="reviewEmail"
                                                 onChange={(event)=>{

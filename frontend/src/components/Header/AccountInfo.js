@@ -5395,10 +5395,10 @@ function AccountInfo(props) {
    const [userHuyen, setUserHuyen] = useState(null)
    const [userAddress, setUserAddress] = useState(null)
    const [toast, setToast] = useState(false)
+   const [orderList, setOrderList] = useState([])
    
 
-   useEffect(()=>{
-      console.log(userInfo)
+   useEffect(()=>{ 
       setUserName(userInfo.userName)
       setUserEmail(userInfo.userEmail)
       setUserPhone(userInfo.userPhone)
@@ -5415,6 +5415,17 @@ function AccountInfo(props) {
       if (userInfo.userHuyen !== "") {
             setUserHuyen(userInfo.userHuyen)
       }
+      axios.get(`http://pe.heromc.net:4000/order`)
+         .then(res => {
+            const orderList2 = []
+            for (let i in res.data) {
+               if (res.data[i].orderEmail === userInfo.userEmail) {
+                  orderList2.push(res.data[i])
+               }
+            }
+            setOrderList(orderList2)
+         }
+      )
    },[])
 
    const submitInfo = (event) => {
@@ -5523,7 +5534,7 @@ function AccountInfo(props) {
                                                    <td>Email</td>
                                                    <td>
                                                       <input 
-                                                            type="text"
+                                                            type="email"
                                                             className="input"
                                                             name="email" 
                                                             value={userEmail}
@@ -5662,8 +5673,76 @@ function AccountInfo(props) {
                         </div>
                   }
                   {
-                        tabId === 2 && 
-                        <div>2</div>
+                     tabId === 2 &&  
+                     <div style={{height: '100%'}}>
+                        <div className="accountinfo-title">
+                           <p>Orders infomation</p>
+                           <p>List of your orders</p>
+                        </div>      
+                        <div className="dashboard-table-orderlist">
+                           <table className="dashboard-table" style={{tableLayout: 'fixed'}}>
+                              <tbody>
+                                 <tr className="dashboard-order"> 
+                                    <th className="table-new-title table-order-title"> 
+                                       Shipping info
+                                    </th> 
+                                    <th className="table-new-title table-order-title"> 
+                                       Date
+                                    </th> 
+                                    <th className="table-new-title table-order-title"> 
+                                       Payment Method
+                                    </th> 
+                                    <th className="table-new-title table-order-title"> 
+                                       Items
+                                    </th> 
+                                    <th className="table-new-title table-order-title"> 
+                                       Total money
+                                    </th> 
+                                 </tr>
+                                 {
+                                    orderList.map((item, index) => {
+                                       const date = new Date(item.orderDate)
+                                       const day = date.getDate()
+                                       const month = date.getMonth() + 1
+                                       const year = date.getFullYear()
+                                       var totalItem = 0;
+                                       for (let i in item.orderList) {
+                                             totalItem += item.orderList[i].amount
+                                       }
+                                       return (
+                                             <tr key={index} className="mobile-table"> 
+                                                <td className="mobile-table-shippinginfo"> 
+                                                   <div className="flex" style={{alignItems: 'center',margin: '10px 0'}}>
+                                                         <p 
+                                                            style={{wordWrap: 'break-word', WebkitLineClamp: '3'}}
+                                                         >{item.orderAddress}, {item.orderHuyen}, {item.orderTinh}</p>
+                                                   </div> 
+                                                </td>
+                                                <td>
+                                                   <p>{day}-{month}-{year}</p>
+                                                </td>
+                                                <td className="mobile-table-paymentmethod">
+                                                   <p style={{textTransform: 'capitalize'}}>{item.orderPaymentMethod}</p>
+                                                </td>
+                                                <td>
+                                                   {   typeof(totalItem) === 'number' &&
+                                                            <div key={index} className="flex" style={{justifyContent: 'space-between'}}>
+                                                               {/* <p style={{margin: '10px 0', width: '100%', WebkitLineClamp: '2'}}>{virtualArr.productName}</p> */}
+                                                               <p style={{margin: '10px 0', width: '50px', marginLeft: '20px'}}>{totalItem}</p>
+                                                            </div>
+                                                   }
+                                                </td>
+                                                <td className="mobile-table-totalmoney">
+                                                   <p>{item.orderTotal} đ</p>
+                                                </td> 
+                                             </tr>
+                                       )
+                                    })
+                                 }
+                              </tbody>
+                           </table>
+                        </div>
+                     </div>
                   }
                </div>
             </div>

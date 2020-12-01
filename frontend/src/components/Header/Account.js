@@ -160,7 +160,7 @@ function Account(props) {
                     { tabID === 0 &&
                         <div className="search-form login-form fadeToRight">
                             <form className="flex-col" onSubmit={handleOnSubmit}>
-                                <input type="text" placeholder="Email" name="loginEmail" onChange={handleOnChange}/>
+                                <input type="email" placeholder="Email" name="loginEmail" onChange={handleOnChange}/>
                                 <input type="password" placeholder="Password" name="loginPassword" onChange={handleOnChange}/>
                                 <div className="remember-login flex noselect" 
                                     onClick={() => { 
@@ -188,7 +188,7 @@ function Account(props) {
                         <div className="search-form login-form fadeToLeft">
                             <form className="flex-col" onSubmit={handleOnSubmit}>
                                 <input type="text" placeholder="Name" name="registerName" onChange={handleOnChange}/>
-                                <input type="text" placeholder="Email" name="registerEmail" onChange={handleOnChange}/>
+                                <input type="email" placeholder="Email" name="registerEmail" onChange={handleOnChange}/>
                                 <input type="password" placeholder="Password" name="registerPassword" onChange={handleOnChange}/>
                                 <button className="btn">REGISTER</button>
                             </form>

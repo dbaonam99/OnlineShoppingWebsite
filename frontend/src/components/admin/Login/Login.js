@@ -101,7 +101,7 @@ function Login(props) {
                         </div>
                         <form className="admin-login-form flex-col" onSubmit={handleOnSubmit}>
                             <input 
-                                type="text" 
+                                type="email" 
                                 placeholder="Email" 
                                 value={email}
                                 onChange={(event)=>{

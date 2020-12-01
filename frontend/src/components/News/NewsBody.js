@@ -20,22 +20,43 @@ function NewsBody(props) {
     let splicedCate = [];
     let pages = [];
     let pageNumbers = []; //Số trang được chia ra
+    const [searchNews, setSearchNews] = useState(null)
+    const [searchErr, setSearchErr] = useState(null)
 
     useEffect(() => {
-        if (props.history.location.pathname === "/news") {
+        if (searchNews) {
             axios.get(`http://pe.heromc.net:4000/news`)
-                .then(res => {
-                    setNews(res.data)
+                .then(res => { 
+                    const search = []
+                    for (let i in res.data) { 
+                        if ((res.data[i].newTitle).toLowerCase().includes(searchNews)) {
+                            search.push(res.data[i])
+                        }
+                    }
+                    if (search.length > 0) {
+                        setNews(search) 
+                        setSearchErr(null)
+                    } else { 
+                        setSearchErr("No results found") 
+                    }
                 }
             )
         } else {
-            axios.get(`http://pe.heromc.net:4000/news/category/${props.match.params.cate}`)
-                .then(res => {
-                    setNews(res.data)
-                }
-            )
+            if (props.history.location.pathname === "/news") {
+                axios.get(`http://pe.heromc.net:4000/news`)
+                    .then(res => {
+                        setNews(res.data)
+                    }
+                )
+            } else {
+                axios.get(`http://pe.heromc.net:4000/news/category/${props.match.params.cate}`)
+                    .then(res => {
+                        setNews(res.data)
+                    }
+                )
+            }
         }
-    },[props.history.location.pathname, props.match.params.cate])
+    },[props.history.location.pathname, props.match.params.cate, searchNews])
 
     const choosePage = (event) => {
         window.scrollTo(0,0);
@@ -154,7 +175,10 @@ function NewsBody(props) {
                         pageNumbers = {pageNumbers}
                     />
                 </div>
-                <NewsBodyWidget/>
+                <NewsBodyWidget
+                    searchErr={searchErr}
+                    setSearchNews= {setSearchNews}
+                />
             </div>
             <div className="newsbody-line"></div>
         </div>

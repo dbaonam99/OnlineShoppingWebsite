@@ -2,6 +2,7 @@ import React, { useState } from 'react'
 import {
     withRouter
 } from 'react-router-dom'
+import { CartContext } from '../../contexts/Cart';
 function CollectionItem(props) {
 
     const [hoverPrice, setHoverPrice] = useState(false)
@@ -9,7 +10,7 @@ function CollectionItem(props) {
     const redirect = () => {
         window.scrollTo(0,0);
         props.history.push(`/products/${props.product._id}`)
-    }
+    }  
 
     return (
         <div className="CollectionItem">
@@ -34,10 +35,11 @@ function CollectionItem(props) {
                             <p 
                                 className={hoverPrice ? "collectionitem-price-text price-transform displayNone" : "collectionitem-price-text"}
                             >
-                                ${props.product.productPrice.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".")}
+                                {props.product.productPrice.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".")}đ
                             </p>
                         }
                         <div 
+                            onClick={redirect}
                             className={hoverPrice ? "addtocart-btn-collection price-transform addtocart-btn-collectio-hover" : "addtocart-btn-collection"}
                         >
                             ADD TO CART

@@ -144,7 +144,7 @@ function OpenChatBtn(props) {
                                     placeholder="Name" 
                                     className="intro" disabled></input>
                                 <input
-                                    type="text" 
+                                    type="email" 
                                     onChange={(event)=>{
                                         setUserEmail(event.target.value)
                                     }}
@@ -168,7 +168,7 @@ function OpenChatBtn(props) {
                                     placeholder="Name" 
                                     className="intro" required></input>
                                 <input
-                                    type="text" 
+                                    type="email" 
                                     onChange={(event)=>{
                                         setUserEmail(event.target.value)
                                     }}

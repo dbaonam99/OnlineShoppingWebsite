@@ -8,6 +8,7 @@ function NewsBodyWidget(props) {
 
     const [news, setNews] = useState([]);
     const [isSearchFocus, setIsSearchFocus] = useState(false);
+    const [searchInput, setSearchInput] = useState("")
 
 
     let splicedCate = [];
@@ -44,10 +45,25 @@ function NewsBodyWidget(props) {
         <div className="newsbody-widget">
             <div className="widget-search">
                 <div className="widget-title">Search</div>
-                <form className={ isSearchFocus === true ? "widget-form widget_search_click" : "widget-form"} 
+                {
+                    props.searchErr && 
+                    <p style={{fontSize: '14px', color: 'red'}}>
+                        {props.searchErr}
+                    </p>
+                }
+                <form 
+                    className={ isSearchFocus === true ? "widget-form widget_search_click" : "widget-form"} 
+                    onSubmit={(event)=>{
+                        event.preventDefault() 
+                        props.setSearchNews(searchInput)
+                    }}
                     onMouseEnter={() => { setIsSearchFocus(true)}}
                     onMouseLeave={() => { setIsSearchFocus(false)}}>
-                    <input placeholder="Search the site"></input>
+                    <input 
+                        placeholder="Search the site" 
+                        onChange={(event)=>setSearchInput(event.target.value)}
+                        value={searchInput}
+                    ></input>
                     <button>Search</button>
                 </form>
             </div>
@@ -128,7 +144,7 @@ function NewsBodyWidget(props) {
                 </div>
             </div>
 
-            <div className="widget-newsletter">
+            {/* <div className="widget-newsletter">
                 <div className="widget-title">Newsletter</div>
                 <form className={ isSearchFocus === true ? "widget-form widget_search_click" : "widget-form"} 
                     onMouseEnter={() => { setIsSearchFocus(true)}}
@@ -136,7 +152,7 @@ function NewsBodyWidget(props) {
                     <input placeholder="Enter your email"></input>
                     <button>Send</button>
                 </form>
-            </div>
+            </div> */}
         </div>
     )
 }

@@ -369,7 +369,11 @@ function HeaderV3(props) {
                                     })
                                 }
                             </div>
-                            <div className="menu-mobile-login flex">
+                            <div 
+                                className="menu-mobile-login flex"
+                                onClick={()=> {
+                                    setAccountOpen(true)
+                                }}>
                                 <FontAwesomeIcon icon={faUser} className="icon"/>
                                 <p>LOGIN</p>
                             </div>
