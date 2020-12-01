@@ -17,15 +17,20 @@ export default function ProductReview(props) {
     const [ratingValue, setRatingValue] = useState(0)
     const [reviewInput, setReviewInput] = useState("")
     const [nameInput, setNameInput] = useState("")
-    const [emailInput, setEmailInput] = useState("")
-    const [userAvt, setUserAvt] = useState("")
+    const [emailInput, setEmailInput] = useState("")  
+    const [product, setProduct] = useState([]);
+    const [productVote, setProductVote] = useState([]);
 
     useEffect(()=>{
         if (userInfo) {
             setNameInput(userInfo.userName)
             setEmailInput(userInfo.userEmail)
         }
-    },[userInfo])
+        if (props.product) {
+            setProduct(props.product); 
+            setProductVote(props.product.productVote);
+        }
+    },[userInfo, props.product])
 
     const defaultStar = {
         size: 24,
@@ -38,25 +43,35 @@ export default function ProductReview(props) {
             setRatingValue(newValue)
         }
     }
-
-    let product = [];
-    let productVote = [];
-    if (props.product) {
-        product = props.product;
-        productVote = [...product.productVote];
-    }
     
     const sendReview = (event) => {
         event.preventDefault()
-        axios.post(`http://pe.heromc.net:4000/products/review/${product._id}`, {
-            ratingName: nameInput,
-            ratingDate: new Date(),
-            ratingText: reviewInput,
-            ratingEmail: emailInput,
-            ratingStar: ratingValue,
-            ratingAvt: userInfo.userAvt || "https://scontent-sin6-1.xx.fbcdn.net/v/t1.0-9/73321413_146697059956770_7174055866474168320_n.jpg?_nc_cat=107&ccb=2&_nc_sid=09cbfe&_nc_ohc=ni-Cr2_KyP0AX-BfQkv&_nc_ht=scontent-sin6-1.xx&oh=9cbda6699093e8dbb061a92c5bb58c7e&oe=5FCB1CFC"
-        })
-    }
+        if (userInfo) {
+            const data = {
+                ratingName: nameInput,
+                ratingDate: new Date().toString(),
+                ratingText: reviewInput,
+                ratingEmail: emailInput,
+                ratingStar: ratingValue,
+                ratingAvt: userInfo.userAvt
+            }
+            axios.post(`http://pe.heromc.net:4000/products/review/${product._id}`, data)
+            setProductVote(productVote=>[...productVote, data])
+            setReviewInput("")
+        } else {
+            const data = {
+                ratingName: nameInput,
+                ratingDate: new Date().toString(),
+                ratingText: reviewInput,
+                ratingEmail: emailInput,
+                ratingStar: ratingValue,
+                ratingAvt: "https://scontent-sin6-1.xx.fbcdn.net/v/t1.0-9/73321413_146697059956770_7174055866474168320_n.jpg?_nc_cat=107&ccb=2&_nc_sid=09cbfe&_nc_ohc=ni-Cr2_KyP0AX-BfQkv&_nc_ht=scontent-sin6-1.xx&oh=9cbda6699093e8dbb061a92c5bb58c7e&oe=5FCB1CFC"
+            }
+            axios.post(`http://pe.heromc.net:4000/products/review/${product._id}`, data)
+            setProductVote(productVote=>[...productVote, data])
+            setReviewInput("")
+        }
+    } 
 
     return(
         <div className="ProductReview" ref={props.bRef} id={props.id}>
@@ -86,7 +101,7 @@ export default function ProductReview(props) {
                     {
                         props.tabId === 1 && 
                         <div className="productreview-list"> 
-                            {product.productVote.map((item, index) => {
+                            {productVote.map((item, index) => {
                                 const ratingStar = {
                                     size: 12,
                                     value: item.ratingStar,
@@ -95,6 +110,10 @@ export default function ProductReview(props) {
                                     color: "#ddd",
                                     isHalf: true
                                 }
+                                const date = new Date(item.ratingDate)
+                                const day = date.getDate()
+                                const month = date.getMonth() + 1
+                                const year = date.getFullYear()
                                 return (
                                     <div 
                                         className="productreview-item flex"
@@ -111,7 +130,7 @@ export default function ProductReview(props) {
                                                 </div>
                                             </div>
                                             <div className="review-second">
-                                                {item.ratingDate}
+                                                {`${day}-${month}-${year}`}
                                             </div>
                                             <ProductReviewContent content={item.ratingText}/>
                                             {/* <div className="review-img flex">
@@ -127,10 +146,10 @@ export default function ProductReview(props) {
                                                     )
                                                 })}
                                             </div> */}
-                                            <div className="review-like">
+                                            {/* <div className="review-like">
                                                 <FontAwesomeIcon icon={faThumbsUp} className="mr-5"></FontAwesomeIcon>
                                                 <FontAwesomeIcon icon={faComment}></FontAwesomeIcon>
-                                            </div>
+                                            </div> */}
                                         </div>
                                         <div className="productreview-line"></div>
                                     </div>
@@ -147,6 +166,7 @@ export default function ProductReview(props) {
                                         type="text" 
                                         className="w-100 no-outline" 
                                         name="reviewText"
+                                        value={reviewInput}
                                         onChange={(event)=>{
                                             setReviewInput(event.target.value)
                                         }}

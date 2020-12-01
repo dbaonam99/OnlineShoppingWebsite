@@ -1,9 +1,10 @@
-import React, { useEffect, useRef, useState } from 'react';
+import React, { useContext, useEffect, useRef, useState } from 'react';
 import '../../App.css';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import {  faAngleRight, faCartPlus, faChevronLeft, faChevronRight, faHeart, faMinus, faPlus } from "@fortawesome/free-solid-svg-icons";
+import {  faAngleRight, faCartPlus, faChevronLeft, faChevronRight, faCircle, faHeart, faMinus, faPlus } from "@fortawesome/free-solid-svg-icons";
 import { Link } from 'react-router-dom';
 import ReactStars from "react-rating-stars-component";
+import { CartContext } from '../../contexts/Cart';
 
 export default function ProductBody(props) {
 
@@ -118,6 +119,29 @@ export default function ProductBody(props) {
     let today = new Date()
 
     const sliderWidth = useRef(null)
+    const [loading, setLoading] = useState(0)
+    const { 
+        addToCart,
+        addToWishList
+    } = useContext(CartContext);
+    const cartClick = () => { 
+        setLoading(1)
+        setTimeout(()=>{
+            setLoading(0)
+            for (let i = 0; i < countCart; i++) { 
+                console.log("Add")
+                addToCart(product)
+            }
+        }, 500)
+        setCountCart(1)
+    }
+    const wishListClick = () => {
+        setLoading(2)
+        setTimeout(()=>{
+            setLoading(0)
+            addToWishList(product)
+        }, 500)
+    }
 
     return(
         <div className="ProductBody">
@@ -261,14 +285,32 @@ export default function ProductBody(props) {
                                 <FontAwesomeIcon icon={faPlus}/>
                             </div>
                         </div>
-                        <div className="product-info-addtocart flex-center btn">
-                            <FontAwesomeIcon icon={faCartPlus}/>
-                            <p>Add to cart</p>
-                        </div>
-                        <div 
-                            className="product-info-wishlist flex-center">
-                            <FontAwesomeIcon icon={faHeart}></FontAwesomeIcon>
-                        </div>
+                        { loading === 1 && 
+                            <div className="product-info-addtocart flex-center btn"  style={{width: '152px'}} onClick={cartClick} >
+                                <FontAwesomeIcon icon={faCircle} className="loading-icon" style={{animationDelay: `0s`, margin: '0 2px', fontSize: '6px'}}></FontAwesomeIcon>
+                                <FontAwesomeIcon icon={faCircle} className="loading-icon" style={{animationDelay: `.2s`, margin: '0 2px', fontSize: '6px'}}></FontAwesomeIcon>
+                                <FontAwesomeIcon icon={faCircle} className="loading-icon" style={{animationDelay: `.4s`, margin: '0 2px', fontSize: '6px'}}></FontAwesomeIcon>
+                            </div>
+                        }
+                        { loading !== 1 &&  
+                            <div className="product-info-addtocart flex-center btn" onClick={cartClick} >
+                                <FontAwesomeIcon icon={faCartPlus}/>
+                                <p>Add to cart</p>
+                            </div>
+                        }
+                        { loading === 2 && 
+                            <div className="product-info-addtocart flex-center btn"  style={{width: '60px', margin: '0'}} onClick={cartClick} >
+                                <FontAwesomeIcon icon={faCircle} className="loading-icon" style={{animationDelay: `0s`, margin: '0 2px', fontSize: '6px'}}></FontAwesomeIcon>
+                                <FontAwesomeIcon icon={faCircle} className="loading-icon" style={{animationDelay: `.2s`, margin: '0 2px', fontSize: '6px'}}></FontAwesomeIcon>
+                                <FontAwesomeIcon icon={faCircle} className="loading-icon" style={{animationDelay: `.4s`, margin: '0 2px', fontSize: '6px'}}></FontAwesomeIcon>
+                            </div>
+                        }
+                        { loading !== 2 &&  
+                            <div 
+                                className="product-info-wishlist flex-center"  onClick={wishListClick}>
+                                <FontAwesomeIcon icon={faHeart}></FontAwesomeIcon>
+                            </div>
+                        }
                     </div>
                     <div className="product-info-line"></div>
                     <div className="product-info-cate flex">

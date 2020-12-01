@@ -67,6 +67,7 @@ function Dashboard(props) {
     const socket = socketIOClient(ENDPOINT);
 
     const [orderNotice, setOrderNotice] = useState(null) 
+    const [userInfo, setUserInfo] = useState(null)
 
     useEffect(()=>{
         if (localStorage.getItem('token')) {
@@ -74,6 +75,7 @@ function Dashboard(props) {
                 headers: {"authorization" : `Bearer ${localStorage.getItem('token')}`}
             })
             .then(res => {
+                setUserInfo(res.data.user)
                 const userInfo = res.data.user; 
                 if (userInfo.userRole === 'admin') {
                     socket.emit('join', {
@@ -147,6 +149,7 @@ function Dashboard(props) {
                 openMenuMobile = {openMenuMobile}
                 setCloseCreateFunc={setCloseCreateFunc}
                 setCloseEditFunc={setCloseEditFunc}
+                userInfo={userInfo}
             />
             <DashboardBody
                 tabId = {tabId}
