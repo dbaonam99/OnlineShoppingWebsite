@@ -240,13 +240,13 @@ function HeaderV2(props) {
                                 <input 
                                     onChange={(e)=>{
                                         setSearchMobile(e.target.value)
-                                        closeMobileMenuFunc() 
                                     }} 
                                     value={searchMobile}
                                     className="input" placeholder="Search" style={{fontSize: '16px', height: '50px'}}
                                 ></input>
                                 <div onClick={(event)=>{
                                     props.history.push(`/shop/${searchMobile}`)
+                                    closeMobileMenuFunc() 
                                 }}>
                                     <FontAwesomeIcon icon={faSearch} style={{marginLeft: '10px', color: '#777'}}/>
                                 </div>
