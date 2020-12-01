@@ -128,9 +128,8 @@ function ShopBody(props) {
             virtualProduct3.push(...virtualProduct2)
         }
         setProduct(virtualProduct3)
-    }
-
-    console.log(product)
+        setFilterBox(false)
+    } 
 
     return(
         <div className="ShopBody">
