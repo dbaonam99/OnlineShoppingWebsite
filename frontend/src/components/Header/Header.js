@@ -244,6 +244,12 @@ function Header(props) {
         }, 700)
     } 
 
+    const redirect = (event) => { 
+        window.scrollTo(0,0);
+        props.history.push(`/${event.target.id}`) 
+        closeMobileMenuFunc() 
+    }
+
     return(
         <div
             className={classNames('Header', {
@@ -323,7 +329,10 @@ function Header(props) {
                                                 }}
                                             >
                                                 <div className="flex" style={{justifyContent: 'space-between'}}>
-                                                    <p>{item.label}</p>
+                                                    <p
+                                                        id = {item.label.toLowerCase()}
+                                                        onClick={redirect}
+                                                    >{item.label}</p>
                                                     { item.dropdownContent.length > 0 && 
                                                         <div>
                                                             <FontAwesomeIcon icon={faAngleDown}/>
@@ -334,21 +343,27 @@ function Header(props) {
                                                     className="menu-mobile-sub"
                                                     ref={subHeight}
                                                 >
-                                                    { item.dropdownContent.map((item, index)=>{ 
+                                                    { item.dropdownContent.map((item2, index)=>{ 
                                                         return (
                                                             <div
                                                                 key={index}
                                                                 className="menu-item-sub-item"
                                                             >
-                                                                {item.dropdownTitle}
+                                                                <p
+                                                                    id = {`${item.label.toLowerCase()}/${item2.dropdownTitle.replace(/\s+/g, '')}`}
+                                                                    onClick={redirect}
+                                                                >{item2.dropdownTitle}</p>
                                                                 {
-                                                                    item.dropdownList.map((item,index)=>{
+                                                                    item2.dropdownList.map((item3,index)=>{
                                                                         return (
                                                                             <div
                                                                                 className="menu-item-sub-item2"
-                                                                                key={index}
+                                                                                key={index} 
                                                                             >
-                                                                                {item}
+                                                                                <p
+                                                                                    id = {`${item.label.toLowerCase()}/${item3.replace(/\s+/g, '')}`}
+                                                                                    onClick={redirect}
+                                                                                >{item3}</p>
                                                                             </div>
                                                                         )
                                                                     })
