@@ -56,6 +56,7 @@ function App(props) {
             <Route path="/" exact component={Home}></Route>
             <Route path="/news" exact component={News}></Route>
             <Route path="/men" exact component={Shop}></Route>
+            <Route path="/shop" exact component={Shop}></Route>
             <Route path="/men/:cate" exact component={Shop}></Route>
             <Route path="/women" exact component={Shop}></Route>
             <Route path="/women/:cate" exact component={Shop}></Route>

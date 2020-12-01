@@ -5462,7 +5462,7 @@ function CheckoutBody(props) {
                 localStorage.removeItem('total')
                 localStorage.removeItem('cart')
                 socket.emit('placeAnOrder', data)
-                props.history.push(`/men`);
+                props.history.push(`/shop`);
                 window.location.reload(false);
             }, 1000)
         }

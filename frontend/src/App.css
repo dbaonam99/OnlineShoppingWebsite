@@ -1854,6 +1854,7 @@
 .shopbody-option {
   align-items: center;
   color: #777;
+  position: relative;
 }
 .shopbody-option-grid {
   border-right: 1px #777 solid;
@@ -1883,7 +1884,33 @@
 .shopbody-option-filter {
   align-items: center;
 }
-
+.shopbody-option-filter:hover {
+  color: #111;
+  cursor: pointer;
+}
+.filter-box {
+  box-shadow: 0 4px 10px 0 rgba(3,3,3,.1);
+  width: 400px;
+  height: max-content;
+  background-color: #fff;
+  position: absolute;
+  top: 0;
+  right: 0;
+  z-index: 10;
+  padding: 40px;
+}
+.filter-box-main select {
+  margin: 20px 0;
+}
+.filter-box-text {
+  font-size: 16px !important;
+  font-family: sans-serif;
+  text-align: center;
+  color: #111;
+}
+.filter-box-header {
+  justify-content: space-between;
+} 
 .shopbody-products {
   display: flex;
   flex-wrap: wrap;

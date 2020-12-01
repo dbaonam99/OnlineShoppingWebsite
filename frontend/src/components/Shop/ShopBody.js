@@ -3,7 +3,7 @@ import '../../App.css';
 import Product from '../Product/Product.js'
 import RangeSlider from './RangeSlider.js'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faCircle, faFilter, faTh, faThLarge } from "@fortawesome/free-solid-svg-icons";
+import { faCircle, faFilter, faTh, faThLarge, faTimes } from "@fortawesome/free-solid-svg-icons";
 import { withRouter } from 'react-router-dom';
 
 function ShopBody(props) {
@@ -80,14 +80,57 @@ function ShopBody(props) {
 
     const choosePrice = () => {
         const virtualProduct = []
-        for (let i in constProduct) {
-            console.log(sortPriceValue[1])
+        for (let i in constProduct) { 
             if (constProduct[i].productPrice >= sortPriceValue[0] && constProduct[i].productPrice <= sortPriceValue[1]) {
                 virtualProduct.push(constProduct[i])
             }
         }
         setProduct(virtualProduct)
     }
+
+    const [filterBox, setFilterBox] = useState(false)
+    const [cateFilter, setCateFilter] = useState("")
+    const [sizeFilter, setSizeFilter] = useState("")
+    const openFilterBox = () => {
+        setFilterBox(true)
+    }
+
+    const filterMobile = () => {
+        const virtualProduct = [] 
+        if (cateFilter !== "") {
+            for (let i in constProduct) { 
+                if (constProduct[i].productCate === cateFilter) {
+                    virtualProduct.push(constProduct[i])
+                }
+            }
+        }
+        if (virtualProduct.length === 0) {
+            virtualProduct.push(...constProduct)
+        }
+        const virtualProduct2 = []
+        if (sizeFilter !== "") {
+            for (let i in virtualProduct) { 
+                if (virtualProduct[i].productSize === sizeFilter) {
+                    virtualProduct2.push(virtualProduct[i])
+                }
+            }
+        }
+        if (virtualProduct2.length === 0) {
+            virtualProduct2.push(...virtualProduct)
+        }
+        const virtualProduct3 = [] 
+        for (let i in virtualProduct2) { 
+            if (virtualProduct2[i].productPrice >= sortPriceValue[0] && virtualProduct2[i].productPrice <= sortPriceValue[1]) {
+                virtualProduct3.push(virtualProduct2[i])
+            }
+        } 
+        if (virtualProduct3.length === 0) {
+            virtualProduct3.push(...virtualProduct2)
+        }
+        setProduct(virtualProduct3)
+    }
+
+    console.log(product)
 
     return(
         <div className="ShopBody">
@@ -205,10 +248,81 @@ function ShopBody(props) {
                                         />
                                 </div>
                             </div>
-                            <div className="shopbody-option-filter flex">
+                            <div className="shopbody-option-filter flex"
+                                onClick={openFilterBox}>
                                 <FontAwesomeIcon icon={faFilter} className="filter-icon"/>
                                 <p style={{marginLeft: '10px'}}>Filter</p>
                             </div>
+                            {
+                                filterBox && 
+                                <div className="filter-box">
+                                    <div className="filter-box-header flex"style={{color: '#111'}}>
+                                        <p >Filter</p>
+                                        <div  
+                                            onClick={()=>{
+                                                setFilterBox(false)
+                                            }}
+                                            style={{
+                                                height: '40px', 
+                                                width: '40px',  
+                                                display: 'flex',
+                                                justifyContent: 'flex-end',
+                                                alignItems: 'flex-start',
+                                                fontSize: '20px'
+                                            }}>
+                                            <FontAwesomeIcon icon={faTimes}/>
+                                        </div>
+                                    </div>
+                                    <div className="filter-box-main flex-col">
+                                        <select 
+                                            className="input"
+                                            value={cateFilter}
+                                            onChange={(event)=>{
+                                                if (event.target.value === "Select a category") {
+                                                    setCateFilter("")
+                                                } else {
+                                                    setCateFilter(event.target.value)
+                                                }
+                                        }}>
+                                            <option>Select a category</option>
+                                            {sortedCate.map((item, index) => 
+                                                <option  
+                                                    key={index} 
+                                                >
+                                                    {item.productCate}
+                                                </option>
+                                            )}
+                                        </select> 
+                                        <select className="input"
+                                            value={sizeFilter}
+                                            onChange={(event)=>{
+                                                if (event.target.value === "Any size") {
+                                                    setSizeFilter("")
+                                                } else {
+                                                    setSizeFilter(event.target.value)
+                                                }
+                                            }}
+                                        >
+                                            <option>Any size</option>
+                                            <option>Small</option>
+                                            <option>Medium</option>
+                                            <option>Large</option>
+                                        </select> 
+                                        <div>
+                                            <p className="filter-box-text">Price</p>
+                                            <RangeSlider
+                                                setSortPriceValue={setSortPriceValue}
+                                            />
+                                        </div>
+                                        <div 
+                                            className="shopbody-filter-submit btn"
+                                            onClick={filterMobile}
+                                        >
+                                            <p>Filter</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            }
                         </div>
                     </div>
                     <div className="shopbody-line"></div>
