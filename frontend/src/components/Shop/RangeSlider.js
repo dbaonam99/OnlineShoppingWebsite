@@ -74,9 +74,9 @@ export default class RangeSlider extends Component {
                         </Slider>
                     </div>
                     <Typography className="filter-price flex">
-                        <p>{update[0].toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".")}</p>
-                        <p>-</p>
-                        <p>{update[1].toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".")}</p>
+                        <span>{update[0].toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".")}</span>
+                        <span>-</span>
+                        <span>{update[1].toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".")}</span>
                     </Typography>
                 </Grid>
             </Grid>

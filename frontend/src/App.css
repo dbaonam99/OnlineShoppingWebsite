@@ -1792,7 +1792,7 @@
   font-size: 14px !important;
   justify-content: center;
 }
-.filter-price p {
+.filter-price span {
   font-family: sans-serif;
   margin: 0 5px;
 }

@@ -4,13 +4,15 @@ import '../../App.css';
 import { faCartPlus, faCheckCircle, faHeart, faMinus, faPlus, faTimes } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import ReactStars from 'react-rating-stars-component';
-import { Link } from 'react-router-dom';
+import { withRouter } from 'react-router-dom';
 import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import { CartContext } from '../../contexts/Cart';
 
-export default function ProductQuickView(props) {
+import Div100vh from 'react-div-100vh';
+
+function ProductQuickView(props) {
 
     const [countCart, setCountCart] = useState(1);
     const [toast, setToast] = useState(false)
@@ -48,10 +50,14 @@ export default function ProductQuickView(props) {
             setToast(false)
         }, 2000)
     }
+    const redirect = () => {
+        window.scrollTo(0,0);
+        props.history.push(`/products/${props.product._id}`);
+    }
 
     return(
         <div>
-            <div className={props.view === true ? 'ProductQuickView' : 'ProductQuickView displayNone'}>
+            <Div100vh className={props.view === true ? 'ProductQuickView' : 'ProductQuickView displayNone'}>
                 <div 
                     className="productquickview-container flex"
                     onClick={()=>{}}
@@ -62,7 +68,9 @@ export default function ProductQuickView(props) {
                     </div>
                     <div
                         className="view-close flex-center"
-                        onClick={props.closeView}
+                        onClick={()=>{ 
+                            props.closeView()
+                        }}
                         >
                         <FontAwesomeIcon 
                             icon={faTimes}
@@ -99,22 +107,29 @@ export default function ProductQuickView(props) {
                     </div>
 
                     <div className="product-info-detail" style={{padding: '0', marginTop: '70px'}}>
-                        <div className="product-info-title">
+                        <div className="product-info-title"
+                            onClick={()=>{
+                                props.closeView()
+                                redirect()
+                            }}>
                             {product.productName}
                         </div>
                         <div className="product-info-des" style={{width: '80%'}}>
                             {product.productDes}
                         </div>
-                        <Link to="/product"
+                        <div
                             className="product-info-vote"
                             style={{textDecoration: 'none', color: '#111'}}
-                            onClick={product.closeView}
+                            onClick={()=>{
+                                props.closeView()
+                                redirect()
+                            }}
                             >
                             <ReactStars {...ratingStar} />
                             <p style={{margin: '0'}}>
                                 ({ratingList.length} customer reviews)
                             </p>
-                        </Link>
+                        </div>
                         <div className="product-info-price" style={{marginTop: '30px'}}>
                             {product.productPrice.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".")} đ
                         </div>
@@ -161,13 +176,19 @@ export default function ProductQuickView(props) {
                         <div className="product-info-line"></div>
                         <div className="product-info-cate flex">
                             <p>Category:</p>
-                            <p>{product.productCate}</p>
+                            <p
+                                onClick={()=>{
+                                    props.history.push(`/${product.productSex === 'Man' ? 'men' : 'women'}/${product.productCate.toLowerCase().split(' ').join('-')}`)
+                                }}
+                            >{product.productCate}</p>
                         </div>
                         <div className="product-info-line"></div>
                     </div>
                 
                 </div>
-            </div>
+            </Div100vh>
         </div>
     )
 }
+
+export default withRouter(ProductQuickView)

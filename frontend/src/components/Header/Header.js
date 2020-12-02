@@ -14,8 +14,13 @@ import MenuItemDropdown from './MenuItemDropdown';
 import { CartContext } from '../../contexts/Cart';
 import Div100vh from 'react-div-100vh';
 import axios from 'axios'
+import { UserContext } from '../../contexts/User';
 
 function Header(props) {
+
+    const { 
+        userInfo
+     } = useContext(UserContext);
 
     const [scrolled, setScrolled] = useState(false);
     const [whiteBox, setWhiteBox] = useState(false);
@@ -38,6 +43,7 @@ function Header(props) {
         setSearchOpen(false);
         setAccountOpen(false);
         setCartOpen(false);
+        setOpenMobileMenu(false)
     }
 
     const handleHover = () => {
@@ -324,21 +330,6 @@ function Header(props) {
                                                 className={classNames("menu-mobile-item a", {
                                                     menu_mobile_item_active: location.slice(1) === item.label.toLowerCase() || home === item.label.toLowerCase(),
                                                 })}
-                                                onClick={()=>{
-                                                    if (!item.dropdownContent.length > 0) {
-                                                        props.history.push(item.url);
-                                                    } else {
-                                                        if (!openSubMenu) {
-                                                            setOpenSubMenu(item.id)
-                                                        } else {
-                                                            if (openSubMenu === item.id) {
-                                                                setOpenSubMenu(null)
-                                                            } else {
-                                                                setOpenSubMenu(item.id)
-                                                            }
-                                                        }
-                                                    }
-                                                }}
                                             >
                                                 <div className="flex" style={{justifyContent: 'space-between'}}>
                                                     <p
@@ -346,7 +337,26 @@ function Header(props) {
                                                         onClick={redirect}
                                                     >{item.label}</p>
                                                     { item.dropdownContent.length > 0 && 
-                                                        <div>
+                                                        <div
+                                                            style={{ 
+                                                                width: '30px',
+                                                            }}
+                                                            className="flex-center"
+                                                            onClick={()=>{
+                                                                if (!item.dropdownContent.length > 0) {
+                                                                    props.history.push(item.url);
+                                                                } else {
+                                                                    if (!openSubMenu) {
+                                                                        setOpenSubMenu(item.id)
+                                                                    } else {
+                                                                        if (openSubMenu === item.id) {
+                                                                            setOpenSubMenu(null)
+                                                                        } else {
+                                                                            setOpenSubMenu(item.id)
+                                                                        }
+                                                                    }
+                                                                }
+                                                            }}>
                                                             <FontAwesomeIcon icon={faAngleDown}/>
                                                         </div>
                                                     }
@@ -396,7 +406,12 @@ function Header(props) {
                                     setAccountOpen(true)
                                 }}>
                                 <FontAwesomeIcon icon={faUser} className="icon"/>
-                                <p>LOGIN</p>
+                                { userInfo &&
+                                    <p>{userInfo.userName}</p>
+                                }
+                                { !userInfo && 
+                                    <p>LOGIN</p>
+                                }
                             </div>
                         </div>
                         <div 

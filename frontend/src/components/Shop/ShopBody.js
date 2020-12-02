@@ -308,7 +308,7 @@ function ShopBody(props) {
                                             <option>Large</option>
                                         </select> 
                                         <div>
-                                            <p className="filter-box-text">Price</p>
+                                            <div className="filter-box-text">Price</div>
                                             <RangeSlider
                                                 setSortPriceValue={setSortPriceValue}
                                             />

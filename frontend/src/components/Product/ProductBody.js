@@ -55,7 +55,7 @@ export default function ProductBody(props) {
     let ratingStar = {};
     if (props.product) {
         product = props.product;
-        slugSex = "/" + slugify(product.productSex);
+        slugSex = "/" + slugify(product.productSex === 'Woman' ? 'Women' : 'Men');
         if (imgIndex >= product.productImg.length) { //infinity slider loop
             // setProductImgBig(productImgBig.concat(props.productImg))
             setImgIndex(0);
@@ -145,7 +145,7 @@ export default function ProductBody(props) {
             <div className="product-breadcrumb flex">
                 <Link to="/" className="breadcrumb-item breadcrumb-link">Home</Link>
                 <FontAwesomeIcon icon={ faAngleRight } className="breadcrumb-arrow"/>
-                <Link to={slugSex} className="breadcrumb-item breadcrumb-link">{product.productSex}</Link>
+                <Link to={slugSex} className="breadcrumb-item breadcrumb-link">{product.productSex === 'Woman' ? 'Women' : 'Men'}</Link>
                 <FontAwesomeIcon icon={ faAngleRight } className="breadcrumb-arrow"/>
                 <div className="breadcrumb-item breadcrumb-product">{product.productName}</div>
             </div>
