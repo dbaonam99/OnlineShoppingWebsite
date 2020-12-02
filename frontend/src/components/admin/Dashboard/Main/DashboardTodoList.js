@@ -18,11 +18,11 @@ export default function DashboardTodoList(props) {
                 setTodoList(res.data)
             }
         )
-    },[openNewTodo])
+    },[])
 
     const clickToCheck = (event)=>{
         const target = JSON.parse(event.target.id)
-        const id = target.id
+        const id = target.id 
         var isDone = ""
         if (target.isDone === true) {
             isDone = false
@@ -39,7 +39,7 @@ export default function DashboardTodoList(props) {
         axios.post('http://pe.heromc.net:4000/todos/update', {
             id: id,
             isDone: isDone
-        })
+        }) 
     }
 
     const addNewTodo = (event)=>{
@@ -51,12 +51,21 @@ export default function DashboardTodoList(props) {
             todoDate: new Date()
         }
         virtualTodo.push(data)
-        setTodoList(virtualTodo)
         axios.post('http://pe.heromc.net:4000/todos', data)
+            .then(function (res) {  
+                axios.get(`http://pe.heromc.net:4000/todos`)
+                    .then(res2 => {
+                        setTodoList(res2.data)
+                    }
+                ) 
+            })
+            .catch(function (error) {
+                console.log(error);
+            });
         setOpenNewTodo(false)
-    }
+    }  
 
-    const deleteTodo = (event) => {
+    const deleteTodo = (event) => { 
         const id = event.target.id
         axios.post('http://pe.heromc.net:4000/todos', {
             delete: true,
@@ -130,7 +139,7 @@ export default function DashboardTodoList(props) {
                             <button className="newtodo-btn btn">Add</button>
                         </form>
                         {todoList &&
-                            todoList.map((item, index)=>{
+                            todoList.reverse().map((item, index)=>{
                                 if (item.isDone === false) {
                                     return(
                                         <div
@@ -205,7 +214,7 @@ export default function DashboardTodoList(props) {
                             })
                         }
                         <p className="todo-title" style={{marginTop: '20px'}}>finished</p>{todoList &&
-                            todoList.map((item, index)=>{
+                            todoList.reverse().map((item, index)=>{
                                 if (item.isDone === true) {
                                     return (
                                         <div

@@ -126,7 +126,7 @@ export default function DashboardProductTable(props) {
     }
 
     const sortTable = (event) => {
-        if (event.target.id === "Name") {
+        if (event.target.id === "ProductName") {
             if (isSortByName) {
                 const sortByName = [...products]
                 sortByName.sort(function(a, b) {
@@ -149,7 +149,7 @@ export default function DashboardProductTable(props) {
                 setProducts(sortByName)
             }
         }
-        if (event.target.id === "Price") {
+        if (event.target.id === "ProductPrice") {
             if (isSortByPrice) {
                 const sortByPrice = [...products]
                 sortByPrice.sort(function(a, b) {
@@ -172,7 +172,7 @@ export default function DashboardProductTable(props) {
                 setProducts(sortByPrice)
             }
         }
-        if (event.target.id === "Sale") {
+        if (event.target.id === "ProductSale") {
             if (isSortBySale) {
                 const sortBySale = [...products]
                 sortBySale.sort(function(a, b) {
@@ -195,7 +195,7 @@ export default function DashboardProductTable(props) {
                 setProducts(sortBySale)
             }
         }
-        if (event.target.id === "Sold") {
+        if (event.target.id === "ProductSold") {
             if (isSortBySold) {
                 const sortBySold = [...products]
                 sortBySold.sort(function(a, b) {

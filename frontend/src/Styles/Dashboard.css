@@ -275,8 +275,30 @@ display: none !important;
 .chart {
     position: relative;
     padding-top: 20px;
-    width: 70%;
-    height: 389px;
+    width: 65%; 
+} 
+.chartline {
+    width: 99%;
+}  
+.chart .top-location-container, .chartpie .top-location-container {
+    padding-bottom: 10px;
+}
+.chart .count-line, .chartpie .count-line {
+    margin-top: 10px;
+}
+.chart .count-up, .chartpie .count-up {
+    color: #777 !important;
+}
+.chartpie {
+    position: relative;
+    padding-top: 20px;
+    width: 35%;
+    margin-right: 30px;
+}
+.pie canvas {
+    width: 100% !important;
+    height: 100% !important; 
+    max-height: 300px !important;
 }
 .top-location-container {
     display: flex;
@@ -1512,7 +1534,27 @@ select {
     }
     .create-box {
         padding: 30px 20px;
+    } 
+    .chartjs-render-monitor { 
+        width: 100% !important;
     }
+    .chartpie {
+        margin-right: 0;
+        margin-top: 10px;
+        width: 100%;
+        margin-bottom: 20px;
+    }
+    .chart {
+        height: max-content !important;
+        width: 100%; 
+        margin-right: 0;
+    }
+    .chart .top-location-map { 
+        height: max-content !important; 
+    }  
+    .chartline {
+        margin-top: 10px;
+    }  
 } 
 @media only screen and (max-width: 750px) {  
     #CollectionName {
@@ -1736,6 +1778,9 @@ select {
     }
     .create-box-btn {
         width: 150px;
+    }
+    .chartjs-render-monitor { 
+        height: 250px !important;
     }
 }
 @media only screen and (max-width: 400px) {  

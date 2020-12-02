@@ -9,11 +9,14 @@ import DashboardRecentReview from './DashboardRecentReview'
 import axios from 'axios'
 import DashboardChart from './DashboardChart'
 import DashboardTodoList from './DashboardTodoList'
+import DashboardChartPie from './DashboardChartPie'
+import DashboardChartLine from './DashboardChartLine'
 
 export default function DashboardMain() {
 
     const [products, setProducts] = useState([]);
     const [order, setOrder] = useState([]);
+    const [email, setEmail] = useState([]);
     const [user, setUser] = useState([]);
     const [topCustomer, setTopCusomer] = useState([]);
     const [topProductSales, setTopProductSales] = useState([]);
@@ -41,7 +44,12 @@ export default function DashboardMain() {
             .then(res => {
                 setUser(res.data)
             }
-        )
+        ) 
+        axios.get(`http://pe.heromc.net:4000/email`)
+            .then(res => {
+                setEmail(res.data)
+            }
+        ) 
         axios.get(`http://pe.heromc.net:4000/order`)
             .then(res => {
                 setOrder(res.data)
@@ -166,7 +174,7 @@ export default function DashboardMain() {
     }
 
     const topRecentVote = recentVote.splice(0,5)
-
+    
     return (
         <div className="dashboard-main">
             <div className="row flex">
@@ -217,6 +225,17 @@ export default function DashboardMain() {
                 />
             </div>
             <div className="row flex">
+                <DashboardChartPie
+                    email = {email}
+                    color = "pink"
+                />
+                <DashboardChart
+                    products = {products}
+                    order = {order}
+                    color = "lightblue"
+                />
+            </div>
+            <div className="row flex">
                 <DashboardRecentReview
                     icon = {faStar}
                     title = "Recent Reviews"
@@ -230,7 +249,11 @@ export default function DashboardMain() {
                 />
             </div>
             <div className="row flex">
-                <DashboardChart/>
+                <DashboardChartLine
+                    icon = {faTasks}
+                    order = {order}
+                    color = "pink"
+                />
             </div>
         </div>
     )

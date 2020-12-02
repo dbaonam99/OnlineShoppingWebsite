@@ -122,7 +122,7 @@ export default function DashboardUserTable(props) {
     }
 
     const sortTable = (event) => {
-        if (event.target.id === "Name") {
+        if (event.target.id === "UserName") {
             if (isSortByName) {
                 const sortByName = [...user]
                 sortByName.sort(function(a, b) {

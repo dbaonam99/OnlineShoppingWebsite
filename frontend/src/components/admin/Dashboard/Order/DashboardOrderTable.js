@@ -126,7 +126,7 @@ export default function DashboardUserTable(props) {
     }
 
     const sortTable = (event) => {
-        if (event.target.id === "Order Info") {
+        if (event.target.id === "OrderOrderInfo") {
             if (isSortByName) {
                 const sortByName = [...order]
                 sortByName.sort(function(a, b) {
@@ -149,7 +149,7 @@ export default function DashboardUserTable(props) {
                 setOrder(sortByName)
             }
         }
-        if (event.target.id === "Total Money") {
+        if (event.target.id === "OrderTotalMoney") {
             if (isSortByTotal) {
                 const sortByTotal = [...order]
                 sortByTotal.sort(function(a, b) {

@@ -131,6 +131,23 @@ function ShopBody(props) {
         setFilterBox(false)
     } 
 
+    const [limit, setLimit] = useState(10);
+    const [loading, setLoading] = useState(false);
+
+    const loadMore = () => {
+        setLoading(true)
+        setTimeout(() => {
+            setLoading(false)
+            setLimit(limit + 5);
+        }, 1500);
+    }
+
+    //Limit products
+    const limitProduct = product.slice(0, limit);
+    const limitProductSold = soldProduct.slice(0, limit);
+    const limitProductDate = dateProduct.slice(0, limit);
+    const limitProductSelling = sellingProduct.slice(0, limit);
+
     return(
         <div className="ShopBody">
             <div className="shopbody-container">
@@ -327,7 +344,7 @@ function ShopBody(props) {
                     <div className="shopbody-line"></div>
                     { currentTab === 1 &&
                         <div className="shopbody-products">
-                            {product.map(function(item, index) {
+                            {limitProduct.map(function(item, index) {
                                 return (
                                     <Product
                                         key={index}
@@ -346,7 +363,7 @@ function ShopBody(props) {
                     }
                     { currentTab === 2 &&
                         <div className="shopbody-products">
-                            {soldProduct.map(function(item, index) {
+                            {limitProductSold.map(function(item, index) {
                                 return (
                                     <Product
                                         key={index}
@@ -366,7 +383,7 @@ function ShopBody(props) {
                     { currentTab === 3 &&
                         <div className="shopbody-products">
                             {
-                                dateProduct.length === 0 &&
+                                limitProductDate.length === 0 &&
                                 <div style={{
                                     textAlign: 'center',
                                     width: '100%',
@@ -376,7 +393,7 @@ function ShopBody(props) {
                                     there's nothing here yet
                                 </div>
                             }
-                            {dateProduct.map(function(item, index) {
+                            {limitProductDate.map(function(item, index) {
                                 return (
                                     <Product
                                         key={index}
@@ -395,7 +412,7 @@ function ShopBody(props) {
                     }
                     { currentTab === 4 &&
                         <div className="shopbody-products">
-                            {sellingProduct.map(function(item, index) {
+                            {limitProductSelling.map(function(item, index) {
                                 return (
                                     <Product
                                         key={index}
@@ -410,6 +427,24 @@ function ShopBody(props) {
                                     />
                                 )
                             })}
+                        </div>
+                    }
+
+                    {(product.length > 10 && product.length >= limit) && 
+                        <div className="tab-loadmore flex-center">
+                            <div 
+                                className="tab-loadmore-btn btn"
+                                onClick={loadMore}
+                                >
+                                Load More
+                            </div>
+                            {loading === true && 
+                                <div className="tab-loadmore-btn tab-loadmore-loading btn-nothover">
+                                    <FontAwesomeIcon icon={faCircle} className="loading-icon" style={{animationDelay: `0s`}}></FontAwesomeIcon>
+                                    <FontAwesomeIcon icon={faCircle} className="loading-icon" style={{animationDelay: `.2s`}}></FontAwesomeIcon>
+                                    <FontAwesomeIcon icon={faCircle} className="loading-icon" style={{animationDelay: `.4s`}}></FontAwesomeIcon>
+                                </div>
+                            }
                         </div>
                     }
                 </div>
