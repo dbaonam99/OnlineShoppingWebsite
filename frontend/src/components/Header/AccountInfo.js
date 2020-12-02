@@ -5503,248 +5503,236 @@ function AccountInfo(props) {
                            >Log out</div>
                   </div>
                </div>
-               <div className="accountinfo-main">
-                  {
-                        tabId === 1 && 
-                        <div>
-                           <div className="accountinfo-title">
-                              <p>Account Infomation</p>
-                              <p>Manage account information for account security</p>
-                           </div>
-                           <div className="accountinfo-body flex">
-                              <form onSubmit={submitInfo} encType="multipart/form-data" >
-                                    <div className="accountinfo-body2 flex">
-                                       <table>
-                                          <tbody>
-                                                <tr>
-                                                   <td>Name</td>
-                                                   <td>
-                                                      <input 
-                                                            type="text"
-                                                            className="input"
-                                                            name="name" 
-                                                            value={userName}
-                                                            onChange={(event)=>{
-                                                               setUserName(event.target.value)
-                                                            }}
-                                                      ></input>
-                                                   </td>
-                                                </tr>
-                                                <tr>
-                                                   <td>Email</td>
-                                                   <td>
-                                                      <input 
-                                                            type="email"
-                                                            className="input"
-                                                            name="email" 
-                                                            value={userEmail}
-                                                            onChange={(event)=>{
-                                                               setUserEmail(event.target.value)
-                                                            }}
-                                                            value={userEmail}
-                                                      ></input>
-                                                   </td>
-                                                </tr>
-                                                <tr>
-                                                   <td>Phone number</td>
-                                                   <td>
-                                                      <input 
-                                                            type="text"
-                                                            className="input"
-                                                            name="phone" 
-                                                            value={userPhone}
-                                                            onChange={(event)=>{
-                                                               setUserPhone(event.target.value)
-                                                            }}
-                                                            value={userPhone}
-                                                      ></input>
-                                                   </td>
-                                                </tr>
-                                                <tr>
-                                                   <td>Province</td>
-                                                   <td>
-                                                      <select 
-                                                            className="input"
-                                                            value={userTinh}
-                                                            onChange={(event)=>{
-                                                               setProvinceId(event.target.selectedIndex)
-                                                               setUserTinh(event.target.value)
-                                                            }}
-                                                      >
-                                                            <option disabled selected value>select a province</option>
-                                                            {tinh.map((item, index) => {
-                                                               return (
-                                                                  <option 
-                                                                        key={index}
-                                                                        value={item.name}
-                                                                  >{item.name}</option>
-                                                               )
-                                                            })}
-                                                      </select>
-                                                   </td>
-                                                </tr>
-                                                <tr>
-                                                   <td>District</td>
-                                                   <td>
-                                                      <select 
-                                                            className="input"
-                                                            value={userHuyen}
-                                                            onChange={(event)=>{
-                                                               setUserHuyen(event.target.value)
-                                                            }}
-                                                      >
-                                                            <option disabled selected value>select a district</option>
-                                                            {huyen.map((item, index) => {
-                                                               if (item.tinh_id === provinceId) {
-                                                                  return (
-                                                                        <option
-                                                                           key={index}
-                                                                           value={item.name}
-                                                                           >{item.name}</option>
-                                                                  )
-                                                               }
-                                                            })}
-                                                      </select>
-                                                   </td>
-                                                </tr>
-                                                <tr>
-                                                   <td>Address</td>
-                                                   <td>
-                                                      <input 
-                                                            type="text"
-                                                            className="input"
-                                                            name="phone" 
-                                                            value={userAddress}
-                                                            onChange={(event)=>{
-                                                               setUserAddress(event.target.value)
-                                                            }}
-                                                            value={userAddress}
-                                                      ></input>
-                                                   </td>
-                                                </tr>
-                                                <tr>
-                                                   <td>New password</td>
-                                                   <td>
-                                                      <input 
-                                                            type="password"
-                                                            className="input"
-                                                            name="email" 
-                                                            value={userPassword}
-                                                            onChange={(event)=>{
-                                                               setUserPassword(event.target.value)
-                                                            }}
-                                                            value={userPassword}
-                                                      ></input>
-                                                   </td>
-                                                </tr>
-                                          </tbody>
-                                       </table>
-
-                                       <div className="accountinfo-editavt flex">
-                                          <img 
-                                                style={{borderRadius: '50%'}}
-                                                className="accountinfo-editavt-img"
-                                                src={userAvt} 
-                                                alt=""
-                                                width="100px"
-                                                height="100px"
-                                          ></img>
-                                          <input 
-                                                onChange={(event) => {
-                                                   const files = event.target.files;
-                                                   setUserAvt(URL.createObjectURL(files[0]))
-                                                   const fileArr = Array.prototype.slice.call(files)
-                                                   fileArr.forEach(item=>{
-                                                      setFile(file=>[...file, item])
-                                                   })
-                                                }}
-                                                type="file"
-                                                name="avatar"
-                                                className="accountinfo-editavt-input"
-                                          ></input>
-                                       </div>
-                                       
-                                    </div>
-                                    <div className="accountinfo-btn-row">
-                                       <button className="accountinfo-btn btn">Save</button>
-                                    </div>
-                              </form>
-                           </div>
-                        </div>
-                  }
-                  {
-                     tabId === 2 &&  
-                     <div style={{height: '100%'}}>
-                        <div className="accountinfo-title">
-                           <p>Orders infomation</p>
-                           <p>List of your orders</p>
-                        </div>      
-                        <div className="dashboard-table-orderlist">
-                           <table className="dashboard-table" style={{tableLayout: 'fixed'}}>
-                              <tbody>
-                                 <tr className="dashboard-order"> 
-                                    <th className="table-new-title table-order-title"> 
-                                       Shipping info
-                                    </th> 
-                                    <th className="table-new-title table-order-title"> 
-                                       Date
-                                    </th> 
-                                    <th className="table-new-title table-order-title"> 
-                                       Payment Method
-                                    </th> 
-                                    <th className="table-new-title table-order-title"> 
-                                       Items
-                                    </th> 
-                                    <th className="table-new-title table-order-title"> 
-                                       Total money
-                                    </th> 
-                                 </tr>
-                                 {
-                                    orderList.map((item, index) => {
-                                       const date = new Date(item.orderDate)
-                                       const day = date.getDate()
-                                       const month = date.getMonth() + 1
-                                       const year = date.getFullYear()
-                                       var totalItem = 0;
-                                       for (let i in item.orderList) {
-                                             totalItem += item.orderList[i].amount
-                                       }
-                                       return (
-                                             <tr key={index} className="mobile-table"> 
-                                                <td className="mobile-table-shippinginfo"> 
-                                                   <div className="flex" style={{alignItems: 'center',margin: '10px 0'}}>
-                                                         <p 
-                                                            style={{wordWrap: 'break-word', WebkitLineClamp: '3'}}
-                                                         >{item.orderAddress}, {item.orderHuyen}, {item.orderTinh}</p>
-                                                   </div> 
-                                                </td>
-                                                <td>
-                                                   <p>{day}-{month}-{year}</p>
-                                                </td>
-                                                <td className="mobile-table-paymentmethod">
-                                                   <p style={{textTransform: 'capitalize'}}>{item.orderPaymentMethod}</p>
-                                                </td>
-                                                <td>
-                                                   {   typeof(totalItem) === 'number' &&
-                                                            <div key={index} className="flex" style={{justifyContent: 'space-between'}}>
-                                                               {/* <p style={{margin: '10px 0', width: '100%', WebkitLineClamp: '2'}}>{virtualArr.productName}</p> */}
-                                                               <p style={{margin: '10px 0', width: '50px', marginLeft: '20px'}}>{totalItem}</p>
-                                                            </div>
-                                                   }
-                                                </td>
-                                                <td className="mobile-table-totalmoney">
-                                                   <p>{item.orderTotal} đ</p>
-                                                </td> 
-                                             </tr>
-                                       )
-                                    })
-                                 }
-                              </tbody>
-                           </table>
-                        </div>
+               {
+                  tabId === 1 && 
+                  <div className="accountinfo-main">
+                     <div className="accountinfo-title">
+                        <p>Account Infomation</p>
+                        <p>Manage account information for account security</p>
                      </div>
-                  }
-               </div>
+                     <div className="accountinfo-body flex">
+                        <form onSubmit={submitInfo} encType="multipart/form-data" >
+                           <div className="create-box-row account-box-row flex">
+                              <div className="dashboard-left create-box-left flex">Name</div>
+                              <div className="dashboard-right create-box-right">
+                                 <input 
+                                    type="text" name="title"  
+                                    value={userName}
+                                    onChange={(event)=>{
+                                       setUserName(event.target.value)
+                                    }} 
+                                 ></input>
+                              </div>
+                           </div>
+                           <div className="create-box-row account-box-row flex">
+                              <div className="dashboard-left create-box-left flex">Images </div>
+                              <div className="dashboard-right create-box-right"> 
+                                 <input 
+                                    onChange={(event) => {
+                                       const files = event.target.files;
+                                       setUserAvt(URL.createObjectURL(files[0]))
+                                       const fileArr = Array.prototype.slice.call(files)
+                                       fileArr.forEach(item=>{
+                                          setFile(file=>[...file, item])
+                                       })
+                                    }}
+                                    type="file"
+                                    name="newsImg"
+                                    className="noborder"
+                                    multiple="multiple"
+                                    style={{height: '30px'}}
+                                 ></input>
+                                 <div className="flex" style={{ overflowY: 'hidden', flexWrap:'wrap'}}> 
+                                    <img  
+                                       className="accountinfo-editavt-img"
+                                       src={userAvt} 
+                                       alt=""
+                                       width="80px"
+                                       height="80px"
+                                    ></img>
+                                 </div>
+                              </div>
+                           </div>
+                           <div className="create-box-row account-box-row flex">
+                              <div className="dashboard-left create-box-left flex">Email</div>
+                              <div className="dashboard-right create-box-right">
+                                 <input 
+                                    type="text" 
+                                    value={userEmail}
+                                    onChange={(event)=>{
+                                       setUserEmail(event.target.value)
+                                    }}
+                                 ></input>
+                              </div>
+                           </div> 
+                           <div className="create-box-row account-box-row flex">
+                              <div className="dashboard-left create-box-left flex">Phone number</div>
+                              <div className="dashboard-right create-box-right">
+                                 <input 
+                                    type="text" 
+                                    value={userPhone}
+                                    onChange={(event)=>{
+                                       setUserPhone(event.target.value)
+                                    }}
+                                 ></input>
+                              </div>
+                           </div> 
+                           <div className="create-box-row account-box-row flex">
+                              <div className="dashboard-left create-box-left flex">Province</div>
+                              <div className="dashboard-right create-box-right"> 
+                                 <select 
+                                    className="input"
+                                    value={userTinh}
+                                    onChange={(event)=>{
+                                       setProvinceId(event.target.selectedIndex)
+                                       setUserTinh(event.target.value)
+                                    }}
+                                 >
+                                    <option disabled selected value>select a province</option>
+                                    {tinh.map((item, index) => {
+                                       return (
+                                          <option 
+                                                key={index}
+                                                value={item.name}
+                                          >{item.name}</option>
+                                       )
+                                    })}
+                                 </select>
+                              </div>
+                           </div> 
+                           <div className="create-box-row account-box-row flex">
+                              <div className="dashboard-left create-box-left flex">District</div>
+                              <div className="dashboard-right create-box-right"> 
+                                 <select 
+                                       className="input"
+                                       value={userHuyen}
+                                       onChange={(event)=>{
+                                          setUserHuyen(event.target.value)
+                                       }}
+                                 >
+                                       <option disabled selected value>select a district</option>
+                                       {huyen.map((item, index) => {
+                                          if (item.tinh_id === provinceId) {
+                                             return (
+                                                   <option
+                                                      key={index}
+                                                      value={item.name}
+                                                      >{item.name}</option>
+                                             )
+                                          }
+                                       })}
+                                 </select>
+                              </div>
+                           </div> 
+                           <div className="create-box-row account-box-row flex">
+                              <div className="dashboard-left create-box-left flex">Address</div>
+                              <div className="dashboard-right create-box-right"> 
+                                 <input 
+                                    type="text"
+                                    className="input"
+                                    name="phone" 
+                                    value={userAddress}
+                                    onChange={(event)=>{
+                                       setUserAddress(event.target.value)
+                                    }}
+                                    value={userAddress}
+                                 ></input>
+                              </div>
+                           </div> 
+                           <div className="create-box-row account-box-row flex">
+                              <div className="dashboard-left create-box-left flex">New password</div>
+                              <div className="dashboard-right create-box-right"> 
+                                 <input 
+                                       type="password"
+                                       className="input"
+                                       name="email" 
+                                       value={userPassword}
+                                       onChange={(event)=>{
+                                          setUserPassword(event.target.value)
+                                       }}
+                                       value={userPassword}
+                                 ></input>
+                              </div>
+                           </div> 
+                           <div className="accountinfo-btn-row">
+                              <button className="accountinfo-btn btn">Update infomation</button>
+                           </div>
+                     </form>
+                     </div> 
+                  </div>
+               }
+               {
+                  tabId === 2 &&  
+                  <div className="accountinfo-main">
+                     <div className="accountinfo-title">
+                        <p>Orders infomation</p>
+                        <p>List of your orders</p>
+                     </div>      
+                     <div className="dashboard-table-orderlist">
+                        <table className="dashboard-table" style={{tableLayout: 'fixed'}}>
+                           <tbody>
+                              <tr className="dashboard-order"> 
+                                 <th className="table-new-title table-order-title"> 
+                                    Shipping info
+                                 </th> 
+                                 <th className="table-new-title table-order-title"> 
+                                    Date
+                                 </th> 
+                                 <th className="table-new-title table-order-title"> 
+                                    Payment Method
+                                 </th> 
+                                 <th className="table-new-title table-order-title"> 
+                                    Items
+                                 </th> 
+                                 <th className="table-new-title table-order-title"> 
+                                    Total money
+                                 </th> 
+                              </tr>
+                              {
+                                 orderList.map((item, index) => {
+                                    const date = new Date(item.orderDate)
+                                    const day = date.getDate()
+                                    const month = date.getMonth() + 1
+                                    const year = date.getFullYear()
+                                    var totalItem = 0;
+                                    for (let i in item.orderList) {
+                                          totalItem += item.orderList[i].amount
+                                    }
+                                    return (
+                                          <tr key={index} className="mobile-table"> 
+                                             <td> 
+                                                <div className="flex" style={{alignItems: 'center',margin: '10px 0'}}>
+                                                      <p 
+                                                         style={{wordWrap: 'break-word', WebkitLineClamp: '3'}}
+                                                      >{item.orderAddress}, {item.orderHuyen}, {item.orderTinh}</p>
+                                                </div> 
+                                             </td>
+                                             <td>
+                                                <p>{day}-{month}-{year}</p>
+                                             </td>
+                                             <td>
+                                                <p style={{textTransform: 'capitalize'}}>{item.orderPaymentMethod}</p>
+                                             </td>
+                                             <td>
+                                                {   typeof(totalItem) === 'number' &&
+                                                         <div key={index} className="flex" style={{justifyContent: 'space-between'}}>
+                                                            {/* <p style={{margin: '10px 0', width: '100%', WebkitLineClamp: '2'}}>{virtualArr.productName}</p> */}
+                                                            <p style={{margin: '10px 0', width: '50px', marginLeft: '20px'}}>{totalItem}</p>
+                                                         </div>
+                                                }
+                                             </td>
+                                             <td>
+                                                <p>{item.orderTotal} đ</p>
+                                             </td> 
+                                          </tr>
+                                    )
+                                 })
+                              }
+                           </tbody>
+                        </table>
+                     </div>
+                  </div>
+               } 
             </div>
       </div>
    )

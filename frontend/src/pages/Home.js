@@ -30,7 +30,9 @@ function Home() {
             />
             <RecommendBanner/>
             <HomeTab/>
-            <Collection/>
+            <Collection
+                collection = {collection}
+            />
             <FashionNews/>
             <Newsletter/>
             <Footer/>

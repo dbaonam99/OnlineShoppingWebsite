@@ -1030,7 +1030,11 @@ select {
     border-bottom: 2px #ddd solid;
     height: 100%;
     width: 100%;
-}
+    font-weight: 300;
+    font-family: sans-serif;
+    font-size: 14px;
+    color: #111; 
+} 
 .dashboard-right input:focus, 
 .dashboard-right input:hover {
     border-bottom: 2px #777 solid;

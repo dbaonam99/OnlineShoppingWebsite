@@ -852,6 +852,7 @@
   height: 100%;
   position: relative;
   width: 50%;
+  height: 330px;
 }
 
 .collection-box img {
@@ -880,11 +881,14 @@
   font-weight: 100;
   font-weight: 300;
   margin-bottom: 20px;
+  text-transform: capitalize;
+  text-align: center;
 }
 
 .collection-link {
   font-size: 16px;
   position: relative;
+  cursor: pointer;
 }
 
 .collection-link::after {
@@ -3706,6 +3710,9 @@
   .search-form, .login-form {
     padding: 0;
   }  
+  .search-header {
+    margin-bottom: 40px;
+  }
 }
 @media only screen and (max-width: 550px) {
   .News {
@@ -3921,6 +3928,9 @@
   }
   .view-close { 
     z-index: 9;
+  }
+  .search-header {
+    margin-bottom: 20px;
   }
 }
 @media only screen and (max-width: 400px) {

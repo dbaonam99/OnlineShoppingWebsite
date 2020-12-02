@@ -42,18 +42,18 @@ function Banner (props) {
                         <div className="flex-center">
                             <div>
                                 <div  
-                                    id={collection[0]._id}
+                                    id={collection[2]._id}
                                     onClick={redirect}
                                     className={currentBanner === 1 ? "banner-link fadeInLeft" :"banner-link"}>
-                                    {collection[0].collectionName}
+                                    {collection[2].collectionName}
                                 </div>
                             </div>
                             <div>
                             <div 
-                                id={collection[1]._id}
+                                id={collection[0]._id}
                                 onClick={redirect}
                                 className={currentBanner === 1 ? "banner-link fadeInRight" :"banner-link"}>
-                                    {collection[1].collectionName}
+                                    {collection[0].collectionName}
                                 </div>
                             </div>
                         </div>
@@ -65,7 +65,7 @@ function Banner (props) {
                     { collection.length > 0 &&
                         <div>
                             <div className={currentBanner === 2 ? "banner-title fadeInDown" :"banner-title"}>
-                                {collection[2].collectionName}
+                                {collection[1].collectionName}
                             </div>
                         </div>
                     }
@@ -73,7 +73,7 @@ function Banner (props) {
                         <div>
                             <div>
                                 <div 
-                                    id={collection[2]._id}
+                                    id={collection[1]._id}
                                     onClick={redirect}
                                     className={currentBanner === 2 ? "banner-link fadeInUp" :"banner-link"} style={{marginLeft: '190px'}}>
                                     Shop now

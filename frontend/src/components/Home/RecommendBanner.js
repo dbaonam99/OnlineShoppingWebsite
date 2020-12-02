@@ -25,7 +25,7 @@ export default function RecommendBanner() {
                         <div className="blackbox-center">
                             <Link 
                                 className="blackbox-link a"
-                                to="/collection" 
+                                to="/shop" 
                                 onClick={handleClick}
                                 >Shop now</Link>
                         </div>
@@ -36,7 +36,7 @@ export default function RecommendBanner() {
                         <div className="banner-top2 img-hover">
                             <img src={b2} alt="banner" width="100%" height="100%"></img>
                             <div className="blackbox-center-container">
-                                <div className="blackbox-title blackbox-title-small">Woman Collection</div>
+                                <div className="blackbox-title blackbox-title-small">Woman</div>
                                 <div className="blackbox-center">
                                     <Link 
                                         className="blackbox-link blackbox-link-smaill a"
@@ -48,7 +48,7 @@ export default function RecommendBanner() {
                         <div className="banner-top2 img-hover">
                             <img src={b3} alt="banner" width="100%" height="100%"></img>
                             <div className="blackbox-center-container">
-                                <div className="blackbox-title blackbox-title-small">Man Collection</div>
+                                <div className="blackbox-title blackbox-title-small">Man</div>
                                 <div className="blackbox-center">
                                     <Link 
                                         className="blackbox-link blackbox-link-smaill a"
