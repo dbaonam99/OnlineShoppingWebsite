@@ -130,9 +130,19 @@ function ProductQuickView(props) {
                                 ({ratingList.length} customer reviews)
                             </p>
                         </div>
-                        <div className="product-info-price" style={{marginTop: '30px'}}>
-                            {product.productPrice.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".")} đ
-                        </div>
+                        {
+                            product.productFinalPrice < product.productPrice &&
+                            <div className="product-info-price flex" style={{marginTop: '30px'}}>
+                                <p style={{textDecoration: 'line-through', color: '#777', marginRight: '10px', fontSize: '12px'}}>{product.productPrice.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".")} Đ</p>
+                                <p>{product.productFinalPrice.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".")} Đ</p>
+                            </div>
+                        }
+                        {
+                            product.productFinalPrice === product.productPrice &&
+                            <div className="product-info-price" style={{marginTop: '30px'}}>
+                                {product.productPrice.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".")} đ
+                            </div>
+                        }
                         <div className="product-info-cart flex">
                             <div className="count-cart noselect">
                                 <div className="count-cart-item left flex-center"

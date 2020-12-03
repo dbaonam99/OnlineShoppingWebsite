@@ -84,9 +84,19 @@ function Product(props) {
             <div className="product-title">
                 {product.productName}
             </div>
-            <div className="product-price">
-                {product.productPrice.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".")} Đ
-            </div>
+            {
+                product.productFinalPrice < product.productPrice &&
+                <div className="product-price flex-center">
+                    <p style={{textDecoration: 'line-through', color: '#777', marginRight: '10px'}}>{product.productPrice.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".")} Đ</p>
+                    <p>{product.productFinalPrice.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".")} Đ</p>
+                </div>
+            }
+            {
+                product.productFinalPrice === product.productPrice &&
+                <div className="product-price">
+                    <p>{product.productFinalPrice.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".")} Đ</p>
+                </div>
+            }
         </div>
     )
 }

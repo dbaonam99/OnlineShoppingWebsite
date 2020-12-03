@@ -797,7 +797,7 @@
 .product-price {
   margin-top: 10px;
   font-size: 12px;
-  font-weight: bold;
+  font-weight: bold; 
 }
 
 .product-overlay {
@@ -2458,6 +2458,8 @@
   margin-top: 10px;
   font-size: 26px;
   margin-bottom: 60px;
+  align-items: flex-end; 
+  height: max-content;
 }
 .product-info-cart {
   height: 60px;

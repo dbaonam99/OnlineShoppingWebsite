@@ -251,12 +251,20 @@ export default function ProductBody(props) {
                             ({ratingList.length} customer reviews)
                         </p>
                     </div>
+
                     {
-                        product.productPrice &&
+                        product.productFinalPrice && product.productFinalPrice < product.productPrice &&
+                        <div className="product-info-price">
+                            <span style={{textDecoration: 'line-through', color: '#777', marginRight: '10px', fontSize: '10px'}}>{product.productPrice.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".")} Đ</span>
+                            <span style={{height: 'max-content'}}>{product.productFinalPrice.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".")} Đ</span>
+                        </div>
+                    }
+                    {
+                        product.productFinalPrice && product.productFinalPrice === product.productPrice &&
                         <div className="product-info-price">
                             {(product.productPrice).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".")} Đ
                         </div>
-                    }
+                    } 
                     <div className="product-info-cart flex">
                         <div className="count-cart noselect">
                             <div className="count-cart-item left flex-center"
