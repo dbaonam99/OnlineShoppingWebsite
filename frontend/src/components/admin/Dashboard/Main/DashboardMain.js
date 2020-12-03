@@ -71,30 +71,16 @@ export default function DashboardMain() {
                 }
                 setTotalSale(totalSale)
                 setTotalIncome(totalIncome)
+
+                const currentMonth = new Date().getMonth() + 1
+                const currentYear = new Date().getFullYear()
+                console.log(currentMonth, currentYear)
+                for (let i in res.data) {
+                    // console.log(res.data[i])
+                }
             }
-        )
-    }, [])
-    // useEffect(()=>{
-    //     var allProductSales = []
-    //     for (let i in order) {
-    //         for (let j in order[i].orderList) {
-    //             for (let k in products) {
-    //                 if (products[k]._id === order[i].orderList[j].id) {
-    //                     allProductSales.push(products[k])
-    //                 }
-    //             }
-    //         }
-    //     }
-    //     const topProductSales2 = Object.values(allProductSales.reduce((a, {_id, productName, productImg}) => {
-    //         a[_id] = a[_id] || {_id, productName, productImg, count: 0};
-    //         a[_id].count++;
-    //         return a;
-    //     }, Object.create(null)));
-        
-    //     topProductSales2.sort((a,b) =>  b.count - a.count)
-    //     setTopProductSales(topProductSales2)
-    // // },[order, products])
-    // console.log(topProductSales)
+        ) 
+    }, []) 
 
     const totalCount = [
         {
