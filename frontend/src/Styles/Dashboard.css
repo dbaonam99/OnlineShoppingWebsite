@@ -449,6 +449,10 @@ display: none !important;
     color: green !important;
     margin-right: 5px;
 }
+.count-down {
+    color: red !important;
+    margin-right: 5px;
+}
 
 
 .topfive:last-child {

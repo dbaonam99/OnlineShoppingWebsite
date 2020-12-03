@@ -5405,6 +5405,7 @@ function CheckoutBody(props) {
                     if (userInfo.userTinh === item.name) {
                         setProvinceId(item.id)
                     }
+                    return true
                 })
                 setUserTinh(userInfo.userTinh)
             }
@@ -5560,6 +5561,7 @@ function CheckoutBody(props) {
                                                         >{item.name}</option>
                                                 )
                                             }
+                                            return true
                                         })}
                                     </select>
                                 </td>

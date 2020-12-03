@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from 'react'
+import React, { useRef, useState } from 'react'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faTimes } from '@fortawesome/free-solid-svg-icons'
 import axios from 'axios'
@@ -98,8 +98,7 @@ export default function DashboardUserCreate(props) {
                                 value={userPassword}
                                 onChange={(event)=>{
                                     setUserPassword(event.target.value)
-                                }}
-                                value={userPassword}
+                                }} 
                             ></input>
                         </div>
                     </div>

@@ -22,6 +22,9 @@ export default function DashboardMain() {
     const [topProductSales, setTopProductSales] = useState([]);
     const [totalIncome, setTotalIncome] = useState(0);
     const [totalSale, setTotalSale] = useState(0);
+    const [orderMonthPercent, setOrderMonthPercent] = useState({})
+    const [saleMonthPercent, setSaleMonthPercent] = useState({})
+    const [incomeMonthPercent, setIncomeMonthPercent] = useState({}) 
 
     useEffect(()=>{
         axios.get(`http://pe.heromc.net:4000/products`)
@@ -70,13 +73,80 @@ export default function DashboardMain() {
                     totalIncome += res.data[i].orderTotal
                 }
                 setTotalSale(totalSale)
-                setTotalIncome(totalIncome)
+                setTotalIncome(totalIncome) 
 
                 const currentMonth = new Date().getMonth() + 1
                 const currentYear = new Date().getFullYear()
-                console.log(currentMonth, currentYear)
+                let lastYear = new Date().getFullYear()
+                let lastMonth = 0
+                if (currentMonth === 1) {
+                    lastMonth = 12
+                    lastYear = currentYear - 1
+                } else {
+                    lastMonth = currentMonth - 1
+                    lastYear = currentYear
+                }
+                const currentOrder = []
+                const lastMonthOrder = []
+                let currentTotalIncome = 0;
+                let currentTotalSale = 0;
+                let lastCurrentTotalIncome = 0;
+                let lastCurrentTotalSale = 0;
                 for (let i in res.data) {
-                    // console.log(res.data[i])
+                    if (new Date(res.data[i].orderDate).getMonth()+1 === currentMonth &&
+                        new Date(res.data[i].orderDate).getFullYear() === currentYear) {
+                        currentOrder.push(res.data[i]) 
+                        currentTotalIncome += res.data[i].orderTotal
+                    } 
+                    if (new Date(res.data[i].orderDate).getMonth()+1 === lastMonth &&
+                        new Date(res.data[i].orderDate).getFullYear() === lastYear) {
+                        lastMonthOrder.push(res.data[i]) 
+                        lastCurrentTotalIncome += res.data[i].orderTotal
+                    }
+                    for(let j in res.data[i].orderList) {
+                        if (new Date(res.data[i].orderDate).getMonth()+1 === currentMonth &&
+                            new Date(res.data[i].orderDate).getFullYear() === currentYear) { 
+                            currentTotalSale += res.data[i].orderList[j].amount 
+                        } 
+                        if (new Date(res.data[i].orderDate).getMonth()+1 === lastMonth &&
+                            new Date(res.data[i].orderDate).getFullYear() === lastYear) { 
+                            lastCurrentTotalSale += res.data[i].orderList[j].amount 
+                        }
+                    }
+                }   
+
+                if (currentOrder.length >= lastMonthOrder.length) {
+                    setOrderMonthPercent({
+                        percent: Math.ceil(((currentOrder.length - lastMonthOrder.length)/lastMonthOrder.length) * 100),
+                        isDecrease: true
+                    })
+                } else { 
+                    setOrderMonthPercent({
+                        percent: Math.ceil(((lastMonthOrder.length - currentOrder.length)/lastMonthOrder.length) * 100),
+                        isDecrease: false
+                    })
+                }
+                if (currentTotalSale >= lastCurrentTotalSale) {
+                    setSaleMonthPercent({
+                        percent: Math.ceil(((currentTotalSale - lastCurrentTotalSale)/lastCurrentTotalSale) * 100),
+                        isDecrease: true
+                    })
+                } else { 
+                    setSaleMonthPercent({
+                        percent: Math.ceil(((lastCurrentTotalSale - currentTotalSale)/lastCurrentTotalSale) * 100),
+                        isDecrease: false
+                    })
+                }
+                if (currentTotalIncome >= lastCurrentTotalIncome) {
+                    setIncomeMonthPercent({
+                        percent: Math.ceil(((currentTotalIncome - lastCurrentTotalIncome)/lastCurrentTotalIncome) * 100),
+                        isDecrease: true
+                    })
+                } else { 
+                    setIncomeMonthPercent({
+                        percent: Math.ceil(((lastCurrentTotalIncome - currentTotalIncome)/lastCurrentTotalIncome) * 100),
+                        isDecrease: false
+                    })
                 }
             }
         ) 
@@ -87,7 +157,8 @@ export default function DashboardMain() {
             id: 1,
             title: "Total orders",
             count: order.length,
-            percent: 12,
+            percent: orderMonthPercent.percent,
+            isDecrease: orderMonthPercent.isDecrease,
             color: "orange",
             icon: faFileInvoice
         },
@@ -95,7 +166,8 @@ export default function DashboardMain() {
             id: 2,
             title: "Total sales",
             count: `${totalSale}`,
-            percent: 20,
+            percent: saleMonthPercent.percent,
+            isDecrease: saleMonthPercent.isDecrease,
             color: "pink",
             icon: faTshirt
         },
@@ -103,7 +175,8 @@ export default function DashboardMain() {
             id: 3,
             title: "Income",
             count: `${totalIncome}đ`,
-            percent: 30,
+            percent: incomeMonthPercent.percent,
+            isDecrease: incomeMonthPercent.isDecrease,
             color: "green",
             icon: faMoneyBillWave
         },
@@ -111,7 +184,8 @@ export default function DashboardMain() {
             id: 4,
             title: "Users",
             count: user.length,
-            percent: 5,
+            percent: 20,
+            isDecrease: true,
             color: "lightblue",
             icon: faUser
         },
@@ -164,15 +238,11 @@ export default function DashboardMain() {
     return (
         <div className="dashboard-main">
             <div className="row flex">
-                { totalCount.map((item, index)=> {
+                { totalCount.map((item, index)=> { 
                     return (
                         <DashboardTotalCount
                             key = {index}
-                            icon = {item.icon}
-                            title = {item.title}
-                            count = {item.count}
-                            percent = {item.percent}
-                            color = {item.color}
+                            item = {item}
                         />
                     )
                 })}

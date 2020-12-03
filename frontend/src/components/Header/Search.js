@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useRef, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import '../../App.css';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faCartPlus, faCheckCircle, faSearch, faTimes } from '@fortawesome/free-solid-svg-icons';
@@ -33,7 +33,7 @@ export default function Search(props) {
         setProducts(search)
     }
 
-    const { wishListItems, removeFromWishList, addToCart } = useContext(CartContext)
+    const { removeFromWishList, addToCart } = useContext(CartContext)
 
     const cartClick = (event) => {
         const id = event.target.id

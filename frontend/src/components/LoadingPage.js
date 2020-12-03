@@ -1,4 +1,4 @@
-import React, { useRef } from 'react';
+import React from 'react';
 import '../Styles/LoadingPage.css'
 import Div100vh from 'react-div-100vh';
 

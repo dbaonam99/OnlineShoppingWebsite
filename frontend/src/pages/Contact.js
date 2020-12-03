@@ -1,4 +1,4 @@
-import React, { Component, useEffect } from "react";
+import React, { useEffect } from "react";
 import "../App.css";
 import Newsletter from "../components/Layouts/Newsletter.js"
 import Footer from "../components/Layouts/Footer.js"

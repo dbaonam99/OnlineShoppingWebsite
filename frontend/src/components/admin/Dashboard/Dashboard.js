@@ -1,12 +1,11 @@
-import React, { useContext, useEffect, useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import '../../../App.css'
 import '../../../Styles/Dashboard.css'
 import DashboardBody from './DashboardBody'
 import DashboardMenu from './DashboardMenu'
 import { faEnvelope, faFileInvoice, faHome, faInbox, faNewspaper, faShoppingBag, faTshirt, faUser } from '@fortawesome/free-solid-svg-icons'
 
-import socketIOClient from "socket.io-client"
-import { UserContext } from '../../../contexts/User'
+import socketIOClient from "socket.io-client" 
 import Axios from 'axios'
 import { withRouter } from 'react-router-dom'
 const ENDPOINT = "http://pe.heromc.net:4000";

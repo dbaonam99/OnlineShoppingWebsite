@@ -282,6 +282,7 @@ export default function DashboardProductEdit(props) {
                                                     <option key={index}>{item.productGroupCate}</option>
                                                 )
                                             }
+                                            return true
                                         })
                                     }
                                 </select>

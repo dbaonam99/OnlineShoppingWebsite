@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import '../../../App.css'
 import '../../../Styles/Dashboard.css'
-import { faBars, faBell, faEllipsisV, faListUl, faSearch } from '@fortawesome/free-solid-svg-icons'
+import { faBell, faEllipsisV, faListUl, faSearch } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import Axios from 'axios'
 

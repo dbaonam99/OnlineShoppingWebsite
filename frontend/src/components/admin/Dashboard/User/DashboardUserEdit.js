@@ -109,8 +109,7 @@ export default function DashboardUserCreate(props) {
                                 value={userPassword}
                                 onChange={(event)=>{
                                     setUserPassword(event.target.value)
-                                }}
-                                value={userPassword}
+                                }} 
                             ></input>
                         </div>
                     </div>

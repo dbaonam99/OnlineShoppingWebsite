@@ -138,7 +138,7 @@ export default function DashboardTodoList(props) {
                             }}></input>
                             <button className="newtodo-btn btn">Add</button>
                         </form>
-                        {todoList &&
+                        { todoList &&
                             todoList.reverse().map((item, index)=>{
                                 if (item.isDone === false) {
                                     return(
@@ -210,7 +210,8 @@ export default function DashboardTodoList(props) {
                                             </form>
                                         </div>
                                     )
-                                }
+                                } 
+                                return true
                             })
                         }
                         <p className="todo-title" style={{marginTop: '20px'}}>finished</p>{todoList &&
@@ -286,6 +287,7 @@ export default function DashboardTodoList(props) {
                                         </div>
                                     )
                                 }
+                                return true
                             })
                         }
                     </div>

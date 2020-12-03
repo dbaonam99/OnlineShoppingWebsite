@@ -47,7 +47,7 @@ export default function DashboardOrderCreate(props) {
                                         res.data.count = item.amount
                                         setProductList(productList => [...productList, res.data])
                                     })
-
+                                return true
                             })
                             return
                         }

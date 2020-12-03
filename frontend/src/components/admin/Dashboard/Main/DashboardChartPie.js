@@ -11,8 +11,7 @@ export default function DashboardChartPie(props) {
     const [data, setData] = useState({})
 
     useEffect(()=>{
-        if (email.length > 0) {
-            const allMail = []
+        if (email.length > 0) { 
             let read = 0;
             let unread = 0;
             for (let i in email) {
