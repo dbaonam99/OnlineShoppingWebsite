@@ -58,7 +58,7 @@ function Login(props) {
     }
 
     return (
-        <Div100vh className="Login">
+        <div className="Login">
             <img className="login-bg" src={bg} alt=""></img>
             <div className="login-overlay flex-center">
                 <div className="login-box flex">
@@ -125,7 +125,7 @@ function Login(props) {
                     </div>
                 </div>
             </div>
-        </Div100vh>
+        </div>
     )
 }
 export default withRouter(Login)

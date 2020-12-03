@@ -1,6 +1,7 @@
 .Login {
     background-color: #777;
     overflow: hidden;
+    height: 100vh;
 }
 .login-bg {
     width: 100%;
