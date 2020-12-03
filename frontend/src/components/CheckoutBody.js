@@ -247,7 +247,7 @@ function CheckoutBody(props) {
                                                 <p>x</p>
                                                 {item.count}
                                             </div>
-                                            <div className="billing-detail-price">{(item.productPrice * item.count).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".")} đ</div>
+                                            <div className="billing-detail-price">{(item.productFinalPrice * item.count).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".")} đ</div>
                                         </div>
                                     </div>
                                 )

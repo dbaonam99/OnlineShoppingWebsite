@@ -111,7 +111,7 @@ export default function DashboardOrderCreate(props) {
                 id: productList[i]._id,
                 amount: productList[i].count,
             }
-            total += productList[i].productPrice * productList[i].count
+            total += productList[i].productFinalPrice * productList[i].count
             listOrder.push(data)
         }
         axios.post(`http://pe.heromc.net:4000/order/update/${order._id}`, {
@@ -310,7 +310,7 @@ export default function DashboardOrderCreate(props) {
                                         <option
                                             key={index}
                                             value={JSON.stringify(item)}
-                                        >Name: {item.productName}, Price: {item.productPrice.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".")}</option>
+                                        >Name: {item.productName}, Price: {item.productFinalPrice.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".")}</option>
                                     )
                                 })}
                             </select>

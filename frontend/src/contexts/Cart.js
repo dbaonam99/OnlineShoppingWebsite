@@ -157,7 +157,7 @@ export function CartProvider(props) {
     const getTotal = (arr) => {
         let virtualTotal = 0
         for (let i in arr) {
-            virtualTotal += arr[i].count * arr[i].productPrice
+            virtualTotal += arr[i].count * arr[i].productFinalPrice
         }
         localStorage.setItem('total', JSON.stringify(virtualTotal))
         setTotal(virtualTotal)

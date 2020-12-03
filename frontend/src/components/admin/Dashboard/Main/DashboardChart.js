@@ -20,8 +20,7 @@ export default function DashboardChart(props) {
     
             for (let i in allCate) {
                 for (let j in products) {
-                    if (allCate[i].productCate === products[j].productCate) { 
-                        // allCate[i].count += (products[j].productSold * products[j].productPrice)
+                    if (allCate[i].productCate === products[j].productCate) {  
                         allCate[i].count += products[j].productSold
                     }
                 }

@@ -81,7 +81,7 @@ function ShopBody(props) {
     const choosePrice = () => {
         const virtualProduct = []
         for (let i in constProduct) { 
-            if (constProduct[i].productPrice >= sortPriceValue[0] && constProduct[i].productPrice <= sortPriceValue[1]) {
+            if (constProduct[i].productFinalPrice >= sortPriceValue[0] && constProduct[i].productFinalPrice <= sortPriceValue[1]) {
                 virtualProduct.push(constProduct[i])
             }
         }
@@ -120,7 +120,7 @@ function ShopBody(props) {
         }
         const virtualProduct3 = [] 
         for (let i in virtualProduct2) { 
-            if (virtualProduct2[i].productPrice >= sortPriceValue[0] && virtualProduct2[i].productPrice <= sortPriceValue[1]) {
+            if (virtualProduct2[i].productFinalPrice >= sortPriceValue[0] && virtualProduct2[i].productFinalPrice <= sortPriceValue[1]) {
                 virtualProduct3.push(virtualProduct2[i])
             }
         } 

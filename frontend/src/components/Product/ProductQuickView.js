@@ -132,9 +132,9 @@ function ProductQuickView(props) {
                         </div>
                         {
                             product.productFinalPrice < product.productPrice &&
-                            <div className="product-info-price flex" style={{marginTop: '30px'}}>
-                                <p style={{textDecoration: 'line-through', color: '#777', marginRight: '10px', fontSize: '12px'}}>{product.productPrice.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".")} Đ</p>
-                                <p>{product.productFinalPrice.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".")} Đ</p>
+                            <div className="product-info-price" style={{marginTop: '30px'}}>
+                                <span style={{textDecoration: 'line-through', color: '#777', marginRight: '10px', fontSize: '12px'}}>{product.productPrice.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".")} Đ</span>
+                                <span>{product.productFinalPrice.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".")} Đ</span>
                             </div>
                         }
                         {

@@ -87,7 +87,7 @@ export default function Search(props) {
                                 </div>
                                 <div className="cart-product-mobile flex">
                                     <div className="cart-product-name flex" style={{alignItems: 'center', justifyContent: 'flex-start'}}>{item.productName}</div>
-                                    <div className="cart-product-price wl-mb-price flex" style={{alignItems: 'center', justifyContent: 'flex-start'}}>{item.productPrice.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".")} đ</div>
+                                    <div className="cart-product-price wl-mb-price flex" style={{alignItems: 'center', justifyContent: 'flex-start'}}>{item.productFinalPrice.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".")} đ</div>
                                     
                                     <div className="product-info-addtocart wl-mb-addtocart flex-center btn"
                                         onClick={(event)=> {
