@@ -56,7 +56,7 @@ export default function DashboardOrder(props) {
         return (()=>{
             window.removeEventListener("resize", handleResize);
         })
-    }, [window.innerWidth])
+    }, [])
     
 
     return (

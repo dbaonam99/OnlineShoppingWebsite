@@ -76,7 +76,7 @@ function Account(props) {
         .catch(err => {
             console.log(err);
         })
-    },[])
+    },[]) 
 
     let uniqueErr, uniqueSuccess = [];
     if (arrErr.length > 0) {

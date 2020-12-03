@@ -49,7 +49,7 @@ function AccountInfo(props) {
                      if (userInfo.userTinh === item.name) {
                         setProvinceId(item.id)
                      }
-                     return true
+                     return null
                   })
                }
             ) 
@@ -264,7 +264,7 @@ function AccountInfo(props) {
                                                       >{item.name}</option>
                                              )
                                           }
-                                          return true
+                                          return null
                                        })}
                                  </select>
                               </div>

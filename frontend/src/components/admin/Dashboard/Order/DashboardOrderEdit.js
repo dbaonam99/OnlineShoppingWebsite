@@ -47,7 +47,7 @@ export default function DashboardOrderCreate(props) {
                                         res.data.count = item.amount
                                         setProductList(productList => [...productList, res.data])
                                     })
-                                return true
+                                return null
                             })
                             return
                         }
@@ -57,6 +57,7 @@ export default function DashboardOrderCreate(props) {
                                 if (order.orderTinh === item.name) {
                                     setProvinceId(item.id)
                                 }
+                                return null
                             })
                             setOrderProvince(order.orderTinh)
                         }
@@ -95,6 +96,7 @@ export default function DashboardOrderCreate(props) {
                             setOrderDistric(item.userHuyen)
                         }
                     }
+                    return null
                 })
             }
         )

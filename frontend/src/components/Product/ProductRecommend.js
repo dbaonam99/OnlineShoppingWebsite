@@ -33,7 +33,7 @@ export default function ProductRecommend(props) {
                 }
             }
         }
-        return true;
+        return null;
     })
 
     let recommendProducts2 = recommendProducts.filter(function(elem, index, self) {

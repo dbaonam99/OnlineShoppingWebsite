@@ -39,7 +39,7 @@ function Shop(props) {
                 const virtualData = []
                 for(let i in res.data) { 
                     if (cate) { 
-                        if ((res.data[i].productName).toLowerCase().includes(cate)) {
+                        if ((res.data[i].productName).toLowerCase().includes(cate.toLowerCase())) {
                             virtualData.push(res.data[i])
                         } 
                     } else {

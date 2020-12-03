@@ -72,6 +72,7 @@ export default function DashboardOrderCreate(props) {
                                 if (item.userTinh === item2.name) {
                                     setProvinceId(item2.id)
                                 }
+                                return null
                             })
                             setOrderProvince(item.userTinh)
                         }
@@ -79,6 +80,7 @@ export default function DashboardOrderCreate(props) {
                             setOrderDistric(item.userHuyen)
                         }
                     }
+                    return null
                 })
             }
         )
@@ -222,6 +224,7 @@ export default function DashboardOrderCreate(props) {
                                             >{item.name}</option>
                                         )
                                     }
+                                    return null
                                 })}
                             </select>
                         </div>

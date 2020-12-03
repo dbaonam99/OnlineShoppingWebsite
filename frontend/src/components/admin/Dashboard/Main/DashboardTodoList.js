@@ -211,7 +211,7 @@ export default function DashboardTodoList(props) {
                                         </div>
                                     )
                                 } 
-                                return true
+                                return null
                             })
                         }
                         <p className="todo-title" style={{marginTop: '20px'}}>finished</p>{todoList &&
@@ -287,7 +287,7 @@ export default function DashboardTodoList(props) {
                                         </div>
                                     )
                                 }
-                                return true
+                                return null
                             })
                         }
                     </div>

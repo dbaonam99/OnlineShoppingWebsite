@@ -51,8 +51,10 @@ function HeaderV3(props) {
     }
 
     const { cartItems, clickedCart } = useContext(CartContext)
-    const [navBar, setNavBar] = useState(
-        [
+    const [navBar, setNavBar] = useState([])
+
+    useEffect(() => {
+        const navBar = [
             {
                 id: "1",
                 label: "Home",
@@ -74,7 +76,7 @@ function HeaderV3(props) {
             {
                 id: "4",
                 label: "News",
-                url: "/collection",
+                url: "/news",
                 dropdownContent: [
                 ]
             },
@@ -85,9 +87,7 @@ function HeaderV3(props) {
                 dropdownContent: []
             },
         ]
-    )
-
-    useEffect(() => {
+        setNavBar(navBar)
         axios.get(`http://pe.heromc.net:4000/products`)
             .then(res => {
                 let virtualNavBar = [...navBar]

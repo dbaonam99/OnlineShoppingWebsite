@@ -1,8 +1,7 @@
 import React, { useState } from 'react'
 import {
     withRouter
-} from 'react-router-dom'
-import { CartContext } from '../../contexts/Cart';
+} from 'react-router-dom' 
 function CollectionItem(props) {
 
     const [hoverPrice, setHoverPrice] = useState(false)

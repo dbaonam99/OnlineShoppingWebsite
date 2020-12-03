@@ -197,10 +197,10 @@ export default function DashboardCollectionTable(props) {
                                     const day = date.getDate()
                                     const month = date.getMonth() + 1
                                     const year = date.getFullYear()
-                                    var totalItem = 0;
-                                    for (let i in item.orderList) {
-                                        totalItem += item.orderList[i].amount
-                                    }
+                                    // let totalItem = 0;
+                                    // for (let i in item.orderList) {
+                                    //     totalItem += item.orderList[i].amount
+                                    // }
                                     return (
                                         <tr key={index}>
                                             <td className="table-name">

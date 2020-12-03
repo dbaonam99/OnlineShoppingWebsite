@@ -1,9 +1,7 @@
 import React, { useContext, useEffect, useState } from 'react';
 import '../../App.css';
 
-import ReactStars from "react-rating-stars-component";
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faComment, faThumbsUp } from '@fortawesome/free-solid-svg-icons';
+import ReactStars from "react-rating-stars-component"; 
 import ProductReviewContent from './ProductReviewContent';
 import { UserContext } from '../../contexts/User';
 import axios from 'axios'
