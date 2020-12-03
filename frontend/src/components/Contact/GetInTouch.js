@@ -11,14 +11,14 @@ export default class GetInTouch extends Component {
                     <div className="map">
                         <GoogleMap/>
                     </div>
-                    <div className="getintouch-form">
+                    <form className="getintouch-form">
                         <label>Contact Us</label>
                         <input placeholder="Name"></input>
                         <input placeholder="Email"></input>
                         <input placeholder="Subject"></input>
                         <input placeholder="Message"></input>
                         <button className="btn">Send message</button>
-                    </div>
+                    </form>
                 </div>
             </div>
         )
