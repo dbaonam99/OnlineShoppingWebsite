@@ -57,7 +57,7 @@ function ProductQuickView(props) {
 
     return(
         <div>
-            <Div100vh className={props.view === true ? 'ProductQuickView' : 'ProductQuickView displayNone'}>
+            <div className={props.view === true ? 'ProductQuickView' : 'ProductQuickView displayNone'}>
                 <div 
                     className="productquickview-container flex"
                     onClick={()=>{}}
@@ -196,7 +196,7 @@ function ProductQuickView(props) {
                     </div>
                 
                 </div>
-            </Div100vh>
+            </div>
         </div>
     )
 }

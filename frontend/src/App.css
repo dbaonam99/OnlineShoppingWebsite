@@ -3712,9 +3712,9 @@
   .search-form, .login-form {
     padding: 0;
   }  
-  .search-header {
+  /* .search-header {
     margin-bottom: 40px;
-  }
+  } */
 }
 @media only screen and (max-width: 550px) {
   .News {
@@ -3927,12 +3927,16 @@
   }
   .product-info-detail, .productquickview-slide{
     width: 100% !important;
+    height: 100vw !important;
   }
   .view-close { 
     z-index: 9;
   }
-  .search-header {
+  /* .search-header {
     margin-bottom: 20px;
+  } */
+  .Search, .Account, .Cart {
+    height: 1000px;
   }
 }
 @media only screen and (max-width: 400px) {
