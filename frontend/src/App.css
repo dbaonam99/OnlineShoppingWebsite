@@ -2411,25 +2411,27 @@
 /* Product info */
 .product-info-detail {
   width: 50%;
-  height: 90vh;
+  height: 100%;
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
   align-items: center;
   padding-left: 40px;
 }
-.product-info-title {
+.product-info-title { 
   font-size: 36px;
   font-family: sans-serif;
   font-weight: 300;
-  margin: 40px 0;
+  margin-top: 40px;
+  margin-bottom: 20px;
+  height: 80px; 
   text-align: center;
   /* Add ... if text is full */
-  display: -webkit-box;
+  /* display: -webkit-box;
   -webkit-line-clamp: 1;
   -webkit-box-orient: vertical;
   max-width: 100%;
-  overflow: hidden;
+  overflow: hidden; */
 }
 .product-info-des {
   font-size: 12px;
@@ -2442,6 +2444,7 @@
   -webkit-box-orient: vertical;
   max-width: 100%;
   overflow: hidden;
+  min-height: 40px;
 }
 .product-info-vote {
   display: flex;
@@ -2511,6 +2514,7 @@
   height: 100%;
   padding: 0 20px;
   cursor: pointer;
+  width: 160px;
 }
 .product-info-addtocart p {
   margin-left: 15px;
@@ -2522,6 +2526,7 @@
   border: 1px solid #ddd;
   color: #777;
   transition: .5s;
+  background-color: #fff;
 }
 .product-info-wishlist:hover {
   border: 1px solid #111;
@@ -3242,9 +3247,9 @@
   .product-small-item {
     margin-right: 5px;
   }
-  .product-info-title {
+  /* .product-info-title {
     margin: 40px 0;
-  }
+  } */
   .product-info-price {
     margin: 40px 0;
   } 
@@ -3377,7 +3382,7 @@
     padding-left: 20px;
   }
   .product-info-title {
-    margin: 25px 0;
+    margin: 0;
     font-size: 26px;
   }
   .product-info-price {
@@ -3598,6 +3603,7 @@
   }
   .product-info-detail {
     width: 100%;
+    height: max-content;
   } 
   .product-info-detail {
     padding-left: 0;
@@ -3607,6 +3613,7 @@
   }
   .product-info-title {
     font-size: 22px;
+    height: 40px;
   }
   .product-info-des {
     display: none;
@@ -3932,12 +3939,13 @@
   .view-close { 
     z-index: 9;
   }
-  /* .search-header {
-    margin-bottom: 20px;
-  } */
+  .product-info-addtocart {
+    width: 140px;
+  }
   .Search, .Account, .Cart {
     height: 1000px;
   }
+
 }
 @media only screen and (max-width: 400px) {
   .logo img {
@@ -4025,6 +4033,9 @@
   }
   .search-form form input { 
     margin-bottom: 20px;
+  }
+  .product-info-title {
+    padding: 0;
   }
 }
 @media only screen and (max-width: 350px) {

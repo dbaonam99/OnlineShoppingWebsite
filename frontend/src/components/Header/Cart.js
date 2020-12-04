@@ -63,8 +63,10 @@ function Account(props) {
                     <div 
                         className="cart-checkout-btn btn"
                         onClick={()=>{
-                            props.history.push(`/checkout`);
-                            window.location.reload(false);
+                            if (total > 0) {    
+                                props.history.push(`/checkout`);
+                                window.location.reload(false);
+                            }
                         }}
                     >Checkout</div> 
                 </div>

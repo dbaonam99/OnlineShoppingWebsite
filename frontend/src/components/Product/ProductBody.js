@@ -293,7 +293,7 @@ export default function ProductBody(props) {
                             </div>
                         </div>
                         { loading === 1 && 
-                            <div className="product-info-addtocart flex-center btn"  style={{width: '152px'}} onClick={cartClick} >
+                            <div className="product-info-addtocart flex-center btn" onClick={cartClick} >
                                 <FontAwesomeIcon icon={faCircle} className="loading-icon" style={{animationDelay: `0s`, margin: '0 2px', fontSize: '6px'}}></FontAwesomeIcon>
                                 <FontAwesomeIcon icon={faCircle} className="loading-icon" style={{animationDelay: `.2s`, margin: '0 2px', fontSize: '6px'}}></FontAwesomeIcon>
                                 <FontAwesomeIcon icon={faCircle} className="loading-icon" style={{animationDelay: `.4s`, margin: '0 2px', fontSize: '6px'}}></FontAwesomeIcon>
@@ -306,7 +306,7 @@ export default function ProductBody(props) {
                             </div>
                         }
                         { loading === 2 && 
-                            <div className="product-info-addtocart flex-center btn"  style={{width: '60px', margin: '0'}} onClick={cartClick} >
+                            <div className="product-info-wishlist flex-center" onClick={cartClick} >
                                 <FontAwesomeIcon icon={faCircle} className="loading-icon" style={{animationDelay: `0s`, margin: '0 2px', fontSize: '6px'}}></FontAwesomeIcon>
                                 <FontAwesomeIcon icon={faCircle} className="loading-icon" style={{animationDelay: `.2s`, margin: '0 2px', fontSize: '6px'}}></FontAwesomeIcon>
                                 <FontAwesomeIcon icon={faCircle} className="loading-icon" style={{animationDelay: `.4s`, margin: '0 2px', fontSize: '6px'}}></FontAwesomeIcon>
