@@ -29,6 +29,9 @@ function CheckoutBody(props) {
     const subTotal = localStorage.getItem('total')
     const [shipping, setShipping] = useState(0)
     const total = Number(subTotal) + Number(shipping)
+    const [confirm, setConfirm] = useState(false)
+    const [orderPaymentMethod, setOrderPaymentMethod] = useState("")
+    const [orderAddressConfirm, setOrderAddressConfirm] = useState("")
 
     useEffect(()=>{
         if (userInfo) {
@@ -66,15 +69,15 @@ function CheckoutBody(props) {
     }
 
     const placeAnOrder = () => {
-        var orderPaymentMethod = "";
+        let orderPaymentMethod2 = "";
         if (methodPayment === 1) {
-            orderPaymentMethod = "cash on delivery"
+            orderPaymentMethod2 = "cash on delivery"
         } else if (methodPayment === 2) {
-            orderPaymentMethod = "direct back transfer"
+            orderPaymentMethod2 = "direct back transfer"
         } else if (methodPayment === 3) {
-            orderPaymentMethod = "paypal"
+            orderPaymentMethod2 = "paypal"
         } else {
-            orderPaymentMethod = ""
+            orderPaymentMethod2 = ""
         }
         var cartId = []
         for (let i in cartList) {
@@ -85,7 +88,7 @@ function CheckoutBody(props) {
                 }
             )
         }
-        if (orderPaymentMethod === "") {
+        if (orderPaymentMethod2 === "") {
             alert("Fill in all infomation please")
         } else {
             const data = {
@@ -98,24 +101,114 @@ function CheckoutBody(props) {
                 orderHuyen: userHuyen,
                 orderList: cartId,
                 orderTotal: total,
-                orderPaymentMethod: orderPaymentMethod,
+                orderPaymentMethod: orderPaymentMethod2,
                 orderDate: new Date()
             }
             axios.post('http://pe.heromc.net:4000/order', data)
             setTimeout(()=>{
+                setConfirm(true)
+                document.body.style.overflow = 'hidden';
+                window.scrollTo(0,0);
                 localStorage.removeItem('total')
                 localStorage.removeItem('cart')
                 socket.emit('placeAnOrder', data)
-                props.history.push(`/shop`);
-                window.location.reload(false);
             }, 1000)
         }
+        setOrderPaymentMethod(orderPaymentMethod2)
+        let addressStr = addressInput + ', ' + userTinh + ', ' + userHuyen 
+        setOrderAddressConfirm(addressStr)
     }
+    //         document.body.style.overflow = 'unset';
+
 
     return(
         <div className="CheckoutBody">
+            {
+                confirm &&
+                <div className="billing-detail confirmPage">
+                    <p style={{fontSize: '18px', color: 'green', marginBottom: '30px'}}>Thank you. Your order has been received.</p> 
+                    <div className="billing-detail-title">Order details</div>
+                    <div> 
+                        <div className="billing-detail-list">
+                            { cartList &&
+                                cartList.map((item, index)=>{
+                                    return (
+                                        <div 
+                                            key={index}
+                                            className="billing-detail-item"
+                                        >
+                                            <div
+                                                style={{width: '300px'}}
+                                            >
+                                                <img src={item.productImg[0]} alt="" width="60px" height="60px"></img>
+                                            </div>
+                                            <div className="billing-detail-mobile">
+                                                <div className="billing-detail-name">{item.productName}</div>
+                                                <div className="billing-detail-count">
+                                                    <p>x</p>
+                                                    {item.count}
+                                                </div>
+                                                <div className="billing-detail-price">{(item.productFinalPrice * item.count).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".")} đ</div>
+                                            </div>
+                                        </div>
+                                    )
+                                }) 
+                            }
+                            <div className="billing-detail-item flex">
+                                <div className="billing-confirm-left">SUBTOTAL</div>
+                                <div className="billing-detail-mobile">
+                                    <div className="billing-detail-name"></div>
+                                    <div className="billing-detail-count" style={{color: '#111'}}></div>
+                                    {subTotal &&
+                                        <div className="billing-detail-price billing-confirm-right">{subTotal.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".")} đ</div>
+                                    }
+                                </div>
+                            </div>
+                            <div 
+                                className="billing-detail-item flex"
+                                style={{justifyContent: 'space-between'}}
+                            >
+                                <div className="billing-confirm-left">ADDRESS</div><div className="billing-detail-mobile">
+                                    <div className="billing-detail-name"></div>
+                                    <div className="billing-detail-count" style={{color: '#111'}}></div>
+                                    <div className="billing-detail-price billing-confirm-right orderAddressConfirm" style={{textTransform: 'capitalize'}}>{orderAddressConfirm} đ</div>
+                                </div>
+                            </div>
+                            <div className="billing-detail-item flex">
+                                <div className="billing-confirm-left">SHIPPING FEE</div>
+                                <div className="billing-detail-mobile">
+                                    <div className="billing-detail-name"></div>
+                                    <div className="billing-detail-count" style={{color: '#111'}}></div>
+                                    <div className="billing-detail-price billing-confirm-right" style={{textTransform: 'capitalize'}}>{shipping} đ</div>
+                                </div>
+                            </div>
+                            <div className="billing-detail-item flex">
+                                <div className="billing-confirm-left">TOTAL</div>
+                                <div className="billing-detail-mobile">
+                                    <div className="billing-detail-name"></div>
+                                    <div className="billing-detail-count" style={{color: '#111'}}></div>
+                                    { subTotal && shipping &&
+                                        <div className="billing-detail-price billing-confirm-right">{(Number(subTotal) + Number(shipping)).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".")} đ</div>
+                                    }
+                                </div>
+                            </div> 
+                            <div className="billing-detail-item flex">
+                                <div className="billing-confirm-left">PAYMENT METHOD</div>
+                                <div className="billing-detail-mobile">
+                                    <div className="billing-detail-name"></div>
+                                    <div className="billing-detail-count" style={{color: '#111'}}></div>
+                                    <div className="billing-detail-price billing-confirm-right" style={{textTransform: 'capitalize'}}>{orderPaymentMethod}</div>
+                                </div>
+                            </div>
+                            <div className="order-btn btn" style={{marginTop: '30px'}} onClick={placeAnOrder}>
+                                PLACE AN ORDER
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            } 
             <div className="billing-detail">
-                <div className="billing-detail-title">Billing Details</div>
+                <div className="billing-detail-title">Billing details</div>
                 <form className="billing-detail-form"> 
                     <table className="billing-detail-table"> 
                         <tbody>
@@ -185,7 +278,7 @@ function CheckoutBody(props) {
                                 </td>
                             </tr>
                             <tr>
-                                <td>Distric</td>
+                                <td>District</td>
                                 <td>
                                     <select 
                                         className="input"
@@ -228,12 +321,12 @@ function CheckoutBody(props) {
                         </tbody>
                     </table>
                 </form>
-            </div>
+            </div> 
             <div className="billing-detail">
                 <div className="billing-detail-title">Your order</div>
                 <div className="billing-detail-form"> 
                     <div className="billing-detail-list">
-                        {
+                        { cartList &&
                             cartList.map((item, index)=>{
                                 return (
                                     <div 
@@ -258,7 +351,9 @@ function CheckoutBody(props) {
                             <div className="billing-detail-mobile">
                                 <div className="billing-detail-name"></div>
                                 <div className="billing-detail-count" style={{color: '#111'}}></div>
-                                <div className="billing-detail-price">{subTotal.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".")} đ</div>
+                                { subTotal &&
+                                    <div className="billing-detail-price">{subTotal.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".")} đ</div>
+                                }
                             </div>
                         </div>
                         <div 
@@ -330,7 +425,7 @@ function CheckoutBody(props) {
                         </div>
                     </div>
                 </div>
-            </div>
+            </div> 
         </div>
     )
 }

@@ -3,6 +3,8 @@ import "../App.css";
 import BannerV4 from "../components/Banner/BannerV4";
 import CheckoutBody from "../components/CheckoutBody";
 import Header from "../components/Header/Header";
+import Footer from "../components/Layouts/Footer";
+import Newsletter from "../components/Layouts/Newsletter";
 
 function Checkout() {
     useEffect(()=>{
@@ -17,6 +19,8 @@ function Checkout() {
                 bannerImage={""} collectionTitle={"Checkout"}
             />
             <CheckoutBody/>
+            <Newsletter/>
+            <Footer/>
         </div>
     )
 }

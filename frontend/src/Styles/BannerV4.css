@@ -73,8 +73,28 @@
     justify-content: center;
     color: #aaa;
 }
+.confirmPage {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    /* min-height: 100vh; */
+    z-index: 99999;
+    padding: 50px;
+    background-color: #fff;
+    overflow-y: scroll;
+}
 .billing-detail-price {
     width: 20%;
+}
+.billing-confirm-right {
+    flex-grow: 1 !important;
+}
+.billing-confirm-left {
+    width: 300px;
+    height: 60px; 
+    line-height: 60px;
+    font-size: 18px; 
 }
 .billing-detail-shipping {
     width: calc(100% - 180px - 45%);
@@ -170,7 +190,7 @@
     .billing-detail-price {
         flex-grow: 1;
         text-align: right;
-    }
+    }   
 }
 @media only screen and (max-width: 550px) { 
     .billing-detail-mobile {
@@ -187,6 +207,22 @@
         -webkit-line-clamp: 1;
         -webkit-box-orient: vertical;
         max-width: 100%;
+        overflow: hidden;
+    }
+    .billing-confirm-left {
+        flex-grow: 1 !important;
+        /* Add ... if text is full */
+        display: -webkit-box;
+        -webkit-line-clamp: 1 !important;
+        -webkit-box-orient: vertical; 
+        overflow: hidden;
+    }
+    .billing-confirm-right {
+        flex-grow: 1 !important;
+        /* Add ... if text is full */
+        display: -webkit-box;
+        -webkit-line-clamp: 2 !important;
+        -webkit-box-orient: vertical; 
         overflow: hidden;
     }
     .billing-detail-count {
