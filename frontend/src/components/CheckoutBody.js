@@ -109,8 +109,6 @@ function CheckoutBody(props) {
                 setConfirm(true)
                 document.body.style.overflow = 'hidden';
                 window.scrollTo(0,0);
-                localStorage.removeItem('total')
-                localStorage.removeItem('cart')
                 socket.emit('placeAnOrder', data)
             }, 1000)
         }
@@ -118,8 +116,6 @@ function CheckoutBody(props) {
         let addressStr = addressInput + ', ' + userTinh + ', ' + userHuyen 
         setOrderAddressConfirm(addressStr)
     }
-    //         document.body.style.overflow = 'unset';
-
 
     return(
         <div className="CheckoutBody">
@@ -129,7 +125,7 @@ function CheckoutBody(props) {
                     <p style={{fontSize: '18px', color: 'green', marginBottom: '30px'}}>Thank you. Your order has been received.</p> 
                     <div className="billing-detail-title">Order details</div>
                     <div> 
-                        <div className="billing-detail-list">
+                        <div className="billing-detail-list comfirm-list">
                             { cartList &&
                                 cartList.map((item, index)=>{
                                     return (
@@ -186,10 +182,8 @@ function CheckoutBody(props) {
                                 <div className="billing-confirm-left">TOTAL</div>
                                 <div className="billing-detail-mobile">
                                     <div className="billing-detail-name"></div>
-                                    <div className="billing-detail-count" style={{color: '#111'}}></div>
-                                    { subTotal && shipping &&
-                                        <div className="billing-detail-price billing-confirm-right">{(Number(subTotal) + Number(shipping)).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".")} đ</div>
-                                    }
+                                    <div className="billing-detail-count" style={{color: '#111'}}></div> 
+                                    <div className="billing-detail-price billing-confirm-right">{(Number(subTotal) + Number(shipping)).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".")} đ</div>
                                 </div>
                             </div> 
                             <div className="billing-detail-item flex">
@@ -200,8 +194,14 @@ function CheckoutBody(props) {
                                     <div className="billing-detail-price billing-confirm-right" style={{textTransform: 'capitalize'}}>{orderPaymentMethod}</div>
                                 </div>
                             </div>
-                            <div className="order-btn btn" style={{marginTop: '30px'}} onClick={placeAnOrder}>
-                                PLACE AN ORDER
+                            <div className="order-btn btn" style={{marginTop: '30px'}} onClick={()=>{
+                                document.body.style.overflow = 'unset';
+                                localStorage.removeItem('total')
+                                localStorage.removeItem('cart') 
+                                props.history.push("/shop")
+                                window.location.reload(false);
+                            }}>
+                                CONFIRM
                             </div>
                         </div>
                     </div>

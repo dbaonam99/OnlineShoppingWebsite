@@ -332,7 +332,7 @@ function AccountInfo(props) {
                                  </th> 
                               </tr>
                               {
-                                 orderList.map((item, index) => {
+                                 orderList.reverse().map((item, index) => {
                                     const date = new Date(item.orderDate)
                                     const day = date.getDate()
                                     const month = date.getMonth() + 1
