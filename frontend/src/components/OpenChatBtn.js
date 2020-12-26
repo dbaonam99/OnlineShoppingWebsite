@@ -16,7 +16,6 @@ function OpenChatBtn(props) {
     const [openChat, setOpenChat] = useState(false)
     const [onHover, setOnHover] = useState(false)
     const [inputValue, setInputValue] = useState("")
-    // const [openChatContent, setOpenChatContent] = useState(false)
 
     const socket = socketIOClient(ENDPOINT)
     const [chatList, setChatList] = useState([])
@@ -53,10 +52,10 @@ function OpenChatBtn(props) {
         socket.on('sendFirstInfo', (data)=> {
             if (data.length > 0) setChatList(data[0].chatContent)
         })
-        socket.on('thread', (data)=> {
+        socket.on('thread', (data)=> { 
             setChatList(data.chatContent)
         })
-        socket.on("admin-msg", function(data) {
+        socket.on("admin-msg", function(data) { 
             setChatList(chatList=> [...chatList, data]);
             setTimeout(()=>{
                 messageRef.current.scrollIntoView({ behavior: "smooth" })

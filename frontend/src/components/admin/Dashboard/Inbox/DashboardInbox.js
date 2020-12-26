@@ -51,7 +51,6 @@ export default function DashboardInbox(props) {
 
     const sendChatInput = (event) => {
         event.preventDefault();
-        setChatInput("")
         if (chatInput === "") {
             return
         }
@@ -62,16 +61,16 @@ export default function DashboardInbox(props) {
             roomId: roomId
         }
         socket.emit('messageSend-admin', data)
-
-        axios.get(`http://pe.heromc.net:4000/chat`)
-            .then(res => {
-                setAllChatData(res.data)
-                setConstAllChatData(res.data)
-            }
-        )
-        setTimeout(()=>{
-            if (messageRef.current) messageRef.current.scrollIntoView({ behavior: "smooth" })
-        }, 100)
+        setTimeout(()=> {
+            axios.get(`http://pe.heromc.net:4000/chat`)
+                .then(res => {
+                    setAllChatData(res.data)
+                    setConstAllChatData(res.data)
+                    setChatInput("")
+                    if (messageRef.current) messageRef.current.scrollIntoView({ behavior: "smooth" })
+                }
+            )
+        }, 200)
     }
 
     const messageRef = useRef([]);
@@ -98,7 +97,6 @@ export default function DashboardInbox(props) {
 
     const [openTimeTooltip, setOpenTimeTooltip] = useState("")
 
-    console.log(roomIndex)
     return (
         <div className="boxchat-admin flex">
             <div className="boxchat-left">
