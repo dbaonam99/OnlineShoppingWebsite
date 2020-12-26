@@ -194,7 +194,7 @@ function CheckoutBody(props) {
                                     <div className="billing-detail-price billing-confirm-right" style={{textTransform: 'capitalize'}}>{orderPaymentMethod}</div>
                                 </div>
                             </div>
-                            <div className="order-btn btn" style={{marginTop: '30px'}} onClick={()=>{
+                            <div className="order-btn btn" style={{marginTop: '30px', marginBottom: '30px'}} onClick={()=>{
                                 document.body.style.overflow = 'unset';
                                 localStorage.removeItem('total')
                                 localStorage.removeItem('cart') 

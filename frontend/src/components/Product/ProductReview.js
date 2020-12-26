@@ -63,7 +63,7 @@ export default function ProductReview(props) {
                 ratingText: reviewInput,
                 ratingEmail: emailInput,
                 ratingStar: ratingValue,
-                ratingAvt: "https://scontent-sin6-1.xx.fbcdn.net/v/t1.0-9/73321413_146697059956770_7174055866474168320_n.jpg?_nc_cat=107&ccb=2&_nc_sid=09cbfe&_nc_ohc=ni-Cr2_KyP0AX-BfQkv&_nc_ht=scontent-sin6-1.xx&oh=9cbda6699093e8dbb061a92c5bb58c7e&oe=5FCB1CFC"
+                ratingAvt: "http://pe.heromc.net:4000/images/16f9bbf512b66a228f7978e34d8fb163"
             }
             axios.post(`http://pe.heromc.net:4000/products/review/${product._id}`, data)
             setProductVote(productVote=>[...productVote, data])
