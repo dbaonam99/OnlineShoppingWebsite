@@ -86,7 +86,7 @@ module.exports.postProduct = async function(req, res) {
 		})
 	}
 
-	res.status(200);
+	res.status(200).send("ok");
 }
 
 module.exports.updateProduct = async function(req, res) {
@@ -145,7 +145,7 @@ module.exports.updateProduct = async function(req, res) {
 			console.log(error);
 		}
 	})
-	res.status(200);
+	res.status(200).send("ok");
 }
 
 module.exports.reviewProduct = async function(req, res) {
@@ -157,10 +157,10 @@ module.exports.reviewProduct = async function(req, res) {
 		function (error) {
 		}
 	)
-	res.status(200);
+	res.status(200).send("ok");
 }
 
 module.exports.deleteProduct = async function(req, res) {
 	await Product.findByIdAndRemove({_id: req.body.productId})
-	res.status(200);
+	res.status(200).send("ok");
 }

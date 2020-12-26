@@ -133,5 +133,5 @@ module.exports.updateUser = async function(req, res) {
 
 module.exports.deleteUser = async function(req, res) {
 	await User.findByIdAndRemove({_id: req.body.id})
-	res.status(200);
+	res.status(200).send("ok");
 }

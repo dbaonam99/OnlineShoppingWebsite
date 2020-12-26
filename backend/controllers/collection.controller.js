@@ -12,7 +12,7 @@ module.exports.info = async function(req, res) {
 }
 module.exports.deleteCollection = async function(req, res) {
 	await Collection.findByIdAndRemove({_id: req.body.id})
-	res.status(200);
+	res.status(200).send("ok");
 }
 module.exports.postCollection = async function(req, res) {
 	const imgArr = [];
@@ -26,7 +26,7 @@ module.exports.postCollection = async function(req, res) {
         collectionItems: req.body.collectionItems.split(',')
     }
 	await Collection.create(data)
-	res.status(200);
+	res.status(200).send("ok");
 }
 module.exports.updateCollection = function(req, res) {
     var id = req.params.id;

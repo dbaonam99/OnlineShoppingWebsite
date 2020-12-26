@@ -100,12 +100,14 @@ export default function DashboardUserTable(props) {
     }
 
     const deleteOnClick = (event) => {
+        const id = event.target.id
         axios.post(`http://pe.heromc.net:4000/order/delete/:${event.target.id}`, {
-            id: event.target.id
+            id: id
+        }).then(()=>{
+            setOrder(order.filter((item)=>{
+                return item._id !== id
+            }))
         })
-        setOrder(order.filter((item)=>{
-            return item._id !== event.target.id
-        }))
     }
 
     const searchOnSubmit = (event) =>{

@@ -32,11 +32,11 @@ module.exports.postNews = async function(req, res) {
 		newView: 0
 	}
 	await News.create(data)
-	res.status(200);
+	res.status(200).send("ok");
 }
 module.exports.deleteNews = async function(req, res) {
 	await News.findByIdAndRemove({_id: req.body.productId})
-	res.status(200);
+	res.status(200).send("ok");
 }
 module.exports.updateNews = async function(req, res) {
 	var id = req.params.id;
@@ -82,5 +82,5 @@ module.exports.updateNews = async function(req, res) {
 			}
 		)
 	}
-	res.status(200);
+	res.status(200).send("ok");
 } 

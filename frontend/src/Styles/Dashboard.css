@@ -546,6 +546,7 @@ display: none !important;
 }
 .review-product-star {
     width: 80px;
+    min-width: 80px;
 }
 .star-rating {
 }

@@ -96,7 +96,7 @@ module.exports.postEmail = async function(req, res) {
 }
 module.exports.deleteSubscriber = async function(req, res) {
 	await Email.findByIdAndRemove({_id: req.body.id})
-	res.status(200);
+	res.status(200).send("ok");
 }
 
 // module.exports.getAllEmail = async function(req, res) {

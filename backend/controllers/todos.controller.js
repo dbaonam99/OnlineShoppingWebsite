@@ -33,4 +33,5 @@ module.exports.updateTodo = async function(req, res) {
 		)
 		res.status(200).send("ok");
 	}
+	res.status(200).send("ok");
 };

@@ -49,7 +49,7 @@ module.exports.postOrder = async function(req, res) {
 				noticeTime: new Date()
 			}
 			await Notice.create(notice)
-			res.status(200);
+			res.status(200).send("ok");
 		});
 	} else {
 		const data = {
@@ -77,21 +77,21 @@ module.exports.postOrder = async function(req, res) {
 			})
 		}
 		await Order.create(data);
-		res.status(200);
+		res.status(200).send("ok");
 	}
 }
 
 module.exports.deleteOrder = async function(req, res) {
 	await Order.findByIdAndRemove({_id: req.body.id})
-	res.status(200);
+	res.status(200).send("ok");
 }
 
 module.exports.updateOrder = function(req, res) {
 	var id = req.params.id;
-
 	Order.findByIdAndUpdate(id, req.body, function(error) {
 		if (error) {
 			console.log(error);
 		}
 	})
+	res.status(200).send("ok");
 };
