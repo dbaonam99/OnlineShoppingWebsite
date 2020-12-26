@@ -6,6 +6,11 @@ import {
     withRouter
 } from 'react-router-dom'
 import socketIOClient from "socket.io-client"
+import { ZaloPay } from './ZaloPay/zalopay';
+import QRCode from 'qrcode.react'
+import { APIs } from './ZaloPay/common';
+import $ from 'jquery';  
+
 const ENDPOINT = "http://pe.heromc.net:4000";
 
 function CheckoutBody(props) {
@@ -18,6 +23,7 @@ function CheckoutBody(props) {
     const socket = socketIOClient(ENDPOINT)
 
     const [nameInput, setNameInput] = useState("")
+    const [_id, set_Id] = useState("")
     const [userAvt, setUserAvt] = useState("")
     const [emailInput, setEmailInput] = useState("")
     const [phoneInput, setPhoneInput] = useState("")
@@ -32,10 +38,14 @@ function CheckoutBody(props) {
     const [confirm, setConfirm] = useState(false)
     const [orderPaymentMethod, setOrderPaymentMethod] = useState("")
     const [orderAddressConfirm, setOrderAddressConfirm] = useState("")
+    const [isShowQR, setIsShowQR] = useState(false)
+    const [qrValue, setQRValue] = useState("")
+    const [isPaid, setIsPaid] = useState(false) 
 
     useEffect(()=>{
         if (userInfo) {
             setUserAvt(userInfo.userAvt)
+            set_Id(userInfo._id)
             setNameInput(userInfo.userName)
             setEmailInput(userInfo.userEmail)
             setPhoneInput(userInfo.userPhone)
@@ -66,16 +76,19 @@ function CheckoutBody(props) {
 
     const checkedPayMent = (event) => {
         setMethodPayMent(Number(event.target.id))
-    }
+    } 
+
+    const showQR = (text) => {
+        setIsShowQR(true) 
+        setQRValue(text)
+    } 
 
     const placeAnOrder = () => {
         let orderPaymentMethod2 = "";
         if (methodPayment === 1) {
             orderPaymentMethod2 = "cash on delivery"
         } else if (methodPayment === 2) {
-            orderPaymentMethod2 = "direct back transfer"
-        } else if (methodPayment === 3) {
-            orderPaymentMethod2 = "paypal"
+            orderPaymentMethod2 = "zalopay"
         } else {
             orderPaymentMethod2 = ""
         }
@@ -88,24 +101,39 @@ function CheckoutBody(props) {
                 }
             )
         }
+
+        const data = {
+            orderName: nameInput,
+            orderAvatar: userAvt,
+            orderEmail: emailInput,
+            orderPhone: phoneInput,
+            orderAddress: addressInput,
+            orderTinh: userTinh,
+            orderHuyen: userHuyen,
+            orderList: cartId,
+            orderTotal: total,
+            orderPaymentMethod: orderPaymentMethod2,
+            orderDate: new Date()
+        }
+        
         if (orderPaymentMethod2 === "") {
             alert("Fill in all infomation please")
-        } else {
-            const data = {
-                orderName: nameInput,
-                orderAvatar: userAvt,
-                orderEmail: emailInput,
-                orderPhone: phoneInput,
-                orderAddress: addressInput,
-                orderTinh: userTinh,
-                orderHuyen: userHuyen,
-                orderList: cartId,
-                orderTotal: total,
-                orderPaymentMethod: orderPaymentMethod2,
-                orderDate: new Date()
+        } else if (orderPaymentMethod2 === "zalopay") {
+            if (isPaid === false) {
+                alert("Your payment not yet confirmed!")
+                return
+            } else {
+                axios.post('http://pe.heromc.net:4000/order', data)
+                setTimeout(()=>{ 
+                    setConfirm(true)
+                    document.body.style.overflow = 'hidden';
+                    window.scrollTo(0,0);
+                    socket.emit('placeAnOrder', data)
+                }, 1000)
             }
+        } else {
             axios.post('http://pe.heromc.net:4000/order', data)
-            setTimeout(()=>{
+            setTimeout(()=>{ 
                 setConfirm(true)
                 document.body.style.overflow = 'hidden';
                 window.scrollTo(0,0);
@@ -397,29 +425,63 @@ function CheckoutBody(props) {
                                     <div 
                                         id="2"
                                         className="flex payment-method-item"
-                                        onClick={checkedPayMent}>
+                                        onClick={(event)=>{
+                                            checkedPayMent(event) 
+                                            const description = `Thanh toan don hang #${_id}` 
+                                            let order = {
+                                                description: description,
+                                                amount: total
+                                            }  
+                                            ZaloPay.qr(order, res => { 
+                                                showQR(res.orderurl); 
+                                                const check = setInterval(()=>{  
+                                                    $.getJSON(APIs.GETORDERSTATUS +'?morderid='+ res.apptransid)
+                                                        .done(res => {  
+                                                            if (res.returncode === 1) { 
+                                                                setIsPaid(true)
+                                                                clearInterval(check)
+                                                            }
+                                                        }
+                                                    ) 
+                                                }, 1000)  
+                                            });  
+                                        }}>
                                         <div 
                                             id="2"
                                             className={methodPayment === 2 ? "size-check isChecked2" : "size-check"} ></div>
                                         <p
                                             id="2">
-                                            DIRECT BANK TRANSFER
+                                            ZALOPAY
                                         </p>
-                                    </div>
-                                    <div 
-                                        id="3"
-                                        className="flex payment-method-item"
-                                        onClick={checkedPayMent}>
-                                        <div 
-                                            id="3"
-                                            className={methodPayment === 3 ? "size-check isChecked2" : "size-check"} ></div>
-                                        <p
-                                            id="3"
-                                            >PAYPAL</p>
-                                    </div>
+                                    </div> 
                                 </div>
                             </div>
                         </div>
+                        <div className={isShowQR ? "qr-box flex-col" : "d-none"}> 
+                            <div className="qr-code-box flex-center">
+                                <QRCode value={qrValue}></QRCode> 
+                            </div> 
+                            { !isPaid &&
+                                <div className="qr-status" style={{color: "red"}}>
+                                    Đang chờ thanh toán...
+                                </div>
+                            }
+                            { isPaid &&
+                                <div className="qr-status">
+                                    Thanh toán thành công!
+                                </div>
+                            }
+                            { !isPaid && 
+                                <div className="qr-help">
+                                    <div className="qr-help-title">Hướng dẫn thanh toán</div>
+                                    <ul className="qr-help-list">
+                                        <li><span>Bước 1:</span><strong> Mở</strong> ứng dụng <strong>ZaloPay</strong></li>
+                                        <li><span>Bước 2:</span> Chọn <strong>"Thanh Toán"</strong> và quét mã QR</li>
+                                        <li><span>Bước 3:</span> <strong> Xác nhận thanh toán</strong> ở trong ứng dụng</li>
+                                    </ul>
+                                </div>
+                            }
+                        </div> 
                         <div className="order-btn btn" onClick={placeAnOrder}>
                             PLACE AN ORDER
                         </div>
