@@ -39,10 +39,11 @@ export default function ProductBody(props) {
     const productSmall = useRef(null);
 
     useEffect(() => {
+        console.log(hover)
         // if (hover === false) {
         //     var interval = setInterval(() => {
         //         setImgIndex(imgIndex => imgIndex + 1);
-        //     }, 5000);
+        //     }, 1000);
         // }
         // return() => {
         //     clearInterval(interval);

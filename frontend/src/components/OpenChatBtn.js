@@ -8,8 +8,8 @@ import { withRouter } from 'react-router-dom'
 import axios from 'axios'
 import { UserContext } from '../contexts/User';
 
-const ENDPOINT = "http://pe.heromc.net:4000";
- 
+const ENDPOINT = "http://localhost:4000";
+
 function OpenChatBtn(props) {
     const messageRef = useRef();
     const inputRef = useRef();

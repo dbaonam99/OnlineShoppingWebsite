@@ -16,7 +16,7 @@ function Login(props) {
     const [email, setEmail] = useState("")
     const [password, setPassword] = useState("")
 
-    useState(()=>{
+    useEffect(()=>{
         if (localStorage.getItem('errLogin')) {
             setArrErr([localStorage.getItem('errLogin')]);
         }
