@@ -70,7 +70,7 @@ export default function DashboardInbox(props) {
                     if (messageRef.current) messageRef.current.scrollIntoView({ behavior: "smooth" })
                 }
             )
-        }, 200)
+        }, 100)
     }
 
     const messageRef = useRef([]);
