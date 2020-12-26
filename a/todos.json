@@ -1,8 +1,0 @@
-{"_id":{"$oid":"5fc7acabaaa493688d379155"},"todoContent":"Create new website","isDone":true,"todoDate":{"$date":"2020-12-02T15:03:07.07Z"}}
-{"_id":{"$oid":"5fc7acecaaa493688d379156"},"todoContent":" Meet business parter","isDone":true,"todoDate":{"$date":"2020-12-02T15:04:12.576Z"}}
-{"_id":{"$oid":"5fc7ad0baaa493688d379158"},"todoContent":"Hire new employees","isDone":false,"todoDate":{"$date":"2020-12-02T15:04:43.16Z"}}
-{"_id":{"$oid":"5fc7acfdaaa493688d379157"},"todoContent":"Design new clothes","isDone":true,"todoDate":{"$date":"2020-12-02T15:04:29.229Z"}}
-{"_id":{"$oid":"5fc7ad4baaa493688d37915a"},"todoContent":"Sign contract for \"What are conference organizers afraid of?\"","isDone":false,"todoDate":{"$date":"2020-12-02T15:05:47.081Z"}}
-{"_id":{"$oid":"5fc7ad8baaa493688d37915b"},"todoContent":"Lines From Great Russian Literature?","isDone":false,"todoDate":{"$date":"2020-12-02T15:06:48.015Z"}}
-{"_id":{"$oid":"5fc8b3efc4e13066c84c1035"},"todoContent":"hehe","isDone":true,"todoDate":{"$date":"2020-12-03T09:46:23.096Z"}}
-{"_id":{"$oid":"5fc7ad43aaa493688d379159"},"todoContent":"Read \"Following makes Medium better\"","isDone":false,"todoDate":{"$date":"2020-12-02T15:05:39.658Z"}}
