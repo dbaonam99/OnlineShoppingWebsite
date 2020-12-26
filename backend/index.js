@@ -91,7 +91,7 @@ io.on('connection', async function (socket) {
       userChatInfo: [data],
       allchat: allchat
     })
-  })
+  }) 
 
   socket.on('messageSend', async function(data) {
     Chat.findOne({ sessionId: data.sessionId })
