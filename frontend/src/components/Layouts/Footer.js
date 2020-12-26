@@ -16,7 +16,7 @@ export default function Footer() {
         <div className="Footer">
             <div className="footer-container">
                 <div className="footer-left">
-                    <a href="pe.heromc.net" className="cr">©2016 Sober</a>
+                    <p className="cr">©2016 Sober</p>
                     <Link to="/news" onClick={handleClick}>News</Link>
                     <a href="/contact" onClick={handleClick}>FAQs</a>
                     <Link to="/contact" onClick={handleClick}>Contact us</Link>

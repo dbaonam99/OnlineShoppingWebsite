@@ -145,6 +145,7 @@
     width: 100%;
     height: max-content; 
     align-items: center;
+    font-family: sans-serif;
 }
 .qr-code-box {
     width: 150px;
