@@ -5,8 +5,7 @@ const CryptoJS = require("crypto-js");
 const moment = require("moment");
 
 const config = require("../config.json");
-const Crypto = require("./Crypto");
-const Ngrok = require("../utils/ngrok");
+const Crypto = require("./Crypto"); 
 
 const publicKey = fs.readFileSync("publickey.pem", "utf8");
 const rsa = new NodeRSA(publicKey, {
