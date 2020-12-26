@@ -42,10 +42,10 @@ function Banner (props) {
                         <div className="flex-center">
                             <div>
                                 <div  
-                                    id={collection[2]._id}
+                                    id={collection[7]._id}
                                     onClick={redirect}
                                     className={currentBanner === 1 ? "banner-link fadeInLeft" :"banner-link"}>
-                                    {collection[2].collectionName}
+                                    {collection[7].collectionName}
                                 </div>
                             </div>
                             <div>

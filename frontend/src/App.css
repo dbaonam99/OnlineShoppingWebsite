@@ -989,6 +989,7 @@
   font-weight: 300;
   font-family: Poppins-medium;
   cursor: pointer;
+  height: 60px;
 }
 .news-title-box:hover {
   text-decoration: underline;
