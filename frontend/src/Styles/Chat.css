@@ -176,6 +176,7 @@ display: none !important;
     color: #FFF;
     background-color: #0e0e0e;
     text-transform: unset;
+    font-family: sans-serif;
 }
 .clienttext {
     margin: 3px 0;
@@ -189,6 +190,7 @@ display: none !important;
     width: max-content;
     background-color: #eeecec;
     text-transform: unset;
+    font-family: sans-serif;
 }
 @media only screen and (max-width: 500px) {
     .chat-btn { 

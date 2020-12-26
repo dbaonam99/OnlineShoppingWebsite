@@ -781,6 +781,7 @@ display: none !important;
     width: max-content;
     color: #FFF;
     background-color: #0e0e0e;
+    font-family: sans-serif;
 }
 .box-chat-admintext {
     margin: 3px 0;
@@ -796,6 +797,7 @@ display: none !important;
     text-align: right;
     width: max-content;
     background-color: #eeecec;
+    font-family: sans-serif;
 }
 .time-tooltip {
     background-color: #111;
