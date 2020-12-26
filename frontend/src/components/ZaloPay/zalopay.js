@@ -11,7 +11,7 @@ export class ZaloPay {
           const data = JSON.parse(e.data);
           console.log('ws message', data);
           cb(data);
-          alert('Thanh toán thành công');
+        //   alert('Thanh toán thành công');
       };
       ws.onclose = e => {
           console.log('close ws', apptransid);
@@ -20,7 +20,7 @@ export class ZaloPay {
 
     static pay(url, data = {}, done) {
         return postJSON(url, data, done, () => {
-            alert('Thanh toán thất bại');
+            // alert('Thanh toán thất bại');
         })
     }
   
@@ -29,7 +29,7 @@ export class ZaloPay {
             if (res.returncode === 1) { 
                 done(res);
             } else {
-                alert(parseResult(res));
+                // alert(parseResult(res));
             }
         });
     }  
