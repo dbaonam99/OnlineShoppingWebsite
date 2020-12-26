@@ -413,7 +413,10 @@ function CheckoutBody(props) {
                                     <div 
                                         id="1"
                                         className="flex payment-method-item" 
-                                        onClick={checkedPayMent}>
+                                        onClick={(event)=>{
+                                            checkedPayMent(event)
+                                            setIsShowQR(false)
+                                        }}>
                                         <div 
                                             id="1"
                                             className={methodPayment === 1 ? "size-check isChecked2" : "size-check"}
