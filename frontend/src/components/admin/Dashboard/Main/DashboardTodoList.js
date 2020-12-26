@@ -50,19 +50,18 @@ export default function DashboardTodoList(props) {
             isDone: false,
             todoDate: new Date()
         }
-        virtualTodo.push(data)
+        virtualTodo.push(data) 
+        console.log("check2")
         axios.post('http://pe.heromc.net:4000/todos', data)
-            .then(function (res) {  
-                axios.get(`http://pe.heromc.net:4000/todos`)
-                    .then(res2 => {
-                        setTodoList(res2.data)
-                    }
-                ) 
-            })
-            .catch(function (error) {
-                console.log(error);
-            });
-        setOpenNewTodo(false)
+        .then((res) => {  
+            console.log("check", res)
+            // axios.get(`http://pe.heromc.net:4000/todos`)
+            //     .then(res2 => {
+            //         setTodoList(res2.data)
+            //         setOpenNewTodo(false)
+            //     }
+            // ) 
+        }) 
     }  
 
     const deleteTodo = (event) => { 

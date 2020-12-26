@@ -13,6 +13,7 @@ module.exports.postTodo = async function(req, res) {
 		await Todos.create(req.body);
 		res.status(200).send("ok");
 	}
+	res.status(200).send("ok");
 };
 module.exports.updateTodo = async function(req, res) {
 	if (req.body.edit) {
