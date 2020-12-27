@@ -58,6 +58,7 @@ module.exports.updateEmail = function(req, res) {
             console.log(error);
         }
     })
+    res.status(200).send("ok");
 };
 
 module.exports.postEmail = async function(req, res) {

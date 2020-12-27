@@ -19,6 +19,7 @@ module.exports.newChat = async function(req, res) {
 		chatContent: content
 	}
 	await Chat.create(data);
+	res.status(200).send("ok");
 };
 
 module.exports.chatData = function(req, res) {

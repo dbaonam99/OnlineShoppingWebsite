@@ -57,5 +57,5 @@ module.exports.updateCollection = function(req, res) {
 			console.log(error);
 		}
     })
-    res.status(200)
+    res.status(200).send("ok");
 };
