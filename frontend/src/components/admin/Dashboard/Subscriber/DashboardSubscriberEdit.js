@@ -22,10 +22,10 @@ export default function DashboardSubscriberCreate(props) {
 
         axios.post(`http://pe.heromc.net:4000/email/update/${email._id}`, {
             subscriberEmail: subscriberEmail
+        }).then(()=>{
+            props.setCloseEditFunc(false);
+            props.setToastFunc(true);
         })
-
-        props.setCloseEditFunc(false);
-        props.setToastFunc(true);
     }
 
     return (

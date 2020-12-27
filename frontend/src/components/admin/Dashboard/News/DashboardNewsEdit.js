@@ -57,8 +57,10 @@ export default function DashboardNewsCreate(props) {
         formData.append("newTitle", newsTitle);
         formData.append("newContent", newsContent);
         axios.post(`http://pe.heromc.net:4000/news/update/${news._id}`, formData, config)
-        props.setCloseEditFunc(false);
-        props.setToastFunc(true);
+        .then(()=>{
+            props.setCloseEditFunc(false);
+            props.setToastFunc(true);
+        })
     }
 
     const addNewCate = () => {

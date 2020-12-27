@@ -94,8 +94,10 @@ export default function DashboardProductCreate(props) {
         formData.append("productSex", sex);
         formData.append("productDate", new Date());
         axios.post('http://pe.heromc.net:4000/products', formData, config)
-        props.setCloseCreateFunc(false);
-        props.setToastFunc(true);
+        .then(()=>{
+            props.setCloseCreateFunc(false);
+            props.setToastFunc(true);
+        })
     }
 
     const addNewCate = () => {

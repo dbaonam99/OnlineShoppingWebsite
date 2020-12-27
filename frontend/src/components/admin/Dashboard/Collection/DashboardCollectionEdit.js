@@ -46,9 +46,10 @@ export default function DashboardCollectionEdit(props) {
         formData.append("productList", JSON.stringify(productList));
         formData.append("collectionName", collectionName);
         axios.post(`http://pe.heromc.net:4000/collection/update/${collection._id}`, formData, config)
-
-        props.setCloseEditFunc(false);
-        props.setToastFunc(true);
+        .then(()=>{
+            props.setCloseEditFunc(false);
+            props.setToastFunc(true);
+        })
     }
 
     const deleteImg = (event) => {

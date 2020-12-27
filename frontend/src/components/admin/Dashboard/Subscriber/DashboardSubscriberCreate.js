@@ -13,9 +13,10 @@ export default function DashboardSubscriberCreate(props) {
         event.preventDefault()
         axios.post('http://pe.heromc.net:4000/email', {
             subscriber: subscriberEmail
+        }).then(()=>{
+            props.setCloseCreateFunc(false);
+            props.setToastFunc(true);
         })
-        props.setCloseCreateFunc(false);
-        props.setToastFunc(true);
     }
 
     return (

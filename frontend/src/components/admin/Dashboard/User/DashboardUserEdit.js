@@ -37,9 +37,10 @@ export default function DashboardUserCreate(props) {
         formData.append("fromAdmin", true)
 
         axios.post(`http://pe.heromc.net:4000/users/update/${user._id}`, formData, config)
-
-        props.setCloseEditFunc(false);
-        props.setToastFunc(true);
+        .then(()=>{
+            props.setCloseEditFunc(false);
+            props.setToastFunc(true);
+        })
     }
 
     return (

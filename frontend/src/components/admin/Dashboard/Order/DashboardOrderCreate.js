@@ -47,9 +47,10 @@ export default function DashboardOrderCreate(props) {
             orderTotal: total,
             orderPaymentMethod: orderPaymentMethod,
             orderDate: new Date()
+        }).then(()=>{
+            props.setCloseCreateFunc(false);
+            props.setToastFunc(true);
         })
-        props.setCloseCreateFunc(false);
-        props.setToastFunc(true);
     }
 
     const [userList, setUserList] = useState([])

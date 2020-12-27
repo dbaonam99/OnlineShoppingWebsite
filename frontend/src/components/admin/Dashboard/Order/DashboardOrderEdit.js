@@ -125,10 +125,10 @@ export default function DashboardOrderCreate(props) {
             orderTotal: total,
             orderPaymentMethod: orderPaymentMethod,
             orderDate: new Date()
+        }).then(()=>{
+            props.setCloseEditFunc(false);
+            props.setToastFunc(true);
         })
-
-        props.setCloseEditFunc(false);
-        props.setToastFunc(true);
     }
 
     return (
