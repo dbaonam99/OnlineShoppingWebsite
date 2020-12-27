@@ -709,18 +709,20 @@
 .tab-loadmore-loading {
   position: absolute;
   top: 0; 
-}
+} 
 .loading-icon {
-  margin: 0 10px;
-  font-size: 8px;
-  animation-name: icon;
-  animation-duration: 1s;
-  animation-iteration-count: infinite;
-}
-@keyframes icon {
-  0%   {transform: scale(1.3);}
-  50%  {transform: scale(0.1);}
-  100% {transform: scale(1.3);}
+  border: 3px solid #343434;
+  border-radius: 50%;
+  border-top: 3px solid #fff;
+  border-right: 3px solid #fff;
+  border-bottom: 3px solid #fff;
+  width: 20px;
+  height: 20px; 
+  animation: spin 1.5s linear infinite;
+} 
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
 }
 /* BestSeller */
 

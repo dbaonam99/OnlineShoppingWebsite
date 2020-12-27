@@ -54,11 +54,9 @@ export default function HomeTabContent(props) {
                         >
                         Load More
                     </div>
-                    {loading === true && 
+                    {loading === true &&  
                         <div className="tab-loadmore-btn tab-loadmore-loading btn-nothover">
-                            <FontAwesomeIcon icon={faCircle} className="loading-icon" style={{animationDelay: `0s`}}></FontAwesomeIcon>
-                            <FontAwesomeIcon icon={faCircle} className="loading-icon" style={{animationDelay: `.2s`}}></FontAwesomeIcon>
-                            <FontAwesomeIcon icon={faCircle} className="loading-icon" style={{animationDelay: `.4s`}}></FontAwesomeIcon>
+                            <div className="loading-icon"></div>
                         </div>
                     }
                 </div>
