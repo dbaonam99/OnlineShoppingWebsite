@@ -135,6 +135,9 @@ export default function DashboardProductEdit(props) {
             props.setCloseEditFunc(false);
             props.setToastFunc(true);
         })
+        .catch((err)=>{
+            console.log(err)
+        })
     }
 
     const addNewCate = () => {
