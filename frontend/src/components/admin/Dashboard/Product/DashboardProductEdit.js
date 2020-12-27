@@ -131,8 +131,10 @@ export default function DashboardProductEdit(props) {
         formData.append("productSex", productSex);
         formData.append("productDate", new Date());
         axios.post(`http://pe.heromc.net:4000/products/update/${product._id}`, formData, config)
-        props.setCloseEditFunc(false);
-        props.setToastFunc(true);
+        .then(()=>{
+            props.setCloseEditFunc(false);
+            props.setToastFunc(true);
+        })
     }
 
     const addNewCate = () => {
