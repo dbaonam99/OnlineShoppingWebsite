@@ -33,7 +33,18 @@ export default function HomeTabContent(props) {
                             index={index}
                         />
                     )
-                })}        
+                })}    
+                {
+                    limitProducts.length === 0 &&
+                    <div style={{
+                        textAlign: 'center',
+                        width: '100%',
+                        textTransform: 'capitalize',
+                        marginTop: '150px'
+                    }}>
+                        there's nothing here yet
+                    </div>
+                }    
             </div>
             {(products.length > 10 && products.length >= limit) && 
                 <div className="tab-loadmore flex-center">

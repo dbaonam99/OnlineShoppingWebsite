@@ -66,17 +66,6 @@ export default function HomeTab() {
                         height={height} 
                     />
                 }
-                {
-                    dateProduct.length === 0 &&
-                    <div style={{
-                        textAlign: 'center',
-                        width: '100%',
-                        textTransform: 'capitalize',
-                        marginTop: '150px'
-                    }}>
-                        there's nothing here yet
-                    </div>
-                }
                 { // new product
                     currentTab === 2 && 
                     <HomeTabContent 
