@@ -23,7 +23,7 @@ function Shop(props) {
 
     useEffect(() => {
         if (sex === "shop") { 
-            axios.get(`http://pe.heromc.net:4000/products`)
+            axios.get(`http://localhost:4000/products`)
             .then(res => {   
                 
                 const virtualCate = [...res.data] 
@@ -50,7 +50,7 @@ function Shop(props) {
             })
         } else {
             sex.toLowerCase() === "men" ? sex = "man" : sex = "woman"
-            axios.get(`http://pe.heromc.net:4000/products`)
+            axios.get(`http://localhost:4000/products`)
                 .then(res => {
                     const virtualCate = []
                     for (let i in res.data) {

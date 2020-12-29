@@ -21,7 +21,7 @@ export default function NewsContent(props) {
     const timeStr = day + '.' + month + '.' +year
 
     if (news._id) {
-        axios.post(`http://pe.heromc.net:4000/news/update/${news._id}`, {
+        axios.post(`http://localhost:4000/news/update/${news._id}`, {
             countId: news._id
         })
     }

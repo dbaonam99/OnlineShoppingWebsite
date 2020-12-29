@@ -9,7 +9,7 @@ export default function HomeTab() {
     const [products, setProducts] = useState([]);
     
     useEffect(() => {
-        axios.get(`http://pe.heromc.net:4000/products`)
+        axios.get(`http://localhost:4000/products`)
             .then(res => {
                 setProducts(res.data)
             }

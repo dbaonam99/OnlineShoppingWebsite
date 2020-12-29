@@ -34,7 +34,7 @@ function NewsBodyWidget(props) {
     }
 
     useEffect(() => {
-        axios.get(`http://pe.heromc.net:4000/news`)
+        axios.get(`http://localhost:4000/news`)
             .then(res => {
                 setNews(res.data)
             }

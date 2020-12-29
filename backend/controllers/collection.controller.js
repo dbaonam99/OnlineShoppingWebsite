@@ -17,7 +17,7 @@ module.exports.deleteCollection = async function(req, res) {
 module.exports.postCollection = async function(req, res) {
 	const imgArr = [];
 	req.files.map((item)=>{
-		imgArr.push(`http://pe.heromc.net:4000/${item.path.split("/").slice(1).join("/")}`)
+		imgArr.push(`http://localhost:4000/${item.path.split("/").slice(1).join("/")}`)
     })
 	const data = {
 		collectionBanner: imgArr[0],
@@ -34,7 +34,7 @@ module.exports.updateCollection = function(req, res) {
     const imgArr = [];
 	if (req.files.length > 0) {
 		req.files.map((item)=>{
-			imgArr.push(`http://pe.heromc.net:4000/${item.path.split("/").slice(1).join("/")}`)
+			imgArr.push(`http://localhost:4000/${item.path.split("/").slice(1).join("/")}`)
 		})
         const img = {
             collectionBanner: imgArr[0]

@@ -21,7 +21,7 @@ module.exports.cate = function(req, res) {
 module.exports.postNews = async function(req, res) {
 	const imgArr = [];
 	req.files.map((item)=>{
-		imgArr.push(`http://pe.heromc.net:4000/${item.path.split("/").slice(1).join("/")}`)
+		imgArr.push(`http://localhost:4000/${item.path.split("/").slice(1).join("/")}`)
 	})
 	const data = {
 		newImg: imgArr[0],
@@ -69,7 +69,7 @@ module.exports.updateNews = async function(req, res) {
 		const imgArr = [];
 		if (req.files) {
 			req.files.map((item)=>{
-				imgArr.push(`http://pe.heromc.net:4000/${item.path.split("/").slice(1).join("/")}`)
+				imgArr.push(`http://localhost:4000/${item.path.split("/").slice(1).join("/")}`)
 			})
 		}
 		const img = {
