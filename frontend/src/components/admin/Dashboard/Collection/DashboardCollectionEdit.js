@@ -16,7 +16,7 @@ export default function DashboardCollectionEdit(props) {
     const collection = props.collection
 
     useEffect(()=>{
-        axios.get(`http://localhost:4000/products`)
+        axios.get(`http://pe.heromc.net/products`)
             .then(res => {
                 setProduct(res.data)
             }
@@ -45,7 +45,7 @@ export default function DashboardCollectionEdit(props) {
         })
         formData.append("productList", JSON.stringify(productList));
         formData.append("collectionName", collectionName);
-        axios.post(`http://localhost:4000/collection/update/${collection._id}`, formData, config)
+        axios.post(`http://pe.heromc.net/collection/update/${collection._id}`, formData, config)
         .then(()=>{
             props.setCloseEditFunc(false);
             props.setToastFunc(true);

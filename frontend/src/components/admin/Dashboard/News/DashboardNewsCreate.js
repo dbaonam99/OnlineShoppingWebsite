@@ -20,7 +20,7 @@ export default function DashboardNewsCreate(props) {
     }
     
     useEffect(()=> {
-        axios.get(`http://localhost:4000/news`)
+        axios.get(`http://pe.heromc.net/news`)
                 .then(res => {
                     const test = Object.values(res.data.reduce((a, {newCate}) => {
                         a[newCate] = a[newCate] || {newCate};
@@ -49,7 +49,7 @@ export default function DashboardNewsCreate(props) {
         formData.append("newCate", cateValue);
         formData.append("newTitle", inputValue.title);
         formData.append("newContent", newsContent);
-        axios.post('http://localhost:4000/news', formData, config)
+        axios.post('http://pe.heromc.net/news', formData, config)
         .then(()=>{
             props.setCloseCreateFunc(false);
             props.setToastFunc(true);

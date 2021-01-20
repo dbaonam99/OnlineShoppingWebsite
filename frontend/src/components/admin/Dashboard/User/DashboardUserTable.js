@@ -13,7 +13,7 @@ export default function DashboardUserTable(props) {
     const [constUser, setConstUser] = useState([])
     
     useEffect(()=>{
-        axios.get(`http://localhost:4000/users/list`)
+        axios.get(`http://pe.heromc.net/users/list`)
             .then(res => {
                 setUser(res.data)
                 setConstUser(res.data)
@@ -99,7 +99,7 @@ export default function DashboardUserTable(props) {
     }
 
     const deleteOnClick = (event) => {
-        axios.post(`http://localhost:4000/users/delete/:${event.target.id}`, {
+        axios.post(`http://pe.heromc.net/users/delete/:${event.target.id}`, {
             id: event.target.id
         })
         setUser(user.filter((item)=>{

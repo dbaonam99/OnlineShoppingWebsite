@@ -29,7 +29,7 @@ function Account(props) {
     const handleOnSubmit = (event) => {
         event.preventDefault();
         if (tabID === 0) {
-            axios.post('http://localhost:4000/users/login', {
+            axios.post('http://pe.heromc.net/users/login', {
                 loginEmail: user.loginEmail,
                 loginPassword: user.loginPassword
             }) 
@@ -46,7 +46,7 @@ function Account(props) {
                 setArrErr(arrErr=>[...arrErr, err.response.data]);
             })
         } else {
-            axios.post('http://localhost:4000/users/register', {
+            axios.post('http://pe.heromc.net/users/register', {
                 userName: user.registerName,
                 userEmail: user.registerEmail,
                 userPassword: user.registerPassword,
@@ -66,7 +66,7 @@ function Account(props) {
     }
 
     useEffect(()=> {
-        axios.get(`http://localhost:4000/users/${localStorage.getItem('user-id')}`, { 
+        axios.get(`http://pe.heromc.net/users/${localStorage.getItem('user-id')}`, { 
             headers: {"authorization" : `Bearer ${localStorage.getItem('token')}`}
         })
         .then(res => {

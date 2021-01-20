@@ -36,7 +36,7 @@ export default function DashboardOrderCreate(props) {
             listOrder.push(data)
         }
 
-        axios.post('http://localhost:4000/order', {
+        axios.post('http://pe.heromc.net/order', {
             orderName: orderName,
             orderEmail: orderEmail,
             orderPhone: orderPhone,
@@ -57,7 +57,7 @@ export default function DashboardOrderCreate(props) {
     const [user, setUser] = useState("")
 
     useEffect(()=>{
-        axios.get(`http://localhost:4000/users/list`)
+        axios.get(`http://pe.heromc.net/users/list`)
             .then(res => {
                 setUserList(res.data)
                 res.data.filter((item)=>{
@@ -85,13 +85,13 @@ export default function DashboardOrderCreate(props) {
                 })
             }
         )
-        axios.get(`http://localhost:4000/vietnam`)
+        axios.get(`http://pe.heromc.net/vietnam`)
             .then(res => {
                 setTinh(res.data[0].tinh)
                 setHuyen(res.data[0].huyen)
             }
         )
-        axios.get(`http://localhost:4000/products`)
+        axios.get(`http://pe.heromc.net/products`)
             .then(res => {
                 setProduct(res.data)
             }

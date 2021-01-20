@@ -13,7 +13,7 @@ export default function DashboardSubscriberTable(props) {
     const [constEmail, setConstEmail] = useState([])
     
     useEffect(()=>{
-        axios.get(`http://localhost:4000/email`)
+        axios.get(`http://pe.heromc.net/email`)
             .then(res => {
                 setEmail(res.data)
                 setConstEmail(res.data)
@@ -101,7 +101,7 @@ export default function DashboardSubscriberTable(props) {
     }
 
     const deleteOnClick = (event) => {
-        axios.post(`http://localhost:4000/email/delete/:${event.target.id}`, {
+        axios.post(`http://pe.heromc.net/email/delete/:${event.target.id}`, {
             id: event.target.id
         })
         setEmail(email.filter((item)=>{

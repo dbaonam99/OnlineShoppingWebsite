@@ -82,12 +82,12 @@ export default function DashboardProductEdit(props) {
             setProductSex(product.productSex)
             setProductSize(product.productSize)
             setProductGroupCate(product.productGroupCate)
-            axios.get(`http://localhost:4000/category`)
+            axios.get(`http://pe.heromc.net/category`)
                 .then(res => {
                     setCate(res.data)
                 }
             )
-            axios.get(`http://localhost:4000/products`)
+            axios.get(`http://pe.heromc.net/products`)
                 .then(res => {
                     const test = Object.values(res.data.reduce((a, {productGroupCate}) => {
                         a[productGroupCate] = a[productGroupCate] || {productGroupCate};
@@ -130,7 +130,7 @@ export default function DashboardProductEdit(props) {
         formData.append("productDes", productDes);
         formData.append("productSex", productSex);
         formData.append("productDate", new Date());
-        axios.post(`http://localhost:4000/products/update/${product._id}`, formData, config)
+        axios.post(`http://pe.heromc.net/products/update/${product._id}`, formData, config)
         .then(()=>{
             props.setCloseEditFunc(false);
             props.setToastFunc(true);
@@ -141,7 +141,7 @@ export default function DashboardProductEdit(props) {
     }
 
     const addNewCate = () => {
-        axios.post('http://localhost:4000/category', {
+        axios.post('http://pe.heromc.net/category', {
             cateName: inputValue.cate
         })
         setCate(cate=>[...cate, {cateName: inputValue.cate}])
@@ -164,7 +164,7 @@ export default function DashboardProductEdit(props) {
         const items = [...productImg]
         items.splice(id, 1)
         setProductImg(items)
-        axios.post(`http://localhost:4000/products/update/${product._id}`, {
+        axios.post(`http://pe.heromc.net/products/update/${product._id}`, {
             deleteImgId: id
         })
     }

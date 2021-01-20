@@ -54,7 +54,7 @@ module.exports.register = async function(req, res) {
 	} catch {}
 
 	const data = {
-		userAvt: "http://localhost:4000/images/16f9bbf512b66a228f7978e34d8fb163",
+		userAvt: "http://pe.heromc.net/images/16f9bbf512b66a228f7978e34d8fb163",
 		userName: req.body.userName,
 		userTinh: "",
 		userHuyen: "",
@@ -75,7 +75,7 @@ module.exports.updateUser = async function(req, res) {
 	if (req.files.length > 0) {
 		const imgArr = [];
 		req.files.map((item)=>{
-			imgArr.push(`http://localhost:4000/${item.path.split("/").slice(1).join("/")}`)
+			imgArr.push(`http://pe.heromc.net/${item.path.split("/").slice(1).join("/")}`)
 		})
 		const img = {
 			userAvt: imgArr[0]

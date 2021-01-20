@@ -11,7 +11,7 @@ export default function ProductDetail(props) {
     const [news, setNews] = useState();
 
     useEffect(() => {
-        axios.get(`http://localhost:4000/news/` + props.match.params.id)
+        axios.get(`http://pe.heromc.net/news/` + props.match.params.id)
             .then(res => {
                 setNews(res.data)
             }

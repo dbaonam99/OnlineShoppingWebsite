@@ -93,7 +93,7 @@ function Header(props) {
             },
         ]
         setNavBar(navBar)
-        axios.get(`http://localhost:4000/products`)
+        axios.get(`http://pe.heromc.net/products`)
             .then(res => {
                 let virtualNavBar = [...navBar]
                 const menProduct = []

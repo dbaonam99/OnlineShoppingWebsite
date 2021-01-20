@@ -53,7 +53,7 @@ export default function ProductReview(props) {
                 ratingStar: ratingValue,
                 ratingAvt: userInfo.userAvt
             }
-            axios.post(`http://localhost:4000/products/review/${product._id}`, data)
+            axios.post(`http://pe.heromc.net/products/review/${product._id}`, data)
             setProductVote(productVote=>[...productVote, data])
             setReviewInput("")
         } else {
@@ -63,9 +63,9 @@ export default function ProductReview(props) {
                 ratingText: reviewInput,
                 ratingEmail: emailInput,
                 ratingStar: ratingValue,
-                ratingAvt: "http://localhost:4000/images/16f9bbf512b66a228f7978e34d8fb163"
+                ratingAvt: "http://pe.heromc.net/images/16f9bbf512b66a228f7978e34d8fb163"
             }
-            axios.post(`http://localhost:4000/products/review/${product._id}`, data)
+            axios.post(`http://pe.heromc.net/products/review/${product._id}`, data)
             setProductVote(productVote=>[...productVote, data])
             setReviewInput("")
         }

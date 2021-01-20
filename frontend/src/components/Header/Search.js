@@ -13,7 +13,7 @@ export default function Search(props) {
     const [toast, setToast] = useState(false)
 
     useEffect(()=> {
-        axios.get(`http://localhost:4000/products`)
+        axios.get(`http://pe.heromc.net/products`)
             .then(res => {
                 setProducts(res.data)
                 setConstProducts(res.data)
@@ -37,7 +37,7 @@ export default function Search(props) {
 
     const cartClick = (event) => {
         const id = event.target.id
-        axios.get(`http://localhost:4000/products/${id}`)
+        axios.get(`http://pe.heromc.net/products/${id}`)
             .then(res => {
                 addToCart(res.data)
             }
