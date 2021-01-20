@@ -22,34 +22,34 @@ import { CartProvider } from './contexts/Cart'
 import Dashboard from './components/admin/Dashboard/Dashboard';
 import { UserProvider } from './contexts/User';
 import { ChatProvider } from './contexts/Chat';
-import LoadingPage from './components/LoadingPage';
+// import LoadingPage from './components/LoadingPage';
 import Toast from './components/Toast';
 import Checkout from './pages/Checkout'; 
 
 function App(props) {
 
-  const [loading, setLoading] = useState(true)
+  // const [loading, setLoading] = useState(true)
 
-  useEffect(()=>{
-    if (window.location.href.split('/')[3] === "") {
-      setTimeout(()=>{
-        setLoading(false)
-      }, 3500)
-    } else {
-      setLoading(false)
-    }
-  },[])
+  // useEffect(()=>{
+  //   if (window.location.href.split('/')[3] === "") {
+  //     setTimeout(()=>{
+  //       setLoading(false)
+  //     }, 3500)
+  //   } else {
+  //     setLoading(false)
+  //   }
+  // },[])
 
   return (
     <UserProvider>
     <CartProvider>
     <ChatProvider>
-      { loading === true &&
+      {/* { loading === true &&
         <LoadingPage
           loading={loading} 
         />
-      }
-      { loading === false &&
+      } */}
+      {/* { loading === false && */}
         <Router>
           <div className="App">
             <Toast/>
@@ -73,7 +73,7 @@ function App(props) {
           </div>
           <OpenChatBtn/>
         </Router>
-      }
+      {/* } */}
     </ChatProvider>
     </CartProvider>
     </UserProvider>
