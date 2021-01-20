@@ -8,9 +8,7 @@ import { withRouter } from 'react-router-dom';
 import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
-import { CartContext } from '../../contexts/Cart';
-
-import Div100vh from 'react-div-100vh';
+import { CartContext } from '../../contexts/Cart'; 
 
 function ProductQuickView(props) {
 

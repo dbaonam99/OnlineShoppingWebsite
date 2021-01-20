@@ -41,7 +41,7 @@ function AccountInfo(props) {
          setUserAvt(userInfo.userAvt)
          setUserAddress(userInfo.userAddress) 
          if (userInfo.userTinh !== "") {
-            axios.get(`http://pe.heromc.net/vietnam`)
+            axios.get(`http://pe.heromc.net:4000/vietnam`)
                .then(res => {
                   setTinh(res.data[0].tinh)
                   setHuyen(res.data[0].huyen)
@@ -55,7 +55,7 @@ function AccountInfo(props) {
             ) 
             setUserTinh(userInfo.userTinh)
          } else {
-            axios.get(`http://pe.heromc.net/vietnam`)
+            axios.get(`http://pe.heromc.net:4000/vietnam`)
                 .then(res => {
                     setTinh(res.data[0].tinh)
                     setHuyen(res.data[0].huyen) 
@@ -65,7 +65,7 @@ function AccountInfo(props) {
          if (userInfo.userHuyen !== "") {
                setUserHuyen(userInfo.userHuyen)
          }
-         axios.get(`http://pe.heromc.net/order`)
+         axios.get(`http://pe.heromc.net:4000/order`)
             .then(res => {
                const orderList2 = []
                for (let i in res.data) {
@@ -99,7 +99,7 @@ function AccountInfo(props) {
       formData.append("userHuyen", userHuyen);
       formData.append("userAddress", userAddress);
       localStorage.removeItem('token')
-      axios.post(`http://pe.heromc.net/users/update/${userInfo._id}`, formData, config)
+      axios.post(`http://pe.heromc.net:4000/users/update/${userInfo._id}`, formData, config)
             .then(res => {
                setUserInfoFunc(res.data.user);
                localStorage.setItem('token', res.data.token);

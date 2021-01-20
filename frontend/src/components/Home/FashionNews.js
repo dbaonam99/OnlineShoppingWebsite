@@ -10,7 +10,7 @@ export default function FashionNews(props) {
     const newsPerPage = 3;
 
     useEffect(() => {
-        axios.get(`http://pe.heromc.net/news`)
+        axios.get(`http://pe.heromc.net:4000/news`)
             .then(res => {
                 setNews(res.data)
             }

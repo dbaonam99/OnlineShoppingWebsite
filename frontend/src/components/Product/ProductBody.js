@@ -1,7 +1,7 @@
 import React, { useContext, useEffect, useRef, useState } from 'react';
 import '../../App.css';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import {  faAngleRight, faCartPlus, faChevronLeft, faChevronRight, faCircle, faHeart, faMinus, faPlus } from "@fortawesome/free-solid-svg-icons";
+import {  faAngleRight, faCartPlus, faChevronLeft, faChevronRight, faHeart, faMinus, faPlus } from "@fortawesome/free-solid-svg-icons";
 import { Link } from 'react-router-dom';
 import ReactStars from "react-rating-stars-component";
 import { CartContext } from '../../contexts/Cart';

@@ -13,7 +13,7 @@ export default function DashboardCollectionTable(props) {
     const [constCollection, setConstCollection] = useState([])
     
     useEffect(()=>{
-        axios.get(`http://pe.heromc.net/collection`)
+        axios.get(`http://pe.heromc.net:4000/collection`)
             .then(res => {
                 setCollection(res.data)
                 setConstCollection(res.data)
@@ -99,7 +99,7 @@ export default function DashboardCollectionTable(props) {
     }
 
     const deleteOnClick = (event) => {
-        axios.post(`http://pe.heromc.net/collection/delete/:${event.target.id}`, {
+        axios.post(`http://pe.heromc.net:4000/collection/delete/:${event.target.id}`, {
             id: event.target.id
         })
         setCollection(collection.filter((item)=>{

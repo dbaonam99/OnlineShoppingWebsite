@@ -8,7 +8,7 @@ import { withRouter } from 'react-router-dom'
 import axios from 'axios'
 import { UserContext } from '../contexts/User';
 
-const ENDPOINT = "http://pe.heromc.net";
+const ENDPOINT = "http://pe.heromc.net:4000";
 
 function OpenChatBtn(props) {
     const messageRef = useRef();
@@ -39,7 +39,7 @@ function OpenChatBtn(props) {
         if (!sessionStorage.getItem('chat-id')) {
             sessionStorage.setItem('chat-id', Math.floor(Math.random() * 190000000) + 100000000);
         }
-        axios.get(`http://pe.heromc.net/chat/${sessionStorage.getItem('chat-id')}`)
+        axios.get(`http://pe.heromc.net:4000/chat/${sessionStorage.getItem('chat-id')}`)
             .then(res => {
                 if (res.data.length > 0)
                     setChatList(res.data[0].chatContent)

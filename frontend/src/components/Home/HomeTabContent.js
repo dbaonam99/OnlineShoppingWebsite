@@ -1,8 +1,6 @@
 import React, { useState } from 'react';
 import '../../App.css';
-import Product from '../Product/Product.js';
-import { faCircle } from '@fortawesome/free-solid-svg-icons';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import Product from '../Product/Product.js'; 
 
 export default function HomeTabContent(props) {
 

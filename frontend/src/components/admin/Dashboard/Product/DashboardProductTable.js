@@ -17,7 +17,7 @@ export default function DashboardProductTable(props) {
     const [isSortBySold, setIsSortBySold] = useState(false)
     
     useEffect(()=>{
-        axios.get(`http://pe.heromc.net/products`)
+        axios.get(`http://pe.heromc.net:4000/products`)
             .then(res => {
                 setProducts(res.data)
                 setConstProducts(res.data)
@@ -103,7 +103,7 @@ export default function DashboardProductTable(props) {
     }
 
     const deleteOnClick = (event) => {
-        axios.post(`http://pe.heromc.net/products/delete/:${event.target.id}`, {
+        axios.post(`http://pe.heromc.net:4000/products/delete/:${event.target.id}`, {
             productId: event.target.id
         })
         setProducts(products.filter((item)=>{

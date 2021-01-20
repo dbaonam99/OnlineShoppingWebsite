@@ -1,4 +1,4 @@
-import { APIs, postJSON, parseResult } from './common'; 
+import { APIs, postJSON } from './common'; 
 
 export class ZaloPay {
     static listenCallback(apptransid, cb) {

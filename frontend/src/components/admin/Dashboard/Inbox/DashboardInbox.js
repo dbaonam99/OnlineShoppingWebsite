@@ -7,7 +7,7 @@ import axios from 'axios'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome' 
 import { faChevronLeft } from '@fortawesome/free-solid-svg-icons'
 
-const ENDPOINT = "http://pe.heromc.net";
+const ENDPOINT = "http://pe.heromc.net:4000";
 
 export default function DashboardInbox(props) {
     
@@ -62,7 +62,7 @@ export default function DashboardInbox(props) {
         }
         socket.emit('messageSend-admin', data)
         setTimeout(()=> {
-            axios.get(`http://pe.heromc.net/chat`)
+            axios.get(`http://pe.heromc.net:4000/chat`)
                 .then(res => {
                     setAllChatData(res.data)
                     setConstAllChatData(res.data)
@@ -171,7 +171,7 @@ export default function DashboardInbox(props) {
                                         }
                                         { !item.userInfo && 
                                             <img 
-                                                src={"http://pe.heromc.net/images/16f9bbf512b66a228f7978e34d8fb163"}
+                                                src={"http://pe.heromc.net:4000/images/16f9bbf512b66a228f7978e34d8fb163"}
                                                 alt=""
                                             ></img>
                                         }
@@ -219,7 +219,7 @@ export default function DashboardInbox(props) {
                                     }
                                     { !sortDateChat[Number(roomIndex)].userInfo && 
                                         <img 
-                                            src={"http://pe.heromc.net/images/16f9bbf512b66a228f7978e34d8fb163"}
+                                            src={"http://pe.heromc.net:4000/images/16f9bbf512b66a228f7978e34d8fb163"}
                                             alt=""
                                         ></img>
                                     }
@@ -358,7 +358,7 @@ export default function DashboardInbox(props) {
                                 }
                                 { !sortDateChat[Number(roomIndex)].userInfo && 
                                     <img 
-                                        src={"http://pe.heromc.net/images/16f9bbf512b66a228f7978e34d8fb163"}
+                                        src={"http://pe.heromc.net:4000/images/16f9bbf512b66a228f7978e34d8fb163"}
                                         alt=""
                                     ></img>
                                 }

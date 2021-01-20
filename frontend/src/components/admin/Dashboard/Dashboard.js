@@ -8,7 +8,7 @@ import { faEnvelope, faFileInvoice, faHome, faInbox, faNewspaper, faShoppingBag,
 import socketIOClient from "socket.io-client" 
 import Axios from 'axios'
 import { withRouter } from 'react-router-dom'
-const ENDPOINT = "http://pe.heromc.net";
+const ENDPOINT = "http://pe.heromc.net:4000";
 
 function Dashboard(props) {
     const menuItems = [
@@ -70,7 +70,7 @@ function Dashboard(props) {
 
     useEffect(()=>{
         if (localStorage.getItem('token')) {
-            Axios.get(`http://pe.heromc.net/users/${localStorage.getItem('user-id')}`, { 
+            Axios.get(`http://pe.heromc.net:4000/users/${localStorage.getItem('user-id')}`, { 
                 headers: {"authorization" : `Bearer ${localStorage.getItem('token')}`}
             })
             .then(res => {

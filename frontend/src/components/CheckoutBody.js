@@ -11,7 +11,7 @@ import QRCode from 'qrcode.react'
 import { APIs } from './ZaloPay/common';
 import $ from 'jquery';  
 
-const ENDPOINT = "http://pe.heromc.net";
+const ENDPOINT = "http://pe.heromc.net:4000";
 
 function CheckoutBody(props) {
     
@@ -51,7 +51,7 @@ function CheckoutBody(props) {
             setPhoneInput(userInfo.userPhone)
             setAddressInput(userInfo.userAddress)
             if (userInfo.userTinh !== "") {
-                axios.get(`http://pe.heromc.net/vietnam`)
+                axios.get(`http://pe.heromc.net:4000/vietnam`)
                     .then(res => {
                         setTinh(res.data[0].tinh)
                         setHuyen(res.data[0].huyen)
@@ -65,7 +65,7 @@ function CheckoutBody(props) {
                 )  
                 setUserTinh(userInfo.userTinh)
             } else {
-                axios.get(`http://pe.heromc.net/vietnam`)
+                axios.get(`http://pe.heromc.net:4000/vietnam`)
                     .then(res => {
                         setTinh(res.data[0].tinh)
                         setHuyen(res.data[0].huyen) 
@@ -130,7 +130,7 @@ function CheckoutBody(props) {
                 alert("Your payment not yet confirmed!")
                 return
             } else {
-                axios.post('http://pe.heromc.net/order', data)
+                axios.post('http://pe.heromc.net:4000/order', data)
                 setTimeout(()=>{ 
                     setConfirm(true)
                     document.body.style.overflow = 'hidden';
@@ -139,7 +139,7 @@ function CheckoutBody(props) {
                 }, 1000)
             }
         } else {
-            axios.post('http://pe.heromc.net/order', data)
+            axios.post('http://pe.heromc.net:4000/order', data)
             setTimeout(()=>{ 
                 setConfirm(true)
                 document.body.style.overflow = 'hidden';

@@ -14,7 +14,7 @@ export default function DashboardNewsTable(props) {
     const [constNews, setConstNews] = useState([])
     
     useEffect(()=>{
-        axios.get(`http://pe.heromc.net/news`)
+        axios.get(`http://pe.heromc.net:4000/news`)
             .then(res => {
                 setNews(res.data)
                 setConstNews(res.data)
@@ -100,7 +100,7 @@ export default function DashboardNewsTable(props) {
     }
 
     const deleteOnClick = (event) => {
-        axios.post(`http://pe.heromc.net/news/delete/:${event.target.id}`, {
+        axios.post(`http://pe.heromc.net:4000/news/delete/:${event.target.id}`, {
             productId: event.target.id
         })
         setNews(news.filter((item)=>{

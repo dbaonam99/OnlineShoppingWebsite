@@ -27,7 +27,7 @@ export default function DashboardMain() {
     const [incomeMonthPercent, setIncomeMonthPercent] = useState({}) 
 
     useEffect(()=>{
-        axios.get(`http://pe.heromc.net/products`)
+        axios.get(`http://pe.heromc.net:4000/products`)
             .then(res => {
                 setProducts(res.data)
                 let virtualProducts = [...res.data]
@@ -43,17 +43,17 @@ export default function DashboardMain() {
                 setTopProductSales(virtualProducts2)
             }
         )
-        axios.get(`http://pe.heromc.net/users/list`)
+        axios.get(`http://pe.heromc.net:4000/users/list`)
             .then(res => {
                 setUser(res.data)
             }
         ) 
-        axios.get(`http://pe.heromc.net/email`)
+        axios.get(`http://pe.heromc.net:4000/email`)
             .then(res => {
                 setEmail(res.data)
             }
         ) 
-        axios.get(`http://pe.heromc.net/order`)
+        axios.get(`http://pe.heromc.net:4000/order`)
             .then(res => {
                 setOrder(res.data)
                 const topCustomer2 = Object.values(res.data.reduce((a, {orderEmail, orderName, orderTotal, orderAvatar}) => {

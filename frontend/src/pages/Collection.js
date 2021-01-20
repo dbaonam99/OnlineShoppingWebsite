@@ -16,7 +16,7 @@ function Collection(props) {
     const path = props.history.location.pathname.slice(12);
 
     useEffect(()=>{
-        Axios.get(`http://pe.heromc.net/collection/${path}`)
+        Axios.get(`http://pe.heromc.net:4000/collection/${path}`)
             .then(res => {
                 setCollection(res.data)
             }

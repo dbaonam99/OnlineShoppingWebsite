@@ -11,7 +11,7 @@ export default function Newsletter () {
     }
     const handleOnSubmit = (event) => {
         event.preventDefault();
-        axios.post('http://pe.heromc.net/email', {
+        axios.post('http://pe.heromc.net:4000/email', {
             subscriber: emailInput
         })
         .then(res => {
